@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Reveal from '@/components/Reveal'
 import { getDict, isLang, langs, type Lang } from '@/lib/content'
+import { PROJECT_IMAGES } from '@/lib/images'
 
 const DETAIL_SLUGS = ['atelier-why', 'food-school']
 
@@ -91,13 +93,26 @@ export default function WorkDetail({ params }: { params: { lang: string; slug: s
         </Reveal>
 
         <Reveal delay={150}>
-          <div
-            className={`mt-14 flex aspect-[16/9] items-end overflow-hidden ${DETAIL_TONES[project.slug] ?? 'bg-[#EAE5DD]'}`}
-          >
-            <span className="select-none px-6 pb-2 font-serif text-[22vw] italic leading-none text-charcoal/[0.12] md:text-[14rem]">
-              {project.title.replace(/ .*/, '')}
-            </span>
-          </div>
+          {PROJECT_IMAGES[project.slug] ? (
+            <div className="relative mt-14 aspect-[16/9] overflow-hidden bg-[#EAE5DD]">
+              <Image
+                src={PROJECT_IMAGES[project.slug].cover}
+                alt={project.title}
+                width={1600}
+                height={1000}
+                priority
+                className="absolute inset-0 h-full w-full object-cover object-top"
+              />
+            </div>
+          ) : (
+            <div
+              className={`mt-14 flex aspect-[16/9] items-end overflow-hidden ${DETAIL_TONES[project.slug] ?? 'bg-[#EAE5DD]'}`}
+            >
+              <span className="select-none px-6 pb-2 font-serif text-[22vw] italic leading-none text-charcoal/[0.12] md:text-[14rem]">
+                {project.title.replace(/ .*/, '')}
+              </span>
+            </div>
+          )}
         </Reveal>
 
         {/* ------------------------------------------------ Sections */}
@@ -155,18 +170,30 @@ export default function WorkDetail({ params }: { params: { lang: string; slug: s
           </SectionRow>
 
           <SectionRow label={labels.visual}>
-            {/* Placeholder grid — swap for screenshots / photography */}
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-              {[1, 2, 3].map((n) => (
-                <div
-                  key={n}
-                  className={`flex aspect-square items-end p-3 ${DETAIL_TONES[project.slug] ?? 'bg-[#EAE5DD]'}`}
-                >
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-charcoal/40">
-                    {labels.visualNote}
-                  </span>
-                </div>
-              ))}
+              {PROJECT_IMAGES[project.slug]
+                ? PROJECT_IMAGES[project.slug].grid.map((src) => (
+                    <div key={src} className="relative aspect-square overflow-hidden bg-[#EAE5DD]">
+                      <Image
+                        src={src}
+                        alt={project.title}
+                        width={800}
+                        height={800}
+                        loading="eager"
+                        className="absolute inset-0 h-full w-full object-cover object-top"
+                      />
+                    </div>
+                  ))
+                : [1, 2, 3].map((n) => (
+                    <div
+                      key={n}
+                      className={`flex aspect-square items-end p-3 ${DETAIL_TONES[project.slug] ?? 'bg-[#EAE5DD]'}`}
+                    >
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-charcoal/40">
+                        {labels.visualNote}
+                      </span>
+                    </div>
+                  ))}
             </div>
           </SectionRow>
 

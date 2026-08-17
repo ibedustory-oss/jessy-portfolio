@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Reveal from '@/components/Reveal'
 import ContactForm from '@/components/ContactForm'
 import { getDict, isLang, type Lang, type Project } from '@/lib/content'
+import { PROJECT_IMAGES } from '@/lib/images'
 
 const PROJECT_TONES: Record<string, string> = {
   'atelier-why': 'bg-[#EDE9E1]',
@@ -11,7 +13,23 @@ const PROJECT_TONES: Record<string, string> = {
 }
 
 function ProjectVisual({ project }: { project: Project }) {
-  // Placeholder visual until real photography/screenshots are added.
+  const images = PROJECT_IMAGES[project.slug]
+
+  if (images) {
+    return (
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#EAE5DD]">
+        <Image
+          src={images.cover}
+          alt={project.title}
+          width={1600}
+          height={1000}
+          className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+        />
+      </div>
+    )
+  }
+
+  // Typographic placeholder for projects without visuals yet.
   return (
     <div
       className={`relative flex aspect-[4/3] items-end overflow-hidden ${PROJECT_TONES[project.slug] ?? 'bg-[#EAE5DD]'}`}
