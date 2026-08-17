@@ -5,21 +5,23 @@ export interface ProjectImages {
   grid: string[]
 }
 
+const BP = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 export const PROJECT_IMAGES: Record<string, ProjectImages> = {
   'atelier-why': {
-    cover: '/images/atelier-why-desktop.jpg',
+    cover: `${BP}/images/atelier-why-desktop.jpg`,
     grid: [
-      '/images/atelier-why-section-1.jpg',
-      '/images/atelier-why-section-2.jpg',
-      '/images/atelier-why-mobile.jpg',
+      `${BP}/images/atelier-why-section-1.jpg`,
+      `${BP}/images/atelier-why-section-2.jpg`,
+      `${BP}/images/atelier-why-mobile.jpg`,
     ],
   },
   'food-school': {
-    cover: '/images/food-school-desktop.jpg',
+    cover: `${BP}/images/food-school-desktop.jpg`,
     grid: [
-      '/images/food-school-section-1.jpg',
-      '/images/food-school-reel.png',
-      '/images/food-school-mobile.jpg',
+      `${BP}/images/food-school-section-1.jpg`,
+      `${BP}/images/food-school-reel.png`,
+      `${BP}/images/food-school-mobile.jpg`,
     ],
   },
 }
