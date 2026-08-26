@@ -27,7 +27,9 @@ export function generateMetadata({ params }: { params: { lang: string } }): Meta
       description: dict.meta.description,
       type: 'website',
       locale: lang === 'ja' ? 'ja_JP' : lang === 'ko' ? 'ko_KR' : 'en_US',
+      images: ['https://ibedustory-oss.github.io/jessy-portfolio/images/og-portfolio.jpg'],
     },
+    twitter: { card: 'summary_large_image' },
   }
 }
 
