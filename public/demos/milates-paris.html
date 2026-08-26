@@ -245,7 +245,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 @media(max-width:900px){.suite{margin-top:34px;}}
 .cover-text{
   grid-column:1;grid-row:1;
-  padding-top:clamp(108px,15vw,214px);
+  padding-top:calc(clamp(14px,3.6vw,58px) + clamp(60px,13.6vw,206px) + 36px);
   display:flex;flex-direction:column;
 }
 /* sommaire as a horizontal strip below the frame */
@@ -708,8 +708,8 @@ body.mag-locked{overflow:hidden;}
 html[lang="ko"] body{font-family:'Noto Sans KR','Archivo',system-ui,sans-serif;}
 html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
 html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
-html[lang="ko"] .price,html[lang="ko"] .dish .p,html[lang="ko"] .foot-logo,
-html[lang="ko"] .review p,html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,
+html[lang="ko"] .price,html[lang="ko"] .dish .p,
+html[lang="ko"] .review p,
 html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
 html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
 html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
@@ -730,11 +730,24 @@ html[lang="ko"] .breath-count,html[lang="ko"] .rail-head .hint,html[lang="ko"] .
 html[lang="ko"] .ckr,html[lang="ko"] .lnum,html[lang="ko"] .card .cname{
   letter-spacing:.01em;
 }
-html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,
-html[lang="ko"] .masthead,html[lang="ko"] .cov-mast{letter-spacing:-.01em;line-height:1.2;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:-.01em;line-height:1.28;}
+/* the wordmark keeps its own face and metrics in every language */
+html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,html[lang="ko"] .foot-logo,
+html[lang="ko"] .logo .latin,html[lang="ko"] .wordmark{
+  font-family:var(--display,'Fraunces',serif);line-height:.9;letter-spacing:-.018em;
+}
 /* the Hangul gloss is redundant once the page is already Korean */
 html[lang="ko"] .kr,html[lang="ko"] .dish .n small,html[lang="ko"] .hangul-big,
 html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{display:none;}
+/* Hangul has no true italic — stop the browser from skewing it */
+html[lang="ko"]{font-synthesis-style:none;font-synthesis:weight small-caps;}
+html[lang="ko"] .hand-note,html[lang="ko"] .review p,html[lang="ko"] .addr,
+html[lang="ko"] .a-head,html[lang="ko"] .pl-h,html[lang="ko"] .cov-dek,
+html[lang="ko"] .pgf.verso blockquote,html[lang="ko"] .sel-pane .fmt,
+html[lang="ko"] .breath-label,html[lang="ko"] .story-text h2 .accent,
+html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
+  font-style:normal;
+}
 </style>
 </head>
 <body>

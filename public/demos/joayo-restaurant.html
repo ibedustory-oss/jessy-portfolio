@@ -257,8 +257,8 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
 html[lang="ko"] body{font-family:'Noto Sans KR','Archivo',system-ui,sans-serif;}
 html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
 html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
-html[lang="ko"] .price,html[lang="ko"] .dish .p,html[lang="ko"] .foot-logo,
-html[lang="ko"] .review p,html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,
+html[lang="ko"] .price,html[lang="ko"] .dish .p,
+html[lang="ko"] .review p,
 html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
 html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
 html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
@@ -279,14 +279,45 @@ html[lang="ko"] .breath-count,html[lang="ko"] .rail-head .hint,html[lang="ko"] .
 html[lang="ko"] .ckr,html[lang="ko"] .lnum,html[lang="ko"] .card .cname{
   letter-spacing:.01em;
 }
-html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,
-html[lang="ko"] .masthead,html[lang="ko"] .cov-mast{letter-spacing:-.01em;line-height:1.2;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:-.01em;line-height:1.28;}
+/* the wordmark keeps its own face and metrics in every language */
+html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,html[lang="ko"] .foot-logo,
+html[lang="ko"] .logo .latin,html[lang="ko"] .wordmark{
+  font-family:var(--display,'Fraunces',serif);line-height:.9;letter-spacing:-.018em;
+}
 /* the Hangul gloss is redundant once the page is already Korean */
 html[lang="ko"] .kr,html[lang="ko"] .dish .n small,html[lang="ko"] .hangul-big,
 html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{display:none;}
 html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .romaja,
 html[lang="ko"] .bubble .romaja,html[lang="ko"] .cov-top,html[lang="ko"] .lnum{}
 html[lang="ko"] .lkr,html[lang="ko"] .kr-sub{display:none;}
+/* Hangul has no true italic — stop the browser from skewing it */
+html[lang="ko"]{font-synthesis-style:none;font-synthesis:weight small-caps;}
+html[lang="ko"] .hand-note,html[lang="ko"] .review p,html[lang="ko"] .addr,
+html[lang="ko"] .a-head,html[lang="ko"] .pl-h,html[lang="ko"] .cov-dek,
+html[lang="ko"] .pgf.verso blockquote,html[lang="ko"] .sel-pane .fmt,
+html[lang="ko"] .breath-label,html[lang="ko"] .story-text h2 .accent,
+html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
+  font-style:normal;
+}
+/* ---- cross-sell band ---- */
+.cross{
+  max-width:1320px;margin:0 auto;padding:76px 40px 96px;
+  border-top:1px solid var(--ink);
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:4vw;align-items:end;
+}
+.cross>*:first-child{grid-column:1;}
+.cross .btn{grid-column:1;justify-self:start;margin-top:28px;}
+.cross p{grid-column:2;grid-row:1;align-self:end;margin-top:0;}
+.cross h2{font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(27px,3vw,42px);line-height:1.1;letter-spacing:-.01em;max-width:22ch;}
+.cross p{margin-top:16px;color:var(--ink-60);font-size:15.5px;max-width:52ch;}
+.cross .btn{white-space:nowrap;}
+@media(max-width:900px){
+  .cross{grid-template-columns:1fr;gap:18px;padding:60px 20px 76px;align-items:start;}
+  .cross p{grid-column:1;grid-row:auto;}
+  .cross .btn{margin-top:8px;}
+}
 </style>
 </head>
 <body>
@@ -530,7 +561,7 @@ html[lang="ko"] .lkr,html[lang="ko"] .kr-sub{display:none;}
 <div class="cross reveal">
   <h2 data-i18n="cr_h2">Envie de refaire ces plats chez vous ?</h2>
   <p data-i18n="cr_p">Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.</p>
-  <a class="btn" href="joayo-market.html" data-i18n="cr_btn">Découvrir l'épicerie →</a>
+  <a class="btn" href="joayo-market.html" data-i18n="cr_btn">Découvrir l'épicerie</a>
 </div>
 
 <!-- FOOTER -->
@@ -589,7 +620,7 @@ fr: {
   ic4_h3:"Réservation", ic4_small:"Réservation conseillée le soir et le week-end.",
   cr_h2:"Envie de refaire ces plats chez vous ?",
   cr_p:"Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.",
-  cr_btn:"Découvrir l'épicerie →",
+  cr_btn:"Découvrir l'épicerie",
   foot_sub:"RESTAURANT",
   legal:"Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89"
 },
@@ -635,7 +666,7 @@ en: {
   ic4_h3:"Booking", ic4_small:"Booking recommended for dinner and weekends.",
   cr_h2:"Want to cook these dishes at home?",
   cr_p:"The joayo also keeps a market: homemade kimchi and banchan, ramyeon, sauces and the whole Korean pantry, in the 15th.",
-  cr_btn:"Discover the grocery →",
+  cr_btn:"Discover the grocery",
   foot_sub:"RESTAURANT",
   legal:"Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · +33 1 23 45 67 89"
 },
@@ -647,7 +678,7 @@ ko: {
   rating_count:"Google",
   ar_head:"오늘의 칠판 메뉴", ar_note:"전체 메뉴 보기 ↓",
   kicker:"점심 & 저녁 — 파리 시내 한복판",
-  hero_h1a:"좋아요", hero_h1b:"레스토랑", hero_hb:"JOAYO RESTAURANT",
+  hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
   hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
   cta_book:"예약 — 01 23 45 67 89",
   me_over:"메뉴 · La carte", me_h2:"한국에서 먹던 그 맛 그대로",
@@ -681,7 +712,7 @@ ko: {
   ic4_h3:"예약", ic4_small:"저녁과 주말은 예약을 권장합니다.",
   cr_h2:"이 메뉴, 집에서도 만들고 싶다면?",
   cr_p:"좋아요 마켓이 있습니다 — 직접 담근 김치와 반찬, 라면, 장류까지. 파리 15구.",
-  cr_btn:"마켓 보러 가기 →",
+  cr_btn:"마켓 보러 가기",
   foot_sub:"레스토랑",
   legal:"데모 사이트 · © 2026 좋아요 레스토랑 — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89"
 }
