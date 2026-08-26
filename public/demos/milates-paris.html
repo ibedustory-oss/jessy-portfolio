@@ -11,6 +11,7 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Pen+Script&display=swap');
 
 :root{
@@ -701,6 +702,39 @@ body.mag-locked{overflow:hidden;}
   .spread.turn .pg-right{transform:none;opacity:0;}
   .spread.turn .cast{animation:none;opacity:0;}
 }
+
+/* ================= Korean typography ================= */
+/* Fraunces / Bodoni carry no Hangul — give Korean its own faces and metrics. */
+html[lang="ko"] body{font-family:'Noto Sans KR','Archivo',system-ui,sans-serif;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
+html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
+html[lang="ko"] .price,html[lang="ko"] .dish .p,html[lang="ko"] .foot-logo,
+html[lang="ko"] .review p,html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,
+html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
+html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
+html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
+html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
+  font-family:'Noto Serif KR',serif;font-style:normal;font-weight:600;
+}
+/* Latin tracking is wrong for Hangul — it breaks words apart */
+html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .btn,
+html[lang="ko"] .addr-pill,html[lang="ko"] .ticker,html[lang="ko"] .ticker-inner span,
+html[lang="ko"] .foot-links a,html[lang="ko"] .nav-links a,html[lang="ko"] .review .who,
+html[lang="ko"] .service-chips span,html[lang="ko"] .a-note a,html[lang="ko"] .info-card .meta,
+html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,html[lang="ko"] .suite .s-t,
+html[lang="ko"] .tag,html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .corner,
+html[lang="ko"] .sel-pane .fmt,html[lang="ko"] .sel-pane .dur,html[lang="ko"] .pl-top,
+html[lang="ko"] .cov-top,html[lang="ko"] .edge-cap,html[lang="ko"] .mag-hint,
+html[lang="ko"] .spread-hint,html[lang="ko"] .som-head,html[lang="ko"] .sommaire a,
+html[lang="ko"] .breath-count,html[lang="ko"] .rail-head .hint,html[lang="ko"] .cname,
+html[lang="ko"] .ckr,html[lang="ko"] .lnum,html[lang="ko"] .card .cname{
+  letter-spacing:.01em;
+}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,
+html[lang="ko"] .masthead,html[lang="ko"] .cov-mast{letter-spacing:-.01em;line-height:1.2;}
+/* the Hangul gloss is redundant once the page is already Korean */
+html[lang="ko"] .kr,html[lang="ko"] .dish .n small,html[lang="ko"] .hangul-big,
+html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{display:none;}
 </style>
 </head>
 <body>
