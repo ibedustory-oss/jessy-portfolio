@@ -14,11 +14,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
 
 :root{
-  --paper:#F2EDE3;
+  --paper:#F7F4EF;
   --ink:#16130F;
   --ink-60:rgba(22,19,15,.6);
-  --line:rgba(22,19,15,.16);
-  --red:#C93A1D;
+  --line:rgba(22,19,15,.13);
+  --red:#BE3418;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -56,7 +56,7 @@ nav{
   transition:background .5s ease,color .5s ease,padding .5s ease;
   color:var(--paper);
 }
-nav.solid{background:rgba(242,237,227,.92);backdrop-filter:blur(12px);color:var(--ink);padding:14px 40px;border-bottom:1px solid var(--line);}
+nav.solid{background:rgba(247,244,239,.92);backdrop-filter:blur(12px);color:var(--ink);padding:14px 40px;border-bottom:1px solid var(--line);}
 .logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit;}
 .logo .latin{font-family:'Fraunces',serif;font-weight:560;font-size:25px;}
 .logo .hangul{font-size:13px;font-weight:600;color:var(--red);letter-spacing:.14em;}
@@ -116,14 +116,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 }
 .leaf .lnum{
   font-family:'Fraunces',serif;font-style:italic;font-size:14px;
-  color:rgba(242,237,227,.7);margin-bottom:12px;display:block;
+  color:rgba(247,244,239,.7);margin-bottom:12px;display:block;
 }
 .leaf h2{
   font-family:'Fraunces',serif;font-weight:560;
   font-size:clamp(30px,3.4vw,58px);line-height:1;letter-spacing:-.01em;
 }
 .leaf .lkr{
-  font-size:12px;font-weight:600;letter-spacing:.26em;color:rgba(242,237,227,.72);
+  font-size:12px;font-weight:600;letter-spacing:.26em;color:rgba(247,244,239,.72);
   margin-top:10px;display:block;
 }
 .leaf .lreveal{
@@ -131,10 +131,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   transition:max-height .9s cubic-bezier(.23,1,.32,1),opacity .6s ease;
 }
 .leaf:hover .lreveal{max-height:260px;opacity:1;}
-.leaf .lreveal p{font-size:15px;color:rgba(242,237,227,.9);max-width:38ch;margin-top:18px;line-height:1.7;}
+.leaf .lreveal p{font-size:15px;color:rgba(247,244,239,.9);max-width:38ch;margin-top:18px;line-height:1.7;}
 .leaf .lreveal .lmeta{
   font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(242,237,227,.62);margin-top:14px;line-height:1.9;
+  color:rgba(247,244,239,.62);margin-top:14px;line-height:1.9;
 }
 .leaf .lgo{
   display:inline-flex;align-items:center;gap:12px;margin-top:22px;
@@ -148,7 +148,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   transition:transform .4s cubic-bezier(.2,1.4,.4,1);
 }
 .leaf:hover .lgo .ar{transform:translateX(3px);}
-.leaf .seam{position:absolute;top:0;bottom:0;right:0;width:1px;background:rgba(242,237,227,.22);z-index:3;}
+.leaf .seam{position:absolute;top:0;bottom:0;right:0;width:1px;background:rgba(247,244,239,.22);z-index:3;}
 
 /* centred wordmark that reacts to which door you lean toward */
 .gate-mark{
@@ -158,7 +158,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 }
 .gate-mark .kick{
   font-size:11px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
-  color:rgba(242,237,227,.8);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;
+  color:rgba(247,244,239,.8);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;
 }
 .gate-mark .kick .dot{width:5px;height:5px;border-radius:50%;background:var(--red);}
 .gate-mark h1{
@@ -169,13 +169,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .gate-mark h1 .kr{font-size:.17em;font-family:'Archivo';font-weight:600;letter-spacing:.3em;opacity:.85;}
 .gate-mark .say{
   margin-top:14px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
-  font-size:clamp(16px,1.7vw,23px);color:rgba(242,237,227,.9);
+  font-size:clamp(16px,1.7vw,23px);color:rgba(247,244,239,.9);
 }
 .gate.leaning-l .gate-mark{transform:translate(-50%,-50%) translateX(7vw) translateY(-13vh) scale(.82);opacity:.5;}
 .gate.leaning-r .gate-mark{transform:translate(-50%,-50%) translateX(-7vw) translateY(-13vh) scale(.82);opacity:.5;}
 .gate-hint{
   position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:5;
-  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(242,237,227,.55);
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,244,239,.55);
   pointer-events:none;transition:opacity .5s;
 }
 .gate:hover .gate-hint{opacity:0;}
@@ -269,11 +269,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 footer{background:var(--ink);color:var(--paper);padding:100px 40px 40px;text-align:center;}
 footer .foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(60px,11vw,150px);line-height:1;letter-spacing:-.015em;}
 footer .foot-logo span{font-style:italic;color:var(--red);}
-footer .foot-hangul{color:rgba(242,237,227,.55);font-weight:600;letter-spacing:.5em;margin-top:14px;font-size:13px;}
+footer .foot-hangul{color:rgba(247,244,239,.55);font-weight:600;letter-spacing:.5em;margin-top:14px;font-size:13px;}
 footer .foot-links{margin:42px 0 28px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;}
 footer .foot-links a{color:var(--paper);text-decoration:none;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;}
 footer .foot-links a:hover{color:var(--red);}
-footer .legal{font-size:11.5px;color:rgba(242,237,227,.38);}
+footer .legal{font-size:11.5px;color:rgba(247,244,239,.38);}
 
 /* ============ REVEAL ============ */
 body.js-anim .reveal{opacity:0;transform:translateY(26px);filter:blur(6px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1),filter .9s cubic-bezier(.23,1,.32,1);}

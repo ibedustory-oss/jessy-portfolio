@@ -198,7 +198,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
   gap:4vw;align-items:start;margin-top:8px;
 }
 .masthead{
-  position:absolute;left:0;right:0;top:clamp(60px,11vw,150px);z-index:5;
+  position:absolute;left:0;right:0;top:clamp(18px,4.6vw,74px);z-index:5;
   font-family:var(--display);font-weight:500;
   font-size:clamp(64px,15.2vw,232px);
   line-height:.9;letter-spacing:-.018em;text-transform:uppercase;
@@ -230,9 +230,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
   position:absolute;left:18px;bottom:20px;z-index:3;
   color:var(--plaster);text-shadow:0 2px 16px rgba(33,27,29,.55);
 }
+.suite{
+  margin-top:auto;padding-top:34px;text-decoration:none;color:var(--ink);
+  display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:baseline;
+  border-top:1px solid var(--line);max-width:46ch;
+  transition:color .35s ease,border-color .35s ease;
+}
+.suite:hover{color:var(--framboise);border-color:var(--framboise);}
+.suite .s-n{font-family:var(--display);font-style:italic;font-size:13px;color:var(--framboise);}
+.suite .s-t{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.suite .s-a{font-size:15px;transition:transform .4s cubic-bezier(.2,1.4,.4,1);}
+.suite:hover .s-a{transform:translateY(4px);}
+@media(max-width:900px){.suite{margin-top:34px;}}
 .cover-text{
   grid-column:1;grid-row:1;
-  padding-top:clamp(150px,24vw,340px);
+  padding-top:clamp(120px,17.5vw,250px);
   display:flex;flex-direction:column;
 }
 /* sommaire as a horizontal strip below the frame */
@@ -336,6 +348,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 /* ============ SECTION SCAFFOLD ============ */
 section{padding:104px 42px;scroll-margin-top:72px;}
 .rail{max-width:1180px;margin:0 auto;}
+.kicker b{font-family:var(--display);font-style:italic;font-weight:400;color:var(--framboise);margin-right:8px;}
 .kicker{
   display:flex;align-items:baseline;gap:16px;
   font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--framboise);font-weight:600;
@@ -373,7 +386,8 @@ h2 i{font-style:italic;font-weight:400;color:var(--framboise);}
 
 /* ============ WONNIE ============ */
 #mina{background:var(--ink);color:var(--plaster);}
-#mina .kicker{color:var(--rose);}
+#mina .kicker b{font-family:var(--display);font-style:italic;font-weight:400;color:var(--framboise);margin-right:8px;}
+.kicker{color:var(--rose);}
 #mina .kicker:after{background:rgba(241,231,228,.25);}
 .mina-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:6vw;align-items:center;}
 .polaroid-stack{position:relative;height:520px;}
@@ -768,6 +782,11 @@ body.mag-locked{overflow:hidden;}
         <a class="btn" href="#" onclick="return false;"><span data-i18n="cta_book">Réserver par message</span> <span class="ar">→</span></a>
         <a class="btn btn-line" href="#methode"><span data-i18n="cta_method">Découvrir la méthode</span> <span class="ar">→</span></a>
       </div>
+      <a class="suite" href="#methode">
+        <span class="s-n">01</span>
+        <span class="s-t" data-i18n="suite">La méthode — on commence par le souffle</span>
+        <span class="s-a">↓</span>
+      </a>
     </div>
   </div>
 
@@ -783,7 +802,7 @@ body.mag-locked{overflow:hidden;}
 <!-- MÉTHODE -->
 <section id="methode" data-trail>
   <div class="rail">
-    <div class="kicker reveal" data-i18n="k_methode">La méthode</div>
+    <div class="kicker reveal" data-i18n="k_methode"><b>01</b> La méthode</div>
     <div class="method-grid">
       <div class="method-intro reveal">
         <h2 data-i18n-html="me_h2">Un seul corps par <i>séance.</i></h2>
@@ -817,7 +836,7 @@ body.mag-locked{overflow:hidden;}
 <!-- WONNIE -->
 <section id="mina" data-trail>
   <div class="rail">
-    <div class="kicker reveal" data-i18n="k_mina">Votre professeure</div>
+    <div class="kicker reveal" data-i18n="k_mina"><b>02</b> Votre professeure</div>
     <div class="mina-grid">
       <div class="polaroid-stack reveal">
         <div class="polaroid polaroid-a">
@@ -859,7 +878,7 @@ body.mag-locked{overflow:hidden;}
 <!-- SÉANCES -->
 <section id="seances" data-trail>
   <div class="rail">
-    <div class="kicker reveal" data-i18n="k_seances">Les séances</div>
+    <div class="kicker reveal" data-i18n="k_seances"><b>03</b> Les séances</div>
     <h2 class="reveal" data-i18n-html="s_h2">Trois façons de <i>pratiquer.</i></h2>
     <div class="sel reveal">
       <div class="sel-names" role="tablist">
@@ -950,7 +969,7 @@ body.mag-locked{overflow:hidden;}
 <!-- INSTAGRAM -->
 <section id="instagram" data-trail>
   <div class="rail">
-    <div class="kicker reveal" data-i18n="k_ig">Le studio</div>
+    <div class="kicker reveal" data-i18n="k_ig"><b>04</b> Le studio</div>
     <div class="ig-head reveal">
       <h2 data-i18n-html="ig_h2">La vie du studio, en <i>images.</i></h2>
       <p data-i18n="ig_p">Exercices commentés, coulisses des séances et petites notes de Mina — tout se passe sur le compte.</p>
@@ -987,6 +1006,7 @@ body.mag-locked{overflow:hidden;}
 var I18N = {
 fr: {
   _title:"Milates Paris",
+  suite:"La méthode — on commence par le souffle",
   sp_left:"Un studio, une professeure, une séance à la fois.", sp_dek:"Le pilates comme un rendez-vous à soi.", sp_quote:"On commence par le souffle. Le reste suit.", sp_cite:"Mina", sp_hint:"tournez la page",
   mag_issue:"N°01 · Pilates privé", mag_cta:"Ouvrir le numéro", mag_hint:"cliquez ou faites défiler",
   mag_l1:"Un seul corps par séance", mag_s1:"La méthode",
@@ -1046,6 +1066,7 @@ fr: {
 },
 en: {
   _title:"Milates Paris",
+  suite:"The method — we start with the breath",
   sp_left:"One studio, one teacher, one session at a time.", sp_dek:"Pilates as an appointment with yourself.", sp_quote:"We start with the breath. The rest follows.", sp_cite:"Mina", sp_hint:"turn the page",
   mag_issue:"N°01 · Private pilates", mag_cta:"Open the issue", mag_hint:"click or scroll",
   mag_l1:"One body per session", mag_s1:"The method",
@@ -1105,6 +1126,7 @@ en: {
 },
 ko: {
   _title:"밀라테스 Milates Paris",
+  suite:"메소드 — 호흡부터 시작합니다",
   sp_left:"하나의 스튜디오, 한 명의 선생님, 한 번에 한 세션.", sp_dek:"나를 만나는 시간으로서의 필라테스.", sp_quote:"호흡부터 시작합니다. 나머지는 따라옵니다.", sp_cite:"미나", sp_hint:"페이지를 넘기세요",
   mag_issue:"N°01 · 프라이빗 필라테스", mag_cta:"이번 호 열기", mag_hint:"클릭하거나 스크롤하세요",
   mag_l1:"한 세션에 한 사람", mag_s1:"메소드",
