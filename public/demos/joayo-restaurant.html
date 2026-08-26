@@ -360,24 +360,53 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 .hero.jangdok .cta-row .btn:hover{background:var(--red);border-color:var(--red);color:var(--paper);}
 .hero.jangdok .cta-row .btn:hover:after{background:var(--paper);color:var(--red);}
 .hero.jangdok .addr-pill{margin-top:0;color:rgba(247,244,239,.62);border-color:rgba(247,244,239,.28);}
-/* the signatures are engraved on the scene, not boxed on top of it */
+/* the signatures hang from a cord, the way a jangdokdae labels its jars */
 .hero.jangdok .ardoise{
-  background:none;backdrop-filter:none;box-shadow:none;padding:0;
-  border-top:1px solid rgba(247,244,239,.34);max-width:430px;justify-self:end;
+  background:none;backdrop-filter:none;box-shadow:none;border:none;
+  padding:2px 0 0 14px;max-width:392px;justify-self:end;position:relative;
+}
+.hero.jangdok .ardoise:before{           /* the cord running down the jars */
+  content:"";position:absolute;left:40px;top:44px;bottom:54px;width:1px;
+  background:linear-gradient(180deg,rgba(247,244,239,0),rgba(247,244,239,.52) 9%,
+             rgba(247,244,239,.52) 91%,rgba(247,244,239,0));
 }
 .hero.jangdok .a-head{
-  font-family:'Fraunces',serif;font-style:italic;font-size:15px;
-  color:rgba(247,244,239,.72);letter-spacing:.02em;
-  margin:16px 0 6px;padding:0;border:none;max-width:none;
+  font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;
+  color:rgba(247,244,239,.8);letter-spacing:.02em;
+  margin:0 0 15px;padding:0;border:none;max-width:none;
 }
-.hero.jangdok .dish{
-  padding:15px 0;border-bottom:1px solid rgba(247,244,239,.16);align-items:baseline;
+.hero.jangdok .dish{                     /* one hanji tag */
+  position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  background:linear-gradient(166deg,#F7F1E6 0%,#EADFC9 100%);
+  border:none;padding:13px 17px 14px 38px;margin:0 0 13px;
+  clip-path:polygon(15px 0,100% 0,100% 100%,15px 100%,0 50%);   /* a luggage-tag tip */
+  transform-origin:26px 50%;                                    /* it swings on its hole */
+  filter:drop-shadow(0 12px 20px rgba(10,7,4,.5));
+  transition:transform .55s cubic-bezier(.23,1,.32,1),filter .55s ease;
 }
-.hero.jangdok .dish:last-of-type{border-bottom:none;}
-.hero.jangdok .dish .n{font-family:'Fraunces',serif;font-weight:560;font-size:17px;}
-.hero.jangdok .dish .n small{color:rgba(247,244,239,.5);}
-.hero.jangdok .dish .p{font-size:16px;color:rgba(247,244,239,.9);}
-.hero.jangdok .a-note{margin-top:16px;}
+.hero.jangdok .dish:nth-child(3){transform:rotate(-1.5deg);}
+.hero.jangdok .dish:nth-child(4){transform:rotate(1.1deg);}
+.hero.jangdok .dish:nth-child(5){transform:rotate(-.7deg);}
+.hero.jangdok .dish:before{              /* the punched hole the cord runs through */
+  content:"";position:absolute;left:23px;top:50%;transform:translateY(-50%);
+  width:7px;height:7px;border-radius:50%;
+  background:#1B1712;box-shadow:inset 0 1px 1px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.5);
+}
+.hero.jangdok .dish:hover{               /* a tag lifts and straightens when read */
+  transform:rotate(0deg);
+  filter:drop-shadow(0 20px 30px rgba(10,7,4,.58)) brightness(1.04);
+}
+.hero.jangdok .dish .n{
+  font-family:'Fraunces',serif;font-weight:560;font-size:16px;color:var(--ink);line-height:1.22;
+}
+.hero.jangdok .dish .n small{
+  display:block;font-size:10.5px;letter-spacing:.15em;color:rgba(26,22,19,.6);margin-top:5px;
+}
+.hero.jangdok .dish .p{
+  font-family:'Fraunces',serif;font-weight:560;font-size:15px;color:var(--ink);
+  margin-top:1px;white-space:nowrap;
+}
+.hero.jangdok .a-note{margin-top:18px;}
 .hero.jangdok .ardoise .rating-sticker{
   position:static;text-align:left;display:flex;align-items:baseline;gap:10px;margin-bottom:6px;
 }

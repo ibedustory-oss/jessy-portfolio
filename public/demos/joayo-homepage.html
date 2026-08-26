@@ -105,6 +105,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   transition:transform 1.4s cubic-bezier(.23,1,.32,1),filter 1s ease;
 }
 .leaf:hover .lph img{transform:scale(1);filter:brightness(.96) saturate(1.06);}
+/* the jangdokdae is a daylight scene; hold it to the same weight as the shop
+   so the wordmark keeps its contrast across the seam */
+#leafR .lph img{object-position:50% 74%;filter:brightness(.3) saturate(.78);}
+#leafR:hover .lph img{filter:brightness(.94) saturate(1.06);}
 .leaf:after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(190deg,rgba(22,19,15,.06) 40%,rgba(22,19,15,.9) 95%);
@@ -152,6 +156,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .leaf .seam{position:absolute;top:0;bottom:0;right:0;width:1px;background:rgba(247,244,239,.22);z-index:3;}
 
 /* centred wordmark that reacts to which door you lean toward */
+/* the doors brighten on hover — the nav needs its own ground to stay legible */
+.gate-scrim{position:absolute;left:0;right:0;top:0;height:190px;pointer-events:none;z-index:3;
+  background:linear-gradient(180deg,rgba(18,15,11,.72) 0%,rgba(18,15,11,.34) 52%,rgba(18,15,11,0) 100%);}
 .gate-mark{
   position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:5;
   text-align:center;pointer-events:none;color:var(--paper);width:min(92vw,900px);
@@ -172,8 +179,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
   margin-top:14px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
   font-size:clamp(16px,1.7vw,23px);color:rgba(247,244,239,.9);
 }
-.gate.leaning-l .gate-mark{transform:translate(-50%,-50%) translateX(7vw) translateY(-13vh) scale(.82);opacity:.5;}
-.gate.leaning-r .gate-mark{transform:translate(-50%,-50%) translateX(-7vw) translateY(-13vh) scale(.82);opacity:.5;}
+.gate.leaning-l .gate-mark{transform:translate(-50%,-50%) translateX(7vw) translateY(-13vh) scale(.82);opacity:0;}
+.gate.leaning-r .gate-mark{transform:translate(-50%,-50%) translateX(-7vw) translateY(-13vh) scale(.82);opacity:0;}
 .gate-hint{
   position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:5;
   font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,244,239,.55);
@@ -394,6 +401,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 
 <!-- GATE : two doors you actually choose -->
 <div class="gate" id="gate" data-rail>
+  <div class="gate-scrim"></div>
   <a class="leaf" id="leafL" href="joayo-market.html">
     <div class="lph"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div>
     <span class="seam" aria-hidden="true"></span>
@@ -410,7 +418,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   </a>
 
   <a class="leaf" id="leafR" href="joayo-restaurant.html">
-    <div class="lph"><img src="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div>
+    <div class="lph"><img src="https://images.pexels.com/photos/34416819/pexels-photo-34416819.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div>
     <div class="leaf-body">
       <span class="lnum">N°2</span>
       <h2 data-i18n="d2_h2">Le Restaurant</h2>
