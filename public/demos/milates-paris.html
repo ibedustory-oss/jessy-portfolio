@@ -198,9 +198,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
   gap:4vw;align-items:start;margin-top:8px;
 }
 .masthead{
-  position:absolute;left:0;right:0;top:clamp(18px,4.6vw,74px);z-index:5;
+  position:absolute;left:0;right:0;top:clamp(14px,3.6vw,58px);z-index:5;
   font-family:var(--display);font-weight:500;
-  font-size:clamp(64px,15.2vw,232px);
+  font-size:clamp(60px,13.6vw,206px);
   line-height:.9;letter-spacing:-.018em;text-transform:uppercase;
   pointer-events:none;overflow:hidden;
   text-shadow:0 1px 40px rgba(241,231,228,.55);
@@ -244,7 +244,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 @media(max-width:900px){.suite{margin-top:34px;}}
 .cover-text{
   grid-column:1;grid-row:1;
-  padding-top:clamp(120px,17.5vw,250px);
+  padding-top:clamp(108px,15vw,214px);
   display:flex;flex-direction:column;
 }
 /* sommaire as a horizontal strip below the frame */
@@ -603,10 +603,16 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 .pg-right{
   transform-origin:left center;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;
   transform:rotateY(0deg);
-  transition:transform 2s cubic-bezier(.58,0,.16,1);
+  transition:transform 1.6s cubic-bezier(.55,0,.18,1);
   will-change:transform;z-index:3;
 }
 .spread.turn .pg-right{transform:rotateY(-179.6deg);}
+/* the left page gets out of the way while the leaf is still sweeping */
+.pg-left{transition:opacity .7s ease;}
+.spread.turn .pg-left{opacity:0;transition:opacity .75s ease .35s;}
+/* and the whole spread dissolves once the leaf is past vertical */
+.spread.turn{animation:spreadout 1.6s ease forwards;}
+@keyframes spreadout{0%,52%{opacity:1}100%{opacity:0}}
 .pgf{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
 
 /* recto = the cover */
@@ -673,8 +679,8 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 /* shadow the turning page casts on the left page */
 .cast{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
   background:linear-gradient(90deg,rgba(33,27,29,.6),rgba(33,27,29,.12) 55%,transparent);}
-.spread.turn .cast{animation:cast 2s cubic-bezier(.58,0,.16,1) forwards;}
-@keyframes cast{0%{opacity:.9}62%{opacity:.42}100%{opacity:0}}
+.spread.turn .cast{animation:cast 1.6s cubic-bezier(.55,0,.18,1) forwards;}
+@keyframes cast{0%{opacity:.9}45%{opacity:.4}100%{opacity:0}}
 
 .spread-hint{
   position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:5;
@@ -1222,9 +1228,8 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
     if(turned)return; turned=true;
     sp.classList.add('turn');
     document.body.classList.remove('mag-locked');
-    var wait=reduce?500:2050;
-    setTimeout(function(){ sp.classList.add('done'); },wait);
-    setTimeout(function(){ sp.classList.add('gone'); },wait+750);
+    var wait=reduce?500:1500;
+    setTimeout(function(){ sp.classList.add('gone'); },wait+260);
     window.removeEventListener('wheel',turn);
     window.removeEventListener('touchmove',turn);
   }
