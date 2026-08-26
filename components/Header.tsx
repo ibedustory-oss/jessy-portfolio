@@ -24,86 +24,126 @@ export default function Header({ lang, dict }: { lang: Lang; dict: Dict }) {
   }
 
   const nav = [
+    { label: dict.nav.services, href: `/${lang}/services/` },
     { label: dict.nav.work, href: `/${lang}/#work` },
-    { label: dict.nav.services, href: `/${lang}/#services` },
-    { label: dict.nav.about, href: `/${lang}/#about` },
-    { label: dict.nav.contact, href: `/${lang}/#contact` },
+    { label: dict.nav.about, href: `/${lang}/about/` },
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/90 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
-        <Link
-          href={`/${lang}/`}
-          onClick={() => setOpen(false)}
-          className="text-sm font-semibold tracking-[0.18em]"
-        >
-          JESSY JUNG
-        </Link>
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 md:pt-4">
+      <div className="mx-auto max-w-4xl">
+        <div className="flex items-center justify-between gap-2 rounded-full bg-white/85 py-2 pl-5 pr-2 shadow-island ring-1 ring-ink/[0.06] backdrop-blur-xl">
+          <Link
+            href={`/${lang}/`}
+            onClick={() => setOpen(false)}
+            className="text-[15px] font-extrabold tracking-tight"
+          >
+            Jessy Jung
+          </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-sm text-charcoal transition-colors hover:text-accent"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-1 md:flex">
+            {nav.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="rounded-full px-3.5 py-1.5 text-sm font-medium text-charcoal transition-colors duration-200 hover:bg-surface hover:text-ink"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 text-xs tracking-[0.08em]">
-            {langs.map((l, i) => (
-              <span key={l} className="flex items-center gap-2">
-                {i > 0 && <span className="text-line">/</span>}
+          <div className="flex items-center gap-1.5">
+            <div className="hidden items-center rounded-full bg-surface p-0.5 text-[11px] font-semibold md:flex">
+              {langs.map((l) => (
                 <Link
+                  key={l}
                   href={pathFor(l)}
                   onClick={() => rememberLang(l)}
                   aria-current={l === lang ? 'true' : undefined}
-                  className={
+                  className={`rounded-full px-2.5 py-1 transition-colors duration-200 ${
                     l === lang
-                      ? 'font-semibold text-ink underline underline-offset-4'
-                      : 'text-warmgray transition-colors hover:text-ink'
-                  }
+                      ? 'bg-white text-ink shadow-[0_1px_3px_rgba(25,31,40,0.12)]'
+                      : 'text-warmgray hover:text-ink'
+                  }`}
                 >
                   {langLabels[l]}
                 </Link>
-              </span>
+              ))}
+            </div>
+
+            <Link
+              href={`/${lang}/#contact`}
+              onClick={() => setOpen(false)}
+              className="hidden rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-[background-color,transform] duration-200 ease-swift hover:bg-accenthover active:scale-[0.97] md:inline-block"
+            >
+              {dict.nav.contact}
+            </Link>
+
+            <button
+              type="button"
+              aria-label="Menu"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] rounded-full transition-colors hover:bg-surface active:scale-95 md:hidden"
+            >
+              <span
+                className={`block h-[1.5px] w-4 rounded-full bg-ink transition-transform duration-300 ease-swift ${open ? 'translate-y-[3.25px] rotate-45' : ''}`}
+              />
+              <span
+                className={`block h-[1.5px] w-4 rounded-full bg-ink transition-transform duration-300 ease-swift ${open ? '-translate-y-[3.25px] -rotate-45' : ''}`}
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile sheet, dropping from the island. */}
+        <div
+          className={`mt-2 origin-top overflow-hidden rounded-[24px] bg-white shadow-lift ring-1 ring-ink/[0.06] transition-all duration-300 ease-swift md:hidden ${
+            open ? 'visible scale-100 opacity-100' : 'invisible scale-[0.97] opacity-0'
+          }`}
+        >
+          <nav className="p-2">
+            {nav.map((item, i) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                style={{ transitionDelay: open ? `${60 + i * 40}ms` : '0ms' }}
+                className={`block rounded-2xl px-4 py-3.5 text-base font-semibold transition-all duration-300 ease-swift hover:bg-surface ${
+                  open ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href={`/${lang}/#contact`}
+              onClick={() => setOpen(false)}
+              style={{ transitionDelay: open ? '180ms' : '0ms' }}
+              className={`mt-1 block rounded-2xl bg-accent px-4 py-3.5 text-center text-base font-semibold text-white transition-all duration-300 ease-swift active:scale-[0.99] ${
+                open ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+              }`}
+            >
+              {dict.nav.contact}
+            </Link>
+          </nav>
+          <div className="flex items-center justify-center gap-1 border-t border-line px-4 py-3">
+            {langs.map((l) => (
+              <Link
+                key={l}
+                href={pathFor(l)}
+                onClick={() => rememberLang(l)}
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                  l === lang ? 'bg-surface text-ink' : 'text-warmgray'
+                }`}
+              >
+                {langLabels[l]}
+              </Link>
             ))}
           </div>
-
-          <button
-            type="button"
-            aria-label="Menu"
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden"
-          >
-            <span
-              className={`block h-px w-5 bg-ink transition-transform ${open ? 'translate-y-[3.5px] rotate-45' : ''}`}
-            />
-            <span
-              className={`block h-px w-5 bg-ink transition-transform ${open ? '-translate-y-[3.5px] -rotate-45' : ''}`}
-            />
-          </button>
         </div>
       </div>
-
-      {open && (
-        <nav className="border-t border-line bg-paper md:hidden">
-          {nav.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="block border-b border-line px-5 py-4 text-lg tracking-tight"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      )}
     </header>
   )
 }

@@ -7,6 +7,10 @@ export interface ProjectImages {
 
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
+// Set to a path like `${BP}/images/portrait.jpg` once a photo exists.
+// While null, the About page simply runs the bio full-width.
+export const PORTRAIT: string | null = null
+
 export const PROJECT_IMAGES: Record<string, ProjectImages> = {
   'atelier-why': {
     cover: `${BP}/images/atelier-why-desktop.jpg`,

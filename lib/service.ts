@@ -1,0 +1,377 @@
+import type { Lang } from '@/lib/content'
+
+export interface ServiceContent {
+  badge: string
+  headline: string
+  headlineAccent: string
+  sub: string
+  ctaPrimary: string
+  ctaSecondary: string
+  stats: { v: string; l: string }[]
+  aiwhy: {
+    eyebrow: string
+    title: string
+    lead: string
+    canTitle: string
+    can: string[]
+    canNote: string
+    cantTitle: string
+    cant: string[]
+    cantNote: string
+  }
+  workTitle: string
+  workSub: string
+  showroom: { label: string; href: string; img: string; url: string; cta: string }
+  demos: { label: string; href: string; genre: string; img: string; url: string }[]
+  includedTitle: string
+  includedSub: string
+  included: { title: string; desc: string }[]
+  stepsTitle: string
+  steps: { n: string; title: string; desc: string }[]
+  priceTitle: string
+  priceSub: string
+  plans: {
+    name: string
+    price: string
+    unit: string
+    desc: string
+    features: string[]
+    cta: string
+    featured?: boolean
+  }[]
+  priceNote: string
+  compareTitle: string
+  compareCols: string[]
+  compareRows: { label: string; values: string[] }[]
+  faqTitle: string
+  faq: { q: string; a: string }[]
+  finalTitle: string
+  finalSub: string
+  finalCta: string
+  finalNote: string
+}
+
+const BASE = [
+  { label: 'JOAYO', href: 'demos/joayo-homepage.html', img: 'demo-joayo.jpg', url: 'joayo.paris' },
+  { label: 'MILATES', href: 'demos/milates-paris.html', img: 'demo-milates.jpg', url: 'milates.paris' },
+  { label: 'MATSU SEITAI', href: 'demos/matsu-seitai.html', img: 'demo-seitai.jpg', url: 'matsu-seitai.paris' },
+  { label: 'JEONG', href: 'demos/jeong-paris.html', img: 'demo-jeong.jpg', url: 'jeong.paris' },
+]
+const withGenre = (g: string[]) => BASE.map((d, i) => ({ ...d, genre: g[i] }))
+
+export const SERVICE: Record<Lang, ServiceContent> = {
+  ja: {
+    badge: 'いま相談を受け付けています',
+    headline: '「なぜ選ばれるのか」から、',
+    headlineAccent: '一緒につくります。',
+    sub: 'Webサイトの制作だけではありません。事業のWHYを言語化し、誰に・どの立ち位置で・どう売るかを決めてから、サイトという形にします。',
+    ctaPrimary: '相談する',
+    ctaSecondary: 'つくったものを見る',
+    stats: [
+      { v: '4P', l: '商品・価格・売り方・伝え方まで設計' },
+      { v: '1枚', l: '戦略シートに言語化してから作る' },
+      { v: '4言語', l: '日英韓は私が書き、仏語は監修つき' },
+      { v: '12年+', l: '事業とプロダクトをつくってきた年数' },
+    ],
+    aiwhy: {
+      eyebrow: 'Why',
+      title: '「つくる」は、AIで安くなりました。',
+      lead: 'サイトを作るだけなら、もう誰でもできます。実装は私もAIで速く済ませます。それでも売れるサイトと売れないサイトが分かれるのは、作る前の「決め」が違うからです。',
+      canTitle: 'AIで速くなったこと',
+      can: ['実装とコーディング', 'デザイン案の物量', '多言語の下書き'],
+      canNote: '私もAIで作ります。だから戦略込みで2〜4週間です。',
+      cantTitle: 'AIには決められないこと',
+      cant: ['誰に売るか', 'なぜあなたから買うのか', '何を言って、何を捨てるか'],
+      cantNote: 'ここが私の仕事です。決めた理由ごと、戦略シートでお渡しします。',
+    },
+    workTitle: 'コンセプトデモ',
+    workSub: '実在の店舗ではなく、「誰に・なぜ・どう売るか」から設計した自主制作です。',
+    showroom: {
+      label: 'Le Showroom',
+      href: 'demos/showroom.html',
+      img: 'demo-showroom.jpg',
+      url: 'le-showroom',
+      cta: '入場する',
+    },
+    demos: withGenre(['飲食 / 2店舗ブランド', 'ウェルネス / 個人スタジオ', '治療院 / パリ', '高級店 / パリ']),
+    includedTitle: '一緒に考えること',
+    includedSub: 'Webサイトは、この積み上げの最後にできる成果物です。',
+    included: [
+      { title: 'WHYの言語化', desc: 'なぜこの事業をやるのか、なぜあなたから買うべきなのか。ここが決まらないと、コピーもデザインも決まりません。' },
+      { title: 'ターゲティングとポジショニング', desc: '誰に売るかを絞り、競合の中でどの立ち位置を取るかを決めます。全部の人に売ろうとすると、誰にも刺さりません。' },
+      { title: '4Pの設計', desc: '商品・価格・売る場所・伝え方をひとつの表に整理します。Webサイトはこの中の一部です。' },
+      { title: '構成とコピー', desc: '決めた戦略をそのまま言葉にします。原稿をご用意いただく必要はありません。' },
+      { title: 'デザインと実装', desc: '業種とポジショニングに合わせて設計します。スマホ対応、多言語、ドメイン設定、公開まで。' },
+      { title: '公開後のマーケティング', desc: '検索・SNS・紹介、どこから人を呼ぶか。公開した後に何をするかまで設計してお渡しします。' },
+    ],
+    stepsTitle: '進め方',
+    steps: [
+      { n: '01', title: '聞く', desc: '30分ほど。事業のことと、いま何に困っているかを聞かせてください。' },
+      { n: '02', title: '言語化する', desc: 'WHY・ターゲット・ポジショニング・4Pを、1枚の戦略シートにまとめて合意します。' },
+      { n: '03', title: 'つくる', desc: '戦略をコピーとデザインに落とします。画像ではなく、実際に開けるページで確認いただきます。' },
+      { n: '04', title: '渡す', desc: 'ドメインを設定して公開。マーケティングの設計図と更新のやり方も一緒にお渡しします。' },
+    ],
+    priceTitle: '料金',
+    priceSub: '税別。着手前に金額を確定します。',
+    plans: [
+      {
+        name: 'ランディングページ',
+        price: '¥300,000',
+        unit: '〜 / 1ページ',
+        desc: '1枚で完結させたいとき。サービス紹介、採用、イベントなど。',
+        features: ['WHYの言語化と戦略シート', '構成とコピー', '1ページ', 'スマホ対応', '公開作業まで'],
+        cta: '相談する',
+      },
+      {
+        name: 'ブランドサイト',
+        price: '¥800,000',
+        unit: '〜 / 〜10ページ',
+        desc: '戦略から立ち上げる、事業の顔になるサイト。',
+        features: ['戦略シート(WHY・STP・4P)', '構成とコピー', '最大10ページ', '多言語', 'ドメインと公開', '公開後のマーケティング設計'],
+        cta: '相談する',
+        featured: true,
+      },
+      {
+        name: '運用サポート',
+        price: '¥50,000',
+        unit: '〜 / 月',
+        desc: '公開したあと、更新と改善まで任せたいとき。',
+        features: ['更新の代行', '施策の提案と改善', 'SNSや記事との連携', 'いつでも解約'],
+        cta: '相談する',
+      },
+    ],
+    priceNote: 'ページ数と内容で変わるため、ヒアリングの後に確定金額をお出しします。着手後の追加請求はありません。',
+    compareTitle: 'どこに頼むか',
+    compareCols: ['Jessy', '制作会社', 'フリーランス'],
+    compareRows: [
+      { label: '戦略', values: ['WHY・STP・4Pから', '要件を聞いて制作', '人による'] },
+      { label: '公開まで', values: ['2〜4週間', '2〜3ヶ月', '1〜2ヶ月'] },
+      { label: 'コピー', values: ['戦略シートから私が書く', '原稿は支給', '人による'] },
+      { label: '多言語', values: ['4言語が標準', '別料金', 'たいてい非対応'] },
+      { label: '公開後', values: ['マーケティング設計図つき', '保守契約', '都度依頼'] },
+    ],
+    faqTitle: 'よくある質問',
+    faq: [
+      { q: 'サイトだけ欲しいのですが。', a: 'お受けします。ただ、WHYとターゲットの整理はどのプランでも最初にやります。ここを飛ばすと、コピーもデザインも決められないからです。' },
+      { q: 'どれくらいかかりますか。', a: '戦略の言語化に1週間、制作に1〜3週間。1ページなら2週間、10ページ規模で4週間です。' },
+      { q: 'ロゴも写真もないのですが。', a: 'よくあります。ロゴがない状態から始めた案件もありますし、写真は撮影の段取りから相談できます。' },
+      { q: '公開したあと、自分で直せますか。', a: '直せます。更新の手順をお渡しします。触るのが不安なら、月額で引き受けます。' },
+      { q: '英語や韓国語も書けますか。', a: '日本語・英語・韓国語は私が書きます。フランス語は書いたあと、ネイティブに見てもらいます。' },
+      { q: '途中で「やっぱりこうしたい」となったら。', a: '戦略シートが固まる前なら何度でも変えられます。固まったあとも、決めた範囲の調整に追加料金はいただきません。' },
+    ],
+    finalTitle: 'まず30分、話しませんか。',
+    finalSub: 'まだ何も決まっていない段階で構いません。売り込みはしません。',
+    finalCta: '相談する',
+    finalNote: '24時間以内に返信します。',
+  },
+
+  ko: {
+    badge: '지금 상담 신청을 받고 있습니다',
+    headline: '"왜 선택받는지"부터,',
+    headlineAccent: '함께 만듭니다.',
+    sub: '웹사이트만 만들어 드리는 게 아닙니다. 사업의 WHY를 언어화하고, 누구에게 어떤 포지션으로 어떻게 팔지 정한 다음, 웹사이트로 완성합니다.',
+    ctaPrimary: '상담하기',
+    ctaSecondary: '작업물 보기',
+    stats: [
+      { v: '4P', l: '제품·가격·유통·프로모션까지 설계' },
+      { v: '1장', l: '전략 시트로 정리한 뒤에 제작' },
+      { v: '4개 언어', l: '한·일·영 직접 작성, 불어는 원어민 감수' },
+      { v: '12년+', l: '사업과 프로덕트를 만들어 온 경력' },
+    ],
+    aiwhy: {
+      eyebrow: 'Why',
+      title: '"만드는 일"은 AI로 싸졌습니다.',
+      lead: '사이트를 만들기만 하는 거라면 이제 누구나 할 수 있습니다. 구현은 저도 AI로 빠르게 끝냅니다. 그런데도 팔리는 사이트와 안 팔리는 사이트가 갈리는 건, 만들기 전의 "결정"이 다르기 때문입니다.',
+      canTitle: 'AI로 빨라진 것',
+      can: ['구현과 코딩', '디자인 시안의 물량', '다국어 초안'],
+      canNote: '저도 AI로 만듭니다. 전략까지 포함해 2~4주면 되는 이유입니다.',
+      cantTitle: 'AI가 정하지 못하는 것',
+      cant: ['누구에게 팔지', '왜 여기서 사야 하는지', '무엇을 말하고 무엇을 버릴지'],
+      cantNote: '이게 제 일입니다. 결정한 이유까지 전략 시트 한 장으로 드립니다.',
+    },
+    workTitle: '콘셉트 데모',
+    workSub: '실제 매장이 아니라, "누구에게·왜·어떻게 팔까"부터 설계한 자체 제작 데모입니다.',
+    showroom: {
+      label: 'Le Showroom',
+      href: 'demos/showroom.html',
+      img: 'demo-showroom.jpg',
+      url: 'le-showroom',
+      cta: '입장하기',
+    },
+    demos: withGenre(['외식 / 두 매장 브랜드', '웰니스 / 개인 스튜디오', '클리닉 / 파리', '파인다이닝 / 파리']),
+    includedTitle: '함께 정리하는 것',
+    includedSub: '웹사이트는 이 과정의 맨 끝에 나오는 결과물입니다.',
+    included: [
+      { title: 'WHY의 언어화', desc: '왜 이 사업을 하는지, 왜 고객이 당신을 선택해야 하는지. 이게 정해지지 않으면 카피도 디자인도 정할 수 없습니다.' },
+      { title: '타깃팅과 포지셔닝', desc: '누구에게 팔지 좁히고, 경쟁 속에서 어떤 자리를 차지할지 정합니다. 모두에게 팔려고 하면 아무에게도 팔리지 않습니다.' },
+      { title: '4P 설계', desc: '제품·가격·유통·프로모션을 한 장의 표로 정리합니다. 웹사이트는 그중 하나일 뿐입니다.' },
+      { title: '구성과 카피', desc: '정해진 전략을 그대로 카피로 옮깁니다. 원고를 준비하실 필요는 없습니다.' },
+      { title: '디자인과 구현', desc: '업종과 포지셔닝에 맞춰 설계합니다. 모바일 대응, 다국어, 도메인 설정, 오픈까지.' },
+      { title: '오픈 후 마케팅', desc: '검색, SNS, 소개. 어디에서 고객을 데려올지, 오픈 후에 무엇을 할지까지 설계해 드립니다.' },
+    ],
+    stepsTitle: '진행 방식',
+    steps: [
+      { n: '01', title: '듣기', desc: '30분이면 됩니다. 사업 이야기와 지금 무엇이 어려운지 들려주세요.' },
+      { n: '02', title: '언어화', desc: 'WHY, 타깃, 포지셔닝, 4P를 전략 시트 한 장으로 정리해 합의합니다.' },
+      { n: '03', title: '만들기', desc: '전략을 카피와 디자인으로 옮깁니다. 시안 이미지가 아니라 실제로 열리는 페이지로 확인합니다.' },
+      { n: '04', title: '전달', desc: '도메인을 연결해 오픈합니다. 마케팅 설계도와 수정 방법도 함께 드립니다.' },
+    ],
+    priceTitle: '요금',
+    priceSub: '부가세 별도. 착수 전에 금액을 확정합니다.',
+    plans: [
+      {
+        name: '랜딩페이지',
+        price: '¥300,000',
+        unit: '~ / 1페이지',
+        desc: '한 페이지로 끝내고 싶을 때. 서비스 소개, 채용, 이벤트.',
+        features: ['WHY 언어화 + 전략 시트', '구성과 카피', '1페이지', '모바일 대응', '오픈까지'],
+        cta: '상담하기',
+      },
+      {
+        name: '브랜드 사이트',
+        price: '¥800,000',
+        unit: '~ / 최대 10페이지',
+        desc: '전략부터 세우는, 사업의 얼굴이 되는 사이트.',
+        features: ['전략 시트(WHY·STP·4P)', '구성과 카피', '최대 10페이지', '다국어', '도메인 연결과 오픈', '오픈 후 마케팅 설계'],
+        cta: '상담하기',
+        featured: true,
+      },
+      {
+        name: '운영 지원',
+        price: '¥50,000',
+        unit: '~ / 월',
+        desc: '오픈 후 업데이트와 개선까지 맡기고 싶을 때.',
+        features: ['업데이트 대행', '개선 제안과 실행', 'SNS·콘텐츠 연계', '언제든 해지 가능'],
+        cta: '상담하기',
+      },
+    ],
+    priceNote: '페이지 수와 범위에 따라 달라지므로, 상담 후에 확정 견적을 드립니다. 착수 후 추가 청구는 없습니다.',
+    compareTitle: '어디에 맡길까',
+    compareCols: ['Jessy', '제작사', '프리랜서'],
+    compareRows: [
+      { label: '전략', values: ['WHY·STP·4P부터', '요구사항대로 제작', '사람마다 다름'] },
+      { label: '오픈까지', values: ['2~4주', '2~3개월', '1~2개월'] },
+      { label: '카피', values: ['전략 시트를 바탕으로 직접 작성', '원고는 직접 준비', '사람마다 다름'] },
+      { label: '다국어', values: ['4개 언어가 기본', '추가 비용', '대부분 불가'] },
+      { label: '오픈 후', values: ['마케팅 설계도 포함', '유지보수 계약', '건별 의뢰'] },
+    ],
+    faqTitle: '자주 묻는 질문',
+    faq: [
+      { q: '사이트만 필요한데요.', a: '가능합니다. 다만 어떤 플랜이든 WHY와 타깃 정리를 맨 먼저 합니다. 이걸 건너뛰면 카피도 디자인도 정할 수 없기 때문입니다.' },
+      { q: '기간은 얼마나 걸리나요?', a: '전략 정리에 1주, 제작에 1~3주. 1페이지면 2주, 10페이지 규모면 4주입니다.' },
+      { q: '로고도 사진도 없는데요.', a: '흔한 일입니다. 로고 없이 시작한 프로젝트도 있고, 사진은 촬영 준비부터 함께 정할 수 있습니다.' },
+      { q: '오픈 후에 직접 수정할 수 있나요?', a: '네. 수정 방법을 정리해 드립니다. 직접 만지기 부담스러우면 월정액으로 맡아 드립니다.' },
+      { q: '일본어나 영어도 쓸 수 있나요?', a: '한국어·일본어·영어는 제가 직접 씁니다. 프랑스어는 작성 후 원어민 감수를 거칩니다.' },
+      { q: '중간에 방향을 바꾸고 싶어지면요?', a: '전략 시트가 확정되기 전에는 몇 번이든 바꿀 수 있습니다. 확정 후에도 정해진 범위 안의 조정에는 추가 요금이 없습니다.' },
+    ],
+    finalTitle: '먼저 30분, 이야기해 볼까요?',
+    finalSub: '아직 아무것도 정해지지 않았어도 괜찮습니다. 억지로 권하지 않습니다.',
+    finalCta: '상담하기',
+    finalNote: '24시간 안에 답변드립니다.',
+  },
+
+  en: {
+    badge: 'Currently taking new projects',
+    headline: 'First the why.',
+    headlineAccent: 'Then the website.',
+    sub: 'This is not just a website build. We put your why into words, decide who you serve and how you position, map the 4Ps — then ship it all as a site.',
+    ctaPrimary: 'Start a conversation',
+    ctaSecondary: 'See the work',
+    stats: [
+      { v: '4Ps', l: 'product, price, place, promotion — mapped' },
+      { v: '1 page', l: 'strategy sheet agreed before any design' },
+      { v: '4', l: 'JA EN KO written by me, FR supervised' },
+      { v: '12+ yrs', l: 'building products and businesses' },
+    ],
+    aiwhy: {
+      eyebrow: 'Why',
+      title: 'AI made building cheap.',
+      lead: "Anyone can ship a website now. I build with AI myself, and fast. What still separates sites that sell from sites that don't is everything decided before the build.",
+      canTitle: 'What AI made fast',
+      can: ['Implementation and code', 'Design variations at volume', 'Multilingual drafts'],
+      canNote: 'I build with AI too. That is why strategy plus build takes 2\u20134 weeks.',
+      cantTitle: "What AI can't decide",
+      cant: ['Who you sell to', 'Why anyone buys from you', 'What to say, and what to cut'],
+      cantNote: 'That part is my job. You get the reasoning too, on one strategy sheet.',
+    },
+    workTitle: 'Concept demos',
+    workSub: 'Not real businesses. Self-directed pieces, each built from who, why and how to sell.',
+    showroom: {
+      label: 'Le Showroom',
+      href: 'demos/showroom.html',
+      img: 'demo-showroom.jpg',
+      url: 'le-showroom',
+      cta: 'Enter',
+    },
+    demos: withGenre(['Food / two-venue brand', 'Wellness / private studio', 'Clinic / Paris', 'Fine dining / Paris']),
+    includedTitle: 'What we work out together',
+    includedSub: 'The website is the final artifact of this stack.',
+    included: [
+      { title: 'Articulating the why', desc: 'Why this business exists, and why anyone should buy from you. Until this is settled, neither copy nor design can be.' },
+      { title: 'Targeting & positioning', desc: 'Narrow down who you serve and claim a position among competitors. Selling to everyone reaches no one.' },
+      { title: 'The 4Ps', desc: 'Product, price, place, promotion — laid out in one table. The website is one piece of it.' },
+      { title: 'Structure & copy', desc: 'The strategy, written straight into words. You do not need to prepare any copy.' },
+      { title: 'Design & build', desc: 'Designed to fit your industry and position. Mobile, multilingual, domain setup, launch.' },
+      { title: 'Post-launch marketing', desc: 'Search, social, referrals — where your customers will come from, mapped before we part.' },
+    ],
+    stepsTitle: 'How it works',
+    steps: [
+      { n: '01', title: 'Listen', desc: 'About 30 minutes. Tell me about the business and what is hard right now.' },
+      { n: '02', title: 'Verbalize', desc: 'Why, target, positioning and 4Ps agreed on a one-page strategy sheet.' },
+      { n: '03', title: 'Build', desc: 'Strategy becomes copy and design. You review real pages, not mockups.' },
+      { n: '04', title: 'Hand over', desc: 'Domain set up, site live — with a marketing map and a guide to updating it.' },
+    ],
+    priceTitle: 'Pricing',
+    priceSub: 'Tax excluded. Fixed before work begins.',
+    plans: [
+      {
+        name: 'Landing page',
+        price: '¥300,000',
+        unit: '+ / 1 page',
+        desc: 'One page that does the job. Service intro, hiring, events.',
+        features: ['Why articulation + strategy sheet', 'Structure and copy', 'One page', 'Mobile-ready', 'Launch included'],
+        cta: 'Start a conversation',
+      },
+      {
+        name: 'Brand site',
+        price: '¥800,000',
+        unit: "+ / up to 10 pages",
+        desc: 'The face of your business, built from strategy up.',
+        features: ['Strategy sheet (why, STP, 4Ps)', 'Structure and copy', 'Up to 10 pages', 'Multilingual', 'Domain and launch', 'Post-launch marketing map'],
+        cta: 'Start a conversation',
+        featured: true,
+      },
+      {
+        name: 'Ongoing support',
+        price: '¥50,000',
+        unit: '+ / month',
+        desc: 'After launch, when you want updates and improvement handled.',
+        features: ['Updates handled', 'Improvement proposals', 'Social and content tie-ins', 'Cancel anytime'],
+        cta: 'Start a conversation',
+      },
+    ],
+    priceNote: 'The final quote depends on page count and scope, fixed after our first conversation. No surprise charges after we start.',
+    compareTitle: 'Your options',
+    compareCols: ['Jessy', 'Agency', 'Freelancer'],
+    compareRows: [
+      { label: 'Strategy', values: ['Why, STP and 4Ps first', 'Builds to your spec', 'Varies'] },
+      { label: 'Time to launch', values: ['2–4 weeks', '2–3 months', '1–2 months'] },
+      { label: 'Copy', values: ['Written by me, from the strategy sheet', "You provide it", 'Varies'] },
+      { label: 'Languages', values: ['Four as standard', 'Extra cost', 'Rarely offered'] },
+      { label: 'After launch', values: ['Marketing map included', 'Maintenance contract', 'Per request'] },
+    ],
+    faqTitle: 'FAQ',
+    faq: [
+      { q: 'I just want a website.', a: "Happy to. But the why and target work happens first on every plan — skip it, and neither the copy nor the design can be decided." },
+      { q: 'How long does it take?', a: 'One week to verbalize the strategy, one to three weeks to build. Two weeks for a single page, four for a ten-page site.' },
+      { q: 'I have no logo and no photos.', a: 'Very common. Some projects started with no logo at all, and photography can be arranged from scratch.' },
+      { q: 'Can I edit the site myself after launch?', a: 'Yes. You get a guide to updating it. If you would rather not touch it, the monthly plan covers that.' },
+      { q: 'Can you write in English or Korean?', a: 'Japanese, English and Korean I write myself. French is written, then reviewed by a native speaker.' },
+      { q: 'What if I change my mind midway?', a: 'Before the strategy sheet is agreed, change anything as often as you like. After that, adjustments within the agreed scope cost nothing extra.' },
+    ],
+    finalTitle: 'Thirty minutes, no strings.',
+    finalSub: "It is fine if nothing is decided yet. There will be no sales pitch.",
+    finalCta: 'Start a conversation',
+    finalNote: 'Replies within 24 hours.',
+  },
+}

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er</title>
+<meta name="description" content="Joayo Restaurant : cuisine coréenne authentique à Paris 1er, en plein cœur de Paris. Bibimbap au tartare de bœuf, bulgogi, poulet frit. 34 avenue Exemple.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,400&family=Archivo+Black&family=Gochi+Hand&display=swap');
+
+:root{
+  --red:#D93A2B;
+  --red-dark:#B22A1D;
+  --cream:#F6EFE3;
+  --cream-2:#EFE5D2;
+  --ink:#1A1613;
+  --ink-2:#26201C;
+  --green:#2E5B3E;
+  --yellow:#F2B33D;
+  --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Archivo',system-ui,sans-serif;
+  background:var(--ink);color:var(--cream);
+  overflow-x:hidden;line-height:1.5;
+}
+::selection{background:var(--yellow);color:var(--ink);}
+h1,h2,h3{font-family:'Archivo Black','Archivo',sans-serif;letter-spacing:-0.02em;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:0;}
+
+/* ---------- TICKER (red identity) ---------- */
+.ticker{
+  background:var(--red);color:var(--cream);
+  overflow:hidden;white-space:nowrap;padding:9px 0;
+  font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;
+  border-bottom:3px solid rgba(246,239,227,.35);
+}
+.ticker-inner{display:inline-block;animation:scroll 28s linear infinite;}
+.ticker-inner span{margin:0 22px;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--ink);border-bottom:3px solid rgba(246,239,227,.25);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;gap:14px;
+}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--cream);}
+.logo .latin{font-family:'Archivo Black';font-size:26px;letter-spacing:-0.03em;}
+.logo .sub-brand{font-size:15px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.08em;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{
+  text-decoration:none;color:var(--cream);font-weight:700;font-size:15px;
+  text-transform:uppercase;letter-spacing:.05em;position:relative;
+}
+.nav-links a:not(.btn):after{
+  content:'';position:absolute;left:0;bottom:-4px;height:3px;width:0;
+  background:var(--yellow);transition:width .25s;
+}
+.nav-links a:not(.btn):hover:after{width:100%;}
+.btn{
+  background:var(--red);color:var(--cream)!important;
+  padding:10px 22px;border-radius:999px;border:3px solid var(--cream);
+  transition:all .2s;display:inline-block;text-decoration:none;font-weight:800;
+}
+.btn:hover{background:var(--yellow);color:var(--ink)!important;transform:translate(-2px,-2px);box-shadow:4px 4px 0 rgba(246,239,227,.4);}
+.lang-switch{
+  display:flex;gap:2px;border:2px solid var(--cream);border-radius:999px;
+  padding:3px;background:var(--ink-2);flex-shrink:0;
+}
+.lang-switch button{
+  border:none;background:transparent;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:12px;padding:5px 11px;border-radius:999px;cursor:pointer;
+  color:var(--cream);letter-spacing:.05em;
+}
+.lang-switch button.active{background:var(--red);color:var(--cream);}
+.lang-switch button:not(.active):hover{background:var(--yellow);color:var(--ink);}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  padding:72px 6vw 90px;
+  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);
+  gap:6vw;align-items:center;
+  background:
+    radial-gradient(circle at 12% 22%, rgba(217,58,43,.22), transparent 40%),
+    radial-gradient(circle at 88% 72%, rgba(242,179,61,.10), transparent 36%),
+    var(--ink);
+  border-bottom:3px solid rgba(246,239,227,.25);
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink-2);border:2px solid var(--cream);border-radius:999px;
+  padding:7px 18px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero .kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-size:clamp(44px,6vw,94px);
+  line-height:.95;text-transform:uppercase;letter-spacing:-.01em;
+}
+.hero h1 .accent{color:var(--red);}
+.hero .hangul-big{
+  font-size:clamp(18px,2.4vw,30px);color:var(--yellow);font-weight:700;
+  margin-top:14px;letter-spacing:.28em;
+}
+.hero p.sub{margin-top:22px;max-width:50ch;font-size:clamp(15.5px,1.8vw,19px);font-weight:500;color:rgba(246,239,227,.9);}
+.hero .cta-row{margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.hero .cta-row .btn{font-size:15px;padding:15px 32px;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;font-weight:800;}
+.hero .addr-pill{
+  display:inline-block;background:var(--cream);color:var(--ink);border-radius:999px;
+  padding:12px 26px;font-weight:700;font-size:14px;
+}
+
+/* ardoise (menu slate) */
+.ardoise{
+  position:relative;
+  background:var(--ink-2);
+  border:3px solid var(--cream);border-radius:8px;
+  padding:36px 34px 30px;
+  transform:rotate(1.6deg);
+  box-shadow:12px 14px 0 rgba(0,0,0,.35);
+}
+.ardoise .a-head{
+  font-family:'Archivo Black';font-size:14px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--yellow);display:flex;align-items:center;gap:12px;margin-bottom:14px;
+}
+.ardoise .a-head:after{content:'';flex:1;height:2px;background:rgba(246,239,227,.22);}
+.ardoise .dish{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:14px 0;border-bottom:2px dashed rgba(246,239,227,.22);
+}
+.ardoise .dish:last-of-type{border-bottom:none;}
+.ardoise .dish .n{font-weight:700;font-size:16px;}
+.ardoise .dish .n small{display:block;font-size:12px;font-weight:600;color:var(--yellow);margin-top:2px;}
+.ardoise .dish .p{font-family:'Archivo Black';font-size:18px;color:var(--yellow);white-space:nowrap;}
+.ardoise .a-note{margin-top:16px;text-align:right;}
+.ardoise .a-note a{
+  color:var(--cream);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border-bottom:2px solid var(--yellow);padding-bottom:2px;
+}
+.ardoise .a-note a:hover{color:var(--yellow);}
+.ardoise .rating-sticker{
+  position:absolute;top:-44px;right:-26px;
+  background:var(--yellow);color:var(--ink);border:3px solid var(--cream);border-radius:50%;
+  width:106px;height:106px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transform:rotate(9deg);font-weight:800;box-shadow:5px 6px 0 rgba(217,58,43,.6);
+  animation:floaty 5s ease-in-out infinite;
+}
+.rating-sticker .score{font-family:'Archivo Black';font-size:24px;}
+.rating-sticker .stars{color:var(--red-dark);letter-spacing:1px;font-size:12px;}
+.rating-sticker .count{font-size:10px;text-transform:uppercase;letter-spacing:.03em;}
+@keyframes floaty{0%,100%{transform:rotate(9deg) translateY(0)}50%{transform:rotate(7deg) translateY(-8px)}}
+
+/* ---------- SECTIONS ---------- */
+section{padding:90px 6vw;scroll-margin-top:76px;}
+.section-head{max-width:900px;margin-bottom:52px;}
+.section-head .over{color:var(--yellow);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:14px;margin-bottom:12px;}
+.section-head h2{font-size:clamp(36px,5vw,64px);line-height:1;text-transform:uppercase;}
+.section-head p{margin-top:16px;font-size:18px;max-width:60ch;font-weight:500;color:rgba(246,239,227,.85);}
+
+/* ---------- MENU ---------- */
+#menu{background:var(--ink);}
+.menu-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start;}
+.menu-list{display:flex;flex-direction:column;}
+.menu-item{
+  display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+  padding:20px 4px;border-bottom:2px dashed rgba(246,239,227,.25);
+  transition:padding-left .2s;
+}
+.menu-item:hover{padding-left:14px;}
+.menu-item .name{font-family:'Archivo Black';font-size:21px;text-transform:uppercase;}
+.menu-item .kr{color:var(--yellow);font-size:14px;font-weight:700;margin-left:8px;}
+.menu-item .desc{font-size:14px;color:rgba(246,239,227,.65);margin-top:3px;font-weight:500;}
+.menu-item .price{font-family:'Archivo Black';font-size:20px;color:var(--yellow);white-space:nowrap;}
+.menu-note{margin-top:22px;font-size:13px;color:rgba(246,239,227,.5);font-weight:500;}
+.resto-side{position:sticky;top:100px;display:flex;flex-direction:column;gap:22px;}
+.resto-card{
+  background:var(--red);border:3px solid var(--cream);border-radius:var(--radius);
+  padding:34px 32px;transform:rotate(1.2deg);
+}
+.resto-card h3{font-size:24px;text-transform:uppercase;margin-bottom:14px;}
+.resto-card p{font-weight:500;font-size:15.5px;margin-bottom:12px;}
+.resto-card .hours{
+  background:rgba(26,22,19,.25);border-radius:14px;padding:16px 18px;margin:16px 0;
+  font-size:14.5px;font-weight:600;
+}
+.resto-card .hours div{display:flex;justify-content:space-between;gap:12px;padding:3px 0;}
+.resto-card .addr{font-size:14px;font-weight:700;margin-top:14px;opacity:.9;}
+.resto-card .btn{border-color:var(--cream);background:var(--ink);}
+.lunch-box{
+  background:var(--yellow);color:var(--ink);border:3px solid var(--cream);
+  border-radius:var(--radius);padding:22px 26px;transform:rotate(-1deg);
+}
+.lunch-box .big{font-family:'Archivo Black';font-size:20px;text-transform:uppercase;line-height:1.15;}
+.lunch-box p{font-size:14px;font-weight:600;margin-top:6px;}
+.service-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;}
+.service-chips span{
+  border:2px solid rgba(246,239,227,.5);border-radius:999px;padding:7px 15px;
+  font-size:13px;font-weight:700;color:rgba(246,239,227,.85);
+}
+
+/* ---------- AMBIANCE ---------- */
+.ambiance{
+  background:var(--red);color:var(--cream);
+  border-top:3px solid rgba(246,239,227,.35);border-bottom:3px solid rgba(246,239,227,.35);
+  padding:60px 6vw;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
+}
+.ambiance h2{font-size:clamp(28px,4vw,48px);text-transform:uppercase;line-height:1.05;max-width:24ch;}
+.ambiance p{font-weight:600;font-size:16px;max-width:46ch;}
+
+/* ---------- AVIS ---------- */
+#avis{background:var(--ink);}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.review{border:3px solid var(--cream);border-radius:var(--radius);background:var(--ink-2);padding:28px 26px;}
+.review:nth-child(2){transform:rotate(-1deg);background:var(--yellow);color:var(--ink);}
+.review .stars{color:var(--yellow);font-size:18px;letter-spacing:2px;margin-bottom:12px;}
+.review:nth-child(2) .stars{color:var(--red-dark);}
+.review p{font-size:16px;font-weight:500;font-style:italic;margin-bottom:14px;}
+.review .who{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.05em;}
+
+/* ---------- INFOS ---------- */
+#infos{background:var(--ink-2);border-top:3px solid rgba(246,239,227,.25);}
+.infos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;}
+.info-card{
+  border:3px solid var(--cream);border-radius:var(--radius);padding:30px 28px;
+  background:rgba(217,58,43,.12);
+}
+.info-card h3{font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:12px;}
+.info-card p{font-size:16.5px;font-weight:600;line-height:1.7;}
+.info-card small{display:block;margin-top:10px;font-weight:500;opacity:.75;font-size:13.5px;}
+.info-card a{color:var(--cream);}
+
+/* ---------- CROSS-SELL ---------- */
+.cross{
+  background:var(--green);color:var(--cream);
+  padding:70px 6vw;text-align:center;border-top:3px solid rgba(246,239,227,.25);
+}
+.cross h2{font-size:clamp(26px,3.6vw,44px);text-transform:uppercase;margin-bottom:14px;}
+.cross p{font-weight:500;max-width:60ch;margin:0 auto 26px;}
+.cross .btn{background:var(--ink);font-size:16px;padding:15px 34px;text-transform:uppercase;letter-spacing:.05em;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:var(--cream);padding:50px 6vw 30px;text-align:center;border-top:3px solid rgba(246,239,227,.25);}
+footer .foot-logo{font-family:'Archivo Black';font-size:clamp(36px,6.4vw,84px);line-height:1;text-transform:uppercase;}
+footer .foot-logo span{color:var(--red);}
+footer .foot-links{margin:28px 0 22px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap;}
+footer .foot-links a{color:var(--cream);text-decoration:none;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.08em;}
+footer .foot-links a:hover{color:var(--yellow);}
+footer .legal{font-size:12.5px;color:rgba(246,239,227,.45);font-weight:500;}
+
+/* ---------- REVEAL ---------- */
+body.js-anim .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+body.js-anim .reveal.in{opacity:1;transform:none;}
+
+@media(max-width:920px){
+  .hero{grid-template-columns:1fr;gap:60px;padding:52px 6vw 76px;}
+  .ardoise{transform:rotate(0);margin-top:8px;}
+  .ardoise .rating-sticker{top:-40px;right:-8px;}
+  .menu-wrap{grid-template-columns:1fr;}
+  .resto-side{position:static;}
+  .resto-card{transform:none;}
+  .nav-links a:not(.btn){display:none;}
+  .ambiance{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span data-i18n="tick1">Joayo Restaurant</span><span>✦</span><span data-i18n="tick2">Bibimbap au tartare de bœuf</span><span>✦</span><span data-i18n="tick3">Bulgogi</span><span>✦</span><span data-i18n="tick4">Poulet frit</span><span>✦</span><span data-i18n="tick5">Paris 1er</span><span>✦</span><span>좋아요 레스토랑</span><span>✦</span>
+    <span data-i18n="tick1">Joayo Restaurant</span><span>✦</span><span data-i18n="tick2">Bibimbap au tartare de bœuf</span><span>✦</span><span data-i18n="tick3">Bulgogi</span><span>✦</span><span data-i18n="tick4">Poulet frit</span><span>✦</span><span data-i18n="tick5">Paris 1er</span><span>✦</span><span>좋아요 레스토랑</span><span>✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="joayo-homepage.html">
+    <span class="latin">JOAYO</span>
+    <span class="sub-brand" data-i18n="brand_sub">Restaurant · 레스토랑</span>
+  </a>
+  <div class="nav-links">
+    <a href="joayo-homepage.html" data-i18n="nav_home">Accueil</a>
+    <a href="#menu" data-i18n="nav_menu">La Carte</a>
+    <a href="joayo-market.html" data-i18n="nav_market">L'Épicerie</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ko">한국어</button>
+    </div>
+    <a class="btn" href="tel:+33123456789" data-i18n="nav_book">Réserver</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div>
+    <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Midi & soir — en plein cœur de Paris</span></div>
+    <h1><span data-i18n="hero_h1a">Joayo</span><br><span class="accent" data-i18n="hero_h1b">Restaurant</span></h1>
+    <div class="hangul-big" data-i18n="hero_hb">좋아요 레스토랑</div>
+    <p class="sub" data-i18n-html="hero_sub">La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.</p>
+    <div class="cta-row">
+      <a class="btn" href="tel:+33123456789" data-i18n="cta_book">☎ Réserver — 01 23 45 67 89</a>
+      <span class="addr-pill">📍 34 avenue Exemple, 75001</span>
+    </div>
+  </div>
+
+  <aside class="ardoise reveal">
+    <div class="rating-sticker" title="Google">
+      <div class="score">4.7</div>
+      <div class="stars">★★★★☆</div>
+      <div class="count" data-i18n="rating_count">Google</div>
+    </div>
+    <div class="a-head" data-i18n="ar_head">Ce soir, au tableau</div>
+    <div class="dish">
+      <span class="n"><span data-i18n="m1_name">Bibimbap au tartare de bœuf</span><small>육회비빔밥</small></span>
+      <span class="p">16,50 €</span>
+    </div>
+    <div class="dish">
+      <span class="n"><span data-i18n="m5_name">Poulet frit coréen</span><small>치킨</small></span>
+      <span class="p">16,00 €</span>
+    </div>
+    <div class="dish">
+      <span class="n"><span data-i18n="m3_name">Bulgogi de porc</span><small>제육불고기</small></span>
+      <span class="p">15,00 €</span>
+    </div>
+    <div class="a-note"><a href="#menu" data-i18n="ar_note">Toute la carte ↓</a></div>
+  </aside>
+</header>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-head reveal">
+    <div class="over" data-i18n="me_over">La carte · 메뉴</div>
+    <h2 data-i18n="me_h2">Ce qu'on mange vraiment en Corée</h2>
+    <p data-i18n="me_p">Cuisine authentique et chaleureuse, menu végétarien disponible. Comptez 20 à 30 € par personne.</p>
+  </div>
+  <div class="menu-wrap">
+    <div class="menu-list reveal">
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m1_name">Bibimbap au tartare de bœuf</span><span class="kr">육회비빔밥</span>
+          <div class="desc" data-i18n="m1_desc">La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf</div>
+        </div>
+        <span class="price">16,50 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m2_name">Dolsot Bibimbap</span><span class="kr">돌솥비빔밥</span>
+          <div class="desc" data-i18n="m2_desc">Riz et légumes servis dans un bol de pierre brûlant, bœuf mariné, œuf, gochujang</div>
+        </div>
+        <span class="price">14,50 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m3_name">Bulgogi de porc</span><span class="kr">제육불고기</span>
+          <div class="desc" data-i18n="m3_desc">Porc mariné sauté, légèrement pimenté, riz et banchan du jour</div>
+        </div>
+        <span class="price">15,00 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m4_name">Japchae</span><span class="kr">잡채</span>
+          <div class="desc" data-i18n="m4_desc">Nouilles de patate douce sautées, bœuf et légumes — un classique des fêtes coréennes</div>
+        </div>
+        <span class="price">14,00 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m5_name">Poulet frit coréen</span><span class="kr">치킨</span>
+          <div class="desc" data-i18n="m5_desc">Double friture croustillante, sauce au choix — celui dont tout le monde parle</div>
+        </div>
+        <span class="price">16,00 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m6_name">BBQ coréen</span><span class="kr">바비큐</span>
+          <div class="desc" data-i18n="m6_desc">Grillades marinées à la coréenne, servies avec riz et banchan</div>
+        </div>
+        <span class="price">19,50 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m7_name">Kimchi Jjigae</span><span class="kr">김치찌개</span>
+          <div class="desc" data-i18n="m7_desc">Ragoût de kimchi mijoté, porc et tofu — le plat réconfort absolu</div>
+        </div>
+        <span class="price">13,50 €</span>
+      </div>
+      <div class="menu-item">
+        <div>
+          <span class="name" data-i18n="m8_name">Mandu</span><span class="kr">만두</span>
+          <div class="desc" data-i18n="m8_desc">Raviolis coréens vapeur ou grillés</div>
+        </div>
+        <span class="price">8,50 €</span>
+      </div>
+      <p class="menu-note" data-i18n="menu_note">Carte indicative — retrouvez la carte complète au restaurant.</p>
+      <div class="service-chips">
+        <span data-i18n="sv1">Menu végétarien</span>
+        <span data-i18n="sv2">Réservation conseillée</span>
+        <span data-i18n="sv3">20 — 30 € / personne</span>
+        <span data-i18n="sv4">Cœur de Paris</span>
+        <span data-i18n="sv5">Déjeuner jusqu'à 15h00</span>
+      </div>
+    </div>
+    <aside class="resto-side reveal">
+      <div class="resto-card">
+        <h3 data-i18n="rc_h3">Infos & réservation</h3>
+        <p data-i18n="rc_p">Le quartier est animé, la salle est petite — réservez, et votre soirée coréenne est assurée.</p>
+        <div class="hours">
+          <div><span data-i18n="h_lunch">Midi</span><span>11h30 — 15h00</span></div>
+          <div><span data-i18n="h_dinner">Soir</span><span>18h30 — 22h00</span></div>
+          <div><span data-i18n="h_note" style="opacity:.75;">Horaires du jour sur Google Maps</span></div>
+        </div>
+        <div class="addr">34 avenue Exemple, 75001 Paris</div>
+        <p style="margin:14px 0 16px;font-weight:800;font-size:17px;">☎ <a href="tel:+33123456789" style="color:inherit;">01 23 45 67 89</a></p>
+        <a class="btn" href="tel:+33123456789" data-i18n="rc_btn">Réserver par téléphone</a>
+      </div>
+      <div class="lunch-box">
+        <div class="big" data-i18n="lb_big">★ 4.7 sur Google</div>
+        <p data-i18n="lb_p">Le rendez-vous des initiés depuis des années, au cœur de Paris.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- AMBIANCE -->
+<div class="ambiance reveal">
+  <div>
+    <h2 data-i18n="am_h2">Une salle en bois, une lumière tamisée, Séoul au cœur de Paris.</h2>
+    <p data-i18n="am_p">Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.</p>
+  </div>
+  <div style="font-size:64px;">🏮🍶</div>
+</div>
+
+<!-- AVIS -->
+<section id="avis">
+  <div class="section-head reveal">
+    <div class="over" data-i18n="av_over">Ils sont venus · 리뷰</div>
+    <h2 data-i18n="av_h2">Aimé des habitués</h2>
+    <p data-i18n="av_p">Une institution du quartier, adoptée par les habitués depuis des années.</p>
+  </div>
+  <div class="reviews">
+    <div class="review reveal">
+      <div class="stars">★★★★★</div>
+      <p data-i18n="rv1_p">« Une salle chaleureuse en plein cœur de Paris, une cuisine authentique. Le bibimbap au tartare de bœuf est parfait. »</p>
+      <div class="who" data-i18n="rv1_who">— Habitué du quartier</div>
+    </div>
+    <div class="review reveal">
+      <div class="stars">★★★★★</div>
+      <p data-i18n="rv2_p">« Le poulet frit est excellent et le japchae un régal. Idéal pour un déjeuner au centre de Paris. »</p>
+      <div class="who" data-i18n="rv2_who">— Déjeuner d'initiés</div>
+    </div>
+    <div class="review reveal">
+      <div class="stars">★★★★★</div>
+      <p data-i18n="rv3_p">« Cuisine coréenne authentique, service attentionné, menu végétarien disponible. On y retourne. »</p>
+      <div class="who" data-i18n="rv3_who">— Visiteuse conquise</div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS -->
+<section id="infos">
+  <div class="section-head reveal">
+    <div class="over" data-i18n="in_over">Infos pratiques · 오시는 길</div>
+    <h2 data-i18n="in_h2">Venir dîner chez le Joayo</h2>
+  </div>
+  <div class="infos-grid">
+    <div class="info-card reveal">
+      <h3 data-i18n="ic1_h3">📍 Adresse</h3>
+      <p>34 avenue Exemple<br>75001 Paris</p>
+      <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic2_h3">🕰 Horaires</h3>
+      <p data-i18n-html="ic2_p">Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00</p>
+      <small data-i18n="ic2_small">Horaires du jour sur Google Maps.</small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic3_h3">🚇 Y aller</h3>
+      <p data-i18n-html="ic3_p">Métro à 2 minutes<br>Bus à proximité</p>
+      <small data-i18n="ic3_small">En plein cœur de Paris.</small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic4_h3">☎ Réservation</h3>
+      <p><a href="tel:+33123456789">01 23 45 67 89</a></p>
+      <small data-i18n="ic4_small">Réservation conseillée le soir et le week-end.</small>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-SELL -->
+<div class="cross reveal">
+  <h2 data-i18n="cr_h2">Envie de refaire ces plats chez vous ?</h2>
+  <p data-i18n="cr_p">Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.</p>
+  <a class="btn" href="joayo-market.html" data-i18n="cr_btn">Découvrir l'épicerie →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">JOAYO <span data-i18n="foot_sub">RESTAURANT</span></div>
+  <div class="foot-links">
+    <a href="joayo-homepage.html" data-i18n="nav_home">Accueil</a>
+    <a href="#menu" data-i18n="nav_menu">La Carte</a>
+    <a href="joayo-market.html" data-i18n="nav_market">L'Épicerie</a>
+    <a href="#infos" data-i18n="nav_find">Infos</a>
+  </div>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89</p>
+</footer>
+
+<script>
+var I18N = {
+fr: {
+  _title:"JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er",
+  tick1:"Joayo Restaurant", tick2:"Bibimbap au tartare de bœuf", tick3:"Bulgogi", tick4:"Poulet frit", tick5:"Paris 1er",
+  brand_sub:"Restaurant · 레스토랑",
+  nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
+  rating_count:"Google",
+  ar_head:"Ce soir, au tableau", ar_note:"Toute la carte ↓",
+  kicker:"Midi & soir — en plein cœur de Paris",
+  hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
+  hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
+  cta_book:"☎ Réserver — 01 23 45 67 89",
+  me_over:"La carte · 메뉴", me_h2:"Ce qu'on mange vraiment en Corée",
+  me_p:"Cuisine authentique et chaleureuse, menu végétarien disponible. Comptez 20 à 30 € par personne.",
+  m1_name:"Bibimbap au tartare de bœuf", m1_desc:"La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf",
+  m2_name:"Dolsot Bibimbap", m2_desc:"Riz et légumes servis dans un bol de pierre brûlant, bœuf mariné, œuf, gochujang",
+  m3_name:"Bulgogi de porc", m3_desc:"Porc mariné sauté, légèrement pimenté, riz et banchan du jour",
+  m4_name:"Japchae", m4_desc:"Nouilles de patate douce sautées, bœuf et légumes — un classique des fêtes coréennes",
+  m5_name:"Poulet frit coréen", m5_desc:"Double friture croustillante, sauce au choix — celui dont tout le monde parle",
+  m6_name:"BBQ coréen", m6_desc:"Grillades marinées à la coréenne, servies avec riz et banchan",
+  m7_name:"Kimchi Jjigae", m7_desc:"Ragoût de kimchi mijoté, porc et tofu — le plat réconfort absolu",
+  m8_name:"Mandu", m8_desc:"Raviolis coréens vapeur ou grillés",
+  menu_note:"Carte indicative — retrouvez la carte complète au restaurant.",
+  sv1:"Menu végétarien", sv2:"Réservation conseillée", sv3:"20 — 30 € / personne", sv4:"Cœur de Paris", sv5:"Déjeuner jusqu'à 15h00",
+  rc_h3:"Infos & réservation",
+  rc_p:"Le quartier est animé, la salle est petite — réservez, et votre soirée coréenne est assurée.",
+  h_lunch:"Midi", h_dinner:"Soir", h_note:"Horaires du jour sur Google Maps",
+  rc_btn:"Réserver par téléphone",
+  lb_big:"★ 4.7 sur Google", lb_p:"Le rendez-vous des initiés depuis des années, au cœur de Paris.",
+  am_h2:"Une salle en bois, une lumière tamisée, Séoul au cœur de Paris.",
+  am_p:"Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.",
+  av_over:"Ils sont venus · 리뷰", av_h2:"Aimé des habitués",
+  av_p:"Une institution du quartier, adoptée par les habitués depuis des années.",
+  rv1_p:"« Une salle chaleureuse en plein cœur de Paris, une cuisine authentique. Le bibimbap au tartare de bœuf est parfait. »", rv1_who:"— Habitué du quartier",
+  rv2_p:"« Le poulet frit est excellent et le japchae un régal. Idéal pour un déjeuner au centre de Paris. »", rv2_who:"— Déjeuner d'initiés",
+  rv3_p:"« Cuisine coréenne authentique, service attentionné, menu végétarien disponible. On y retourne. »", rv3_who:"— Visiteuse conquise",
+  in_over:"Infos pratiques · 오시는 길", in_h2:"Venir dîner chez le Joayo",
+  ic1_h3:"📍 Adresse", maps_link:"Ouvrir dans Google Maps ↗",
+  ic2_h3:"🕰 Horaires", ic2_p:"Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00", ic2_small:"Horaires du jour sur Google Maps.",
+  ic3_h3:"🚇 Y aller", ic3_p:"Métro à 2 minutes<br>Bus à proximité", ic3_small:"En plein cœur de Paris.",
+  ic4_h3:"☎ Réservation", ic4_small:"Réservation conseillée le soir et le week-end.",
+  cr_h2:"Envie de refaire ces plats chez vous ?",
+  cr_p:"Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.",
+  cr_btn:"Découvrir l'épicerie →",
+  foot_sub:"RESTAURANT",
+  legal:"Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89"
+},
+en: {
+  _title:"JOAYO Restaurant 좋아요 레스토랑 — Korean Cuisine, Paris 1st",
+  tick1:"Joayo Restaurant", tick2:"Beef tartare bibimbap", tick3:"Bulgogi", tick4:"Fried chicken", tick5:"Paris 1st",
+  brand_sub:"Restaurant · 레스토랑",
+  nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
+  rating_count:"Google",
+  ar_head:"Tonight, on the slate", ar_note:"See the full menu ↓",
+  kicker:"Lunch & dinner — in the heart of Paris",
+  hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
+  hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
+  cta_book:"☎ Book — +33 1 23 45 67 89",
+  me_over:"The menu · 메뉴", me_h2:"What people really eat in Korea",
+  me_p:"Authentic, warm cooking, vegetarian menu available. Expect €20–30 per person.",
+  m1_name:"Beef tartare bibimbap", m1_desc:"The house signature — rice, vegetables, seasoned beef tartare, egg yolk",
+  m2_name:"Dolsot Bibimbap", m2_desc:"Rice and vegetables in a sizzling stone bowl, marinated beef, egg, gochujang",
+  m3_name:"Pork bulgogi", m3_desc:"Stir-fried marinated pork, gently spicy, rice and banchan of the day",
+  m4_name:"Japchae", m4_desc:"Stir-fried sweet potato noodles with beef and vegetables — a Korean feast classic",
+  m5_name:"Korean fried chicken", m5_desc:"Crispy double-fried, sauce of your choice — the one everyone talks about",
+  m6_name:"Korean BBQ", m6_desc:"Korean marinated grills, served with rice and banchan",
+  m7_name:"Kimchi Jjigae", m7_desc:"Slow-simmered kimchi stew with pork and tofu — ultimate comfort food",
+  m8_name:"Mandu", m8_desc:"Korean dumplings, steamed or grilled",
+  menu_note:"Sample menu — the full menu is at the restaurant.",
+  sv1:"Vegetarian menu", sv2:"Booking recommended", sv3:"€20–30 per person", sv4:"Heart of Paris", sv5:"Lunch until 3:00 pm",
+  rc_h3:"Info & booking",
+  rc_p:"The neighborhood is lively and the room is small — book ahead and your Korean evening is safe.",
+  h_lunch:"Lunch", h_dinner:"Dinner", h_note:"Today's hours on Google Maps",
+  rc_btn:"Book by phone",
+  lb_big:"★ 4.7 on Google", lb_p:"An insiders' favorite for years, in the heart of Paris.",
+  am_h2:"Warm wood, soft lighting — Seoul in the heart of Paris.",
+  am_p:"A cosy room mixing woodwork and contemporary touches — perfect after a stroll around the neighborhood.",
+  av_over:"They came by · 리뷰", av_h2:"A neighborhood favorite",
+  av_p:"An neighborhood institution, adopted by regulars for years.",
+  rv1_p:"“A warm dining room in the heart of Paris, authentic cooking. The beef tartare bibimbap is perfect.”", rv1_who:"— Neighborhood regular",
+  rv2_p:"“The fried chicken is excellent and the japchae a delight. Ideal for lunch in central Paris.”", rv2_who:"— Insiders' lunch",
+  rv3_p:"“Authentic Korean food, attentive service, vegetarian menu available. We'll be back.”", rv3_who:"— Happy visitor",
+  in_over:"Practical info · 오시는 길", in_h2:"Come dine at the Joayo",
+  ic1_h3:"📍 Address", maps_link:"Open in Google Maps ↗",
+  ic2_h3:"🕰 Hours", ic2_p:"Lunch: 11:30 am — 3:00 pm<br>Dinner: 6:30 — 10:00 pm", ic2_small:"Today's hours on Google Maps.",
+  ic3_h3:"🚇 Getting there", ic3_p:"Metro 2 minutes away<br>Buses nearby", ic3_small:"In the heart of Paris.",
+  ic4_h3:"☎ Booking", ic4_small:"Booking recommended for dinner and weekends.",
+  cr_h2:"Want to cook these dishes at home?",
+  cr_p:"The joayo also keeps a market: homemade kimchi and banchan, ramyeon, sauces and the whole Korean pantry, in the 15th.",
+  cr_btn:"Discover the grocery →",
+  foot_sub:"RESTAURANT",
+  legal:"Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · +33 1 23 45 67 89"
+},
+ko: {
+  _title:"좋아요 레스토랑 JOAYO Restaurant — 파리 1구 한식당",
+  tick1:"좋아요 레스토랑", tick2:"육회비빔밥", tick3:"불고기", tick4:"치킨", tick5:"파리 1구",
+  brand_sub:"레스토랑 · Restaurant",
+  nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
+  rating_count:"Google",
+  ar_head:"오늘의 칠판 메뉴", ar_note:"전체 메뉴 보기 ↓",
+  kicker:"점심 & 저녁 — 파리 시내 한복판",
+  hero_h1a:"좋아요", hero_h1b:"레스토랑", hero_hb:"JOAYO RESTAURANT",
+  hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
+  cta_book:"☎ 예약 — 01 23 45 67 89",
+  me_over:"메뉴 · La carte", me_h2:"한국에서 먹던 그 맛 그대로",
+  me_p:"정성스러운 정통 한식, 채식 메뉴 있음. 1인 예산은 20~30€ 정도입니다.",
+  m1_name:"육회비빔밥", m1_desc:"시그니처 메뉴 — 신선한 육회와 노른자를 얹은 비빔밥",
+  m2_name:"돌솥비빔밥", m2_desc:"뜨거운 돌솥에 나물과 불고기, 계란, 고추장",
+  m3_name:"제육불고기", m3_desc:"매콤하게 볶은 제육, 밥과 오늘의 반찬",
+  m4_name:"잡채", m4_desc:"소고기와 채소를 넣은 당면 볶음 — 잔칫상 단골 메뉴",
+  m5_name:"치킨", m5_desc:"겉은 바삭, 속은 촉촉 — 두 번 튀긴 한국식 치킨, 소스 선택 가능",
+  m6_name:"바비큐", m6_desc:"한국식 양념 고기구이, 밥과 반찬 포함",
+  m7_name:"김치찌개", m7_desc:"돼지고기와 두부를 넣고 푹 끓인 김치찌개",
+  m8_name:"만두", m8_desc:"찐만두 또는 군만두",
+  menu_note:"대표 메뉴입니다 — 전체 메뉴는 매장에서 확인해 주세요.",
+  sv1:"채식 메뉴", sv2:"예약 권장", sv3:"1인 20~30€", sv4:"시내 한복판", sv5:"점심 15시까지",
+  rc_h3:"예약 안내",
+  rc_p:"자리가 많지 않아요 — 전화로 예약하고 오시면 기다리지 않고 드실 수 있습니다.",
+  h_lunch:"점심", h_dinner:"저녁", h_note:"당일 영업시간은 구글 지도 참고",
+  rc_btn:"전화로 예약하기",
+  lb_big:"구글 ★ 4.7", lb_p:"파리 시내 한복판, 파리지앵 단골이 많은 집.",
+  am_h2:"나무 인테리어, 따뜻한 조명 — 파리 한복판의 서울.",
+  am_p:"우드톤과 모던함이 어우러진 아늑한 공간 — 동네 산책 후 들르기 딱 좋아요.",
+  av_over:"리뷰 · Avis", av_h2:"단골이 많은 집",
+  av_p:"동네에서 오래 사랑받아 온, 단골이 많은 한식당입니다.",
+  rv1_p:"“분위기 좋은 동네 한식당. 육회비빔밥이 진짜 맛있어요.”", rv1_who:"— 동네 단골손님",
+  rv2_p:"“치킨이 훌륭하고 잡채도 일품입니다. 시내 중심 점심으로 딱이에요.”", rv2_who:"— 점심 단골",
+  rv3_p:"“정통 한식에 세심한 서비스, 채식 메뉴까지. 또 올 거예요.”", rv3_who:"— 만족한 손님",
+  in_over:"오시는 길 · Infos", in_h2:"좋아요 레스토랑으로 오세요",
+  ic1_h3:"📍 주소", maps_link:"구글 지도에서 보기 ↗",
+  ic2_h3:"🕰 영업시간", ic2_p:"점심: 11:30 — 15:00<br>저녁: 18:30 — 22:00", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
+  ic3_h3:"🚇 오시는 길", ic3_p:"메트로 2분<br>버스 정류장 인근", ic3_small:"시내 중심에 있습니다.",
+  ic4_h3:"☎ 예약", ic4_small:"저녁과 주말은 예약을 권장합니다.",
+  cr_h2:"이 메뉴, 집에서도 만들고 싶다면?",
+  cr_p:"좋아요 마켓이 있습니다 — 직접 담근 김치와 반찬, 라면, 장류까지. 파리 15구.",
+  cr_btn:"마켓 보러 가기 →",
+  foot_sub:"레스토랑",
+  legal:"데모 사이트 · © 2026 좋아요 레스토랑 — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89"
+}
+};
+
+function applyLang(lang){
+  var dict = I18N[lang] || I18N.fr;
+  document.documentElement.setAttribute('lang', lang);
+  document.title = dict._title;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('joayo-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang-switch button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+var saved = null;
+try{ saved = localStorage.getItem('joayo-lang'); }catch(e){}
+applyLang(saved && I18N[saved] ? saved : 'fr');
+
+(function(){
+  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
+  document.body.classList.add('js-anim');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+</body>
+</html>

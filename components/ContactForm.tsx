@@ -19,12 +19,12 @@ export default function ContactForm({ dict }: { dict: Dict }) {
   }
 
   const inputClass =
-    'w-full border-b border-line bg-transparent py-3 text-base outline-none transition-colors placeholder:text-warmgray/70 focus:border-ink'
+    'w-full rounded-2xl border border-line bg-white px-4 py-3.5 text-[15px] outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-warmgray/60 focus:border-accent focus:shadow-[0_0_0_4px_rgba(27,100,218,0.12)]'
 
   return (
-    <form onSubmit={handleSubmit} className="mt-10 grid gap-6 md:grid-cols-2">
+    <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
       <label className="block">
-        <span className="text-xs uppercase tracking-[0.2em] text-warmgray">{f.name}</span>
+        <span className="mb-1.5 block text-[13px] font-semibold text-charcoal">{f.name}</span>
         <input
           required
           value={name}
@@ -33,7 +33,7 @@ export default function ContactForm({ dict }: { dict: Dict }) {
         />
       </label>
       <label className="block">
-        <span className="text-xs uppercase tracking-[0.2em] text-warmgray">{f.email}</span>
+        <span className="mb-1.5 block text-[13px] font-semibold text-charcoal">{f.email}</span>
         <input
           required
           type="email"
@@ -43,11 +43,11 @@ export default function ContactForm({ dict }: { dict: Dict }) {
         />
       </label>
       <label className="block md:col-span-2">
-        <span className="text-xs uppercase tracking-[0.2em] text-warmgray">{f.company}</span>
+        <span className="mb-1.5 block text-[13px] font-semibold text-charcoal">{f.company}</span>
         <input value={company} onChange={(e) => setCompany(e.target.value)} className={inputClass} />
       </label>
       <label className="block md:col-span-2">
-        <span className="text-xs uppercase tracking-[0.2em] text-warmgray">{f.message}</span>
+        <span className="mb-1.5 block text-[13px] font-semibold text-charcoal">{f.message}</span>
         <textarea
           required
           rows={5}
@@ -56,10 +56,10 @@ export default function ContactForm({ dict }: { dict: Dict }) {
           className={`${inputClass} resize-none`}
         />
       </label>
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 pt-1">
         <button
           type="submit"
-          className="border border-ink px-8 py-3 text-sm tracking-[0.08em] transition-colors hover:bg-ink hover:text-paper"
+          className="rounded-full bg-accent px-8 py-3.5 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 ease-swift hover:bg-accenthover active:scale-[0.97]"
         >
           {f.submit}
         </button>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOAYO Market 좋아요 마켓 — Épicerie coréenne, Paris 15e</title>
+<meta name="description" content="Joayo Market : épicerie coréenne à Paris 15e. Kimchi et banchan faits maison, ramyeon, sauces, snacks et boissons de Corée. 12 rue Exemple, 75015.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;1,400&family=Archivo+Black&family=Gochi+Hand&display=swap');
+
+:root{
+  --red:#D93A2B;
+  --red-dark:#B22A1D;
+  --cream:#F6EFE3;
+  --cream-2:#EFE5D2;
+  --ink:#1A1613;
+  --green:#2E5B3E;
+  --green-dark:#234731;
+  --yellow:#F2B33D;
+  --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Archivo',system-ui,sans-serif;
+  background:var(--cream);color:var(--ink);
+  overflow-x:hidden;line-height:1.5;
+}
+::selection{background:var(--green);color:var(--cream);}
+h1,h2,h3{font-family:'Archivo Black','Archivo',sans-serif;letter-spacing:-0.02em;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:0;}
+
+/* ---------- TICKER (green identity) ---------- */
+.ticker{
+  background:var(--green);color:var(--cream);
+  overflow:hidden;white-space:nowrap;padding:9px 0;
+  font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;
+  border-bottom:3px solid var(--ink);
+}
+.ticker-inner{display:inline-block;animation:scroll 28s linear infinite;}
+.ticker-inner span{margin:0 22px;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--cream);border-bottom:3px solid var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;gap:14px;
+}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);}
+.logo .latin{font-family:'Archivo Black';font-size:26px;letter-spacing:-0.03em;}
+.logo .sub-brand{font-size:15px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.08em;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{
+  text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;
+  text-transform:uppercase;letter-spacing:.05em;position:relative;
+}
+.nav-links a:not(.btn):after{
+  content:'';position:absolute;left:0;bottom:-4px;height:3px;width:0;
+  background:var(--green);transition:width .25s;
+}
+.nav-links a:not(.btn):hover:after{width:100%;}
+.btn{
+  background:var(--green);color:var(--cream)!important;
+  padding:10px 22px;border-radius:999px;border:3px solid var(--ink);
+  transition:all .2s;display:inline-block;text-decoration:none;font-weight:800;
+}
+.btn:hover{background:var(--ink);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink);}
+.lang-switch{
+  display:flex;gap:2px;border:2px solid var(--ink);border-radius:999px;
+  padding:3px;background:var(--cream-2);flex-shrink:0;
+}
+.lang-switch button{
+  border:none;background:transparent;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:12px;padding:5px 11px;border-radius:999px;cursor:pointer;
+  color:var(--ink);letter-spacing:.05em;
+}
+.lang-switch button.active{background:var(--green);color:var(--cream);}
+.lang-switch button:not(.active):hover{background:var(--yellow);}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;padding:70px 28px 80px;text-align:center;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(46,91,62,.10), transparent 36%),
+    radial-gradient(circle at 85% 70%, rgba(242,179,61,.12), transparent 36%),
+    var(--cream);
+  border-bottom:3px solid var(--ink);
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--cream-2);border:2px solid var(--ink);border-radius:999px;
+  padding:7px 18px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:26px;
+}
+.hero .kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(46px,9vw,120px);line-height:.95;text-transform:uppercase;}
+.hero h1 .accent{color:var(--green);}
+.hero .hangul-big{font-size:clamp(20px,3vw,34px);color:var(--green);font-weight:700;margin-top:8px;letter-spacing:.3em;}
+.hero p.sub{max-width:560px;margin:24px auto 0;font-size:clamp(16px,2vw,20px);font-weight:500;}
+.hero .addr-pill{
+  display:inline-block;margin-top:26px;
+  background:var(--ink);color:var(--cream);border-radius:999px;
+  padding:12px 26px;font-weight:700;font-size:15px;
+}
+.rating-sticker{
+  position:absolute;top:52px;right:6vw;
+  background:var(--yellow);border:3px solid var(--ink);border-radius:50%;
+  width:126px;height:126px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transform:rotate(9deg);font-weight:800;box-shadow:5px 6px 0 rgba(26,22,19,.85);
+  animation:floaty 5s ease-in-out infinite;
+}
+.rating-sticker .score{font-family:'Archivo Black';font-size:28px;}
+.rating-sticker .stars{color:var(--red-dark);letter-spacing:1px;font-size:13px;}
+.rating-sticker .count{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;}
+@keyframes floaty{0%,100%{transform:rotate(9deg) translateY(0)}50%{transform:rotate(7deg) translateY(-9px)}}
+
+/* ---------- SECTIONS ---------- */
+section{padding:90px 6vw;}
+section{scroll-margin-top:76px;}
+.section-head{max-width:900px;margin-bottom:52px;}
+.section-head .over{color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:14px;margin-bottom:12px;}
+.section-head h2{font-size:clamp(36px,5vw,64px);line-height:1;text-transform:uppercase;}
+.section-head p{margin-top:16px;font-size:18px;max-width:60ch;font-weight:500;}
+
+/* ---------- RAYONS ---------- */
+#rayons{background:var(--cream);}
+.grid-rayons{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
+.rayon{
+  border:3px solid var(--ink);border-radius:var(--radius);
+  background:#fff;padding:26px 24px;
+  transition:transform .2s, box-shadow .2s;cursor:default;position:relative;
+}
+.rayon:hover{transform:translate(-4px,-4px);box-shadow:7px 7px 0 var(--ink);}
+.rayon .icon{font-size:38px;margin-bottom:12px;}
+.rayon h3{font-size:19px;margin-bottom:6px;text-transform:uppercase;}
+.rayon .kr{color:var(--green);font-weight:700;font-size:14px;margin-bottom:8px;}
+.rayon p{font-size:14.5px;color:#5a534b;font-weight:500;}
+.rayon.highlight{background:var(--green);color:var(--cream);}
+.rayon.highlight p{color:rgba(246,239,227,.85);}
+.rayon.highlight .kr{color:var(--yellow);}
+.rayon .badge{
+  position:absolute;top:-13px;right:16px;background:var(--yellow);color:var(--ink);
+  border:2px solid var(--ink);border-radius:999px;padding:4px 12px;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;transform:rotate(3deg);
+}
+
+/* ---------- KIMCHI BANNER ---------- */
+.kimchi-banner{
+  background:var(--red);color:var(--cream);
+  border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  padding:60px 6vw;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
+}
+.kimchi-banner h2{font-size:clamp(28px,4vw,48px);text-transform:uppercase;line-height:1.05;max-width:22ch;}
+.kimchi-banner p{font-weight:600;font-size:16px;max-width:44ch;}
+
+/* ---------- INFOS ---------- */
+#infos{background:var(--green);color:var(--cream);}
+#infos .section-head .over{color:var(--yellow);}
+.infos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;}
+.info-card{
+  border:3px solid var(--cream);border-radius:var(--radius);padding:30px 28px;
+  background:rgba(26,22,19,.16);
+}
+.info-card h3{font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:12px;}
+.info-card p{font-size:16.5px;font-weight:600;line-height:1.7;}
+.info-card small{display:block;margin-top:10px;font-weight:500;opacity:.75;font-size:13.5px;}
+.info-card a{color:var(--cream);}
+
+/* ---------- REVIEWS ---------- */
+#avis{background:var(--cream);}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.review{border:3px solid var(--ink);border-radius:var(--radius);background:#fff;padding:28px 26px;}
+.review:nth-child(2){transform:rotate(-1deg);background:var(--yellow);}
+.review .stars{color:var(--green);font-size:18px;letter-spacing:2px;margin-bottom:12px;}
+.review:nth-child(2) .stars{color:var(--red-dark);}
+.review p{font-size:16px;font-weight:500;font-style:italic;margin-bottom:14px;}
+.review .who{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.05em;}
+
+/* ---------- CROSS-SELL ---------- */
+.cross{
+  background:var(--ink);color:var(--cream);
+  padding:70px 6vw;text-align:center;border-top:3px solid var(--ink);
+}
+.cross h2{font-size:clamp(26px,3.6vw,44px);text-transform:uppercase;margin-bottom:14px;}
+.cross p{font-weight:500;max-width:60ch;margin:0 auto 26px;}
+.cross .btn{background:var(--red);font-size:16px;padding:15px 34px;text-transform:uppercase;letter-spacing:.05em;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:var(--cream);padding:50px 6vw 30px;text-align:center;}
+footer .foot-logo{font-family:'Archivo Black';font-size:clamp(40px,7vw,90px);line-height:1;text-transform:uppercase;}
+footer .foot-logo span{color:var(--green);}
+footer .foot-links{margin:28px 0 22px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap;}
+footer .foot-links a{color:var(--cream);text-decoration:none;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.08em;}
+footer .foot-links a:hover{color:var(--yellow);}
+footer .legal{font-size:12.5px;color:rgba(246,239,227,.45);font-weight:500;}
+
+/* ---------- REVEAL ---------- */
+body.js-anim .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+body.js-anim .reveal.in{opacity:1;transform:none;}
+
+@media(max-width:920px){
+  .rating-sticker{position:static;width:100px;height:100px;margin:26px auto 0;transform:rotate(6deg);}
+  .rating-sticker .score{font-size:23px;}
+  .nav-links a:not(.btn){display:none;}
+  .kimchi-banner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span data-i18n="tick1">Joayo Market</span><span>✦</span><span data-i18n="tick2">Kimchi maison</span><span>✦</span><span data-i18n="tick3">Banchan</span><span>✦</span><span data-i18n="tick4">Ramyeon</span><span>✦</span><span data-i18n="tick5">Paris 15e</span><span>✦</span><span>좋아요 마켓</span><span>✦</span>
+    <span data-i18n="tick1">Joayo Market</span><span>✦</span><span data-i18n="tick2">Kimchi maison</span><span>✦</span><span data-i18n="tick3">Banchan</span><span>✦</span><span data-i18n="tick4">Ramyeon</span><span>✦</span><span data-i18n="tick5">Paris 15e</span><span>✦</span><span>좋아요 마켓</span><span>✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="joayo-homepage.html">
+    <span class="latin">JOAYO</span>
+    <span class="sub-brand" data-i18n="brand_sub">Market · 마켓</span>
+  </a>
+  <div class="nav-links">
+    <a href="joayo-homepage.html" data-i18n="nav_home">Accueil</a>
+    <a href="#rayons" data-i18n="nav_rayons">Les Rayons</a>
+    <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ko">한국어</button>
+    </div>
+    <a class="btn" href="#infos" data-i18n="nav_find">Nous trouver</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="rating-sticker" title="Google">
+    <div class="score">4.9</div>
+    <div class="stars">★★★★★</div>
+    <div class="count" data-i18n="rating_count">Google</div>
+  </div>
+  <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Ouvert dès 11h30 — Paris 15e</span></div>
+  <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Market</span></h1>
+  <div class="hangul-big" data-i18n="hero_hb">좋아요 마켓</div>
+  <p class="sub" data-i18n-html="hero_sub">Le garde-manger de Séoul, dans le 15e. Kimchi et banchan <strong>faits maison</strong>, et tout ce qu'il faut pour cuisiner coréen chez vous.</p>
+  <div class="addr-pill">📍 12 rue Exemple, 75015 Paris</div>
+</header>
+
+<!-- RAYONS -->
+<section id="rayons">
+  <div class="section-head reveal">
+    <div class="over" data-i18n="ry_over">Les rayons · 매대</div>
+    <h2 data-i18n="ry_h2">Tout Séoul, en rayons</h2>
+    <p data-i18n="ry_p">Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.</p>
+  </div>
+  <div class="grid-rayons">
+    <div class="rayon highlight reveal">
+      <div class="badge" data-i18n="r1_badge">Fait maison</div>
+      <div class="icon">🥬</div>
+      <h3 data-i18n="r1_h3">Kimchi & Banchan</h3>
+      <div class="kr">김치 · 반찬</div>
+      <p data-i18n="r1_p">Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats d'accompagnement prêts à emporter.</p>
+    </div>
+    <div class="rayon reveal">
+      <div class="icon">🍜</div>
+      <h3 data-i18n="r2_h3">Ramyeon & Nouilles</h3>
+      <div class="kr">라면 · 면</div>
+      <p data-i18n="r2_p">Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.</p>
+    </div>
+    <div class="rayon reveal">
+      <div class="icon">🌶️</div>
+      <h3 data-i18n="r3_h3">Sauces & Condiments</h3>
+      <div class="kr">장 · 소스</div>
+      <p data-i18n="r3_p">Gochujang, doenjang, huile de sésame, sauce soja coréenne — la base de tout.</p>
+    </div>
+    <div class="rayon reveal">
+      <div class="icon">🥟</div>
+      <h3 data-i18n="r4_h3">Surgelés</h3>
+      <div class="kr">냉동식품</div>
+      <p data-i18n="r4_p">Mandu, tteok pour tteokbokki, poissons et fruits de mer — le congélateur qui dépanne les soirs de flemme.</p>
+    </div>
+    <div class="rayon reveal">
+      <div class="icon">🍪</div>
+      <h3 data-i18n="r5_h3">Snacks & Douceurs</h3>
+      <div class="kr">과자</div>
+      <p data-i18n="r5_p">Choco pie, chips au miel, bonbons — le rayon préféré des enfants (et des adultes qui assument).</p>
+    </div>
+    <div class="rayon reveal">
+      <div class="icon">🍶</div>
+      <h3 data-i18n="r6_h3">Boissons & Soju</h3>
+      <div class="kr">음료 · 주류</div>
+      <p data-i18n="r6_p">Soju, makgeolli, thés et boissons pétillantes coréennes bien fraîches.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KIMCHI BANNER -->
+<div class="kimchi-banner reveal">
+  <div>
+    <h2 data-i18n="kb_h2">Le kimchi, on le fait nous-mêmes.</h2>
+    <p data-i18n="kb_p">Chaque semaine, sur place. En grande quantité pour vos fêtes ? Demandez au comptoir.</p>
+  </div>
+  <div style="font-size:64px;">🥬🌶️</div>
+</div>
+
+<!-- AVIS -->
+<section id="avis">
+  <div class="section-head reveal">
+    <div class="over" data-i18n="av_over">Ils sont venus · 리뷰</div>
+    <h2 data-i18n="av_h2">★★★★★ sur Google</h2>
+    <p data-i18n="av_p">Des avis cinq étoiles. Le quartier a adopté le joayo.</p>
+  </div>
+  <div class="reviews">
+    <div class="review reveal">
+      <div class="stars">★★★★★</div>
+      <p data-i18n="rv1_p">« Enfin une vraie épicerie coréenne dans le 15e. Le kimchi maison est incroyable, on sent que tout est fait avec soin. »</p>
+      <div class="who" data-i18n="rv1_who">— Cliente du quartier</div>
+    </div>
+    <div class="review reveal">
+      <div class="stars">★★★★★</div>
+      <p data-i18n="rv2_p">« Accueil adorable, produits qu'on ne trouve nulle part ailleurs dans le coin. J'y retourne chaque semaine. »</p>
+      <div class="who" data-i18n="rv2_who">— Habitué</div>
+    </div>
+    <div class="review reveal">
+      <div class="stars">★★★★★</div>
+      <p data-i18n="rv3_p">« Petit par la taille, immense par le choix. Les banchan à emporter sont une tuerie. »</p>
+      <div class="who" data-i18n="rv3_who">— Voisin du quartier</div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS -->
+<section id="infos">
+  <div class="section-head reveal">
+    <div class="over" data-i18n="in_over">Infos pratiques · 오시는 길</div>
+    <h2 data-i18n="in_h2">Passer au marché</h2>
+  </div>
+  <div class="infos-grid">
+    <div class="info-card reveal">
+      <h3 data-i18n="ic1_h3">📍 Adresse</h3>
+      <p>12 rue Exemple<br>75015 Paris</p>
+      <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic2_h3">🕰 Horaires</h3>
+      <p data-i18n-html="ic2_p">Ouverture dès 11h30</p>
+      <small data-i18n="ic2_small">Horaires du jour sur Google Maps.</small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic3_h3">🚇 Y aller</h3>
+      <p data-i18n-html="ic3_p">Métro à 3 minutes<br>Bus à proximité</p>
+      <small data-i18n="ic3_small">Au cœur d'un quartier vivant.</small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic4_h3">💬 Contact</h3>
+      <p data-i18n-html="ic4_p">Sur place, tout simplement</p>
+      <small data-i18n="ic4_small">Kimchi en grande quantité : demandez au comptoir.</small>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-SELL -->
+<div class="cross reveal">
+  <h2 data-i18n="cr_h2">Pas envie de cuisiner ce soir ?</h2>
+  <p data-i18n="cr_p">Le joayo a aussi une table : bibimbap au tartare de bœuf, bulgogi et poulet frit, en plein cœur de Paris.</p>
+  <a class="btn" href="joayo-restaurant.html" data-i18n="cr_btn">Découvrir le restaurant →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">JOAYO <span data-i18n="foot_sub">MARKET</span></div>
+  <div class="foot-links">
+    <a href="joayo-homepage.html" data-i18n="nav_home">Accueil</a>
+    <a href="#rayons" data-i18n="nav_rayons">Les Rayons</a>
+    <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
+    <a href="#infos" data-i18n="nav_find">Nous trouver</a>
+  </div>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Market — 12 rue Exemple, 75015 Paris</p>
+</footer>
+
+<script>
+var I18N = {
+fr: {
+  _title:"JOAYO Market 좋아요 마켓 — Épicerie coréenne, Paris 15e",
+  tick1:"Joayo Market", tick2:"Kimchi maison", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15e",
+  brand_sub:"Market · 마켓",
+  nav_home:"Accueil", nav_rayons:"Les Rayons", nav_resto:"Le Restaurant", nav_find:"Nous trouver",
+  rating_count:"Google",
+  kicker:"Ouvert dès 11h30 — Paris 15e",
+  hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"좋아요 마켓",
+  hero_sub:"Le garde-manger de Séoul, dans le 15e. Kimchi et banchan <strong>faits maison</strong>, et tout ce qu'il faut pour cuisiner coréen chez vous.",
+  ry_over:"Les rayons · 매대", ry_h2:"Tout Séoul, en rayons",
+  ry_p:"Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.",
+  r1_badge:"Fait maison", r1_h3:"Kimchi & Banchan", r1_p:"Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats d'accompagnement prêts à emporter.",
+  r2_h3:"Ramyeon & Nouilles", r2_p:"Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.",
+  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, huile de sésame, sauce soja coréenne — la base de tout.",
+  r4_h3:"Surgelés", r4_p:"Mandu, tteok pour tteokbokki, poissons et fruits de mer — le congélateur qui dépanne les soirs de flemme.",
+  r5_h3:"Snacks & Douceurs", r5_p:"Choco pie, chips au miel, bonbons — le rayon préféré des enfants (et des adultes qui assument).",
+  r6_h3:"Boissons & Soju", r6_p:"Soju, makgeolli, thés et boissons pétillantes coréennes bien fraîches.",
+  kb_h2:"Le kimchi, on le fait nous-mêmes.", kb_p:"Chaque semaine, sur place. En grande quantité pour vos fêtes ? Demandez au comptoir.",
+  av_over:"Ils sont venus · 리뷰", av_h2:"★★★★★ sur Google", av_p:"Des avis cinq étoiles. Le quartier a adopté le joayo.",
+  rv1_p:"« Enfin une vraie épicerie coréenne dans le 15e. Le kimchi maison est incroyable, on sent que tout est fait avec soin. »", rv1_who:"— Cliente du quartier",
+  rv2_p:"« Accueil adorable, produits qu'on ne trouve nulle part ailleurs dans le coin. J'y retourne chaque semaine. »", rv2_who:"— Habitué",
+  rv3_p:"« Petit par la taille, immense par le choix. Les banchan à emporter sont une tuerie. »", rv3_who:"— Voisin du quartier",
+  in_over:"Infos pratiques · 오시는 길", in_h2:"Passer au marché",
+  ic1_h3:"📍 Adresse", maps_link:"Ouvrir dans Google Maps ↗",
+  ic2_h3:"🕰 Horaires", ic2_p:"Ouverture dès 11h30", ic2_small:"Horaires du jour sur Google Maps.",
+  ic3_h3:"🚇 Y aller", ic3_p:"Métro à 3 minutes<br>Bus à proximité", ic3_small:"Au cœur d'un quartier vivant.",
+  ic4_h3:"💬 Contact", ic4_p:"Sur place, tout simplement", ic4_small:"Kimchi en grande quantité : demandez au comptoir.",
+  cr_h2:"Pas envie de cuisiner ce soir ?",
+  cr_p:"Le joayo a aussi une table : bibimbap au tartare de bœuf, bulgogi et poulet frit, en plein cœur de Paris.",
+  cr_btn:"Découvrir le restaurant →",
+  foot_sub:"MARKET",
+  legal:"Site de démonstration · © 2026 Joayo Market — 12 rue Exemple, 75015 Paris"
+},
+en: {
+  _title:"JOAYO Market 좋아요 마켓 — Korean Grocery, Paris 15th",
+  tick1:"Joayo Market", tick2:"Homemade kimchi", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15th",
+  brand_sub:"Market · 마켓",
+  nav_home:"Home", nav_rayons:"The Aisles", nav_resto:"The Restaurant", nav_find:"Find us",
+  rating_count:"Google",
+  kicker:"Opens 11:30 am — Paris 15th",
+  hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"좋아요 마켓",
+  hero_sub:"Seoul's pantry, in the 15th. <strong>Homemade</strong> kimchi and banchan, plus everything you need to cook Korean at home.",
+  ry_over:"The aisles · 매대", ry_h2:"All of Seoul, on shelves",
+  ry_p:"Everything you need to cook Korean at home — and things you won't find anywhere else in the neighborhood.",
+  r1_badge:"Homemade", r1_h3:"Kimchi & Banchan", r1_p:"Made in-house every week. Cabbage, radish and cucumber kimchi, plus ready-to-go side dishes.",
+  r2_h3:"Ramyeon & Noodles", r2_p:"The ramyeon wall: classics, limited editions, and spice levels for every kind of brave.",
+  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, sesame oil, Korean soy sauce — the foundation of everything.",
+  r4_h3:"Frozen", r4_p:"Mandu, tteok for tteokbokki, fish and seafood — the freezer that saves lazy weeknights.",
+  r5_h3:"Snacks & Sweets", r5_p:"Choco pie, honey butter chips, candy — the kids' favorite aisle (and the adults who own it).",
+  r6_h3:"Drinks & Soju", r6_p:"Soju, makgeolli, teas and Korean sodas, always cold.",
+  kb_h2:"The kimchi? We make it ourselves.", kb_p:"Every week, in-house. Need a party-sized batch? Ask at the counter.",
+  av_over:"They came by · 리뷰", av_h2:"★★★★★ on Google", av_p:"Five-star reviews. The neighborhood has adopted the joayo.",
+  rv1_p:"“Finally a real Korean grocery in the 15th. The homemade kimchi is incredible — you can tell everything is made with care.”", rv1_who:"— Neighborhood regular",
+  rv2_p:"“Lovely welcome, products you can't find anywhere else around here. I come back every week.”", rv2_who:"— Regular",
+  rv3_p:"“Small in size, huge in choice. The takeaway banchan are addictive.”", rv3_who:"— A neighbor from the block",
+  in_over:"Practical info · 오시는 길", in_h2:"Stop by the market",
+  ic1_h3:"📍 Address", maps_link:"Open in Google Maps ↗",
+  ic2_h3:"🕰 Hours", ic2_p:"Opens at 11:30 am", ic2_small:"Today's hours on Google Maps.",
+  ic3_h3:"🚇 Getting there", ic3_p:"Metro 3 minutes away<br>Buses nearby", ic3_small:"In a lively neighborhood.",
+  ic4_h3:"💬 Contact", ic4_p:"Just drop by", ic4_small:"Bulk kimchi orders: ask at the counter.",
+  cr_h2:"No time to cook tonight?",
+  cr_p:"The joayo also sets a table: beef tartare bibimbap, bulgogi and fried chicken, in the heart of Paris.",
+  cr_btn:"Discover the restaurant →",
+  foot_sub:"MARKET",
+  legal:"Site de démonstration · © 2026 Joayo Market — 12 rue Exemple, 75015 Paris"
+},
+ko: {
+  _title:"좋아요 마켓 JOAYO Market — 파리 15구 한국 마켓",
+  tick1:"좋아요 마켓", tick2:"직접 담근 김치", tick3:"반찬", tick4:"라면", tick5:"파리 15구",
+  brand_sub:"마켓 · Market",
+  nav_home:"홈", nav_rayons:"매대 안내", nav_resto:"레스토랑", nav_find:"오시는 길",
+  rating_count:"Google",
+  kicker:"11:30 오픈 — 파리 15구",
+  hero_h1a:"좋아요", hero_h1b:"마켓", hero_hb:"JOAYO MARKET",
+  hero_sub:"파리 15구의 한국 마켓. <strong>직접 담근</strong> 김치와 반찬, 그리고 집에서 한식을 만들 때 필요한 모든 것.",
+  ry_over:"매대 안내 · Rayons", ry_h2:"서울 마트를 통째로 옮겨 왔습니다",
+  ry_p:"집에서 한식을 만들 때 필요한 모든 것 — 파리에서 구하기 힘든 것까지 다 있습니다.",
+  r1_badge:"직접 만듦", r1_h3:"김치 & 반찬", r1_p:"매주 매장에서 직접 만듭니다. 배추김치, 깍두기, 오이소박이, 바로 먹을 수 있는 밑반찬까지.",
+  r2_h3:"라면 & 면류", r2_p:"클래식부터 신상, 한정판까지 — 취향대로, 맵기별로 골라 가세요.",
+  r3_h3:"장류 & 소스", r3_p:"고추장, 된장, 참기름, 간장 — 한식의 기본기를 갖췄습니다.",
+  r4_h3:"냉동식품", r4_p:"만두, 떡볶이 떡, 해산물까지 — 바쁜 날 저녁을 책임지는 냉동 코너.",
+  r5_h3:"과자 & 간식", r5_p:"초코파이, 허니버터칩, 젤리 — 아이도 어른도 그냥 지나치기 힘든 코너.",
+  r6_h3:"음료 & 주류", r6_p:"소주, 막걸리, 식혜, 탄산음료까지 시원하게 준비되어 있습니다.",
+  kb_h2:"김치는 저희가 직접 담급니다.", kb_p:"매주 매장에서 담가요. 명절이나 모임용 대량 주문은 카운터에 문의해 주세요.",
+  av_over:"리뷰 · Avis", av_h2:"구글 ★★★★★", av_p:"별 다섯 개 리뷰가 이어집니다. 동네가 인정한 마켓입니다.",
+  rv1_p:"“15구에 드디어 제대로 된 한국 마켓이 생겼어요. 직접 담근 김치가 정말 맛있습니다.”", rv1_who:"— 동네 단골손님",
+  rv2_p:"“사장님이 친절하고, 다른 데서 못 구하는 것들이 많아요. 매주 갑니다.”", rv2_who:"— 단골손님",
+  rv3_p:"“가게는 작지만 없는 게 없어요. 포장 반찬 강력 추천합니다.”", rv3_who:"— 동네 이웃",
+  in_over:"오시는 길 · Infos", in_h2:"마켓에 들러 보세요",
+  ic1_h3:"📍 주소", maps_link:"구글 지도에서 보기 ↗",
+  ic2_h3:"🕰 영업시간", ic2_p:"11:30 오픈", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
+  ic3_h3:"🚇 오시는 길", ic3_p:"메트로 3분<br>버스 정류장 인근", ic3_small:"활기찬 동네 한가운데입니다.",
+  ic4_h3:"💬 문의", ic4_p:"매장에서 편하게 문의해 주세요", ic4_small:"김치 대량 주문은 카운터로.",
+  cr_h2:"오늘 저녁, 요리하기 귀찮다면?",
+  cr_p:"좋아요 레스토랑이 있습니다 — 육회비빔밥, 불고기, 치킨. 파리 시내 한복판.",
+  cr_btn:"레스토랑 보러 가기 →",
+  foot_sub:"마켓",
+  legal:"데모 사이트 · © 2026 좋아요 마켓 — 12 rue Exemple, 75015 Paris"
+}
+};
+
+function applyLang(lang){
+  var dict = I18N[lang] || I18N.fr;
+  document.documentElement.setAttribute('lang', lang);
+  document.title = dict._title;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('joayo-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang-switch button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+var saved = null;
+try{ saved = localStorage.getItem('joayo-lang'); }catch(e){}
+applyLang(saved && I18N[saved] ? saved : 'fr');
+
+(function(){
+  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
+  document.body.classList.add('js-anim');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+</body>
+</html>

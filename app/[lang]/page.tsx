@@ -4,44 +4,40 @@ import Reveal from '@/components/Reveal'
 import ContactForm from '@/components/ContactForm'
 import { getDict, isLang, type Lang, type Project } from '@/lib/content'
 import { PROJECT_IMAGES } from '@/lib/images'
+import { SERVICE } from '@/lib/service'
 
-const PROJECT_TONES: Record<string, string> = {
-  'atelier-why': 'bg-[#EDE9E1]',
-  'food-school': 'bg-[#E5E1D6]',
-  'web-projects': 'bg-[#EAE5DD]',
-  'social-brand': 'bg-[#E8E2D8]',
-}
+const BP = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-function ProjectVisual({ project }: { project: Project }) {
-  const images = PROJECT_IMAGES[project.slug]
-
-  if (images) {
-    return (
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#EAE5DD]">
+/* Screenshot in a machined tray: soft outer shell, concentric inner radius. */
+function Bezel({
+  src,
+  alt,
+  priority,
+  aspect = 'aspect-[4/3]',
+}: {
+  src: string
+  alt: string
+  priority?: boolean
+  aspect?: string
+}) {
+  return (
+    <div className="rounded-[28px] bg-surface p-2 ring-1 ring-ink/[0.04]">
+      <div className={`relative overflow-hidden rounded-[20px] bg-white ${aspect}`}>
         <Image
-          src={images.cover}
-          alt={project.title}
+          src={src}
+          alt={alt}
           width={1600}
-          height={1000}
-          className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+          height={1200}
+          priority={priority}
+          className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-swift group-hover:scale-[1.025]"
         />
       </div>
-    )
-  }
-
-  // Typographic placeholder for projects without visuals yet.
-  return (
-    <div
-      className={`relative flex aspect-[4/3] items-end overflow-hidden ${PROJECT_TONES[project.slug] ?? 'bg-[#EAE5DD]'}`}
-    >
-      <span className="pointer-events-none absolute left-4 top-4 text-[10px] uppercase tracking-[0.25em] text-charcoal/50">
-        {project.category}
-      </span>
-      <span className="select-none px-4 pb-2 font-serif text-[17vw] italic leading-none text-charcoal/[0.13] md:text-[8rem]">
-        {project.title.replace(/ .*/, '')}
-      </span>
     </div>
   )
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-[13px] font-bold tracking-wide text-accent">{children}</p>
 }
 
 export default function Home({ params }: { params: { lang: string } }) {
@@ -51,105 +47,161 @@ export default function Home({ params }: { params: { lang: string } }) {
   return (
     <main>
       {/* ------------------------------------------------ Hero */}
-      <section className="flex min-h-screen flex-col justify-end px-5 pb-14 pt-28 md:px-8">
-        <div className="mx-auto w-full max-w-6xl">
+      <section className="relative overflow-hidden px-5 pb-16 pt-36 md:pb-24 md:pt-48">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-[radial-gradient(900px_420px_at_50%_-120px,#EEF4FD,transparent_70%)]"
+        />
+        <div className="relative mx-auto max-w-4xl text-center">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.25em] text-warmgray">
-              {dict.hero.name} — {dict.hero.credential}
+            <p className="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-[13px] font-semibold text-charcoal">
+              {dict.hero.name} · {dict.hero.credential}
             </p>
           </Reveal>
-          <Reveal delay={100}>
-            <h1 className="mt-6 max-w-5xl text-[13vw] font-medium leading-[0.98] tracking-tightest md:text-[6.5rem]">
+          <Reveal delay={80}>
+            <h1 className="mx-auto mt-7 text-[2.9rem] font-extrabold leading-[1.08] tracking-tightest md:text-[5.2rem]">
               {dict.hero.title}
             </h1>
           </Reveal>
-          <Reveal delay={200}>
-            <p className="mt-8 max-w-xl text-base leading-relaxed text-charcoal md:text-lg">
+          <Reveal delay={160}>
+            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-charcoal md:text-lg">
               {dict.hero.sub}
             </p>
           </Reveal>
-          <Reveal delay={300}>
-            <div className="mt-12 flex flex-col gap-4 border-t border-line pt-5 md:flex-row md:items-center md:justify-between">
-              <p className="text-xs uppercase tracking-[0.2em] text-warmgray">{dict.hero.fields}</p>
+          <Reveal delay={240}>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href={`/${lang}/#contact`}
+                className="rounded-full bg-accent px-7 py-3.5 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 ease-swift hover:bg-accenthover active:scale-[0.97]"
+              >
+                {dict.nav.contact}
+              </Link>
               <a
                 href="#work"
-                className="text-sm tracking-[0.05em] text-ink transition-colors hover:text-accent"
+                className="rounded-full bg-surface px-7 py-3.5 text-[15px] font-semibold text-ink transition-[background-color,transform] duration-200 ease-swift hover:bg-surface2 active:scale-[0.97]"
               >
-                {dict.hero.cta} ↓
+                {dict.hero.cta}
               </a>
             </div>
+          </Reveal>
+          <Reveal delay={320}>
+            <p className="mt-10 text-xs font-medium tracking-[0.14em] text-warmgray">
+              {dict.hero.fields}
+            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ------------------------------------------------ Intro */}
-      <section className="border-t border-line px-5 py-24 md:px-8 md:py-32">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-12">
-          <Reveal className="md:col-span-3">
-            <h2 className="text-xs uppercase tracking-[0.25em] text-warmgray">
-              {dict.intro.heading}
+      {/* ------------------------------------------------ Numbers */}
+      <section className="px-5 md:px-8">
+        <Reveal>
+          <div className="mx-auto grid max-w-5xl grid-cols-2 overflow-hidden rounded-[28px] bg-surface md:grid-cols-4">
+            {dict.edge.numbers.map((n, i) => (
+              <div
+                key={n.l}
+                className={`px-6 py-8 md:px-8 ${i % 2 === 1 ? 'border-l border-white' : ''} ${
+                  i > 1 ? 'border-t border-white md:border-t-0' : ''
+                } ${i > 0 ? 'md:border-l md:border-white' : ''}`}
+              >
+                <p className="text-2xl font-extrabold tracking-tight tabular-nums md:text-3xl">
+                  {n.v}
+                </p>
+                <p className="mt-1.5 text-[12px] leading-snug text-warmgray">{n.l}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ------------------------------------------------ The Difference */}
+      <section className="px-5 py-24 md:px-8 md:py-36">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <Eyebrow>{dict.edge.heading}</Eyebrow>
+            <h2 className="mt-3 max-w-2xl text-3xl font-extrabold leading-tight tracking-tightest md:text-5xl">
+              {dict.edge.sub}
             </h2>
           </Reveal>
-          <div className="md:col-span-9">
-            <Reveal>
-              <p className="max-w-2xl text-xl leading-relaxed tracking-tight md:text-2xl">
-                {dict.intro.body}
-              </p>
-            </Reveal>
-            <Reveal delay={150}>
-              <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-4">
-                {dict.intro.words.map((word) => (
-                  <p
-                    key={word}
-                    className="border-t border-line pt-3 font-serif text-2xl italic md:text-3xl"
-                  >
-                    {word}
-                  </p>
-                ))}
-              </div>
-            </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {dict.edge.items.map((it, i) => (
+              <Reveal key={it.title} delay={i * 80}>
+                <div className="flex h-full flex-col rounded-[28px] bg-surface p-7 md:p-8">
+                  <h3 className="text-xl font-bold tracking-tight">{it.title}</h3>
+                  <p className="mt-3 flex-1 text-[15px] leading-relaxed text-charcoal">{it.body}</p>
+                  <div className="mt-6 rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(25,31,40,0.04)]">
+                    <p className="text-xs leading-relaxed text-warmgray">{it.proof}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------ Selected Work */}
-      <section id="work" className="scroll-mt-16 border-t border-line px-5 py-24 md:px-8 md:py-32">
+      <section id="work" className="scroll-mt-24 px-5 pb-24 md:px-8 md:pb-36">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="text-4xl font-medium tracking-tightest md:text-6xl">
-                {dict.workSection.heading}
-              </h2>
+              <div>
+                <Eyebrow>Selected Work</Eyebrow>
+                <h2 className="mt-3 text-3xl font-extrabold tracking-tightest md:text-5xl">
+                  {dict.workSection.heading}
+                </h2>
+              </div>
               <p className="text-sm text-warmgray">{dict.workSection.sub}</p>
             </div>
           </Reveal>
 
-          <div className="mt-16 space-y-24 md:space-y-32">
+          <div className="mt-14 space-y-20 md:space-y-28">
             {dict.projects.map((project, index) => {
+              const hasVisual = Boolean(PROJECT_IMAGES[project.slug])
               const body = (
-                <div className="grid gap-8 md:grid-cols-12 md:gap-12">
-                  <div className={`md:col-span-7 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
-                    <ProjectVisual project={project} />
-                  </div>
-                  <div className={`md:col-span-5 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-warmgray">
-                      {String(index + 1).padStart(2, '0')} — {project.category} · {project.year}
+                <div className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
+                  {hasVisual && (
+                    <div className={`md:col-span-7 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                      <div className="transition-transform duration-500 ease-swift group-hover:-translate-y-1.5">
+                        <Bezel
+                          src={PROJECT_IMAGES[project.slug].cover}
+                          alt={project.title}
+                          priority={index === 0}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  <div
+                    className={
+                      hasVisual
+                        ? `md:col-span-5 ${index % 2 === 1 ? 'md:order-1' : ''}`
+                        : 'md:col-span-8'
+                    }
+                  >
+                    <p className="text-xs font-semibold tracking-[0.12em] text-warmgray">
+                      {project.category} · {project.year}
                     </p>
-                    <h3 className="mt-4 text-3xl font-medium tracking-tight md:text-4xl">
+                    <h3 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
                       {project.title}
                     </h3>
-                    <p className="mt-3 font-serif text-xl italic text-charcoal">
-                      {project.tagline}
-                    </p>
-                    <p className="mt-5 text-sm leading-relaxed text-charcoal md:text-base">
+                    <p className="mt-2 text-[15px] font-semibold text-accent">{project.tagline}</p>
+                    <p className="mt-4 text-[15px] leading-relaxed text-charcoal">
                       {project.overview}
                     </p>
-                    <p className="mt-6 text-xs leading-relaxed tracking-[0.05em] text-warmgray">
-                      {project.roles.join(' / ')}
-                    </p>
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {project.roles.slice(0, 5).map((r) => (
+                        <span
+                          key={r}
+                          className="rounded-full bg-surface px-3 py-1 text-[11px] font-semibold text-charcoal"
+                        >
+                          {r}
+                        </span>
+                      ))}
+                    </div>
                     {project.hasDetail && (
-                      <p className="mt-6 text-sm tracking-[0.05em] text-ink transition-colors group-hover:text-accent">
-                        {dict.workSection.view} →
+                      <p className="mt-6 inline-flex items-center gap-1.5 text-[15px] font-semibold text-ink transition-colors group-hover:text-accent">
+                        {dict.workSection.view}
+                        <span className="transition-transform duration-300 ease-swift group-hover:translate-x-0.5">
+                          →
+                        </span>
                       </p>
                     )}
                   </div>
@@ -172,155 +224,107 @@ export default function Home({ params }: { params: { lang: string } }) {
         </div>
       </section>
 
-      {/* ------------------------------------------------ How I Work */}
-      <section className="border-t border-line px-5 py-24 md:px-8 md:py-32">
+      {/* ------------------------------------------------ The Offer */}
+      <section className="px-5 pb-24 md:px-8 md:pb-36">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <h2 className="font-serif text-5xl italic tracking-tight md:text-7xl">
-              {dict.how.heading}
-            </h2>
-            <p className="mt-4 max-w-xl text-sm text-warmgray md:text-base">{dict.how.sub}</p>
-          </Reveal>
-          <div className="mt-16 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-4">
-            {dict.how.steps.map((step, i) => (
-              <Reveal key={step.name} delay={i * 80} className="bg-paper p-6 md:p-8">
-                <p className="text-[10px] tracking-[0.25em] text-warmgray">{step.num}</p>
-                <h3 className="mt-6 text-2xl font-medium tracking-tight">{step.name}</h3>
-                <p className="mt-3 min-h-12 text-sm leading-relaxed text-charcoal">{step.desc}</p>
-                <p className="mt-6 text-xs leading-relaxed tracking-[0.05em] text-warmgray">
-                  {step.items.join(' / ')}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------ Services */}
-      <section
-        id="services"
-        className="scroll-mt-16 border-t border-line px-5 py-24 md:px-8 md:py-32"
-      >
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="text-4xl font-medium tracking-tightest md:text-6xl">
-                {dict.services.heading}
-              </h2>
-              <p className="text-sm text-warmgray">{dict.services.note}</p>
-            </div>
-          </Reveal>
-          <div className="mt-16 space-y-0">
-            {dict.services.groups.map((group, i) => (
-              <Reveal key={group.name} delay={i * 60}>
-                <div className="grid gap-4 border-t border-line py-10 md:grid-cols-12 md:gap-8">
-                  <p className="text-[10px] tracking-[0.25em] text-warmgray md:col-span-1">
-                    {group.num}
+            <Link
+              href={`/${lang}/services/`}
+              className="group relative block overflow-hidden rounded-[32px] bg-ink text-white"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-32 right-0 h-[420px] w-[560px] bg-[radial-gradient(closest-side,rgba(49,130,246,0.28),transparent)]"
+              />
+              <div className="relative grid gap-10 px-7 pt-12 md:grid-cols-12 md:gap-8 md:px-14 md:pt-16">
+                <div className="md:col-span-7">
+                  <p className="inline-flex items-center gap-2.5 rounded-full bg-white/10 px-4 py-1.5 text-[13px] font-semibold text-white/90">
+                    <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-[#4ADE80]" />
+                    {dict.offer.label}
                   </p>
-                  <div className="md:col-span-5">
-                    <h3 className="text-2xl font-medium tracking-tight md:text-3xl">{group.name}</h3>
-                    <p className="mt-2 text-sm text-warmgray">{group.sub}</p>
-                  </div>
-                  <p className="text-sm leading-loose text-charcoal md:col-span-6">
-                    {group.items.join(' / ')}
+                  <h2 className="mt-6 text-3xl font-extrabold leading-[1.14] tracking-tightest md:text-[2.9rem]">
+                    {dict.offer.heading}
+                  </h2>
+                  <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70 md:text-base">
+                    {dict.offer.body}
                   </p>
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div className="flex flex-col justify-between gap-8 md:col-span-4 md:col-start-9">
+                  <ul className="space-y-3">
+                    {dict.offer.points.map((pt) => (
+                      <li key={pt} className="flex items-center gap-3 text-[15px] font-medium text-white/90">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
+                          <svg viewBox="0 0 12 12" className="h-3 w-3" aria-hidden="true">
+                            <path
+                              d="M2 6.2l2.6 2.6L10 3.4"
+                              fill="none"
+                              stroke="#3182F6"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                  <div>
+                    <span className="inline-flex items-center gap-3 rounded-full bg-white py-2 pl-6 pr-2 text-[15px] font-semibold text-ink transition-transform duration-200 ease-swift group-hover:scale-[1.02] group-active:scale-[0.98]">
+                      {dict.offer.cta}
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-tint text-accent transition-transform duration-300 ease-swift group-hover:translate-x-0.5">
+                        →
+                      </span>
+                    </span>
+                    <p className="mt-3.5 text-xs text-white/60">{dict.offer.note}</p>
+                  </div>
+                </div>
+              </div>
 
-      {/* ------------------------------------------------ About */}
-      <section id="about" className="scroll-mt-16 border-t border-line px-5 py-24 md:px-8 md:py-32">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-12">
-          <Reveal className="md:col-span-3">
-            <h2 className="text-xs uppercase tracking-[0.25em] text-warmgray">
-              {dict.about.heading}
-            </h2>
-          </Reveal>
-          <div className="md:col-span-6">
-            <Reveal>
-              <p className="text-2xl font-medium tracking-tight">{dict.about.name}</p>
-              <p className="mt-1 text-sm text-warmgray">{dict.about.credential}</p>
-              <p className="mt-6 font-serif text-2xl italic md:text-3xl">{dict.about.title}</p>
-            </Reveal>
-            <Reveal delay={120}>
-              <div className="mt-8 space-y-5 text-base leading-relaxed text-charcoal">
-                {dict.about.body.map((paragraph) => (
-                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              <div className="relative mt-12 flex gap-3 px-7 pb-12 md:px-14 md:pb-16">
+                {SERVICE[lang].demos.map((d) => (
+                  <div
+                    key={d.img}
+                    className="w-1/2 shrink-0 overflow-hidden rounded-2xl ring-1 ring-white/10 md:w-1/4"
+                  >
+                    <Image
+                      src={`${BP}/images/${d.img}`}
+                      alt={d.label}
+                      width={900}
+                      height={600}
+                      className="aspect-[3/2] w-full object-cover object-top opacity-85 transition-opacity duration-500 group-hover:opacity-100"
+                    />
+                  </div>
                 ))}
               </div>
-            </Reveal>
-          </div>
-          <Reveal delay={200} className="md:col-span-3">
-            {/* Portrait placeholder — swap for a natural, at-work photo */}
-            <div className="flex aspect-[3/4] items-end bg-[#E8E4DB] p-4">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-charcoal/40">
-                Portrait — coming soon
-              </p>
-            </div>
+            </Link>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------ Career */}
-      <section className="border-t border-line px-5 py-24 md:px-8 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="text-4xl font-medium tracking-tightest md:text-6xl">
-                {dict.career.heading}
-              </h2>
-              <p className="text-sm text-warmgray">{dict.career.sub}</p>
-            </div>
-          </Reveal>
-          <div className="mt-16">
-            {dict.career.items.map((item, i) => (
-              <Reveal key={`${item.period}-${item.org}`} delay={i * 40}>
-                <div className="grid gap-2 border-t border-line py-7 md:grid-cols-12 md:gap-8">
-                  <p className="text-xs tracking-[0.15em] text-warmgray md:col-span-2 md:pt-1">
-                    {item.period}
-                  </p>
-                  <div className="md:col-span-4">
-                    <h3 className="text-lg font-medium tracking-tight">{item.role}</h3>
-                    <p className="mt-0.5 text-sm text-warmgray">{item.org}</p>
-                  </div>
-                  <p className="text-sm leading-relaxed text-charcoal md:col-span-6 md:pt-1">
-                    {item.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ------------------------------------------------ Contact */}
-      <section
-        id="contact"
-        className="scroll-mt-16 border-t border-line px-5 py-24 md:px-8 md:py-32"
-      >
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <h2 className="max-w-3xl text-4xl font-medium leading-tight tracking-tightest md:text-6xl">
-              {dict.contact.heading}
-            </h2>
-            <p className="mt-6 font-serif text-2xl italic text-charcoal">{dict.contact.line}</p>
-          </Reveal>
-          <div className="mt-14 grid gap-12 md:grid-cols-12">
+      <section id="contact" className="scroll-mt-24 px-5 pb-24 md:px-8 md:pb-32">
+        <div className="mx-auto max-w-6xl rounded-[32px] bg-surface px-6 py-14 md:px-14 md:py-20">
+          <div className="grid gap-12 md:grid-cols-12">
             <Reveal className="md:col-span-5">
-              <p className="text-sm text-warmgray">{dict.contact.desc}</p>
-              <ul className="mt-6 space-y-3">
+              <h2 className="text-3xl font-extrabold leading-tight tracking-tightest md:text-4xl">
+                {dict.contact.heading}
+              </h2>
+              <p className="mt-4 text-[15px] font-semibold text-accent">{dict.contact.line}</p>
+              <p className="mt-5 text-sm leading-relaxed text-charcoal">{dict.contact.desc}</p>
+              <ul className="mt-7 space-y-2.5">
                 {dict.contact.bullets.map((item) => (
-                  <li key={item} className="border-b border-line pb-3 text-sm text-charcoal">
+                  <li key={item} className="flex items-center gap-3 text-sm text-charcoal">
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-accent" />
                     {item}
                   </li>
                 ))}
               </ul>
             </Reveal>
-            <Reveal delay={120} className="md:col-span-7">
-              <ContactForm dict={dict} />
+            <Reveal delay={100} className="md:col-span-7">
+              <div className="rounded-[24px] bg-white p-5 shadow-soft md:p-8">
+                <ContactForm dict={dict} />
+              </div>
             </Reveal>
           </div>
         </div>

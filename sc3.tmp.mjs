@@ -1,0 +1,13 @@
+import puppeteer from 'puppeteer';
+const b=await puppeteer.launch({headless:'new'});
+const p=await b.newPage();
+await p.setViewport({width:1440,height:1700,deviceScaleFactor:1});
+await p.goto('http://localhost:4700/ja/work/web-projects/',{waitUntil:'domcontentloaded',timeout:25000});
+await new Promise(r=>setTimeout(r,4500));
+await p.screenshot({path:'/tmp/case-top.jpg',type:'jpeg',quality:80});
+await p.evaluate(()=>window.scrollTo(0,1450));
+await new Promise(r=>setTimeout(r,1500));
+await p.screenshot({path:'/tmp/case-mid.jpg',type:'jpeg',quality:80});
+console.log('ok');
+await b.close();
+process.exit(0);

@@ -13,8 +13,12 @@ export interface ProjectDetail {
   challenge: string
   concept: string
   process: string[]
+  steps?: { name: string; desc: string; out?: string }[]
   result: string[]
   link?: { label: string; href: string }
+  manifesto?: string
+  showcase?: { label: string; href: string; img?: string }
+  demos?: { label: string; href: string; genre?: string; img?: string }[]
 }
 
 export interface Project {
@@ -41,8 +45,22 @@ export interface Dict {
     cta: string
   }
   intro: { heading: string; body: string; words: string[] }
+  edge: {
+    heading: string
+    sub: string
+    items: { title: string; body: string; proof: string }[]
+    numbers: { v: string; l: string }[]
+  }
   workSection: { heading: string; sub: string; view: string }
   projects: Project[]
+  offer: {
+    label: string
+    heading: string
+    body: string
+    points: string[]
+    cta: string
+    note: string
+  }
   how: {
     heading: string
     sub: string
@@ -90,6 +108,8 @@ export interface Dict {
     visualNote: string
     back: string
     next: string
+    demos: string
+    deliverable: string
   }
 }
 
@@ -114,6 +134,33 @@ const dictionaries: Record<Lang, Dict> = {
       heading: 'What I do',
       body: '事業をつくるとき、ブランド、Web、SNSを別々には考えません。「誰に、何を、なぜ届けるのか」から考え、必要なものを一緒につくります。',
       words: ['Business', 'Brand', 'Web', 'Social'],
+    },
+    edge: {
+      heading: 'The Difference',
+      sub: '戦略と実装と数字を、同じ人が地続きで見ます。',
+      items: [
+        {
+          title: '実装がわかる',
+          body: 'エンジニアとして8年、実際にコードを書いてきました。だからスコープを切るとき、どこが重くてどこが軽いかが読めます。エンジニアと同じ言葉で話せます。',
+          proof: 'Ateamでプロジェクトエンジニア8年。日本・インドネシアで新規サービス開発をリード。',
+        },
+        {
+          title: '数字を持てる',
+          body: '米国公認会計士です。ユニットエコノミクスと価格から逆算して、事業として成立するかを先に確かめます。新規事業のP&Lを持った経験があります。',
+          proof: 'nonpiで新規事業のP&Lを主導。2,500社以上が使う採用SaaSのGTM・機能企画を担当。',
+        },
+        {
+          title: 'AIで運用まで作る',
+          body: '企画から品質チェック、配信までをAIエージェントの仕組みとして組み立てました。編集部の規模でやる作業が、毎週それで動いています。',
+          proof: 'Atelier Why:動画選定→AI品質ゲート→制作→メール/LINE配信まで自動化し、サブスクとして運営中。',
+        },
+      ],
+      numbers: [
+        { v: '8年', l: 'エンジニアとしての開発経験' },
+        { v: '2,500社+', l: 'GTMを担当したSaaSの導入社数' },
+        { v: '毎週', l: 'AIで回す編集オペレーション' },
+        { v: '3言語', l: '日本語・英語・韓国語で仕事' },
+      ],
     },
     workSection: {
       heading: 'Selected Work',
@@ -143,7 +190,7 @@ const dictionaries: Record<Lang, Dict> = {
             'サブスクリプションサービスとしてローンチ',
             '年齢別・週次プログラムの継続運営',
             'Web・SNS・メール・LINEを横断するブランド構築',
-            'AIを組み込んだ一人運営の編集体制',
+            'AIを組み込んだ編集オペレーションの構築',
           ],
           link: { label: 'atelier-why.com', href: 'https://atelier-why.com' },
         },
@@ -184,25 +231,6 @@ const dictionaries: Record<Lang, Dict> = {
         },
       },
       {
-        slug: 'web-projects',
-        category: 'WEB / BRAND',
-        year: 'Ongoing',
-        title: 'Website Projects',
-        tagline: '「作る」前に、「何を伝えるか」から。',
-        overview:
-          'Webサイトを「制作物」ではなく「事業の伝え方」として設計する。課題の整理から、戦略、構成、コピー、デザイン、実装まで。Problem → Strategy → Structure → Copy → Design → Website の流れで、一貫して形にする。',
-        roles: [
-          'Strategy',
-          'Web Direction',
-          'Information Architecture',
-          'UX',
-          'Copy',
-          'Design',
-          'Production',
-        ],
-        hasDetail: false,
-      },
-      {
         slug: 'social-brand',
         category: 'SOCIAL / CONTENT / BRAND',
         year: 'Ongoing',
@@ -220,6 +248,14 @@ const dictionaries: Record<Lang, Dict> = {
         hasDetail: false,
       },
     ],
+    offer: {
+      label: '戦略とWeb',
+      heading: '「なぜ選ばれるのか」から、一緒につくります。',
+      body: 'WHYの言語化、ターゲティング、ポジショニング、4P。戦略を決めてから、Webサイトという形にします。',
+      points: ['WHY・STP・4Pの戦略シート', '原稿の準備は不要', '戦略から公開まで一気通貫'],
+      cta: '料金と進め方を見る',
+      note: 'いま相談を受け付けています。',
+    },
     how: {
       heading: 'From zero to one.',
       sub: 'まだ形になっていないものを、事業にするまでの4つのステップ。',
@@ -300,11 +336,11 @@ const dictionaries: Record<Lang, Dict> = {
       heading: 'About',
       name: 'Jessy (Giyoung) Jung',
       credential: '米国公認会計士（U.S. CPA）',
-      title: 'Independent Business & Brand Builder',
+      title: '0→1 Product Manager / Business Builder',
       body: [
         '新規事業やブランドの0→1を中心に、事業企画、コンセプト、ブランド、Web、SNSまで横断して仕事をしています。',
-        '米国公認会計士として培ったビジネス・数字の視点と、ブランドやクリエイティブの視点の両方から事業を考えられることが特徴です。',
-        'すでに答えが決まっているものを作るより、まだ形になっていないものを考え、形にし、世の中に出すことを得意としています。',
+        'キャリアは、エンジニア8年 → 米国公認会計士 → SaaSプロダクトマネージャー → 事業立ち上げ。実装・数字・プロダクトの三つの言葉を話せることが、PMとしての差別化です。',
+        '今はその全部をAIエージェントに接続し、「考える→作る→運用する」が途切れない体制をつくっています。',
       ],
     },
     career: {
@@ -321,7 +357,7 @@ const dictionaries: Record<Lang, Dict> = {
           period: '2026 —',
           role: 'Founder',
           org: 'Atelier Why',
-          desc: 'AI時代の家庭学習メンバーシップを、コンテンツから配信まで一人で立ち上げ・運営。',
+          desc: 'AI時代の家庭学習メンバーシップを、コンテンツから配信まで立ち上げ・運営。',
         },
         {
           period: '2024 – 2026',
@@ -380,6 +416,8 @@ const dictionaries: Record<Lang, Dict> = {
       visualNote: 'Visuals coming soon',
       back: 'Back to Work',
       next: 'Next Project',
+      demos: 'Live Demos',
+      deliverable: 'Deliverable',
     },
   },
 
@@ -404,9 +442,36 @@ const dictionaries: Record<Lang, Dict> = {
       body: '비즈니스를 만들 때 브랜드, 웹, SNS를 따로 생각하지 않습니다. "누구에게, 무엇을, 왜 전할 것인가"에서 시작해, 필요한 것을 함께 만듭니다.',
       words: ['Business', 'Brand', 'Web', 'Social'],
     },
+        edge: {
+      heading: 'The Difference',
+      sub: '전략, 구현, 숫자를 한 사람이 끊김 없이 봅니다.',
+      items: [
+        {
+          title: '구현을 아는 PM',
+          body: '엔지니어로 8년, 직접 코드를 짰습니다. 그래서 스코프를 자를 때 어디가 무겁고 어디가 가벼운지 보입니다. 엔지니어와 같은 언어로 이야기할 수 있습니다.',
+          proof: 'Ateam에서 프로젝트 엔지니어 8년. 일본·인도네시아에서 신규 서비스 개발 리드.',
+        },
+        {
+          title: '숫자로 판단하는 PM',
+          body: '미국 공인회계사입니다. 유닛 이코노믹스와 가격에서 역산해, 사업이 되는지부터 먼저 확인합니다. 신규 사업의 P&L을 직접 맡아 본 경험이 있습니다.',
+          proof: 'nonpi에서 신규 사업 P&L 주도. 2,500개사 이상이 쓰는 채용 SaaS의 GTM·기능 기획 담당.',
+        },
+        {
+          title: 'AI로 운영까지 만드는 PM',
+          body: '기획부터 품질 체크, 발송까지를 AI 에이전트 구조로 짰습니다. 편집팀 규모의 일이 매주 그 시스템으로 돌아갑니다.',
+          proof: 'Atelier Why: 영상 선정→AI 품질 게이트→제작→메일/LINE 발송까지 자동화해 구독 서비스로 운영 중.',
+        },
+      ],
+      numbers: [
+        { v: '8년', l: '엔지니어 개발 경력' },
+        { v: '2,500개사+', l: 'GTM을 담당한 SaaS의 도입 기업 수' },
+        { v: '매주', l: 'AI로 돌아가는 편집 운영' },
+        { v: '3개 언어', l: '일본어·영어·한국어로 일합니다' },
+      ],
+    },
     workSection: {
       heading: 'Selected Work',
-      sub: '직접 0에서 시작한 프로젝트를 중심으로.',
+      sub: '직접 0부터 만든 프로젝트 중심으로.',
       view: 'Case Study 보기',
     },
     projects: [
@@ -473,25 +538,6 @@ const dictionaries: Record<Lang, Dict> = {
         },
       },
       {
-        slug: 'web-projects',
-        category: 'WEB / BRAND',
-        year: 'Ongoing',
-        title: 'Website Projects',
-        tagline: '"만들기" 전에, "무엇을 전할 것인가"부터.',
-        overview:
-          '웹사이트를 "제작물"이 아니라 "비즈니스의 전달 방식"으로 설계합니다. 과제 정리부터 전략, 구조, 카피, 디자인, 구현까지. Problem → Strategy → Structure → Copy → Design → Website 의 흐름으로 일관되게 만듭니다.',
-        roles: [
-          'Strategy',
-          'Web Direction',
-          'Information Architecture',
-          'UX',
-          'Copy',
-          'Design',
-          'Production',
-        ],
-        hasDetail: false,
-      },
-      {
         slug: 'social-brand',
         category: 'SOCIAL / CONTENT / BRAND',
         year: 'Ongoing',
@@ -509,6 +555,14 @@ const dictionaries: Record<Lang, Dict> = {
         hasDetail: false,
       },
     ],
+    offer: {
+      label: '전략과 웹',
+      heading: '"왜 선택받는지"부터, 함께 만듭니다.',
+      body: 'WHY의 언어화, 타깃팅, 포지셔닝, 4P까지. 전략을 정한 다음, 웹사이트로 완성합니다.',
+      points: ['WHY·STP·4P 전략 시트', '원고 준비는 필요 없음', '전략부터 오픈까지 한 번에'],
+      cta: '요금과 진행 방식 보기',
+      note: '지금 상담 신청을 받고 있습니다.',
+    },
     how: {
       heading: 'From zero to one.',
       sub: '아직 형태가 없는 것을 비즈니스로 만들기까지, 네 단계.',
@@ -516,25 +570,25 @@ const dictionaries: Record<Lang, Dict> = {
         {
           num: '01',
           name: 'FIND',
-          desc: '아직 언어가 되지 않은 가치를 찾습니다.',
+          desc: '아직 말로 정리되지 않은 가치를 찾습니다.',
           items: ['Research', 'Customer', 'Market', 'Insight'],
         },
         {
           num: '02',
           name: 'DEFINE',
-          desc: '"무엇을 만들 것인가"를 언어로 정의합니다.',
+          desc: '"무엇을 만들 것인가"를 말로 정리합니다.',
           items: ['Concept', 'Positioning', 'Brand', 'Story', 'Customer'],
         },
         {
           num: '03',
           name: 'BUILD',
-          desc: '실제로 만들어 냅니다.',
+          desc: '실제로 형태를 만듭니다.',
           items: ['Business', 'Service', 'Brand', 'Website', 'Content'],
         },
         {
           num: '04',
           name: 'GROW',
-          desc: '사람들에게 전합니다.',
+          desc: '사람들에게 전달합니다.',
           items: ['Social', 'Content', 'Community', 'Campaign', 'PR'],
         },
       ],
@@ -589,34 +643,34 @@ const dictionaries: Record<Lang, Dict> = {
       heading: 'About',
       name: 'Jessy (Giyoung) Jung',
       credential: '미국 공인회계사 (U.S. CPA)',
-      title: 'Independent Business & Brand Builder',
+      title: '0→1 Product Manager / Business Builder',
       body: [
         '새로운 비즈니스와 브랜드의 0→1 단계에서 사업 기획, 콘셉트, 브랜딩, 웹사이트, SNS까지 폭넓게 함께하고 있습니다.',
-        '미국 공인회계사로서 쌓은 비즈니스와 숫자에 대한 관점과 브랜드 및 크리에이티브에 대한 관점을 함께 가지고 있습니다.',
-        '이미 답이 정해져 있는 것을 만드는 것보다, 아직 형태가 없는 것을 생각하고, 만들고, 실제로 시작하는 일을 잘합니다.',
+        '커리어는 엔지니어 8년 → 미국 공인회계사 → SaaS 프로덕트 매니저 → 사업 론칭. 구현·숫자·프로덕트, 세 가지 언어를 모두 말할 수 있다는 것이 PM으로서의 차별점입니다.',
+        '지금은 그 전부를 AI 에이전트에 연결해, \"생각한다 → 만든다 → 운영한다\"가 끊기지 않는 체계를 만들고 있습니다.',
       ],
     },
     career: {
       heading: 'Career',
-      sub: '엔지니어링, 비즈니스, 프로덕트, 그리고 0→1으로.',
+      sub: '엔지니어링, 비즈니스, 프로덕트, 그리고 0→1로.',
       items: [
         {
           period: '2026 —',
           role: 'Project Leader',
           org: '식(食)의 학교 프로젝트',
-          desc: '지역의 식문화를 기점으로, 사업 론칭과 배움이 하나가 된 프로젝트를 이끌고 있다.',
+          desc: '지역 식문화를 기점으로, 사업 론칭과 배움이 하나 된 프로젝트를 리드.',
         },
         {
           period: '2026 —',
           role: 'Founder',
           org: 'Atelier Why',
-          desc: 'AI 시대의 가정 학습 멤버십을 콘텐츠부터 배송까지 혼자 만들고 운영.',
+          desc: 'AI 시대의 가정 학습 멤버십을 콘텐츠부터 배송까지 구축·운영.',
         },
         {
           period: '2024 – 2026',
           role: 'Product Manager',
           org: 'Thinkings (Japan)',
-          desc: '2,500개 이상 기업이 쓰는 채용 SaaS "sonar ATS"의 GTM과 기능 기획 담당.',
+          desc: '2,500개사 이상이 쓰는 채용 SaaS "sonar ATS"의 GTM과 기능 기획 담당.',
         },
         {
           period: '2021 – 2023',
@@ -669,6 +723,8 @@ const dictionaries: Record<Lang, Dict> = {
       visualNote: 'Visuals coming soon',
       back: 'Back to Work',
       next: 'Next Project',
+      demos: 'Live Demos',
+      deliverable: 'Deliverable',
     },
   },
 
@@ -692,6 +748,33 @@ const dictionaries: Record<Lang, Dict> = {
       heading: 'What I do',
       body: "When I build a business, I don't treat brand, web and social as separate projects. I start from who it is for, what it offers and why it matters — then build what's needed, end to end.",
       words: ['Business', 'Brand', 'Web', 'Social'],
+    },
+        edge: {
+      heading: 'The Difference',
+      sub: 'Strategy, build and numbers, watched by the same person without a handoff.',
+      items: [
+        {
+          title: 'Speaks implementation',
+          body: 'Eight years writing code before I ever wrote a spec. When I cut scope I can tell what is expensive and what is cheap, and I can say it in the same language the engineers use.',
+          proof: 'Project engineer at Ateam for 8 years; led new service development in Japan and Indonesia.',
+        },
+        {
+          title: 'Owns the numbers',
+          body: 'I am a U.S. CPA. I work backwards from unit economics and pricing to check whether something holds up as a business first. I have owned a new-business P&L.',
+          proof: 'Led new-business P&L at nonpi; GTM and feature planning for a recruiting SaaS used by 2,500+ companies.',
+        },
+        {
+          title: 'Builds AI operations',
+          body: 'Planning, quality checks and distribution are wired together as an agent system. Work that would take an editorial team now runs on it every week.',
+          proof: 'Atelier Why: curation → AI quality gates → production → email/LINE delivery, automated and running as a subscription.',
+        },
+      ],
+      numbers: [
+        { v: '8 yrs', l: 'as a software engineer' },
+        { v: '2,500+', l: 'companies on the SaaS I ran GTM for' },
+        { v: 'Weekly', l: 'AI-powered editorial operation' },
+        { v: '3', l: 'working languages — JA · EN · KO' },
+      ],
     },
     workSection: {
       heading: 'Selected Work',
@@ -721,7 +804,7 @@ const dictionaries: Record<Lang, Dict> = {
             'Launched as a subscription service',
             'Ongoing weekly programs by age group',
             'A brand spanning web, social, email and LINE',
-            'A one-person editorial operation, powered by AI',
+            'An AI-powered editorial operation, built from scratch',
           ],
           link: { label: 'atelier-why.com', href: 'https://atelier-why.com' },
         },
@@ -762,25 +845,6 @@ const dictionaries: Record<Lang, Dict> = {
         },
       },
       {
-        slug: 'web-projects',
-        category: 'WEB / BRAND',
-        year: 'Ongoing',
-        title: 'Website Projects',
-        tagline: 'Before building, decide what to say.',
-        overview:
-          'Websites designed not as deliverables but as the way a business communicates. From problem to strategy, structure, copy, design and production — Problem → Strategy → Structure → Copy → Design → Website, built as one continuous line.',
-        roles: [
-          'Strategy',
-          'Web Direction',
-          'Information Architecture',
-          'UX',
-          'Copy',
-          'Design',
-          'Production',
-        ],
-        hasDetail: false,
-      },
-      {
         slug: 'social-brand',
         category: 'SOCIAL / CONTENT / BRAND',
         year: 'Ongoing',
@@ -798,6 +862,14 @@ const dictionaries: Record<Lang, Dict> = {
         hasDetail: false,
       },
     ],
+    offer: {
+      label: 'Strategy & Web',
+      heading: 'First the why. Then the website.',
+      body: 'We articulate your why, decide targeting and positioning, map the 4Ps — then ship it all as a site.',
+      points: ['A one-page strategy sheet', 'No copy needed from you', 'Strategy through launch, one thread'],
+      cta: 'See pricing and process',
+      note: 'Currently taking new projects.',
+    },
     how: {
       heading: 'From zero to one.',
       sub: 'Four steps from something that doesn’t exist yet to a working business.',
@@ -878,11 +950,11 @@ const dictionaries: Record<Lang, Dict> = {
       heading: 'About',
       name: 'Jessy (Giyoung) Jung',
       credential: 'U.S. CPA',
-      title: 'Independent Business & Brand Builder',
+      title: '0→1 Product Manager / Business Builder',
       body: [
         'I work with businesses and ideas at the zero-to-one stage — shaping concepts, building brands, creating websites and designing how they communicate with the world.',
-        'My background as a U.S. CPA gives me a business and financial perspective, while my work today spans strategy, branding, digital, content and social media.',
-        'I am particularly interested in projects where the answer does not exist yet. From idea to business. From concept to launch.',
+        'My path: eight years as an engineer → U.S. CPA → SaaS product manager → founder. Speaking all three languages — implementation, numbers and product — is what sets me apart as a PM.',
+        'Today I wire all of it into AI agents so the full loop — think, build, operate — never breaks.',
       ],
     },
     career: {
@@ -958,6 +1030,8 @@ const dictionaries: Record<Lang, Dict> = {
       visualNote: 'Visuals coming soon',
       back: 'Back to Work',
       next: 'Next Project',
+      demos: 'Live Demos',
+      deliverable: 'Deliverable',
     },
   },
 }
