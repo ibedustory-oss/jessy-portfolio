@@ -26,7 +26,7 @@ body:after{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
 
 /* ticker */
 .ticker{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;padding:10px 0;
-  font-weight:600;font-size:11px;letter-spacing:.32em;text-transform:uppercase;}
+  font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;}
 .ticker-inner{display:inline-block;animation:scroll 34s linear infinite;}
 .ticker-inner span{margin:0 24px;}
 .ticker-inner span:nth-child(even){color:var(--red);}
@@ -46,11 +46,17 @@ nav{position:sticky;top:0;z-index:100;background:rgba(247,244,239,.92);backdrop-
 .nav-links a:not(.btn):after{content:'';position:absolute;left:0;bottom:-5px;height:1px;width:0;
   background:var(--ink);transition:width .35s cubic-bezier(.23,1,.32,1);}
 .nav-links a:not(.btn):hover:after{width:100%;}
-.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;
-  border:1px solid var(--ink);border-radius:999px;color:var(--ink);
-  padding:11px 24px;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  transition:background .3s,color .3s;}
-.btn:hover{background:var(--ink);color:var(--paper);}
+.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;
+  border:1px solid var(--ink);border-radius:999px;color:var(--ink);background:transparent;
+  padding:8px 8px 8px 22px;font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  transition:background .3s,color .3s,transform .3s cubic-bezier(.23,1,.32,1);}
+.btn:after{content:'\2192';display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);
+  font-size:14px;letter-spacing:0;flex-shrink:0;
+  transition:transform .4s cubic-bezier(.2,1.4,.4,1),background .3s,color .3s;}
+.btn:hover{transform:translateY(-2px);}
+.btn:hover:after{transform:translateX(3px);}
+.btn:active{transform:scale(.97);}
 .lang-switch{display:flex;gap:13px;}
 .lang-switch button{border:none;background:transparent;font-family:'Archivo';font-weight:600;
   font-size:11px;letter-spacing:.12em;cursor:pointer;color:var(--ink);opacity:.55;
@@ -61,19 +67,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 
 /* hero */
 .hero{max-width:1320px;margin:0 auto;padding:96px 40px 80px;position:relative;}
+.hero:has(.ardoise){display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
+  gap:5vw;align-items:start;}
+.hero:has(.ardoise) .rating-sticker{display:none;}
 .kicker{display:flex;align-items:center;gap:11px;font-size:11.5px;font-weight:600;
-  letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:26px;}
+  letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:26px;}
 .kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
 .hero h1{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,8vw,124px);
   line-height:.96;letter-spacing:-.018em;}
 .hero h1 .accent{color:var(--red);font-style:italic;}
-.hangul-big{font-size:13px;font-weight:600;letter-spacing:.34em;color:var(--ink-60);margin-top:18px;}
+.hangul-big{font-size:13px;font-weight:600;letter-spacing:.22em;color:var(--ink-60);margin-top:18px;}
 .hero .sub{margin-top:24px;font-size:clamp(16px,1.7vw,19px);max-width:52ch;color:var(--ink);}
 .hero .sub strong{font-weight:600;}
-.addr-pill{display:inline-block;margin-top:26px;font-size:11.5px;letter-spacing:.16em;
+.addr-pill{display:inline-block;margin-top:26px;font-size:12px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-60);border-bottom:1px solid var(--line);padding-bottom:6px;}
 .cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
-.cta-row .btn{background:var(--ink);color:var(--paper);}
+.cta-row .btn{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.cta-row .btn:after{background:var(--paper);color:var(--ink);}
 .cta-row .btn:hover{background:var(--red);border-color:var(--red);}
 
 /* google rating — a quiet seal, not a sticker */
@@ -85,7 +95,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 /* section scaffold */
 section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .section-head{margin-bottom:52px;border-top:1px solid var(--ink);padding-top:26px;max-width:64ch;}
-.section-head .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.3em;
+.section-head .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.2em;
   font-size:11.5px;margin-bottom:16px;}
 .section-head h2{font-family:'Fraunces',serif;font-weight:560;
   font-size:clamp(32px,4.2vw,58px);line-height:1.04;letter-spacing:-.01em;}
@@ -93,14 +103,14 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 
 /* rayons — a numbered index, not emoji cards */
 .grid-rayons{display:grid;grid-template-columns:repeat(2,1fr);gap:0 6vw;}
-.rayon{position:relative;padding:30px 0;border-top:1px solid var(--line);
-  display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:baseline;
-  transition:padding-left .4s cubic-bezier(.23,1,.32,1);}
-.rayon:hover{padding-left:10px;}
-.rayon .icon{font-family:'Fraunces',serif;font-style:italic;font-weight:420;
-  font-size:17px;color:var(--red);}
+.rayon{position:relative;padding:30px 0 30px 52px;border-top:1px solid var(--line);
+  transition:padding-left .45s cubic-bezier(.23,1,.32,1);}
+.rayon:hover{padding-left:62px;}
+.rayon .icon{position:absolute;left:0;top:32px;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:420;
+  font-size:16px;color:var(--red);}
 .rayon h3{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(20px,2.2vw,27px);line-height:1.15;}
-.rayon .kr{font-size:11px;letter-spacing:.22em;color:var(--ink-60);margin-top:6px;}
+.rayon .kr{font-size:11.5px;letter-spacing:.14em;color:var(--ink-60);margin-top:6px;}
 .rayon p{margin-top:12px;font-size:14.5px;color:var(--ink-60);max-width:40ch;}
 .rayon .badge{position:absolute;top:30px;right:0;font-size:10px;letter-spacing:.22em;
   text-transform:uppercase;color:var(--red);font-weight:600;}
@@ -125,7 +135,7 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
   transition:padding-left .4s cubic-bezier(.23,1,.32,1);}
 .menu-item:hover{padding-left:10px;}
 .menu-item .name{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(17px,1.9vw,22px);}
-.menu-item .kr{font-size:11px;letter-spacing:.2em;color:var(--ink-60);margin-left:12px;}
+.menu-item .kr{font-size:11.5px;letter-spacing:.12em;color:var(--ink-60);margin-left:12px;}
 .menu-item .desc{margin-top:8px;font-size:14px;color:var(--ink-60);max-width:46ch;}
 .menu-item .price{font-family:'Fraunces',serif;font-weight:560;font-size:17px;white-space:nowrap;}
 .menu-note{margin-top:22px;font-size:13px;color:var(--ink-60);}
@@ -133,8 +143,8 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .lunch-box h3,.ambiance h3{font-family:'Fraunces',serif;font-weight:560;font-size:21px;margin-bottom:10px;}
 .lunch-box p,.ambiance p{font-size:14.5px;color:var(--ink-60);}
 .service-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
-.service-chips span{border:1px solid var(--line);border-radius:999px;padding:6px 13px;
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-60);}
+.service-chips span{border:1px solid var(--line);border-radius:999px;padding:7px 15px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);}
 
 /* ardoise — the evening board */
 .ardoise{background:var(--ink);color:var(--paper);padding:34px 32px;position:relative;}
@@ -158,7 +168,7 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .review .stars{color:var(--red);font-size:11px;letter-spacing:.2em;}
 .review p{margin-top:14px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
   font-size:18px;line-height:1.5;}
-.review .who{margin-top:16px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-60);}
+.review .who{margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);}
 
 /* infos */
 .infos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:5vw;}
@@ -200,9 +210,50 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
   .btn{padding:9px 15px;font-size:10.5px;letter-spacing:.1em;}
   .lang-switch{gap:9px;} .lang-switch button{font-size:10px;}
 }
+
+/* ---- hero photo ---- */
+.hero.has-ph{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);
+  gap:5vw;align-items:center;}
+.hero-copy{display:flex;flex-direction:column;align-items:flex-start;}
+.hero-copy .rating-sticker{position:static;text-align:left;margin:0 0 24px;}
+.hero.has-ph .rating-sticker{position:static;text-align:left;}
+
+.hero-ph{position:relative;overflow:hidden;aspect-ratio:4/4.4;}
+.hero-ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);
+  transition:transform 1.4s cubic-bezier(.23,1,.32,1);}
+.hero-ph:hover img{transform:scale(1);}
+.hero:has(.ardoise).has-ph{grid-template-columns:minmax(0,1fr) minmax(0,.62fr) minmax(280px,.72fr);}
+
+/* ---- hover-swap photo stages ---- */
+.ray-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:5vw;align-items:start;}
+.ray-wrap .grid-rayons{display:block;}
+.ray-stage,.menu-stage{position:sticky;top:110px;overflow:hidden;aspect-ratio:4/4.6;background:var(--paper-2);}
+.menu-stage{aspect-ratio:4/3.4;margin-bottom:18px;top:100px;}
+.ray-stage img,.menu-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.06);
+  transition:opacity .9s cubic-bezier(.23,1,.32,1),transform 1.3s cubic-bezier(.23,1,.32,1);}
+.ray-stage img.on,.menu-stage img.on{opacity:1;transform:scale(1);}
+.rayon{cursor:default;}
+.rayon.on h3,.menu-item.on .name{color:var(--red);}
+
+/* ---- progress rail ---- */
+.rail{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:90;
+  display:flex;flex-direction:column;gap:9px;mix-blend-mode:difference;}
+.rail span{height:2px;width:13px;border-radius:99px;background:rgba(255,255,255,.4);
+  transition:all .5s cubic-bezier(.23,1,.32,1);}
+.rail span.on{width:26px;background:#fff;}
+@media(max-width:1100px){.rail{display:none;}}
+
+@media(max-width:900px){
+  .hero.has-ph,.hero:has(.ardoise).has-ph{grid-template-columns:1fr;gap:34px;}
+  .ray-wrap{grid-template-columns:1fr;gap:30px;}
+  .ray-stage{position:relative;top:auto;order:-1;aspect-ratio:4/3;}
+  .menu-stage{position:relative;top:auto;}
+}
 </style>
 </head>
 <body>
+<div class="rail" aria-hidden="true"></div>
 
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
@@ -232,7 +283,8 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero has-ph" data-rail>
+  <div class="hero-copy">
   <div class="rating-sticker" title="Google">
     <div class="score">4.9</div>
     <div class="stars">★★★★★</div>
@@ -243,52 +295,64 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
   <div class="hangul-big" data-i18n="hero_hb">좋아요 마켓</div>
   <p class="sub" data-i18n-html="hero_sub">Le garde-manger de Séoul, dans le 15e. Kimchi et banchan <strong>faits maison</strong>, et tout ce qu'il faut pour cuisiner coréen chez vous.</p>
   <div class="addr-pill">12 rue Exemple, 75015 Paris</div>
+  </div>
+  <div class="hero-ph"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Les rayons de l'épicerie"></div>
 </header>
 
 <!-- RAYONS -->
-<section id="rayons">
+<section id="rayons" data-rail>
   <div class="section-head reveal">
     <div class="over" data-i18n="ry_over">Les rayons · 매대</div>
     <h2 data-i18n="ry_h2">Tout Séoul, en rayons</h2>
     <p data-i18n="ry_p">Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.</p>
   </div>
+  <div class="ray-wrap">
   <div class="grid-rayons">
-    <div class="rayon highlight reveal">
+    <div class="rayon highlight reveal" data-ray="0">
       <div class="badge" data-i18n="r1_badge">Fait maison</div>
       <div class="icon">01</div>
       <h3 data-i18n="r1_h3">Kimchi & Banchan</h3>
       <div class="kr">김치 · 반찬</div>
       <p data-i18n="r1_p">Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats d'accompagnement prêts à emporter.</p>
     </div>
-    <div class="rayon reveal">
+    <div class="rayon reveal" data-ray="1">
       <div class="icon">02</div>
       <h3 data-i18n="r2_h3">Ramyeon & Nouilles</h3>
       <div class="kr">라면 · 면</div>
       <p data-i18n="r2_p">Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.</p>
     </div>
-    <div class="rayon reveal">
+    <div class="rayon reveal" data-ray="2">
       <div class="icon">03</div>
       <h3 data-i18n="r3_h3">Sauces & Condiments</h3>
       <div class="kr">장 · 소스</div>
       <p data-i18n="r3_p">Gochujang, doenjang, huile de sésame, sauce soja coréenne — la base de tout.</p>
     </div>
-    <div class="rayon reveal">
+    <div class="rayon reveal" data-ray="3">
       <div class="icon">04</div>
       <h3 data-i18n="r4_h3">Surgelés</h3>
       <div class="kr">냉동식품</div>
       <p data-i18n="r4_p">Mandu, tteok pour tteokbokki, poissons et fruits de mer — le congélateur qui dépanne les soirs de flemme.</p>
     </div>
-    <div class="rayon reveal">
+    <div class="rayon reveal" data-ray="4">
       <div class="icon">05</div>
       <h3 data-i18n="r5_h3">Snacks & Douceurs</h3>
       <div class="kr">과자</div>
       <p data-i18n="r5_p">Choco pie, chips au miel, bonbons — le rayon préféré des enfants (et des adultes qui assument).</p>
     </div>
-    <div class="rayon reveal">
+    <div class="rayon reveal" data-ray="5">
       <div class="icon">06</div>
       <h3 data-i18n="r6_h3">Boissons & Soju</h3>
       <div class="kr">음료 · 주류</div>
       <p data-i18n="r6_p">Soju, makgeolli, thés et boissons pétillantes coréennes bien fraîches.</p>
+    </div>
+  </div>
+    <div class="ray-stage" aria-hidden="true">
+      <img class="on" data-rp="0" src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="1" src="https://images.pexels.com/photos/32418799/pexels-photo-32418799.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="2" src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="3" src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="4" src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="5" src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
     </div>
   </div>
 </section>
@@ -303,7 +367,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
 </div>
 
 <!-- AVIS -->
-<section id="avis">
+<section id="avis" data-rail>
   <div class="section-head reveal">
     <div class="over" data-i18n="av_over">Ils sont venus · 리뷰</div>
     <h2 data-i18n="av_h2">★★★★★ sur Google</h2>
@@ -329,7 +393,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
 </section>
 
 <!-- INFOS -->
-<section id="infos">
+<section id="infos" data-rail>
   <div class="section-head reveal">
     <div class="over" data-i18n="in_over">Infos pratiques · 오시는 길</div>
     <h2 data-i18n="in_h2">Passer au marché</h2>
@@ -515,6 +579,56 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
     document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
   }, 1500);
 })();
+</script>
+
+<script>
+/* progress rail */
+(function(){
+  var rail=document.querySelector('.rail');
+  var secs=[].slice.call(document.querySelectorAll('[data-rail]'));
+  if(!rail||!secs.length||!('IntersectionObserver' in window))return;
+  secs.forEach(function(){rail.appendChild(document.createElement('span'));});
+  var t=rail.children;
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){var i=secs.indexOf(e.target);
+      for(var j=0;j<t.length;j++)t[j].classList.toggle('on',j===i);}});
+  },{rootMargin:'-45% 0px -45% 0px'}).observe&&secs.forEach(function(x){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){var i=secs.indexOf(e.target);
+        for(var j=0;j<t.length;j++)t[j].classList.toggle('on',j===i);}});
+    },{rootMargin:'-45% 0px -45% 0px'}).observe(x);});
+})();
+
+/* ticker driven by scroll velocity */
+(function(){
+  var t=document.querySelector('.ticker-inner');
+  if(!t)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  t.style.animation='none';
+  var x=0,last=window.scrollY,vel=0,half=0;
+  function m(){half=t.scrollWidth/2;} m(); window.addEventListener('resize',m);
+  window.addEventListener('scroll',function(){var y=window.scrollY;vel=y-last;last=y;},{passive:true});
+  (function step(){vel*=0.9;x-=0.55+Math.min(Math.abs(vel)*0.22,14);
+    if(half&&-x>=half)x+=half; t.style.transform='translateX('+x+'px)';
+    requestAnimationFrame(step);})();
+})();
+
+/* hover swaps the photo */
+function bindStage(itemSel,attr,stageSel,phAttr){
+  var items=[].slice.call(document.querySelectorAll(itemSel));
+  var imgs=document.querySelectorAll(stageSel+' img');
+  if(!items.length||!imgs.length)return;
+  function pick(n){
+    items.forEach(function(el,k){el.classList.toggle('on',k===n);});
+    imgs.forEach(function(im,k){im.classList.toggle('on',k===n);});
+  }
+  items.forEach(function(el,k){
+    el.addEventListener('mouseenter',function(){pick(k);});
+    el.addEventListener('focusin',function(){pick(k);});
+  });
+}
+bindStage('.rayon[data-ray]','data-ray','.ray-stage','data-rp');
+bindStage('.menu-item[data-mi]','data-mi','.menu-stage','data-mp');
 </script>
 </body>
 </html>
