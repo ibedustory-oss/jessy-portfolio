@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Reveal from '@/components/Reveal'
 import ContactForm from '@/components/ContactForm'
+import SectionRail from '@/components/SectionRail'
+import StickyEdge from '@/components/StickyEdge'
 import { getDict, isLang, type Lang, type Project } from '@/lib/content'
 import { PROJECT_IMAGES } from '@/lib/images'
 import { SERVICE } from '@/lib/service'
@@ -46,25 +48,29 @@ export default function Home({ params }: { params: { lang: string } }) {
 
   return (
     <main>
+      <SectionRail />
       {/* ------------------------------------------------ Hero */}
-      <section className="relative overflow-hidden px-5 pb-16 pt-36 md:pb-24 md:pt-48">
+      <section
+        data-rail
+        className="relative flex min-h-[94vh] items-center overflow-hidden px-5 pb-16 pt-32 md:pt-36"
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-[radial-gradient(900px_420px_at_50%_-120px,#EEF4FD,transparent_70%)]"
         />
-        <div className="relative mx-auto max-w-4xl text-center">
+        <div className="relative mx-auto w-full max-w-5xl text-center">
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-[13px] font-semibold text-charcoal">
               {dict.hero.name} · {dict.hero.credential}
             </p>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mx-auto mt-7 text-[2.9rem] font-extrabold leading-[1.08] tracking-tightest md:text-[5.2rem]">
+            <h1 className="mx-auto mt-8 text-[3.2rem] font-extrabold leading-[1.05] tracking-tightest md:text-[6.4rem]">
               {dict.hero.title}
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-charcoal md:text-lg">
+            <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-charcoal md:text-xl">
               {dict.hero.sub}
             </p>
           </Reveal>
@@ -93,17 +99,17 @@ export default function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* ------------------------------------------------ Numbers */}
-      <section className="px-5 md:px-8">
-        <Reveal>
-          <div className="mx-auto grid max-w-5xl grid-cols-2 overflow-hidden rounded-[28px] bg-surface md:grid-cols-4">
+      <section data-rail className="flex min-h-[62vh] items-center px-5 py-24 md:px-8">
+        <Reveal className="w-full">
+          <div className="mx-auto grid max-w-5xl grid-cols-2 overflow-hidden rounded-[32px] bg-surface md:grid-cols-4">
             {dict.edge.numbers.map((n, i) => (
               <div
                 key={n.l}
-                className={`px-6 py-8 md:px-8 ${i % 2 === 1 ? 'border-l border-white' : ''} ${
+                className={`px-6 py-10 md:px-8 md:py-14 ${i % 2 === 1 ? 'border-l border-white' : ''} ${
                   i > 1 ? 'border-t border-white md:border-t-0' : ''
                 } ${i > 0 ? 'md:border-l md:border-white' : ''}`}
               >
-                <p className="text-2xl font-extrabold tracking-tight tabular-nums md:text-3xl">
+                <p className="text-3xl font-extrabold tracking-tight tabular-nums md:text-5xl">
                   {n.v}
                 </p>
                 <p className="mt-1.5 text-[12px] leading-snug text-warmgray">{n.l}</p>
@@ -114,38 +120,20 @@ export default function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* ------------------------------------------------ The Difference */}
-      <section className="px-5 py-24 md:px-8 md:py-36">
+      <section data-rail className="px-5 py-28 md:px-8 md:py-40">
         <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <Eyebrow>{dict.edge.heading}</Eyebrow>
-            <h2 className="mt-3 max-w-2xl text-3xl font-extrabold leading-tight tracking-tightest md:text-5xl">
-              {dict.edge.sub}
-            </h2>
-          </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {dict.edge.items.map((it, i) => (
-              <Reveal key={it.title} delay={i * 80}>
-                <div className="flex h-full flex-col rounded-[28px] bg-surface p-7 md:p-8">
-                  <h3 className="text-xl font-bold tracking-tight">{it.title}</h3>
-                  <p className="mt-3 flex-1 text-[15px] leading-relaxed text-charcoal">{it.body}</p>
-                  <div className="mt-6 rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(25,31,40,0.04)]">
-                    <p className="text-xs leading-relaxed text-warmgray">{it.proof}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <StickyEdge eyebrow={dict.edge.heading} heading={dict.edge.sub} items={dict.edge.items} />
         </div>
       </section>
 
       {/* ------------------------------------------------ Selected Work */}
-      <section id="work" className="scroll-mt-24 px-5 pb-24 md:px-8 md:pb-36">
+      <section id="work" data-rail className="scroll-mt-24 px-5 pb-28 md:px-8 md:pb-44">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <Eyebrow>Selected Work</Eyebrow>
-                <h2 className="mt-3 text-3xl font-extrabold tracking-tightest md:text-5xl">
+                <h2 className="mt-3 text-4xl font-extrabold tracking-tightest md:text-6xl">
                   {dict.workSection.heading}
                 </h2>
               </div>
@@ -225,7 +213,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* ------------------------------------------------ The Offer */}
-      <section className="px-5 pb-24 md:px-8 md:pb-36">
+      <section data-rail className="px-5 pb-28 md:px-8 md:pb-44">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <Link
@@ -303,7 +291,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* ------------------------------------------------ Contact */}
-      <section id="contact" className="scroll-mt-24 px-5 pb-24 md:px-8 md:pb-32">
+      <section id="contact" data-rail className="scroll-mt-24 px-5 pb-24 md:px-8 md:pb-32">
         <div className="mx-auto max-w-6xl rounded-[32px] bg-surface px-6 py-14 md:px-14 md:py-20">
           <div className="grid gap-12 md:grid-cols-12">
             <Reveal className="md:col-span-5">
