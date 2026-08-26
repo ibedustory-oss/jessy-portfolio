@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Le Showroom</title>
 <meta name="description" content="4つの架空ブランド、4つのデザイン言語。Webデモのショールーム。">
+<meta property="og:title" content="Le Showroom — Jessy Jung">
+<meta property="og:description" content="Four fictional brands, four design languages. Built from who, why and how to sell.">
+<meta property="og:image" content="https://ibedustory-oss.github.io/jessy-portfolio/images/og-showroom.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400&family=EB+Garamond:ital,wght@0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
 
@@ -69,19 +74,75 @@ img{display:block;max-width:100%;}
   font-size:13.5px;letter-spacing:.16em;color:rgba(245,242,236,.6);
 }
 .entry .enter-btn{
-  margin-top:52px;
+  margin-top:36px;
   background:none;border:1px solid rgba(245,242,236,.45);color:var(--blanc);
   padding:18px 58px;font-size:12px;letter-spacing:.42em;text-transform:uppercase;cursor:pointer;
   transition:background .35s,color .35s,border-color .35s,letter-spacing .35s;
 }
 .entry .enter-btn:hover{background:var(--blanc);color:#111;border-color:var(--blanc);letter-spacing:.5em;}
-.entry .langs{margin-top:40px;display:flex;gap:22px;justify-content:center;}
+.entry .langs{margin-top:24px;display:flex;gap:22px;justify-content:center;}
 .entry .langs button,.hud .langs button{
   background:none;border:none;cursor:pointer;color:rgba(245,242,236,.4);
   font-size:10.5px;letter-spacing:.2em;padding:2px 0;border-bottom:1px solid transparent;
 }
 .entry .langs button.active,.hud .langs button.active{color:var(--blanc);border-bottom-color:var(--blanc);}
 a:focus-visible,button:focus-visible{outline:1px solid rgba(245,242,236,.8);outline-offset:4px;}
+/* ---- entry decks: the four maisons, fanned like cards on a table ---- */
+.decks{margin-top:40px;padding-bottom:30px;display:flex;justify-content:center;align-items:flex-end;}
+.deck{
+  width:148px;height:196px;border-radius:10px;position:relative;flex-shrink:0;border:none;padding:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;cursor:pointer;
+  box-shadow:0 22px 44px -18px rgba(0,0,0,.85), inset 0 0 0 1px rgba(255,255,255,.07);
+  transform:rotate(var(--r,0deg)) translateY(var(--y,0px));
+  transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s cubic-bezier(.23,1,.32,1);
+}
+.deck:hover,.deck:focus-visible{transform:rotate(0deg) translateY(-16px) scale(1.05);z-index:6;box-shadow:0 34px 60px -20px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.12);}
+.deck+.deck{margin-left:-18px;}
+.deck small{font-size:8px;letter-spacing:.26em;text-transform:uppercase;opacity:.6;font-weight:700;}
+.deck b{line-height:1;}
+.d-joayo{--r:-7deg;background:#F6EFE3;color:#1A1613;}
+.d-joayo b{font-family:'Archivo Black';font-size:20px;letter-spacing:-.01em;}
+.d-joayo b em{font-style:normal;color:#D93A2B;}
+.d-joayo .bub{background:#fff;border:2px solid #1A1613;border-radius:10px;padding:3px 9px;font-family:'Archivo Black';font-size:12px;box-shadow:2.5px 3px 0 rgba(26,22,19,.8);transform:rotate(3deg);}
+.d-milates{--r:-2.5deg;--y:-10px;background:#F1E7E4;color:#38292E;}
+.d-milates b{font-family:'Bodoni Moda',serif;font-weight:500;font-size:20px;letter-spacing:.01em;}
+.d-milates b i{color:#B94A62;}
+.d-milates .rose{width:34px;height:2px;background:#B94A62;opacity:.6;}
+.d-matsu{--r:2.5deg;--y:-10px;background:#F6F4EE;color:#1D211E;}
+.d-matsu b{font-family:'EB Garamond',serif;font-weight:500;font-size:17px;letter-spacing:.04em;}
+.d-matsu .ens{width:44px;height:44px;}
+.d-matsu .sealm{position:absolute;right:12px;bottom:12px;width:20px;height:20px;background:#BF3F2C;color:#F6F4EE;border-radius:3px;font-family:'Nanum Myeongjo',serif;font-size:12px;display:flex;align-items:center;justify-content:center;transform:rotate(-3deg);}
+.d-jeong{--r:7deg;background:#161413;color:#EDEAE3;box-shadow:0 22px 44px -18px rgba(0,0,0,.85), inset 0 0 0 1px rgba(237,234,227,.16);}
+.d-jeong b{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:16px;letter-spacing:.24em;}
+.d-jeong .gly{font-family:'Nanum Myeongjo',serif;font-size:40px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(237,234,227,.55);}
+/* staggered float-in */
+#curtain .deck{opacity:0;transform:translateY(34px) rotate(var(--r,0deg));}
+#curtain.ready .deck{opacity:1;transform:rotate(var(--r,0deg)) translateY(var(--y,0px));}
+#curtain.ready .deck:nth-child(1){transition:opacity .7s ease .15s,transform .9s cubic-bezier(.23,1,.32,1) .15s;}
+#curtain.ready .deck:nth-child(2){transition:opacity .7s ease .27s,transform .9s cubic-bezier(.23,1,.32,1) .27s;}
+#curtain.ready .deck:nth-child(3){transition:opacity .7s ease .39s,transform .9s cubic-bezier(.23,1,.32,1) .39s;}
+#curtain.ready .deck:nth-child(4){transition:opacity .7s ease .51s,transform .9s cubic-bezier(.23,1,.32,1) .51s;}
+#curtain.ready .deck:hover,#curtain.ready .deck:focus-visible{transform:rotate(0deg) translateY(-16px) scale(1.05);}
+@media(max-height:760px),(max-width:640px){
+  .decks{margin-top:30px;}
+  .deck{width:112px;height:150px;gap:6px;}
+  .deck+.deck{margin-left:-20px;}
+  .d-joayo b{font-size:15px;}.d-milates b{font-size:15px;}.d-matsu b{font-size:13px;}
+  .d-jeong .gly{font-size:30px;}.d-jeong b{font-size:12px;}
+  .d-matsu .ens{width:32px;height:32px;}.deck small{font-size:7px;}
+  .d-joayo .bub{font-size:10px;}
+}
+@media(max-width:430px){
+  .deck{width:86px;height:118px;gap:4px;border-radius:8px;}
+  .deck+.deck{margin-left:-13px;}
+  .d-joayo b{font-size:12px;}.d-milates b{font-size:12px;}.d-matsu b{font-size:10.5px;}
+  .d-jeong .gly{font-size:24px;}.d-jeong b{font-size:10px;letter-spacing:.16em;}
+  .d-matsu .ens{width:26px;height:26px;}
+  .deck small{font-size:6px;letter-spacing:.18em;}
+  .d-joayo .bub{font-size:8.5px;padding:2px 6px;border-width:1.5px;}
+  .d-matsu .sealm{width:15px;height:15px;font-size:9px;right:8px;bottom:8px;}
+  .d-milates .rose{width:24px;}
+}
 
 /* ================= HUD ================= */
 .hud{
@@ -335,6 +396,29 @@ body.entered .dots{opacity:1;}
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="ko">한국어</button>
     </div>
+    <div class="decks">
+      <button type="button" class="deck d-joayo" data-goto="s1" aria-label="JOAYO">
+        <b>JOA—<em>YO!</em></b>
+        <span class="bub">좋아요!</span>
+        <small>Épicerie &amp; Resto</small>
+      </button>
+      <button type="button" class="deck d-milates" data-goto="s2" aria-label="MILATES">
+        <b>M<i>i</i>la—tes.</b>
+        <span class="rose"></span>
+        <small>Pilates privé</small>
+      </button>
+      <button type="button" class="deck d-matsu" data-goto="s3" aria-label="MATSU SEITAI">
+        <svg class="ens" viewBox="0 0 290 290" aria-hidden="true"><path d="M198 42 Q262 74 258 148 Q254 226 168 248 Q86 268 48 196 Q14 128 68 74 Q106 38 158 36" fill="none" stroke="#1D211E" stroke-width="14" stroke-linecap="round" opacity=".85"/></svg>
+        <b>Matsu Seitai</b>
+        <small>Seitai — Paris</small>
+        <span class="sealm">松</span>
+      </button>
+      <button type="button" class="deck d-jeong" data-goto="s4" aria-label="JEONG">
+        <span class="gly">정</span>
+        <b>JEONG</b>
+        <small>Fine dining</small>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -566,6 +650,17 @@ function enter(){
   activate(document.getElementById('s1'));
 }
 document.getElementById('enterBtn').addEventListener('click', enter);
+setTimeout(function(){ curtain.classList.add('ready'); }, 150);
+document.querySelectorAll('.deck').forEach(function(d){
+  d.addEventListener('click', function(){
+    var id = d.getAttribute('data-goto');
+    enter();
+    setTimeout(function(){
+      var el = document.getElementById(id);
+      if(el){ el.scrollIntoView(); el.classList.add('live'); }
+    }, 650);
+  });
+});
 
 if(isStatic || reduced){
   curtain.style.display='none';

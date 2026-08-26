@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   title: 'Jessy (Giyoung) Jung — Independent Business & Brand Builder',
   description:
     'Business development, branding, web and social strategy by Jessy (Giyoung) Jung, U.S. CPA.',
+  openGraph: {
+    title: 'Jessy Jung — First the why. Then the website.',
+    description: 'Strategy, brand, web and social. 한국어 · 日本語 · English · Français.',
+    images: ['https://ibedustory-oss.github.io/jessy-portfolio/images/og-portfolio.jpg'],
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
