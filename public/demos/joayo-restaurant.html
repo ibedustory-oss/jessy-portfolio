@@ -360,13 +360,30 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 .hero.jangdok .cta-row .btn:hover{background:var(--red);border-color:var(--red);color:var(--paper);}
 .hero.jangdok .cta-row .btn:hover:after{background:var(--paper);color:var(--red);}
 .hero.jangdok .addr-pill{margin-top:0;color:rgba(247,244,239,.62);border-color:rgba(247,244,239,.28);}
-/* the evening board floats as a slate on the jars */
+/* the signatures are engraved on the scene, not boxed on top of it */
 .hero.jangdok .ardoise{
-  background:rgba(12,10,8,.72);backdrop-filter:blur(14px);
-  box-shadow:0 30px 70px -34px rgba(0,0,0,.85);
-  padding:30px 28px;
+  background:none;backdrop-filter:none;box-shadow:none;padding:0;
+  border-top:1px solid rgba(247,244,239,.34);max-width:430px;justify-self:end;
 }
-.hero.jangdok .ardoise .rating-sticker{position:absolute;top:24px;right:26px;}
+.hero.jangdok .a-head{
+  font-family:'Fraunces',serif;font-style:italic;font-size:15px;
+  color:rgba(247,244,239,.72);letter-spacing:.02em;
+  margin:16px 0 6px;padding:0;border:none;max-width:none;
+}
+.hero.jangdok .dish{
+  padding:15px 0;border-bottom:1px solid rgba(247,244,239,.16);align-items:baseline;
+}
+.hero.jangdok .dish:last-of-type{border-bottom:none;}
+.hero.jangdok .dish .n{font-family:'Fraunces',serif;font-weight:560;font-size:17px;}
+.hero.jangdok .dish .n small{color:rgba(247,244,239,.5);}
+.hero.jangdok .dish .p{font-size:16px;color:rgba(247,244,239,.9);}
+.hero.jangdok .a-note{margin-top:16px;}
+.hero.jangdok .ardoise .rating-sticker{
+  position:static;text-align:left;display:flex;align-items:baseline;gap:10px;margin-bottom:6px;
+}
+.hero.jangdok .ardoise .rating-sticker .score{font-size:19px;color:var(--paper);}
+.hero.jangdok .ardoise .rating-sticker .stars{margin:0;}
+.hero.jangdok .ardoise .rating-sticker .count{margin:0;color:rgba(247,244,239,.55);}
 @media(max-width:900px){
   .hero.jangdok{min-height:auto;padding-top:96px;}
   .jd-inner{grid-template-columns:1fr;gap:34px;padding:0 20px 56px;}
@@ -429,7 +446,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
       <div class="stars">★★★★☆</div>
       <div class="count" data-i18n="rating_count">Google</div>
     </div>
-    <div class="a-head" data-i18n="ar_head">Ce soir, au tableau</div>
+    <div class="a-head" data-i18n="ar_head">Les signatures</div>
     <div class="dish">
       <span class="n"><span data-i18n="m1_name">Bibimbap au tartare de bœuf</span><small>육회비빔밥</small></span>
       <span class="p">16,50 €</span>
@@ -645,7 +662,7 @@ fr: {
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
   rating_count:"Google",
-  ar_head:"Ce soir, au tableau", ar_note:"Toute la carte ↓",
+  ar_head:"Les signatures", ar_note:"Toute la carte ↓",
   kicker:"Midi & soir — en plein cœur de Paris",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
@@ -692,7 +709,7 @@ en: {
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
   rating_count:"Google",
-  ar_head:"Tonight, on the slate", ar_note:"See the full menu ↓",
+  ar_head:"The signatures", ar_note:"See the full menu ↓",
   kicker:"Lunch & dinner — in the heart of Paris",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
@@ -739,7 +756,7 @@ ko: {
   brand_sub:"레스토랑 · Restaurant",
   nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
   rating_count:"Google",
-  ar_head:"오늘의 칠판 메뉴", ar_note:"전체 메뉴 보기 ↓",
+  ar_head:"대표 메뉴", ar_note:"전체 메뉴 보기 ↓",
   kicker:"점심 & 저녁 — 파리 시내 한복판",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
   hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",

@@ -181,8 +181,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 
 /* ============ COVER ============ */
 .cover{
-  position:relative;
-  padding:30px 24px 70px;
+  position:relative;max-width:1400px;margin:0 auto;
+  padding:30px 40px 64px;
   overflow:hidden;
 }
 .issue-bar{
@@ -237,8 +237,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
   display:flex;flex-direction:column;
 }
 /* sommaire as a horizontal strip below the frame */
-.sommaire{margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:0 34px;}
-.sommaire .som-head{grid-column:1/-1;}
+.sommaire{
+  margin-top:38px;border-top:1px solid var(--ink);
+  display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));gap:0;align-items:stretch;
+}
+.sommaire .som-head{
+  grid-column:1;align-self:center;margin:0;padding-right:26px;
+  white-space:nowrap;
+}
+.sommaire .som-head:after{display:none;}
 .sommaire{margin-top:auto;padding-top:56px;}
 .sommaire .som-head{
   font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--framboise);font-weight:600;
@@ -246,15 +253,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 }
 .sommaire .som-head:after{content:'';flex:1;height:1px;background:var(--line);}
 .sommaire a{
-  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
-  padding:13px 2px;border-bottom:1px solid var(--line);
-  text-decoration:none;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
-  transition:padding-left .25s,color .25s;
+  display:flex;flex-direction:column;gap:7px;
+  padding:18px 0 18px 22px;border-left:1px solid var(--line);
+  text-decoration:none;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:var(--ink);transition:background .35s ease,color .35s ease;
 }
-.sommaire a:hover{padding-left:10px;color:var(--framboise);}
+.sommaire a:hover{background:var(--plaster-deep);color:var(--framboise);}
 .sommaire a .num{
-  font-family:var(--display);font-style:italic;font-size:15px;color:var(--framboise);
-  letter-spacing:.04em;
+  order:-1;font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:13px;color:var(--framboise);letter-spacing:.04em;
 }
 .cover .dek{font-size:clamp(16px,1.5vw,19px);font-weight:400;color:var(--ink);}
 .cover .dek b{font-weight:600;}
@@ -546,6 +553,10 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   .issue-bar{font-size:9.5px;letter-spacing:.14em;gap:8px;}
 }
 @media(max-width:900px){
+  .cover{padding:26px 20px 52px;}
+  .sommaire{grid-template-columns:1fr 1fr;}
+  .sommaire .som-head{grid-column:1/-1;padding:0 0 10px;}
+  .sommaire a{padding:14px 0 14px 16px;}
   .cover-stage{grid-template-columns:1fr;gap:22px;}
   .masthead{position:relative;top:auto;left:auto;right:auto;font-size:clamp(52px,15vw,120px);text-shadow:none;margin-bottom:6px;}
   .cover-ph{grid-column:1;grid-row:auto;aspect-ratio:3/3.4;}
@@ -657,13 +668,6 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 }
 .pgf.verso:after{content:'';position:absolute;inset:0;pointer-events:none;
   background-image:radial-gradient(rgba(33,27,29,.06) 1px,transparent 1px);background-size:5px 5px;}
-.pgf.verso blockquote{
-  position:relative;z-index:2;text-align:center;max-width:22ch;
-  font-family:var(--display);font-style:italic;font-weight:400;
-  font-size:clamp(20px,2.4vw,34px);line-height:1.4;color:var(--ink);
-}
-.pgf.verso cite{display:block;margin-top:18px;font-family:var(--body);font-style:normal;
-  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);}
 
 /* shadow the turning page casts on the left page */
 .cast{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
@@ -698,8 +702,7 @@ html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
 html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
 html[lang="ko"] .price,html[lang="ko"] .dish .p,
 html[lang="ko"] .review p,
-html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
-html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
+html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
 html[lang="ko"] .hand-note,html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
   font-family:'Noto Serif KR',serif;font-style:normal;font-weight:600;
 }
@@ -730,7 +733,7 @@ html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{d
 html[lang="ko"]{font-synthesis-style:none;font-synthesis:weight small-caps;}
 html[lang="ko"] .hand-note,html[lang="ko"] .review p,html[lang="ko"] .addr,
 html[lang="ko"] .a-head,html[lang="ko"] .pl-h,html[lang="ko"] .cov-dek,
-html[lang="ko"] .pgf.verso blockquote,html[lang="ko"] .sel-pane .fmt,
+html[lang="ko"] .sel-pane .fmt,
 html[lang="ko"] .breath-label,html[lang="ko"] .story-text h2 .accent,
 html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   font-style:normal;
@@ -769,10 +772,6 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
       </div>
     </div>
     <div class="pgf verso">
-      <blockquote>
-        <span data-i18n="sp_quote">On commence par le souffle. Le reste suit.</span>
-        <cite data-i18n="sp_cite">Mina</cite>
-      </blockquote>
     </div>
   </div>
 
@@ -1042,7 +1041,7 @@ var I18N = {
 fr: {
   _title:"Milates Paris",
   suite:"La méthode — on commence par le souffle",
-  sp_left:"Un studio, une professeure, une séance à la fois.", sp_dek:"Le pilates comme un rendez-vous à soi.", sp_quote:"On commence par le souffle. Le reste suit.", sp_cite:"Mina", sp_hint:"tournez la page",
+  sp_left:"Un studio, une professeure, une séance à la fois.", sp_dek:"Le pilates comme un rendez-vous à soi.", sp_hint:"tournez la page",
   mag_issue:"N°01 · Pilates privé", mag_cta:"Ouvrir le numéro", mag_hint:"cliquez ou faites défiler",
   mag_l1:"Un seul corps par séance", mag_s1:"La méthode",
   mag_l2:"De Séoul à Paris", mag_s2:"Mina",
@@ -1102,7 +1101,7 @@ fr: {
 en: {
   _title:"Milates Paris",
   suite:"The method — we start with the breath",
-  sp_left:"One studio, one teacher, one session at a time.", sp_dek:"Pilates as an appointment with yourself.", sp_quote:"We start with the breath. The rest follows.", sp_cite:"Mina", sp_hint:"turn the page",
+  sp_left:"One studio, one teacher, one session at a time.", sp_dek:"Pilates as an appointment with yourself.", sp_hint:"turn the page",
   mag_issue:"N°01 · Private pilates", mag_cta:"Open the issue", mag_hint:"click or scroll",
   mag_l1:"One body per session", mag_s1:"The method",
   mag_l2:"From Seoul to Paris", mag_s2:"Mina",
@@ -1162,7 +1161,7 @@ en: {
 ko: {
   _title:"밀라테스 Milates Paris",
   suite:"메소드 — 호흡부터 시작합니다",
-  sp_left:"하나의 스튜디오, 한 명의 선생님, 한 번에 한 세션.", sp_dek:"나를 만나는 시간으로서의 필라테스.", sp_quote:"호흡부터 시작합니다. 나머지는 따라옵니다.", sp_cite:"미나", sp_hint:"페이지를 넘기세요",
+  sp_left:"하나의 스튜디오, 한 명의 선생님, 한 번에 한 세션.", sp_dek:"나를 만나는 시간으로서의 필라테스.", sp_hint:"페이지를 넘기세요",
   mag_issue:"N°01 · 프라이빗 필라테스", mag_cta:"이번 호 열기", mag_hint:"클릭하거나 스크롤하세요",
   mag_l1:"한 세션에 한 사람", mag_s1:"메소드",
   mag_l2:"서울에서 파리로", mag_s2:"미나",
