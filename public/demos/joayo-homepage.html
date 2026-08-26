@@ -33,6 +33,14 @@ body{
   line-height:1.5;
 }
 ::selection{background:var(--red);color:var(--cream);}
+/* offset-print paper grain */
+body:after{
+  content:'';position:fixed;inset:0;z-index:200;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important;}
+}
 h1,h2,h3{font-family:'Archivo Black','Archivo',sans-serif;letter-spacing:-0.02em;}
 html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:0;}
 
@@ -56,7 +64,7 @@ nav{
 }
 .logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);}
 .logo .latin{font-family:'Archivo Black';font-size:26px;letter-spacing:-0.03em;}
-.logo .hangul{font-size:18px;font-weight:700;color:var(--red);}
+.logo .hangul{font-size:18px;font-weight:700;color:var(--red);white-space:nowrap;}
 .nav-links{display:flex;gap:22px;align-items:center;}
 .nav-links a{
   text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;
@@ -73,6 +81,7 @@ nav{
   transition:all .2s;display:inline-block;text-decoration:none;
 }
 .btn:hover{background:var(--red);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink);}
+.btn:active,.door .go:active{transform:scale(.96);}
 .btn-red{background:var(--red);}
 .btn-red:hover{background:var(--ink);}
 .lang-switch{
@@ -109,8 +118,10 @@ nav{
 .hero h1{
   font-size:clamp(68px,12.5vw,184px);
   line-height:.88;text-transform:uppercase;letter-spacing:-.015em;
+  transform:rotate(-1.4deg);
+  text-shadow:6px 6px 0 rgba(217,58,43,.22);
 }
-.hero h1 .accent{color:var(--red);}
+.hero h1 .accent{color:var(--red);text-shadow:6px 6px 0 rgba(46,91,62,.28);}
 .hero .say{
   margin-top:20px;display:flex;align-items:baseline;gap:12px;
   font-weight:700;font-size:15px;letter-spacing:.04em;
@@ -123,9 +134,39 @@ nav{
 .btn-green:hover{background:var(--ink);}
 
 .bubble-wrap{
-  position:relative;display:flex;flex-direction:column;align-items:center;
-  padding-bottom:10px;
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding-bottom:10px;min-height:460px;
 }
+/* --- sticker system: everything tilted, everything bounces in --- */
+.stk{position:absolute;filter:drop-shadow(5px 6px 0 rgba(26,22,19,.2));}
+.stamp{
+  top:-18px;right:2%;width:118px;height:118px;z-index:3;
+  animation:spin 24s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.burst{
+  bottom:16%;right:6%;width:96px;height:96px;background:var(--red);z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--cream);font-family:'Archivo Black';transform:rotate(8deg);
+}
+.burst,.burst:before,.burst:after{border-radius:6px;}
+.burst:before,.burst:after{content:'';position:absolute;inset:0;background:inherit;z-index:-1;}
+.burst:before{transform:rotate(30deg);}
+.burst:after{transform:rotate(60deg);}
+.burst b{font-size:23px;line-height:1;}
+.burst small{font-size:9px;letter-spacing:.18em;margin-top:3px;}
+.stk-chili{top:8%;left:-4%;transform:rotate(-14deg);z-index:1;animation:floaty2 5s ease-in-out infinite .6s;}
+.stk-ramyeon{bottom:-2%;left:6%;transform:rotate(9deg);z-index:3;animation:floaty2 7s ease-in-out infinite 1.2s;}
+/* bouncy entrance */
+@keyframes stpop{0%{opacity:0;transform:scale(.3) rotate(-8deg);}70%{opacity:1;transform:scale(1.08);}100%{opacity:1;transform:scale(1);}}
+body.js-anim .bubble{opacity:0;}
+body.js-anim.loaded .bubble{animation:stpop .55s cubic-bezier(.2,1.4,.4,1) .15s forwards;}
+body.js-anim .stk,body.js-anim .mascot{opacity:0;}
+body.js-anim.loaded .stamp{animation:stpop .5s cubic-bezier(.2,1.4,.4,1) .4s forwards, spin 24s linear 1s infinite;}
+body.js-anim.loaded .burst{animation:stpop .5s cubic-bezier(.2,1.4,.4,1) .55s forwards;}
+body.js-anim.loaded .stk-chili{animation:stpop .5s cubic-bezier(.2,1.4,.4,1) .7s forwards, floaty2 5s ease-in-out 1.4s infinite;}
+body.js-anim.loaded .stk-ramyeon{animation:stpop .5s cubic-bezier(.2,1.4,.4,1) .85s forwards, floaty2 7s ease-in-out 1.6s infinite;}
+body.js-anim.loaded .mascot{animation:stpop .5s cubic-bezier(.2,1.4,.4,1) 1s forwards, floaty2 6s ease-in-out 1.8s infinite;}
 .bubble{
   position:relative;background:#fff;border:3px solid var(--ink);border-radius:30px;
   padding:38px 46px 30px;transform:rotate(2deg);
@@ -153,8 +194,16 @@ nav{
 }
 @keyframes floaty2{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-9px)}}
 
+/* ---------- transitions between worlds ---------- */
+.checker{
+  height:20px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  background:conic-gradient(var(--green) 25%, var(--cream) 0 50%, var(--green) 0 75%, var(--cream) 0) 0 0/28px 28px;
+}
+.scallop{
+  height:18px;background:radial-gradient(circle at 50% 115%, var(--cream-2) 13px, transparent 14px) 0 0/30px 18px repeat-x;
+}
 /* ---------- DOORS (the two maisons) ---------- */
-.doors{display:grid;grid-template-columns:1fr 1fr;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+.doors{display:grid;grid-template-columns:1fr 1fr;border-bottom:3px solid var(--ink);}
 .door{
   position:relative;overflow:hidden;
   padding:80px 5vw 70px;
@@ -189,7 +238,21 @@ nav{
   position:absolute;right:-14px;bottom:-32px;
   font-family:'Archivo Black';font-size:150px;opacity:.09;pointer-events:none;user-select:none;
 }
-.door .emoji-row{font-size:30px;letter-spacing:7px;}
+.icon-row{display:flex;gap:18px;align-items:center;margin:4px 0;}
+.icon-row svg{display:block;}
+.icon-row svg:nth-child(1){transform:rotate(-6deg);}
+.icon-row svg:nth-child(2){transform:rotate(4deg);}
+.icon-row svg:nth-child(3){transform:rotate(-3deg);}
+.icon-row svg:nth-child(4){transform:rotate(7deg);}
+.door:hover .icon-row svg{animation:wig .5s ease;}
+@keyframes wig{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.door .tag{transform:rotate(-2deg);background:rgba(0,0,0,.12);}
+.door h2{transition:transform .35s cubic-bezier(.2,1.4,.4,1);}
+.door:hover h2{transform:rotate(-1.5deg) scale(1.02);}
+.door:hover .big-hangul{opacity:.16;}
+.door .big-hangul{transition:opacity .4s;}
+.door .go .ar{display:inline-block;transition:transform .3s cubic-bezier(.2,1.4,.4,1);}
+.door:hover .go .ar{transform:translateX(5px);}
 
 /* ---------- STORY ---------- */
 #histoire{background:var(--cream-2);padding:90px 6vw;position:relative;overflow:hidden;}
@@ -197,20 +260,38 @@ nav{
 .story-text h2{font-size:clamp(34px,4.4vw,58px);text-transform:uppercase;line-height:1.02;margin-bottom:22px;}
 .story-text h2 .accent{color:var(--red);}
 .story-text p{font-size:17.5px;font-weight:500;margin-bottom:16px;max-width:56ch;}
-.story-visual{display:flex;justify-content:center;}
+.story-text h2{transform:rotate(-1deg);text-shadow:4px 4px 0 rgba(217,58,43,.18);}
+.story-visual{display:flex;justify-content:center;position:relative;}
+.story-visual:before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:360px;height:360px;border-radius:50%;
+  background-image:radial-gradient(var(--red) 1.7px, transparent 1.7px);
+  background-size:13px 13px;opacity:.14;
+}
+.goblin-big{position:relative;}
+.goblin-big:hover svg{animation:wig .5s ease;}
 .goblin-big svg{filter:drop-shadow(8px 10px 0 rgba(26,22,19,.15));}
 .hand-note{font-family:'Gochi Hand',cursive;font-size:22px;color:var(--red-dark);transform:rotate(-2deg);display:inline-block;margin-top:8px;}
 html[lang="ko"] .hand-note{font-family:'Archivo',sans-serif;font-weight:700;font-size:19px;}
 
 /* ---------- INFOS ---------- */
-#infos{background:var(--cream);padding:90px 6vw;border-top:3px solid var(--ink);}
+#infos{background:var(--cream);padding:90px 6vw;}
 .section-head{max-width:900px;margin-bottom:48px;}
 .section-head .over{color:var(--red);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:14px;margin-bottom:12px;}
 .section-head h2{font-size:clamp(36px,5vw,64px);line-height:1;text-transform:uppercase;}
 .infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
 .info-card{
   border:3px solid var(--ink);border-radius:var(--radius);padding:32px 30px;background:#fff;
-  display:flex;flex-direction:column;gap:6px;
+  display:flex;flex-direction:column;gap:6px;position:relative;
+  transition:transform .3s cubic-bezier(.2,1.4,.4,1), box-shadow .3s cubic-bezier(.2,1.4,.4,1);
+}
+.info-card:hover{transform:translate(-3px,-3px) rotate(-.4deg);box-shadow:7px 7px 0 rgba(26,22,19,.85);}
+.info-card:nth-child(1){transform:rotate(-.6deg);}
+.info-card:nth-child(2){transform:rotate(.5deg);}
+.info-card .corner{
+  position:absolute;top:-16px;right:22px;background:var(--yellow);color:var(--ink);
+  border:3px solid var(--ink);border-radius:999px;padding:5px 14px;
+  font-family:'Archivo Black';font-size:11px;letter-spacing:.1em;transform:rotate(3deg);
 }
 .info-card.market-c{background:var(--green);color:var(--cream);border-color:var(--ink);}
 .info-card.resto-c{background:var(--ink);color:var(--cream);}
@@ -238,6 +319,20 @@ body.js-anim .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s
 body.js-anim .reveal.in{opacity:1;transform:none;}
 
 /* ---------- RESPONSIVE ---------- */
+@media(max-width:640px){
+  nav{padding:10px 14px;gap:8px;}
+  .logo .latin{font-size:20px;}
+  .logo .hangul{font-size:13px;}
+  .btn{padding:8px 14px;font-size:12px!important;}
+  .lang-switch button{padding:4px 8px;font-size:11px;}
+  .stamp{width:90px;height:90px;top:-6px;}
+  .burst{width:78px;height:78px;}
+  .burst b{font-size:18px;}
+  .stk-chili{width:62px;}
+  .stk-ramyeon{width:74px;}
+  .bubble-wrap{min-height:400px;}
+  .bubble{padding:28px 32px 22px;}
+}
 @media(max-width:920px){
   .hero{grid-template-columns:1fr;gap:48px;padding:44px 6vw 70px;}
   .hero h1{font-size:clamp(64px,17vw,110px);}
@@ -295,10 +390,37 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   </div>
 
   <div class="bubble-wrap" aria-hidden="true">
+    <svg class="stk stamp" viewBox="0 0 120 120">
+      <defs><path id="circ" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs>
+      <circle cx="60" cy="60" r="57" fill="#F2B33D" stroke="#1A1613" stroke-width="3"/>
+      <circle cx="60" cy="60" r="33" fill="none" stroke="#1A1613" stroke-width="2" stroke-dasharray="3 5"/>
+      <text font-family="Archivo Black, Archivo, sans-serif" font-size="12" letter-spacing="2.5" fill="#1A1613">
+        <textPath href="#circ">JOAYO · PARIS 15E · PARIS 1ER · 좋아요 ·</textPath>
+      </text>
+      <text x="60" y="67" text-anchor="middle" font-family="Archivo Black" font-size="18" fill="#D93A2B">✦</text>
+    </svg>
+
+    <svg class="stk stk-chili" width="84" height="84" viewBox="0 0 90 90">
+      <path d="M62 14 Q70 8 76 12 Q70 16 68 22" fill="#2E5B3E" stroke="#1A1613" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M66 20 Q74 42 58 62 Q42 80 22 74 Q14 70 18 64 Q34 66 46 52 Q58 38 56 22 Q60 16 66 20 Z" fill="#D93A2B" stroke="#1A1613" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M52 30 Q56 42 46 54" fill="none" stroke="#F6EFE3" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+    </svg>
+
     <div class="bubble">
       <span class="h">좋아<em>요!</em></span>
       <span class="romaja">jo·a·yo</span>
     </div>
+
+    <div class="stk burst"><b>4.9★</b><small>GOOGLE</small></div>
+
+    <svg class="stk stk-ramyeon" width="96" height="86" viewBox="0 0 100 90">
+      <path d="M22 12 Q24 4 30 8 M38 10 Q40 2 46 6 M54 12 Q56 4 62 8" fill="none" stroke="#1A1613" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+      <path d="M10 34 H88 Q86 62 66 72 H32 Q12 62 10 34 Z" fill="#F6EFE3" stroke="#1A1613" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M16 34 Q30 22 48 30 Q66 38 82 28" fill="none" stroke="#D93A2B" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M26 42 Q40 50 60 44 M30 52 Q44 58 62 52" fill="none" stroke="#F2B33D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M70 18 L84 6 M76 22 L92 14" stroke="#1A1613" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+
     <svg class="mascot" width="110" height="110" viewBox="0 0 120 120">
       <circle cx="60" cy="64" r="42" fill="#D93A2B" stroke="#1A1613" stroke-width="4"/>
       <circle cx="46" cy="58" r="7" fill="#F6EFE3"/><circle cx="74" cy="58" r="7" fill="#F6EFE3"/>
@@ -309,6 +431,8 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   </div>
 </header>
 
+<div class="checker" aria-hidden="true"></div>
+
 <!-- DOORS -->
 <div class="doors">
   <a class="door market reveal" href="joayo-market.html">
@@ -316,9 +440,14 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
     <h2 data-i18n="d1_h2">L'Épicerie</h2>
     <div class="kr-sub">좋아요 마켓</div>
     <p class="desc" data-i18n="d1_p">Kimchi et banchan faits maison, ramyeon, sauces, snacks — le garde-manger de Séoul, dans le 15e.</p>
-    <div class="emoji-row">🥬 🍜 🌶️ 🍶</div>
+    <div class="icon-row" aria-hidden="true">
+      <svg width="42" height="42" viewBox="0 0 40 40"><rect x="8" y="12" width="24" height="22" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 12 V8 H28 V12" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><text x="20" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="currentColor">김</text></svg>
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M6 18 H34 Q33 30 24 34 H16 Q7 30 6 18 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M12 18 Q20 10 28 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M16 8 Q17 4 20 6 M24 9 Q25 5 28 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".6"/></svg>
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M26 8 Q30 4 34 7 Q30 10 29 13" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M28 12 Q32 22 24 30 Q16 38 8 34 Q6 32 8 29 Q16 31 21 24 Q26 17 25 12 Q26 10 28 12 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M16 6 H24 V12 Q30 15 30 22 V34 H10 V22 Q10 15 16 12 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M14 24 H26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".6"/></svg>
+    </div>
     <div class="meta" data-i18n-html="d1_meta">12 rue Exemple, 75015<br>Ouvert dès 11h30 · ★ 4.9 · Google</div>
-    <span class="go" data-i18n="d1_go">Entrer dans l'épicerie →</span>
+    <span class="go"><span data-i18n="d1_go2">Entrer dans l'épicerie</span> <span class="ar">→</span></span>
     <div class="big-hangul">마켓</div>
   </a>
   <a class="door resto reveal" href="joayo-restaurant.html">
@@ -326,9 +455,14 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
     <h2 data-i18n="d2_h2">Le Restaurant</h2>
     <div class="kr-sub">좋아요 레스토랑</div>
     <p class="desc" data-i18n="d2_p">Bibimbap au tartare de bœuf, bulgogi, poulet frit — l'institution coréenne en plein cœur de Paris.</p>
-    <div class="emoji-row">🍲 🍗 🍚 🔥</div>
+    <div class="icon-row" aria-hidden="true">
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M8 16 H32 V22 Q32 32 20 32 Q8 32 8 22 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M4 16 H8 M32 16 H36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 10 Q15 6 18 8 M22 11 Q23 7 26 9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".6"/></svg>
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M14 22 Q8 14 14 8 Q22 2 28 10 Q34 18 26 24 L22 27 Q17 29 14 22 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M21 28 L28 36 M25 25 L33 31" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M7 20 H33 Q32 30 24 33 H16 Q8 30 7 20 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M13 15 Q16 11 20 14 Q24 17 27 13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></svg>
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M20 4 Q26 12 22 16 Q30 14 30 24 Q30 34 20 35 Q10 34 10 24 Q10 17 15 12 Q18 9 17 5 Q19 3 20 4 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 24 Q23 28 20 31 Q17 28 20 24 Z" fill="currentColor"/></svg>
+    </div>
     <div class="meta" data-i18n-html="d2_meta">34 avenue Exemple, 75001<br>11h30 — 15h00 · 18h30 — 22h00 · ★ 4.7 · Google</div>
-    <span class="go" data-i18n="d2_go">Voir la carte →</span>
+    <span class="go"><span data-i18n="d2_go2">Voir la carte</span> <span class="ar">→</span></span>
     <div class="big-hangul">식당</div>
   </a>
 </div>
@@ -356,6 +490,8 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   </div>
 </section>
 
+<div class="scallop" aria-hidden="true"></div>
+
 <!-- INFOS -->
 <section id="infos">
   <div class="section-head reveal">
@@ -364,13 +500,15 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   </div>
   <div class="infos-grid">
     <div class="info-card market-c reveal">
-      <h3 data-i18n="ic1_h3">🥬 L'Épicerie — Paris 15e</h3>
+      <span class="corner" aria-hidden="true">MAISON 1</span>
+      <h3 data-i18n="ic1_h3">L'Épicerie — Paris 15e</h3>
       <div class="addr">12 rue Exemple, 75015</div>
       <div class="meta" data-i18n-html="ic1_meta">Ouvert dès 11h30<br>Métro à 3 minutes<br>★ 4.9 — Google</div>
       <a class="page-link" href="joayo-market.html" data-i18n="ic1_link">Page de l'épicerie →</a>
     </div>
     <div class="info-card resto-c reveal">
-      <h3 data-i18n="ic2_h3">🍲 Le Restaurant — Paris 1er</h3>
+      <span class="corner" aria-hidden="true">MAISON 2</span>
+      <h3 data-i18n="ic2_h3">Le Restaurant — Paris 1er</h3>
       <div class="addr">34 avenue Exemple, 75001</div>
       <div class="meta" data-i18n-html="ic2_meta">11h30 — 15h00 · 18h30 — 22h00 · ☎ 01 23 45 67 89<br>Métro à 2 minutes<br>★ 4.7 — Google</div>
       <a class="page-link" href="joayo-restaurant.html" data-i18n="ic2_link">Page du restaurant →</a>
@@ -402,20 +540,20 @@ fr: {
   d1_tag:"Maison N°1 — Paris 15e", d1_h2:"L'Épicerie",
   d1_p:"Kimchi et banchan faits maison, ramyeon, sauces, snacks — le garde-manger de Séoul, dans le 15e.",
   d1_meta:"12 rue Exemple, 75015<br>Ouvert dès 11h30 · ★ 4.9 · Google",
-  d1_go:"Entrer dans l'épicerie →",
+  d1_go2:"Entrer dans l'épicerie",
   d2_tag:"Maison N°2 — Paris 1er", d2_h2:"Le Restaurant",
   d2_p:"Bibimbap au tartare de bœuf, bulgogi, poulet frit — l'institution coréenne en plein cœur de Paris.",
   d2_meta:"34 avenue Exemple, 75001<br>11h30 — 15h00 · 18h30 — 22h00 · ★ 4.7 · Google",
-  d2_go:"Voir la carte →",
+  d2_go2:"Voir la carte",
   st_h2:"Pourquoi « <span class=\"accent\">Joayo</span> » ?",
   st_p1:"En coréen, <strong>joayo (좋아요)</strong> est le mot qui échappe quand tout va bien — « c'est bon ! », « j'aime ! ». C'est le mot qu'on entend autour d'une table coréenne, au moment où les plats arrivent.",
   st_p2:"C'est exactement le mot qu'on veut vous entendre dire : à l'épicerie, devant un kimchi qui croque — et à table, devant un bibimbap fumant.",
   st_note:"— entrez, et dites-le : joayo ✦",
   in_over:"Infos pratiques · 오시는 길", in_h2:"Deux portes, un joayo",
-  ic1_h3:"🥬 L'Épicerie — Paris 15e",
+  ic1_h3:"L'Épicerie — Paris 15e",
   ic1_meta:"Ouvert dès 11h30<br>Métro à 3 minutes<br>★ 4.9 — Google",
   ic1_link:"Page de l'épicerie →",
-  ic2_h3:"🍲 Le Restaurant — Paris 1er",
+  ic2_h3:"Le Restaurant — Paris 1er",
   ic2_meta:"11h30 — 15h00 · 18h30 — 22h00 · ☎ 01 23 45 67 89<br>Métro à 2 minutes<br>★ 4.7 — Google",
   ic2_link:"Page du restaurant →",
   legal:"Site de démonstration · © 2026 Joayo — Épicerie : 12 rue Exemple, 75015 · Restaurant : 34 avenue Exemple, 75001 Paris"
@@ -429,20 +567,20 @@ en: {
   d1_tag:"House N°1 — Paris 15th", d1_h2:"The Grocery",
   d1_p:"Homemade kimchi and banchan, ramyeon, sauces, snacks — Seoul's pantry, in the 15th.",
   d1_meta:"12 rue Exemple, 75015<br>Opens 11:30 am · ★ 4.9 · Google",
-  d1_go:"Enter the grocery →",
+  d1_go2:"Enter the grocery",
   d2_tag:"House N°2 — Paris 1st", d2_h2:"The Restaurant",
   d2_p:"Beef tartare bibimbap, bulgogi, fried chicken — the Korean institution in the heart of Paris.",
   d2_meta:"34 avenue Exemple, 75001<br>11:30 am–3 pm · 6:30–10 pm · ★ 4.7 · Google",
-  d2_go:"See the menu →",
+  d2_go2:"See the menu",
   st_h2:"Why “<span class=\"accent\">Joayo</span>”?",
   st_p1:"In Korean, <strong>joayo (좋아요)</strong> is the word that slips out when things are good — “it's good!”, “I like it!”. It is what you hear around a Korean table the moment the dishes arrive.",
   st_p2:"It is exactly the word we want from you — at the grocery, over kimchi that still crunches, and at the table, over a steaming bibimbap.",
   st_note:"— come in and say it: joayo ✦",
   in_over:"Practical info · 오시는 길", in_h2:"Two doors, one joayo",
-  ic1_h3:"🥬 The Grocery — Paris 15th",
+  ic1_h3:"The Grocery — Paris 15th",
   ic1_meta:"Opens 11:30 am<br>Metro 3 minutes away<br>★ 4.9 — Google",
   ic1_link:"Grocery page →",
-  ic2_h3:"🍲 The Restaurant — Paris 1st",
+  ic2_h3:"The Restaurant — Paris 1st",
   ic2_meta:"11:30 am–3:00 pm · 6:30–10:00 pm · ☎ +33 1 23 45 67 89<br>Metro 2 minutes away<br>★ 4.7 — Google",
   ic2_link:"Restaurant page →",
   legal:"Site de démonstration · © 2026 Joayo — Grocery: 12 rue Exemple, 75015 · Restaurant: 34 avenue Exemple, 75001 Paris"
@@ -456,20 +594,20 @@ ko: {
   d1_tag:"1호점 — 파리 15구", d1_h2:"좋아요 마켓",
   d1_p:"직접 담근 김치와 반찬, 라면, 장류, 과자까지 — 파리 15구의 한국 마켓.",
   d1_meta:"12 rue Exemple, 75015<br>11:30 오픈 · ★ 4.9 · Google",
-  d1_go:"마켓 들어가기 →",
+  d1_go2:"마켓 들어가기",
   d2_tag:"2호점 — 파리 1구", d2_h2:"좋아요 레스토랑",
   d2_p:"육회비빔밥, 불고기, 치킨 — 파리에서 오래 사랑받아 온 한식 레스토랑.",
   d2_meta:"34 avenue Exemple, 75001<br>11:30–15:00 · 18:30–22:00 · ★ 4.7 · Google",
-  d2_go:"메뉴 보기 →",
+  d2_go2:"메뉴 보기",
   st_h2:"왜 \"<span class=\"accent\">좋아요</span>\"냐고요?",
   st_p1:"<strong>좋아요</strong> — 맛있을 때, 마음에 들 때 저절로 나오는 말이죠. 한국의 밥상에서 음식이 나오는 순간, 가장 많이 들리는 말이기도 합니다.",
   st_p2:"저희가 듣고 싶은 말이 바로 그 말입니다. 마켓에서 아삭한 김치에 한 번, 식당에서 뜨끈한 비빔밥에 또 한 번 — \"좋아요!\"",
   st_note:"— 들어와서 말해 주세요, 좋아요 ✦",
   in_over:"오시는 길 · Infos", in_h2:"두 개의 문, 하나의 좋아요",
-  ic1_h3:"🥬 마켓 — 파리 15구",
+  ic1_h3:"마켓 — 파리 15구",
   ic1_meta:"11:30 오픈<br>메트로 3분<br>★ 4.9 — Google",
   ic1_link:"마켓 페이지 →",
-  ic2_h3:"🍲 레스토랑 — 파리 1구",
+  ic2_h3:"레스토랑 — 파리 1구",
   ic2_meta:"11:30–15:00 · 18:30–22:00 · ☎ 01 23 45 67 89<br>메트로 2분<br>★ 4.7 — Google",
   ic2_link:"레스토랑 페이지 →",
   legal:"데모 사이트 · © 2026 좋아요 Joayo — 마켓: 12 rue Exemple, 75015 · 레스토랑: 34 avenue Exemple, 75001 Paris"
@@ -503,6 +641,7 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
 (function(){
   if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
   document.body.classList.add('js-anim');
+  setTimeout(function(){ document.body.classList.add('loaded'); }, 80);
   var obs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
   },{threshold:.12});
