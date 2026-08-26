@@ -318,6 +318,59 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   .cross p{grid-column:1;grid-row:auto;}
   .cross .btn{margin-top:8px;}
 }
+/* ================= pantry hero — the bright twin of the jangdokdae ================= */
+.hero.pantry{
+  position:relative;max-width:none;margin:0;padding:0;
+  min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;background:var(--paper);
+}
+.pt-ph{position:absolute;inset:0;}
+.pt-ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);filter:saturate(1.04);}
+.pt-veil{position:absolute;inset:0;
+  background:
+    linear-gradient(94deg,rgba(247,244,239,.98) 0%,rgba(247,244,239,.94) 38%,rgba(247,244,239,.45) 66%,rgba(247,244,239,.08) 100%),
+    linear-gradient(180deg,rgba(247,244,239,.7) 0%,transparent 26%);}
+.pt-vert{
+  position:absolute;right:26px;top:0;bottom:96px;z-index:3;
+  writing-mode:vertical-rl;display:flex;align-items:center;
+  font-size:11px;letter-spacing:.3em;color:var(--ink-60);
+}
+.pt-inner{
+  position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;
+  padding:0 40px clamp(52px,5vw,84px);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4vw;align-items:end;
+}
+.hero.pantry h1{
+  font-family:'Fraunces',serif;font-weight:560;color:var(--ink);
+  font-size:clamp(48px,6.8vw,112px);line-height:.98;letter-spacing:-.02em;
+}
+.hero.pantry h1 .accent{color:var(--red);font-style:italic;}
+.pt-line{
+  margin-top:22px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
+  font-size:clamp(17px,1.9vw,26px);line-height:1.45;max-width:24ch;color:var(--ink);
+}
+.hero.pantry .sub{margin-top:12px;font-size:15px;color:var(--ink-60);max-width:44ch;}
+.hero.pantry .cta-row{margin-top:28px;align-items:center;}
+.hero.pantry .cta-row .btn{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.hero.pantry .cta-row .btn:after{background:var(--paper);color:var(--ink);}
+.hero.pantry .cta-row .btn:hover{background:var(--red);border-color:var(--red);}
+.hero.pantry .addr-pill{margin-top:0;}
+.pt-seal{text-align:right;padding-bottom:6px;}
+.pt-seal .score{font-family:'Fraunces',serif;font-weight:560;font-size:44px;line-height:1;}
+.pt-seal .stars{color:var(--red);font-size:12px;letter-spacing:.2em;margin-top:4px;}
+.pt-seal .count{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-60);margin-top:6px;}
+.receipt{position:relative;z-index:3;background:var(--ink);color:var(--paper);
+  overflow:hidden;white-space:nowrap;padding:13px 0;}
+.receipt-track{display:inline-block;will-change:transform;}
+.receipt-track span{margin:0 22px;font-size:13px;font-weight:500;letter-spacing:.04em;}
+.receipt-track span:nth-child(3n){color:var(--red);}
+@media(max-width:900px){
+  .hero.pantry{min-height:auto;padding-top:92px;}
+  .pt-inner{grid-template-columns:1fr;gap:26px;padding:0 20px 44px;}
+  .pt-seal{text-align:left;}
+  .pt-vert{display:none;}
+  .pt-veil{background:linear-gradient(180deg,rgba(247,244,239,.94) 0%,rgba(247,244,239,.86) 48%,rgba(247,244,239,.5) 100%);}
+}
 </style>
 </head>
 <body>
@@ -351,20 +404,37 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 </nav>
 
 <!-- HERO -->
-<header class="hero has-ph" data-rail>
-  <div class="hero-copy">
-  <div class="rating-sticker" title="Google">
-    <div class="score">4.9</div>
-    <div class="stars">★★★★★</div>
-    <div class="count" data-i18n="rating_count">Google</div>
+<header class="hero pantry" data-rail>
+  <div class="pt-ph" aria-hidden="true">
+    <img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="">
   </div>
-  <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Ouvert dès 11h30 — Paris 15e</span></div>
-  <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Market</span></h1>
-  <div class="hangul-big" data-i18n="hero_hb">좋아요 마켓</div>
-  <p class="sub" data-i18n-html="hero_sub">Le garde-manger de Séoul, dans le 15e. Kimchi et banchan <strong>faits maison</strong>, et tout ce qu'il faut pour cuisiner coréen chez vous.</p>
-  <div class="addr-pill">12 rue Exemple, 75015 Paris</div>
+  <div class="pt-veil" aria-hidden="true"></div>
+  <span class="pt-vert" data-i18n="pt_vert">서울의 찬장 — 파리 15구</span>
+
+  <div class="pt-inner">
+    <div class="pt-copy">
+      <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Ouvert dès 11h30 — Paris 15e</span></div>
+      <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Market</span></h1>
+      <p class="pt-line" data-i18n="pt_line">On a déménagé une épicerie de Séoul, rayon par rayon.</p>
+      <p class="sub" data-i18n-html="hero_sub">Le garde-manger de Séoul, dans le 15e.</p>
+      <div class="cta-row">
+        <a class="btn" href="#rayons" data-i18n="pt_cta">Voir les rayons</a>
+        <span class="addr-pill">12 rue Exemple, 75015 Paris</span>
+      </div>
+    </div>
+    <div class="pt-seal">
+      <div class="score">4.9</div>
+      <div class="stars">★★★★★</div>
+      <div class="count" data-i18n="rating_count">Google</div>
+    </div>
   </div>
-  <div class="hero-ph"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Les rayons de l'épicerie"></div>
+
+  <div class="receipt" aria-hidden="true">
+    <div class="receipt-track" id="receipt">
+      <span>김치</span><span>라면</span><span>고추장</span><span>된장</span><span>반찬</span><span>만두</span><span>떡</span><span>소주</span><span>막걸리</span><span>참기름</span><span>김</span><span>과자</span>
+      <span>김치</span><span>라면</span><span>고추장</span><span>된장</span><span>반찬</span><span>만두</span><span>떡</span><span>소주</span><span>막걸리</span><span>참기름</span><span>김</span><span>과자</span>
+    </div>
+  </div>
 </header>
 
 <!-- RAYONS -->
@@ -513,6 +583,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 var I18N = {
 fr: {
   _title:"JOAYO Market 좋아요 마켓 — Épicerie coréenne, Paris 15e",
+  pt_vert:"서울의 찬장 — 파리 15구", pt_line:"On a déménagé une épicerie de Séoul, rayon par rayon.", pt_cta:"Voir les rayons",
   tick1:"Joayo Market", tick2:"Kimchi maison", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15e",
   brand_sub:"Market · 마켓",
   nav_home:"Accueil", nav_rayons:"Les Rayons", nav_resto:"Le Restaurant", nav_find:"Nous trouver",
@@ -546,6 +617,7 @@ fr: {
 },
 en: {
   _title:"JOAYO Market 좋아요 마켓 — Korean Grocery, Paris 15th",
+  pt_vert:"서울의 찬장 — 파리 15구", pt_line:"We moved a Seoul grocery over here, shelf by shelf.", pt_cta:"See the aisles",
   tick1:"Joayo Market", tick2:"Homemade kimchi", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15th",
   brand_sub:"Market · 마켓",
   nav_home:"Home", nav_rayons:"The Aisles", nav_resto:"The Restaurant", nav_find:"Find us",
@@ -579,6 +651,7 @@ en: {
 },
 ko: {
   _title:"좋아요 마켓 JOAYO Market — 파리 15구 한국 마켓",
+  pt_vert:"서울의 찬장 — 파리 15구", pt_line:"서울의 마트를 매대 하나까지 그대로 옮겨 왔습니다.", pt_cta:"매대 둘러보기",
   tick1:"좋아요 마켓", tick2:"직접 담근 김치", tick3:"반찬", tick4:"라면", tick5:"파리 15구",
   brand_sub:"마켓 · Market",
   nav_home:"홈", nav_rayons:"매대 안내", nav_resto:"레스토랑", nav_find:"오시는 길",
@@ -650,6 +723,21 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
 </script>
 
 <script>
+/* receipt strip — runs against the top ticker */
+(function(){
+  var t=document.getElementById('receipt');
+  if(!t)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var x=-1,last=window.scrollY,vel=0,half=0;
+  function m(){half=t.scrollWidth/2;x=-half;} m(); window.addEventListener('resize',m);
+  window.addEventListener('scroll',function(){var y=window.scrollY;vel=y-last;last=y;},{passive:true});
+  (function step(){vel*=0.9;
+    x+=0.45+Math.min(Math.abs(vel)*0.18,11);
+    if(half&&x>=0)x-=half;
+    t.style.transform='translateX('+x+'px)';
+    requestAnimationFrame(step);})();
+})();
+
 /* progress rail */
 (function(){
   var rail=document.querySelector('.rail');

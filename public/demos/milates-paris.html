@@ -231,18 +231,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
   position:absolute;left:18px;bottom:20px;z-index:3;
   color:var(--plaster);text-shadow:0 2px 16px rgba(33,27,29,.55);
 }
-.suite{
-  margin-top:auto;padding-top:34px;text-decoration:none;color:var(--ink);
-  display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:baseline;
-  border-top:1px solid var(--line);max-width:46ch;
-  transition:color .35s ease,border-color .35s ease;
-}
-.suite:hover{color:var(--framboise);border-color:var(--framboise);}
-.suite .s-n{font-family:var(--display);font-style:italic;font-size:13px;color:var(--framboise);}
-.suite .s-t{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
-.suite .s-a{font-size:15px;transition:transform .4s cubic-bezier(.2,1.4,.4,1);}
-.suite:hover .s-a{transform:translateY(4px);}
-@media(max-width:900px){.suite{margin-top:34px;}}
 .cover-text{
   grid-column:1;grid-row:1;
   padding-top:calc(clamp(14px,3.6vw,58px) + clamp(60px,13.6vw,206px) + 36px);
@@ -712,8 +700,7 @@ html[lang="ko"] .price,html[lang="ko"] .dish .p,
 html[lang="ko"] .review p,
 html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
 html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
-html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
-html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
+html[lang="ko"] .hand-note,html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
   font-family:'Noto Serif KR',serif;font-style:normal;font-weight:600;
 }
 /* Latin tracking is wrong for Hangul — it breaks words apart */
@@ -721,7 +708,7 @@ html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .btn,
 html[lang="ko"] .addr-pill,html[lang="ko"] .ticker,html[lang="ko"] .ticker-inner span,
 html[lang="ko"] .foot-links a,html[lang="ko"] .nav-links a,html[lang="ko"] .review .who,
 html[lang="ko"] .service-chips span,html[lang="ko"] .a-note a,html[lang="ko"] .info-card .meta,
-html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,html[lang="ko"] .suite .s-t,
+html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,
 html[lang="ko"] .tag,html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .corner,
 html[lang="ko"] .sel-pane .fmt,html[lang="ko"] .sel-pane .dur,html[lang="ko"] .pl-top,
 html[lang="ko"] .cov-top,html[lang="ko"] .edge-cap,html[lang="ko"] .mag-hint,
@@ -835,11 +822,6 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
         <a class="btn" href="#" onclick="return false;"><span data-i18n="cta_book">Réserver par message</span> <span class="ar">→</span></a>
         <a class="btn btn-line" href="#methode"><span data-i18n="cta_method">Découvrir la méthode</span> <span class="ar">→</span></a>
       </div>
-      <a class="suite" href="#methode">
-        <span class="s-n">01</span>
-        <span class="s-t" data-i18n="suite">La méthode — on commence par le souffle</span>
-        <span class="s-a">↓</span>
-      </a>
     </div>
   </div>
 

@@ -11,13 +11,13 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400&family=EB+Garamond:ital,wght@0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@500;700&family=Archivo+Black&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400&family=EB+Garamond:ital,wght@0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
 
 :root{
   --noir:#101010;
   --blanc:#F5F2EC;
-  /* joayo */ --j-cream:#F6EFE3; --j-red:#D93A2B; --j-ink:#1A1613; --j-green:#2E5B3E; --j-yellow:#F2B33D;
-  /* milates */ --m-plaster:#F1E7E4; --m-ink:#38292E; --m-framboise:#B94A62; --m-rose:#E3B7B0;
+  /* joayo */ --j-cream:#F7F4EF; --j-red:#BE3418; --j-ink:#16130F; --j-green:#2E5B3E; --j-yellow:#F2B33D;
+  /* milates */ --m-plaster:#F8F6F4; --m-ink:#211B1D; --m-framboise:#C0334F; --m-rose:#E3B7B0;
   /* matsu */ --s-washi:#F6F4EE; --s-sumi:#1D211E; --s-matsuba:#3E5A47; --s-shu:#BF3F2C; --s-haze:#E8EAE2;
   /* jeong */ --g-encre:#161413; --g-os:#EDEAE3; --g-laque:#8A3A40;
   --sans:'Zen Kaku Gothic New',sans-serif;
@@ -101,9 +101,9 @@ a:focus-visible,button:focus-visible{outline:1px solid rgba(245,242,236,.8);outl
 .deck small{font-size:8px;letter-spacing:.26em;text-transform:uppercase;opacity:.6;font-weight:700;}
 .deck b{line-height:1;}
 .d-joayo{--r:-7deg;background:#F6EFE3;color:#1A1613;}
-.d-joayo b{font-family:'Archivo Black';font-size:20px;letter-spacing:-.01em;}
-.d-joayo b em{font-style:normal;color:#D93A2B;}
-.d-joayo .bub{background:#fff;border:2px solid #1A1613;border-radius:10px;padding:3px 9px;font-family:'Archivo Black';font-size:12px;box-shadow:2.5px 3px 0 rgba(26,22,19,.8);transform:rotate(3deg);}
+.d-joayo b{font-family:'Fraunces',serif;font-weight:560;font-size:24px;letter-spacing:-.01em;}
+.d-joayo b em{font-style:italic;color:#BE3418;}
+.d-joayo .bub{font-size:10px;letter-spacing:.22em;color:rgba(22,19,15,.55);text-transform:uppercase;}
 .d-milates{--r:-2.5deg;--y:-10px;background:#F1E7E4;color:#38292E;}
 .d-milates b{font-family:'Bodoni Moda',serif;font-weight:500;font-size:20px;letter-spacing:.01em;}
 .d-milates b i{color:#B94A62;}
@@ -224,8 +224,8 @@ body.entered .dots{opacity:1;}
 .s-joayo{background:var(--j-cream);color:var(--j-ink);grid-template-columns:1.1fr .9fr;gap:5vw;}
 .s-joayo .tag{color:var(--j-green);opacity:1;}
 .s-joayo .word{
-  font-family:'Archivo Black';font-size:clamp(64px,11vw,160px);line-height:.9;
-  text-transform:uppercase;letter-spacing:-.015em;display:flex;flex-wrap:wrap;
+  font-family:'Fraunces',serif;font-weight:560;font-size:clamp(56px,9.4vw,140px);line-height:.96;
+  letter-spacing:-.02em;display:flex;flex-wrap:wrap;
 }
 .s-joayo .word span{display:inline-block;transform:translateY(120%);opacity:0;}
 .s-joayo.live .word span{animation:jpop .7s cubic-bezier(.2,1.4,.4,1) forwards;}
@@ -235,7 +235,7 @@ body.entered .dots{opacity:1;}
 .s-joayo .word span:nth-child(4){animation-delay:.26s;}
 .s-joayo .word span:nth-child(5){animation-delay:.33s;}
 .s-joayo .word span:nth-child(6){animation-delay:.4s;}
-.s-joayo .word .red{color:var(--j-red);}
+.s-joayo .word .red{color:var(--j-red);font-style:italic;}
 .s-joayo .bubble{
   justify-self:center;position:relative;
   background:#fff;border:3px solid var(--j-ink);border-radius:28px;
@@ -243,7 +243,8 @@ body.entered .dots{opacity:1;}
   box-shadow:8px 9px 0 rgba(26,22,19,.85);
 }
 .s-joayo.live .bubble{animation:bpop .6s cubic-bezier(.2,1.5,.4,1) .5s forwards;}
-.s-joayo .bubble .h{font-family:'Archivo Black';font-size:clamp(38px,4.4vw,60px);}
+
+.s-joayo .bubble .h{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(38px,4.4vw,60px);}
 .s-joayo .bubble .h em{font-style:normal;color:var(--j-red);}
 .s-joayo .bubble:after{
   content:'';position:absolute;left:40px;bottom:-20px;width:30px;height:30px;background:#fff;
@@ -356,7 +357,7 @@ body.entered .dots{opacity:1;}
 }
 .s-fin .marks a{text-decoration:none;opacity:.75;transition:opacity .3s,transform .3s;display:inline-block;}
 .s-fin .marks a:hover{opacity:1;transform:translateY(-4px);}
-.s-fin .mk-j{font-family:'Archivo Black';font-size:22px;color:var(--j-red);}
+.s-fin .mk-j{font-family:'Fraunces',serif;font-weight:560;font-size:23px;color:var(--j-red);}
 .s-fin .mk-m{font-family:'Bodoni Moda',serif;font-size:24px;color:var(--m-rose);}
 .s-fin .mk-s{font-family:'EB Garamond',serif;font-size:23px;color:#7EA48B;}
 .s-fin .mk-g{font-family:'Cormorant Garamond',serif;font-size:23px;letter-spacing:.3em;color:var(--g-os);}
@@ -398,9 +399,9 @@ body.entered .dots{opacity:1;}
     </div>
     <div class="decks">
       <button type="button" class="deck d-joayo" data-goto="s1" aria-label="JOAYO">
-        <b>JOA—<em>YO!</em></b>
-        <span class="bub">좋아요!</span>
-        <small>Épicerie &amp; Resto</small>
+        <b>Joayo</b>
+        <span class="bub">Market &amp; Resto</span>
+        <small>Paris 15e · 1er</small>
       </button>
       <button type="button" class="deck d-milates" data-goto="s2" aria-label="MILATES">
         <b>M<i>i</i>la—tes.</b>
@@ -445,7 +446,7 @@ body.entered .dots{opacity:1;}
     <div class="tag fx" data-i18n="j_tag">Maison 01 — 韓国食料品店 & レストラン</div>
     <div class="word" aria-label="JOAYO!"><span>J</span><span>O</span><span>A</span><span class="red">Y</span><span class="red">O</span><span class="red">!</span></div>
     <p class="desc fx d2" data-i18n="j_desc">「美味しい時に思わず出る言葉」をそのまま名前にした、パリの韓国食料品店×レストラン。レトロポップな2店舗ブランド。</p>
-    <div class="chips fx d3"><span>Retro pop</span><span>3 pages</span><span>FR·EN·KO</span></div>
+    <div class="chips fx d3"><span>Éditorial</span><span>3 pages</span><span>FR·EN·KO</span></div>
     <div class="memo fx d3"><div><b data-i18n="memo_who">誰に</b><span data-i18n="j_who"></span></div><div><b data-i18n="memo_why">なぜ</b><span data-i18n="j_why"></span></div><div><b data-i18n="memo_pos">立ち位置</b><span data-i18n="j_pos"></span></div></div>
     <a class="visit fx d4" href="joayo-homepage.html" target="_blank" rel="noopener" data-i18n="visit">サイトを見る →</a>
   </div>
@@ -526,7 +527,7 @@ ja: {
   enter:"入場する",
   visit:"サイトを見る →",
   j_tag:"Maison 01 — 韓国食料品店 & レストラン",
-  j_desc:"「美味しい時に思わず出る言葉」をそのまま名前にした、パリの韓国食料品店×レストラン。レトロポップな2店舗ブランド。",
+  j_desc:"「美味しい時に思わず出る言葉」をそのまま名前にした、パリの韓国食料品店×レストラン。エディトリアルな2店舗ブランド。",
   memo_who:"誰に", memo_why:"なぜ", memo_pos:"立ち位置",
   j_who:"パリで韓国の味を試したい20〜30代",
   j_why:"「本場の味」は敷居が高い。入口は楽しさから",
@@ -557,7 +558,7 @@ en: {
   enter:"Enter",
   visit:"Visit the site →",
   j_tag:"Maison 01 — Korean grocery & restaurant",
-  j_desc:"Named after the word Koreans blurt out when food is good. A retro-pop two-venue brand in Paris.",
+  j_desc:"Named after the word Koreans blurt out when food is good. An editorial two-venue brand in Paris.",
   memo_who:"Who", memo_why:"Why", memo_pos:"Position",
   j_who:"Parisians in their 20s\u201330s curious about Korean food",
   j_why:"\u201cAuthentic\u201d can intimidate \u2014 fun is the way in",
@@ -588,7 +589,7 @@ ko: {
   enter:"입장하기",
   visit:"사이트 보기 →",
   j_tag:"Maison 01 — 한국 식료품점 & 레스토랑",
-  j_desc:"맛있을 때 저절로 나오는 말을 그대로 이름으로 만든, 파리의 레트로 팝 두 매장 브랜드.",
+  j_desc:"맛있을 때 저절로 나오는 말을 그대로 이름으로 만든, 파리의 에디토리얼 두 매장 브랜드.",
   memo_who:"누구에게", memo_why:"왜", memo_pos:"포지션",
   j_who:"한국의 맛이 궁금한 파리의 20~30대",
   j_why:"\"정통 한식\"은 문턱이 높다. 입구는 재미부터",
