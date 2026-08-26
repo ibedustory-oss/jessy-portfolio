@@ -86,10 +86,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 .lang-switch button.active{background:var(--ink);color:var(--plaster);}
 .lang-switch button:not(.active):hover{background:var(--rose);}
 
+/* ============ Toss-style progress trail ============ */
+.trail{
+  position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:90;
+  display:flex;flex-direction:column;gap:9px;align-items:flex-start;
+  mix-blend-mode:difference;
+}
+.trail span{height:2px;width:13px;border-radius:99px;background:rgba(255,255,255,.4);transition:all .5s cubic-bezier(.23,1,.32,1);}
+.trail span.on{width:26px;background:#fff;}
+@media(max-width:1100px){.trail{display:none;}}
+
 /* ============ COVER ============ */
 .cover{
   position:relative;
-  padding:34px 42px 90px;
+  padding:30px 24px 70px;
   overflow:hidden;
 }
 .issue-bar{
@@ -113,17 +123,34 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 .masthead span{display:inline-block;animation:rise 1s cubic-bezier(.19,1,.22,1) both;}
 .masthead i{font-style:italic;font-weight:400;color:var(--framboise);}
 @keyframes rise{from{transform:translateY(110%);}to{transform:translateY(0);}}
-.cover-grid{
-  position:relative;z-index:2;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,40%);
-  gap:5vw;align-items:stretch;
-  margin-top:calc(clamp(72px,16vw,244px) * -0.16);
+/* giant rounded media frame under the masthead (Toss), magazine type above */
+.hero-frame{
+  position:relative;overflow:hidden;border-radius:32px;
+  min-height:74vh;display:flex;align-items:flex-end;
+  margin-top:-1.2vw;
 }
-.cover-left{
-  padding-top:calc(clamp(72px,16vw,244px) * 0.26);
-  max-width:56ch;
-  display:flex;flex-direction:column;
+.hero-frame > img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation:coverin 2.4s cubic-bezier(.23,1,.32,1);
 }
+@keyframes coverin{from{transform:scale(1.05);}to{transform:scale(1);}}
+.hero-frame .scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(205deg,rgba(56,41,46,0) 34%,rgba(56,41,46,.78) 88%);
+}
+.hero-overlay{
+  position:relative;z-index:2;color:var(--plaster);
+  padding:0 52px 48px;max-width:660px;
+}
+.hero-overlay .dek{color:var(--plaster);font-size:clamp(16px,1.5vw,19px);}
+.hero-overlay .dek b{font-weight:600;}
+.hero-frame .hand-note{
+  position:absolute;top:26px;right:34px;z-index:2;color:var(--plaster);
+  text-shadow:0 2px 14px rgba(56,41,46,.4);
+}
+/* sommaire as a horizontal strip below the frame */
+.sommaire{margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:0 34px;}
+.sommaire .som-head{grid-column:1/-1;}
 .sommaire{margin-top:auto;padding-top:56px;}
 .sommaire .som-head{
   font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--framboise);font-weight:600;
@@ -143,7 +170,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 }
 .cover .dek{font-size:clamp(16px,1.5vw,19px);font-weight:400;color:var(--ink);}
 .cover .dek b{font-weight:600;}
-.cover .cta-row{margin-top:32px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.cover .cta-row{margin-top:30px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.cover .cta-row .btn{
+  background:var(--plaster);color:var(--ink);border:none;
+  padding:9px 10px 9px 24px;gap:14px;
+}
+.cover .cta-row .btn .ar{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--plaster);
+  transition:transform .35s cubic-bezier(.23,1,.32,1);
+}
+.cover .cta-row .btn:hover{background:#fff;transform:translateY(-2px);}
+.cover .cta-row .btn:hover .ar{transform:translateX(3px);}
+.cover .cta-row .btn-line{background:transparent;color:var(--plaster);border:1px solid rgba(241,231,228,.55);}
+.cover .cta-row .btn-line .ar{background:rgba(241,231,228,.2);color:var(--plaster);}
+.cover .cta-row .btn-line:hover{background:rgba(241,231,228,.14);color:var(--plaster);}
 .btn{
   display:inline-flex;align-items:center;gap:10px;
   text-decoration:none;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
@@ -427,7 +468,9 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 </nav>
 
 <!-- COVER -->
-<header class="cover" id="top">
+<div class="trail" aria-hidden="true"></div>
+
+<header class="cover" id="top" data-trail>
   <div class="issue-bar">
     <span><b>Milates</b> — Paris</span>
     <span class="mid" data-i18n="issue2">Pilates privé</span>
@@ -436,42 +479,30 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 
   <h1 class="masthead"><span>M<i>i</i>la—tes.</span></h1>
 
-  <div class="cover-grid">
-    <div class="cover-left">
+  <div class="hero-frame">
+    <img src="milates-photos/studio2.jpg" alt="Mina guide une élève en séance privée au reformer">
+    <div class="scrim" aria-hidden="true"></div>
+    <span class="hand-note" aria-hidden="true">오늘도, 숨 한 번 크게 쉬어요 — Mina 💕</span>
+    <div class="hero-overlay">
       <p class="dek" data-i18n-html="dek">Le pilates comme un rendez-vous à soi. <b>Mina</b> vous reçoit en séance privée 1:1 — au studio, pendant la grossesse ou en plein air — et construit chaque cours autour de votre corps, pas l'inverse.</p>
       <div class="cta-row">
-        <a class="btn btn-solid" href="#" onclick="return false;" data-i18n="cta_book">Réserver par message</a>
-        <a class="btn btn-line" href="#methode" data-i18n="cta_method">Découvrir la méthode</a>
-      </div>
-      <div class="sommaire" role="navigation" aria-label="Sommaire">
-        <div class="som-head" data-i18n="som">Sommaire</div>
-        <a href="#methode"><span data-i18n="nav_methode">La méthode</span><span class="num">01</span></a>
-        <a href="#mina"><span data-i18n="nav_mina">Mina</span><span class="num">02</span></a>
-        <a href="#seances"><span data-i18n="nav_seances">Séances</span><span class="num">03</span></a>
-        <a href="#pratique"><span data-i18n="nav_reserver">Réserver</span><span class="num">04</span></a>
+        <a class="btn" href="#" onclick="return false;"><span data-i18n="cta_book">Réserver par message</span> <span class="ar">→</span></a>
+        <a class="btn btn-line" href="#methode"><span data-i18n="cta_method">Découvrir la méthode</span> <span class="ar">→</span></a>
       </div>
     </div>
+  </div>
 
-    <div class="photo-comp">
-      <span class="hand-note photo-note">오늘도, 숨 한 번 크게 쉬어요 — Mina 💕</span>
-      <svg class="photo-stamp" viewBox="0 0 100 100" aria-hidden="true">
-        <defs><path id="ring" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/></defs>
-        <text><textPath href="#ring">breathe · align · flow · breathe · align ·</textPath></text>
-      </svg>
-      <div class="photo-main">
-        <img src="milates-photos/studio6.jpg" alt="Mina guide une élève dans un étirement latéral au Cadillac">
-        <span class="photo-caption" data-i18n="caption">Respirer — s'aligner — s'ancrer</span>
-      </div>
-      <div class="photo-inset">
-        <img src="milates-photos/studio8.jpg" alt="Le bilan du premier jour, planche à la main">
-        <span class="tag" data-i18n="tag_b">le bilan du premier jour</span>
-      </div>
-    </div>
+  <div class="sommaire" role="navigation" aria-label="Sommaire">
+    <div class="som-head" data-i18n="som">Sommaire</div>
+    <a href="#methode"><span data-i18n="nav_methode">La méthode</span><span class="num">01</span></a>
+    <a href="#mina"><span data-i18n="nav_mina">Mina</span><span class="num">02</span></a>
+    <a href="#seances"><span data-i18n="nav_seances">Séances</span><span class="num">03</span></a>
+    <a href="#pratique"><span data-i18n="nav_reserver">Réserver</span><span class="num">04</span></a>
   </div>
 </header>
 
 <!-- MÉTHODE -->
-<section id="methode">
+<section id="methode" data-trail>
   <div class="rail">
     <div class="kicker reveal" data-i18n="k_methode">La méthode</div>
     <div class="method-grid">
@@ -498,7 +529,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 </section>
 
 <!-- WONNIE -->
-<section id="mina">
+<section id="mina" data-trail>
   <div class="rail">
     <div class="kicker reveal" data-i18n="k_mina">Votre professeure</div>
     <div class="mina-grid">
@@ -540,7 +571,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 </section>
 
 <!-- SÉANCES -->
-<section id="seances">
+<section id="seances" data-trail>
   <div class="rail">
     <div class="kicker reveal" data-i18n="k_seances">Les séances</div>
     <h2 class="reveal" data-i18n-html="s_h2">Trois façons de <i>pratiquer.</i></h2>
@@ -575,7 +606,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 </section>
 
 <!-- PRATIQUE / RÉSERVER -->
-<section id="pratique">
+<section id="pratique" data-trail>
   <div class="rail">
     <div class="kicker reveal" data-i18n="k_pratique">En pratique</div>
     <div class="prat-grid">
@@ -847,6 +878,24 @@ document.querySelectorAll('.lang-switch button').forEach(function(b){
 var saved = null;
 try{ saved = localStorage.getItem('milates-lang'); }catch(e){}
 applyLang(saved && I18N[saved] ? saved : 'fr');
+
+/* Toss-style progress trail */
+(function(){
+  var trail=document.querySelector('.trail');
+  var secs=Array.prototype.slice.call(document.querySelectorAll('[data-trail]'));
+  if(!trail||!secs.length||!('IntersectionObserver' in window))return;
+  secs.forEach(function(){var t=document.createElement('span');trail.appendChild(t);});
+  var ticks=trail.children;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var i=secs.indexOf(en.target);
+        for(var j=0;j<ticks.length;j++)ticks[j].classList.toggle('on',j===i);
+      }
+    });
+  },{rootMargin:'-45% 0px -45% 0px'});
+  secs.forEach(function(x){io.observe(x);});
+})();
 
 /* ============ SCROLL REVEAL ============ */
 (function(){
