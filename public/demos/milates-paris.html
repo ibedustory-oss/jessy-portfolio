@@ -86,6 +86,88 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 .lang-switch button.active{background:var(--ink);color:var(--plaster);}
 .lang-switch button:not(.active):hover{background:var(--rose);}
 
+/* ============ breathing ring (méthode) ============ */
+.breath-wrap{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px;}
+.breath{
+  position:relative;width:190px;height:190px;border-radius:50%;
+  border:1px solid var(--framboise);
+  display:flex;align-items:center;justify-content:center;
+  animation:breathe 9s cubic-bezier(.45,0,.55,1) infinite;
+}
+.breath:before,.breath:after{
+  content:'';position:absolute;inset:0;border-radius:50%;border:1px solid var(--framboise);
+  opacity:.45;animation:breathe 9s cubic-bezier(.45,0,.55,1) infinite;
+}
+.breath:before{animation-delay:-.5s;opacity:.3;}
+.breath:after{animation-delay:-1s;opacity:.16;}
+@keyframes breathe{
+  0%,100%{transform:scale(.82);}
+  45%,55%{transform:scale(1.16);}
+}
+.breath-label{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:19px;color:var(--framboise);transition:opacity .7s ease;
+}
+.breath-count{
+  position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);
+  font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;
+}
+.method-item{transition:opacity .6s ease;}
+.method-item.dim{opacity:.32;}
+.method-item .bar{display:block;height:1px;background:var(--line);margin-top:16px;position:relative;overflow:hidden;}
+.method-item .bar i{position:absolute;inset:0;background:var(--framboise);transform:scaleX(0);transform-origin:left;}
+.method-item.live .bar i{animation:fill 4.5s linear forwards;}
+@keyframes fill{to{transform:scaleX(1);}}
+@media (prefers-reduced-motion: reduce){
+  .breath,.breath:before,.breath:after{animation:none;transform:scale(1);}
+  .method-item.dim{opacity:1;}
+}
+
+/* ============ séance selector (editorial) ============ */
+.sel{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:5vw;align-items:start;margin-top:48px;}
+.sel-names{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+.sel-names button{
+  appearance:none;background:none;border:none;cursor:pointer;text-align:left;
+  padding:26px 4px;border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:16px;
+  font-family:var(--display);font-weight:500;color:var(--ink);
+  font-size:clamp(28px,3.4vw,46px);line-height:1;letter-spacing:-.01em;
+  transition:color .45s ease,padding-left .45s cubic-bezier(.23,1,.32,1);
+}
+.sel-names button .n{
+  font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.24em;
+  color:var(--ink-soft);transition:color .45s ease;
+}
+.sel-names button:hover{padding-left:12px;}
+.sel-names button.on{color:var(--framboise);padding-left:12px;}
+.sel-names button.on .n{color:var(--framboise);}
+.sel-stage{position:relative;}
+.sel-ph{position:relative;overflow:hidden;aspect-ratio:4/3.15;background:var(--plaster-deep);}
+.sel-ph img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.06);
+  transition:opacity 1s cubic-bezier(.23,1,.32,1),transform 1.4s cubic-bezier(.23,1,.32,1);
+}
+.sel-ph img.on{opacity:1;transform:scale(1);}
+.sel-body{margin-top:26px;position:relative;min-height:180px;}
+.sel-pane{
+  position:absolute;inset:0;opacity:0;transform:translateY(12px);pointer-events:none;
+  transition:opacity .6s ease,transform .6s cubic-bezier(.23,1,.32,1);
+}
+.sel-pane.on{opacity:1;transform:none;pointer-events:auto;position:relative;}
+.sel-pane .fmt{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--framboise);font-weight:600;}
+.sel-pane .dur{display:block;margin-top:10px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.sel-pane p{margin-top:14px;font-size:16px;max-width:48ch;}
+.sel-pane .for{margin-top:16px;font-size:14px;color:var(--ink-soft);border-left:2px solid var(--framboise);padding-left:14px;}
+.sel-pane .for b{color:var(--ink);font-weight:600;}
+@media(max-width:900px){
+  .sel{grid-template-columns:1fr;gap:34px;}
+  .sel-body{min-height:0;}
+  .sel-pane{position:relative;opacity:1;transform:none;display:none;}
+  .sel-pane.on{display:block;}
+  .breath-wrap{min-height:270px;}
+}
+
 /* ============ Toss-style progress trail ============ */
 .trail{
   position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:90;
@@ -509,19 +591,26 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
       <div class="method-intro reveal">
         <h2 data-i18n-html="me_h2">Un seul corps par <i>séance.</i></h2>
         <p data-i18n="me_p">Pas de cours à la chaîne, pas de chorégraphie imposée. Chaque séance part de là où vous en êtes, ce jour-là — et avance à votre rythme.</p>
+        <div class="breath-wrap" aria-hidden="true">
+          <div class="breath"><span class="breath-label" id="breathLabel" data-i18n="br_in">Inspirez</span></div>
+          <span class="breath-count" data-i18n="br_note">respirez avec le cercle</span>
+        </div>
       </div>
       <div class="method-list reveal">
         <div class="method-item">
           <h3><span data-i18n="m1_h3">Respirer</span><small data-i18n="m1_sm">숨쉬기</small></h3>
           <p data-i18n="m1_p">Le souffle donne le tempo. On commence par lui : il relâche les tensions du cou et des épaules avant même le premier mouvement.</p>
+          <span class="bar" aria-hidden="true"><i></i></span>
         </div>
         <div class="method-item">
           <h3><span data-i18n="m2_h3">S'aligner</span><small data-i18n="m2_sm">정렬</small></h3>
           <p data-i18n="m2_p">Bassin, colonne, appuis. On cherche votre alignement à vous — celui qui rend le mouvement fluide et le quotidien moins fatigant.</p>
+          <span class="bar" aria-hidden="true"><i></i></span>
         </div>
         <div class="method-item">
           <h3><span data-i18n="m3_h3">S'ancrer</span><small data-i18n="m3_sm">중심 잡기</small></h3>
           <p data-i18n="m3_p">La force vient du centre. Un centre stable rend tout le reste plus libre : le dos, les hanches, la tête.</p>
+          <span class="bar" aria-hidden="true"><i></i></span>
         </div>
       </div>
     </div>
@@ -575,27 +664,38 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   <div class="rail">
     <div class="kicker reveal" data-i18n="k_seances">Les séances</div>
     <h2 class="reveal" data-i18n-html="s_h2">Trois façons de <i>pratiquer.</i></h2>
-    <div class="seance-grid" style="margin-top:44px;">
-      <div class="seance hero-card reveal">
-        <span class="fmt" data-i18n="s1_fmt">Le cœur de Milates</span>
-        <h3 data-i18n="s1_h3">Privé</h3>
-        <span class="dur" data-i18n="s1_dur">55 min · seul·e avec Mina</span>
-        <p data-i18n="s1_p">La séance sur mesure : bilan postural au premier rendez-vous, puis un programme qui évolue avec vous, semaine après semaine.</p>
-        <div class="for" data-i18n-html="s1_for"><b>Pour vous si :</b> vous débutez, vous sortez d'une douleur, ou vous voulez progresser vite et proprement.</div>
+    <div class="sel reveal">
+      <div class="sel-names" role="tablist">
+        <button type="button" class="on" data-sel="0" role="tab" aria-selected="true"><span class="n">01</span><span data-i18n="s1_h3">Privé</span></button>
+        <button type="button" data-sel="1" role="tab" aria-selected="false"><span class="n">02</span><span data-i18n="s2_h3">Prénatal</span></button>
+        <button type="button" data-sel="2" role="tab" aria-selected="false"><span class="n">03</span><span data-i18n="s3_h3">En plein air</span></button>
       </div>
-      <div class="seance reveal">
-        <span class="fmt" data-i18n="s2_fmt">Future maman</span>
-        <h3 data-i18n="s2_h3">Prénatal</h3>
-        <span class="dur" data-i18n="s2_dur">Séance adaptée · femmes enceintes</span>
-        <p data-i18n="s2_p">Un pilates doux et sûr pour accompagner la grossesse : soulager le dos, respirer plus librement, garder de la force pour l'après.</p>
-        <div class="for" data-i18n-html="s2_for"><b>Pour vous si :</b> vous attendez un bébé et voulez bouger en confiance.</div>
-      </div>
-      <div class="seance reveal">
-        <span class="fmt" data-i18n="s3_fmt">Aux beaux jours</span>
-        <h3 data-i18n="s3_h3">En plein air</h3>
-        <span class="dur" data-i18n="s3_dur">Selon la saison · Paris</span>
-        <p data-i18n="s3_p">Le tapis dans un parc, le ciel comme plafond. Des séances en extérieur quand la météo le permet — suivez les annonces sur Instagram.</p>
-        <div class="for" data-i18n-html="s3_for"><b>Pour vous si :</b> bouger dehors vous fait plus de bien qu'entre quatre murs.</div>
+      <div class="sel-stage">
+        <div class="sel-ph">
+          <img class="on" data-ph="0" src="milates-photos/studio2.jpg" alt="Séance privée au reformer">
+          <img data-ph="1" src="milates-photos/studio6.jpg" alt="Séance adaptée au Cadillac">
+          <img data-ph="2" src="milates-photos/studio5.jpg" alt="Le studio baigné de lumière">
+        </div>
+        <div class="sel-body">
+          <div class="sel-pane on" data-pane="0">
+            <span class="fmt" data-i18n="s1_fmt">Le cœur de Milates</span>
+            <span class="dur" data-i18n="s1_dur">55 min · seul·e avec Mina</span>
+            <p data-i18n="s1_p">La séance sur mesure : bilan postural au premier rendez-vous, puis un programme qui évolue avec vous, semaine après semaine.</p>
+            <div class="for" data-i18n-html="s1_for"><b>Pour vous si :</b> vous débutez, vous sortez d'une douleur, ou vous voulez progresser vite et proprement.</div>
+          </div>
+          <div class="sel-pane" data-pane="1">
+            <span class="fmt" data-i18n="s2_fmt">Future maman</span>
+            <span class="dur" data-i18n="s2_dur">Séance adaptée · femmes enceintes</span>
+            <p data-i18n="s2_p">Un pilates doux et sûr pour accompagner la grossesse : soulager le dos, respirer plus librement, garder de la force pour l'après.</p>
+            <div class="for" data-i18n-html="s2_for"><b>Pour vous si :</b> vous attendez un bébé et voulez bouger en confiance.</div>
+          </div>
+          <div class="sel-pane" data-pane="2">
+            <span class="fmt" data-i18n="s3_fmt">Aux beaux jours</span>
+            <span class="dur" data-i18n="s3_dur">Selon la saison · Paris</span>
+            <p data-i18n="s3_p">Le tapis dans un parc, le ciel comme plafond. Des séances en extérieur quand la météo le permet — suivez les annonces sur Instagram.</p>
+            <div class="for" data-i18n-html="s3_for"><b>Pour vous si :</b> bouger dehors vous fait plus de bien qu'entre quatre murs.</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="pricing-note reveal">
@@ -699,6 +799,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 var I18N = {
 fr: {
   _title:"Milates Paris",
+  br_in:"Inspirez", br_out:"Expirez", br_note:"respirez avec le cercle",
   nav_methode:"La méthode", nav_mina:"Mina", nav_seances:"Séances", nav_reserver:"Réserver", som:"Sommaire",
   issue2:"Pilates privé",
   dek:"Le pilates comme un rendez-vous à soi. <b>Mina</b> vous reçoit en séance privée 1:1 — au studio, pendant la grossesse ou en plein air — et construit chaque cours autour de votre corps, pas l'inverse.",
@@ -751,6 +852,7 @@ fr: {
 },
 en: {
   _title:"Milates Paris",
+  br_in:"Breathe in", br_out:"Breathe out", br_note:"breathe with the circle",
   nav_methode:"The method", nav_mina:"Mina", nav_seances:"Sessions", nav_reserver:"Book", som:"In this issue",
   issue2:"Private pilates",
   dek:"Pilates as time kept for yourself. <b>Mina</b> teaches one-to-one — at the studio, through pregnancy, or outdoors — and builds every session around your body, not the other way round.",
@@ -803,6 +905,7 @@ en: {
 },
 ko: {
   _title:"밀라테스 Milates Paris",
+  br_in:"들이쉬고", br_out:"내쉬고", br_note:"원을 따라 호흡해 보세요",
   nav_methode:"수업 철학", nav_mina:"미나", nav_seances:"레슨", nav_reserver:"예약", som:"차례",
   issue2:"1:1 프라이빗 필라테스",
   dek:"필라테스는 온전히 나를 위한 시간. <b>미나</b> 선생님이 1:1로 함께합니다 — 스튜디오에서, 임신 중에도, 야외에서도. 수업을 몸에 맞추지, 몸을 수업에 맞추지 않아요.",
@@ -878,6 +981,101 @@ document.querySelectorAll('.lang-switch button').forEach(function(b){
 var saved = null;
 try{ saved = localStorage.getItem('milates-lang'); }catch(e){}
 applyLang(saved && I18N[saved] ? saved : 'fr');
+
+/* ---------- breathing ring + méthode cycle ---------- */
+(function(){
+  var label=document.getElementById('breathLabel');
+  var items=Array.prototype.slice.call(document.querySelectorAll('.method-item'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!items.length)return;
+  if(label&&!reduce){
+    var inhale=true;
+    setInterval(function(){
+      inhale=!inhale;
+      label.style.opacity=0;
+      setTimeout(function(){
+        var d=I18N[document.documentElement.lang]||I18N.fr;
+        label.textContent=inhale?(d.br_in||'Inspirez'):(d.br_out||'Expirez');
+        label.style.opacity=1;
+      },420);
+    },4500);
+  }
+  if(reduce)return;
+  var i=0,timer=null,paused=false;
+  function show(n){
+    items.forEach(function(el,k){
+      el.classList.toggle('dim',k!==n);
+      el.classList.remove('live');
+    });
+    void items[n].offsetWidth;
+    items[n].classList.add('live');
+  }
+  function start(){ show(i); timer=setInterval(function(){ if(paused)return; i=(i+1)%items.length; show(i); },4500); }
+  items.forEach(function(el,k){
+    el.addEventListener('mouseenter',function(){paused=true;i=k;show(k);});
+    el.addEventListener('mouseleave',function(){paused=false;});
+  });
+  var sec=document.getElementById('methode');
+  if('IntersectionObserver' in window && sec){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting && !timer){ start(); io.disconnect(); } });
+    },{threshold:.3});
+    io.observe(sec);
+  } else { start(); }
+})();
+
+/* ---------- séance selector ---------- */
+(function(){
+  var btns=Array.prototype.slice.call(document.querySelectorAll('.sel-names button'));
+  if(!btns.length)return;
+  var phs=document.querySelectorAll('.sel-ph img');
+  var panes=document.querySelectorAll('.sel-pane');
+  function pick(n){
+    btns.forEach(function(b,k){b.classList.toggle('on',k===n);b.setAttribute('aria-selected',k===n);});
+    phs.forEach(function(x,k){x.classList.toggle('on',k===n);});
+    panes.forEach(function(x,k){x.classList.toggle('on',k===n);});
+  }
+  btns.forEach(function(b,k){
+    b.addEventListener('mouseenter',function(){pick(k);});
+    b.addEventListener('focus',function(){pick(k);});
+    b.addEventListener('click',function(){pick(k);});
+  });
+})();
+
+/* ---------- hero photo parallax + magnetic buttons ---------- */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(reduce||!fine)return;
+  var frame=document.querySelector('.hero-frame');
+  var img=frame&&frame.querySelector('img');
+  var note=frame&&frame.querySelector('.hand-note');
+  if(frame&&img){
+    setTimeout(function(){
+      img.style.animation='none';
+      img.style.transform='scale(1.06)';
+      img.style.transition='transform .6s cubic-bezier(.23,1,.32,1)';
+      frame.addEventListener('mousemove',function(e){
+        var r=frame.getBoundingClientRect();
+        var nx=(e.clientX-r.left)/r.width-.5, ny=(e.clientY-r.top)/r.height-.5;
+        img.style.transform='scale(1.06) translate('+(-nx*22)+'px,'+(-ny*16)+'px)';
+        if(note)note.style.transform='translate('+(nx*14)+'px,'+(ny*10)+'px)';
+      });
+      frame.addEventListener('mouseleave',function(){
+        img.style.transform='scale(1.06)';
+        if(note)note.style.transform='';
+      });
+    },2500);
+  }
+  document.querySelectorAll('.cta-row .btn, .btn-solid').forEach(function(el){
+    el.style.transition='transform .35s cubic-bezier(.23,1,.32,1),background .25s,color .25s';
+    el.addEventListener('mousemove',function(e){
+      var r=el.getBoundingClientRect();
+      el.style.transform='translate('+((e.clientX-r.left-r.width/2)*.22)+'px,'+((e.clientY-r.top-r.height/2)*.34)+'px)';
+    });
+    el.addEventListener('mouseleave',function(){el.style.transform='';});
+  });
+})();
 
 /* Toss-style progress trail */
 (function(){
