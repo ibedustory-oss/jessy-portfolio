@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import type { FinderBlock } from '@/lib/service-extra'
+import type { FinderBlock, PlanExtra } from '@/lib/service-extra'
 
 function Caret() {
   return (
@@ -52,10 +52,12 @@ function Slot({
 export default function Finder({
   block,
   plans,
+  planExtra,
   contact,
 }: {
   block: FinderBlock
   plans: { name: string; price: string; unit: string }[]
+  planExtra: PlanExtra
   contact: string
 }) {
   const [size, setSize] = useState<number | null>(null)
@@ -64,10 +66,12 @@ export default function Finder({
 
   const ready = size !== null && pain !== null
   const result = shown && ready ? { s: block.sizes[size!], p: block.pains[pain!] } : null
-  const plan = result ? plans[Math.min(result.p.plan, plans.length - 1)] : null
+  const idx = result ? Math.min(result.p.plan, plans.length - 1) : -1
+  const plan = idx >= 0 ? plans[idx] : null
+  const excludes = idx >= 0 ? planExtra.items[idx]?.excludes ?? [] : []
 
   return (
-    <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.86fr)]">
+    <div className="grid items-start gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.86fr)]">
       <div className="rounded-3xl border border-line bg-paper p-7 md:p-9">
         <p className="text-[17px] font-medium leading-[2.6] text-ink md:text-[21px] md:leading-[2.7]">
           {block.sizeLead}{' '}
@@ -139,6 +143,13 @@ export default function Finder({
               {plan.price} <span className="font-medium text-warmgray">{plan.unit}</span>
             </p>
 
+            <p className="mt-4 inline-flex items-baseline gap-2 rounded-full bg-surface px-3.5 py-1.5">
+              <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-warmgray">
+                {block.weeksLabel}
+              </span>
+              <span className="text-[13px] font-extrabold text-ink">{result.p.weeks}</span>
+            </p>
+
             <dl className="mt-5 space-y-4 border-t border-line pt-5">
               <div>
                 <dt className="text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
@@ -153,6 +164,22 @@ export default function Finder({
                 <dd className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal">{result.s.how}</dd>
               </div>
             </dl>
+
+            {excludes.length > 0 && (
+              <div className="mt-5 border-t border-line pt-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
+                  {block.excludeLabel}
+                </p>
+                <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5">
+                  {excludes.map((e) => (
+                    <li key={e} className="flex items-center gap-1.5 text-[12.5px] text-warmgray">
+                      <span aria-hidden="true" className="text-[13px] leading-none">&times;</span>
+                      {e}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <Link
               href={contact}

@@ -309,7 +309,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             note={x.finder.lead}
           />
           <Reveal className="mt-12">
-            <Finder block={x.finder} plans={s.plans} contact={contact} />
+            <Finder block={x.finder} plans={s.plans} planExtra={x.planExtra} contact={contact} />
           </Reveal>
         </div>
       </section>
@@ -485,8 +485,32 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                     >
                       {p.desc}
                     </p>
+
+                    <p
+                      className={`mt-5 rounded-2xl px-4 py-3 text-[12.5px] leading-relaxed ${
+                        onDark ? 'bg-white/[0.07] text-white/80' : 'bg-surface text-charcoal'
+                      }`}
+                    >
+                      <span
+                        className={`mr-1.5 font-bold ${onDark ? 'text-accentlit' : 'text-accent'}`}
+                      >
+                        {x.planExtra.bestLabel}
+                      </span>
+                      {x.planExtra.items[i]?.best}
+                    </p>
+
+                    {x.planExtra.items[i]?.adds && (
+                      <p
+                        className={`mt-5 text-[12px] font-bold ${
+                          onDark ? 'text-accentlit' : 'text-accent'
+                        }`}
+                      >
+                        {x.planExtra.items[i]?.adds}
+                      </p>
+                    )}
+
                     <ul
-                      className={`mt-6 space-y-2.5 border-t pt-6 ${
+                      className={`mt-4 space-y-2.5 border-t pt-5 ${
                         onDark ? 'border-white/15' : 'border-line'
                       }`}
                     >
@@ -504,9 +528,38 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                         </li>
                       ))}
                     </ul>
+                    {(x.planExtra.items[i]?.excludes.length ?? 0) > 0 && (
+                      <div
+                        className={`mb-7 mt-5 border-t pt-5 ${onDark ? 'border-white/15' : 'border-line'}`}
+                      >
+                        <p
+                          className={`text-[11px] font-bold uppercase tracking-[0.16em] ${
+                            onDark ? 'text-white/45' : 'text-warmgray'
+                          }`}
+                        >
+                          {x.planExtra.excludeLabel}
+                        </p>
+                        <ul className="mt-2 space-y-1.5">
+                          {x.planExtra.items[i]?.excludes.map((e) => (
+                            <li
+                              key={e}
+                              className={`flex items-start gap-2 text-[12.5px] ${
+                                onDark ? 'text-white/50' : 'text-warmgray'
+                              }`}
+                            >
+                              <span aria-hidden="true" className="mt-px leading-none">
+                                &times;
+                              </span>
+                              {e}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     <Link
                       href={contact}
-                      className={`mt-7 block rounded-full py-3 text-center text-[13px] font-bold transition duration-300 ease-swift ${
+                      className={`mt-auto block rounded-full py-3 text-center text-[13px] font-bold transition duration-300 ease-swift ${
                         tone === 'ink'
                           ? 'bg-accent text-white hover:bg-accentlit'
                           : 'border border-line bg-paper text-ink hover:border-ink'

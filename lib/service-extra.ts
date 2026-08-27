@@ -20,6 +20,7 @@ export interface FinderSize {
 export interface FinderPain {
   label: string
   plan: number
+  weeks: string
   what: string
 }
 
@@ -38,11 +39,20 @@ export interface FinderBlock {
   resultTitle: string
   resultEmpty: string
   planLabel: string
+  weeksLabel: string
   whatLabel: string
   howLabel: string
+  excludeLabel: string
   cta: string
   sizes: FinderSize[]
   pains: FinderPain[]
+}
+
+export interface PlanExtra {
+  bestLabel: string
+  addsLabel: string
+  excludeLabel: string
+  items: { best: string; adds?: string; excludes: string[] }[]
 }
 
 export interface NavBlock {
@@ -57,6 +67,7 @@ export interface NavBlock {
 export interface Extra {
   pain: PainBlock
   finder: FinderBlock
+  planExtra: PlanExtra
   nav: NavBlock
   eyebrows: { work: string; included: string; steps: string; price: string; compare: string; faq: string }
 }
@@ -91,8 +102,10 @@ export const EXTRA: Record<Lang, Extra> = {
       resultTitle: 'おすすめの進め方',
       resultEmpty: '2つ選ぶと、ここに出ます。',
       planLabel: 'プラン',
+      weeksLabel: '公開まで',
       whatLabel: 'まずやること',
       howLabel: '進め方',
+      excludeLabel: 'このプランに含まないもの',
       cta: 'この内容で相談する',
       sizes: [
         {
@@ -116,22 +129,46 @@ export const EXTRA: Record<Lang, Extra> = {
         {
           label: '何を伝えればいいか決まっていない',
           plan: 1,
+          weeks: '3〜4週間',
           what: 'WHYの言語化から始めます。誰に・なぜ・何を言わないかが1枚に収まるまで、デザインには入りません。',
         },
         {
           label: 'サイトはあるが問い合わせが来ない',
           plan: 0,
+          weeks: '2週間',
           what: 'いまのサイトを読んで、どこで離脱しているかを見ます。作り直すより1ページに絞ったほうが早いことも多いです。',
         },
         {
           label: '多言語で出したい',
           plan: 1,
+          weeks: '4週間',
           what: '日英韓は私が書きます。翻訳ではなく、その言語で読まれる文章として書き直します。仏語はネイティブ監修つきです。',
         },
         {
           label: '公開したあと何をすればいいかわからない',
           plan: 2,
+          weeks: '初月から',
           what: '検索・SNS・紹介のどこから人を呼ぶかを設計図にして、月ごとにやることを決めます。',
+        },
+      ],
+    },
+    planExtra: {
+      bestLabel: 'こんな方に',
+      addsLabel: 'ランディングページの内容すべて ＋',
+      excludeLabel: '含まないもの',
+      items: [
+        {
+          best: '伝えたいことが1つに絞れている方。まず1枚で試したい方。',
+          excludes: ['多言語', 'ページの追加', '公開後の運用'],
+        },
+        {
+          best: '事業の顔として、何度も見られる場所が要る方。',
+          adds: 'ランディングページの内容すべて ＋',
+          excludes: ['公開後のマーケティング運用', '写真撮影とロゴ制作'],
+        },
+        {
+          best: 'サイトはもうあり、公開後のマーケティングまで任せたい方。',
+          excludes: ['新規のサイト制作', '大幅なデザイン変更'],
         },
       ],
     },
@@ -175,8 +212,10 @@ export const EXTRA: Record<Lang, Extra> = {
       resultTitle: '추천 진행 방식',
       resultEmpty: '두 가지를 고르시면 여기에 나옵니다.',
       planLabel: '플랜',
+      weeksLabel: '오픈까지',
       whatLabel: '먼저 할 일',
       howLabel: '진행 방식',
+      excludeLabel: '이 플랜에 포함하지 않는 것',
       cta: '이 내용으로 상담하기',
       sizes: [
         {
@@ -200,22 +239,46 @@ export const EXTRA: Record<Lang, Extra> = {
         {
           label: '무엇을 말해야 할지 정해지지 않았다',
           plan: 1,
+          weeks: '3~4주',
           what: 'WHY를 언어화하는 것부터 합니다. 누구에게·왜·무엇을 말하지 않을지가 한 장에 담기기 전까지는 디자인에 들어가지 않습니다.',
         },
         {
           label: '사이트는 있는데 문의가 없다',
           plan: 0,
+          weeks: '2주',
           what: '지금 사이트를 읽고 어디서 이탈하는지 봅니다. 새로 만드는 것보다 한 페이지로 좁히는 게 빠를 때가 많습니다.',
         },
         {
           label: '여러 언어로 내고 싶다',
           plan: 1,
+          weeks: '4주',
           what: '한국어·일본어·영어는 제가 씁니다. 번역이 아니라 그 언어로 읽히는 글로 다시 씁니다. 불어는 원어민 감수를 붙입니다.',
         },
         {
           label: '공개한 다음에 뭘 해야 할지 모르겠다',
           plan: 2,
+          weeks: '첫 달부터',
           what: '검색·SNS·소개 중 어디서 사람을 데려올지 설계도로 만들고, 달마다 할 일을 정합니다.',
+        },
+      ],
+    },
+    planExtra: {
+      bestLabel: '이런 분께',
+      addsLabel: '랜딩페이지 내용 전부 ＋',
+      excludeLabel: '포함하지 않는 것',
+      items: [
+        {
+          best: '할 말이 하나로 좁혀진 분. 우선 한 장으로 시험해 보고 싶은 분.',
+          excludes: ['다국어', '페이지 추가', '오픈 후 운영'],
+        },
+        {
+          best: '사업의 얼굴로, 여러 번 보게 될 자리가 필요한 분.',
+          adds: '랜딩페이지 내용 전부 ＋',
+          excludes: ['오픈 후 마케팅 운영', '사진 촬영과 로고 제작'],
+        },
+        {
+          best: '사이트는 이미 있고, 오픈 후 마케팅까지 맡기고 싶은 분.',
+          excludes: ['신규 사이트 제작', '대폭적인 디자인 변경'],
         },
       ],
     },
@@ -259,8 +322,10 @@ export const EXTRA: Record<Lang, Extra> = {
       resultTitle: 'Where to start',
       resultEmpty: 'Choose both and it appears here.',
       planLabel: 'Plan',
+      weeksLabel: 'To launch',
       whatLabel: 'First move',
       howLabel: 'How we run it',
+      excludeLabel: 'Not in this plan',
       cta: 'Start from this',
       sizes: [
         {
@@ -284,22 +349,46 @@ export const EXTRA: Record<Lang, Extra> = {
         {
           label: 'I have not decided what to say',
           plan: 1,
+          weeks: '3–4 weeks',
           what: 'We start by writing the WHY. Design waits until who, why, and what we refuse to say all fit on one page.',
         },
         {
           label: 'I have a site but no enquiries',
           plan: 0,
+          weeks: '2 weeks',
           what: 'I read the current site and find where people leave. Narrowing to a single page is often faster than rebuilding.',
         },
         {
           label: 'I need it in several languages',
           plan: 1,
+          weeks: '4 weeks',
           what: 'I write Japanese, English and Korean myself — rewritten to read natively, not translated. French goes through a native editor.',
         },
         {
           label: 'I do not know what happens after launch',
           plan: 2,
+          weeks: 'from month one',
           what: 'We map where the traffic comes from — search, social, referral — and set what to do each month.',
+        },
+      ],
+    },
+    planExtra: {
+      bestLabel: 'Right if',
+      addsLabel: 'Everything in the landing page, plus',
+      excludeLabel: 'Not included',
+      items: [
+        {
+          best: 'you have one thing to say and want to test it on a single page.',
+          excludes: ['Other languages', 'Extra pages', 'Running it after launch'],
+        },
+        {
+          best: 'this is the face of the business and people will come back to it.',
+          adds: 'Everything in the landing page, plus',
+          excludes: ['Running marketing after launch', 'Photography and logo design'],
+        },
+        {
+          best: 'the site exists and you want the marketing after launch handled too.',
+          excludes: ['Building a new site', 'A full redesign'],
         },
       ],
     },
