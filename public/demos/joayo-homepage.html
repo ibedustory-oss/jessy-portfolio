@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JOAYO 좋아요 — Épicerie & Restaurant coréens à Paris</title>
-<meta name="description" content="Joayo : une maison coréenne, deux adresses à Paris. L'épicerie dans le 15e (12 rue Exemple) et le restaurant dans le 1er (34 avenue Exemple).">
+<meta name="description" content="Joayo : une maison coréenne, deux adresses à Paris. L'épicerie dans le 15e, le restaurant dans le 1er. Site de démonstration.">
 <meta property="og:title" content="JOAYO — Épicerie & Restaurant coréens à Paris (démo)">
 <meta property="og:description" content="Une maison coréenne, deux adresses à Paris. Site de démonstration par Jessy Jung.">
 <meta property="og:image" content="https://ibedustory-oss.github.io/jessy-portfolio/images/demo-joayo.jpg">
@@ -203,13 +203,27 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 @media(hover:none){.bub{display:none!important;}}
 
 /* ============ INTRO — split, not a lone paragraph ============ */
-.intro{
-  max-width:1320px;margin:0 auto;padding:130px 40px 110px;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:6vw;align-items:end;
-}
+.intro{max-width:1320px;margin:0 auto;padding:120px 40px 100px;}
 .intro .lead{
-  font-family:'Fraunces',serif;font-weight:420;
-  font-size:clamp(25px,3vw,42px);line-height:1.35;letter-spacing:-.005em;
+  font-family:'Fraunces',serif;font-weight:420;max-width:20ch;
+  font-size:clamp(25px,3vw,42px);line-height:1.34;letter-spacing:-.005em;
+}
+/* two uses, deliberately not the same size */
+.two-uses{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  gap:clamp(30px,5vw,80px);margin-top:clamp(48px,6vw,86px);align-items:start;
+}
+.use-k{
+  display:block;font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(21px,2.3vw,30px);margin-bottom:14px;
+}
+.use p{font-size:15.5px;line-height:1.82;color:var(--ink-60);max-width:34ch;}
+.use-a{border-top:1px solid var(--ink);padding-top:22px;}
+.use-a p{font-size:17px;color:var(--ink);}
+.use-b{border-top:1px solid var(--line);padding-top:22px;margin-top:clamp(0px,3vw,42px);}
+@media(max-width:860px){
+  .two-uses{grid-template-columns:1fr;gap:34px;}
+  .use-b{margin-top:0;}
 }
 .intro .lead strong{font-weight:560;color:var(--red);font-style:italic;}
 .intro .aside{border-top:1px solid var(--ink);padding-top:20px;}
@@ -217,6 +231,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .intro .aside dt{color:var(--ink-60);}
 .intro .aside dd{font-weight:600;}
 .intro .mark{margin-top:26px;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-60);font-weight:600;}
+.infos-practical{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 26px;
+  margin-top:46px;padding-top:24px;border-top:1px solid var(--line);
+  font-size:13px;line-height:1.7;
+}
+.infos-practical dt{color:var(--ink-60);letter-spacing:.1em;text-transform:uppercase;font-size:11px;padding-top:2px;}
+.infos-practical dd{color:var(--ink);}
+@media(max-width:640px){.infos-practical{grid-template-columns:1fr;gap:4px 0;}
+  .infos-practical dd{margin:0 0 14px;}}
 
 /* ============ BANCHAN RAIL — drag / scroll horizontally ============ */
 .rail-sec{padding:20px 0 130px;overflow:hidden;}
@@ -241,6 +264,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .card:hover img{transform:scale(1.06);}
 .card .cname{margin-top:14px;font-family:'Fraunces',serif;font-weight:560;font-size:19px;}
 .card .ckr{font-size:11.5px;letter-spacing:.2em;color:var(--red);margin-top:3px;}
+.card .cdoor{margin-top:7px;font-size:11.5px;line-height:1.5;color:var(--ink-60);}
+.card:nth-child(3n+1) .cimg{aspect-ratio:3/4;}
+.card:nth-child(3n+2) .cimg{aspect-ratio:1/1;}
+.card:nth-child(3n+3) .cimg{aspect-ratio:4/5;}
+.card:nth-child(even){margin-top:26px;}
 
 /* ============ STORY ============ */
 #histoire{
@@ -411,7 +439,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
       <span class="lkr">좋아요 마켓</span>
       <div class="lreveal">
         <p data-i18n="d1_p">Kimchi et banchan faits maison, ramyeon, sauces, snacks — le garde-manger de Séoul, dans le 15e.</p>
-        <div class="lmeta" data-i18n-html="d1_meta">12 rue Exemple, 75015<br>Ouvert dès 11h30 · ★ 4.9 · Google</div>
+        <div class="lmeta" data-i18n-html="d1_meta">Paris 15e · à emporter<br>Ouvert dès 11h30</div>
         <span class="lgo"><span data-i18n="d1_go2">Entrer dans l'épicerie</span> <span class="ar">→</span></span>
       </div>
     </div>
@@ -425,7 +453,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
       <span class="lkr">좋아요 레스토랑</span>
       <div class="lreveal">
         <p data-i18n="d2_p">Bibimbap au tartare de bœuf, bulgogi, poulet frit — l'institution coréenne en plein cœur de Paris.</p>
-        <div class="lmeta" data-i18n-html="d2_meta">34 avenue Exemple, 75001<br>11h30 — 15h00 · 18h30 — 22h00 · ★ 4.7 · Google</div>
+        <div class="lmeta" data-i18n-html="d2_meta">Paris 1er · sur place<br>11h30 — 15h00 · 18h30 — 22h00</div>
         <span class="lgo"><span data-i18n="d2_go2">Voir la carte</span> <span class="ar">→</span></span>
       </div>
     </div>
@@ -434,7 +462,6 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   <div class="gate-mark" id="gateMark">
     <div class="kick"><span class="dot"></span> <span data-i18n="kicker">Une maison coréenne, deux adresses à Paris</span></div>
     <h1>Joayo <span class="kr">좋아요</span></h1>
-    <div class="say" data-i18n="hero_say">coréen — le mot qu'on dit quand c'est bon</div>
   </div>
   <div class="gate-hint" data-i18n="hint">Choisissez votre porte</div>
 </div>
@@ -449,30 +476,32 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 
 <!-- INTRO -->
 <section class="intro" data-rail>
-  <p class="lead reveal" data-i18n-html="hero_sub">Le goût de la Corée, à Paris. <strong>L'épicerie</strong> pour cuisiner chez soi, <strong>le restaurant</strong> pour se régaler sur place — choisissez votre porte.</p>
-  <div class="aside reveal">
-    <dl>
-      <dt data-i18n="a_open">Ouvert</dt><dd>11:30 — 22:00</dd>
-      <dt data-i18n="a_adr">Adresses</dt><dd>15e · 1er</dd>
-      <dt data-i18n="a_lang">Langues</dt><dd>FR · EN · 한국어</dd>
-    </dl>
-    <div class="mark">Paris 15e · Paris 1er</div>
+  <p class="lead reveal" data-i18n="hero_sub">Nous avons deux adresses à Paris. Une épicerie dans le 15e, un restaurant dans le 1er.</p>
+  <div class="two-uses">
+    <div class="use use-a reveal">
+      <span class="use-k">L'Épicerie</span>
+      <p data-i18n="use1">On y fait ses courses. Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.</p>
+    </div>
+    <div class="use use-b reveal">
+      <span class="use-k">Le Restaurant</span>
+      <p data-i18n="use2">On y mange sur place. Bibimbap, bulgogi, poulet frit. Midi et soir.</p>
+    </div>
   </div>
 </section>
 
 <!-- BANCHAN RAIL -->
 <section class="rail-sec" data-rail>
   <div class="rail-head">
-    <h2 class="reveal" data-i18n="r_h2">Ce qu'on rapporte à la maison</h2>
+    <h2 class="reveal" data-i18n="r_h2">Ce qu'on vend, ce qu'on sert</h2>
     <span class="hint reveal" data-i18n="r_hint">← Faites glisser →</span>
   </div>
   <div class="dragrail" id="dragrail">
-    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Kimchi</div><div class="ckr">김치</div></div>
-    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Banchan</div><div class="ckr">반찬</div></div>
-    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Bibimbap</div><div class="ckr">비빔밥</div></div>
-    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Jeon</div><div class="ckr">전</div></div>
-    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Bulgogi</div><div class="ckr">불고기</div></div>
-    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Ramyeon</div><div class="ckr">라면</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Kimchi</div><div class="cdoor" data-i18n="c1">L'épicerie · fait maison</div><div class="ckr">김치</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Banchan</div><div class="cdoor" data-i18n="c2">L'épicerie · selon le jour</div><div class="ckr">반찬</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Bibimbap</div><div class="cdoor" data-i18n="c3">Le restaurant</div><div class="ckr">비빔밥</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Jeon</div><div class="cdoor" data-i18n="c4">Le restaurant</div><div class="ckr">전</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Bulgogi</div><div class="cdoor" data-i18n="c5">Le restaurant</div><div class="ckr">불고기</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Ramyeon</div><div class="cdoor" data-i18n="c6">L'épicerie</div><div class="ckr">라면</div></div>
   </div>
 </section>
 
@@ -481,8 +510,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   <div class="story-text reveal">
       <h2 data-i18n-html="st_h2">Pourquoi « <span class="accent">Joayo</span> » ?</h2>
       <p data-i18n-html="st_p1">En coréen, <strong>joayo (좋아요)</strong> est le mot qui échappe quand tout va bien — « c'est bon ! », « j'aime ! ». C'est le mot qu'on entend autour d'une table coréenne, au moment où les plats arrivent.</p>
-      <p data-i18n="st_p2">C'est exactement le mot qu'on veut vous entendre dire : à l'épicerie, devant un kimchi qui croque — et à table, devant un bibimbap fumant.</p>
-      <span class="hand-note" data-i18n="st_note">— entrez, et dites-le : joayo ✦</span>
+      <p data-i18n="st_p2">C'est le mot qu'on entend le plus dans nos deux adresses.</p>
     </div>
     </div>
 </section>
@@ -497,18 +525,20 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
     <div class="info-card market-c reveal">
       <span class="corner" aria-hidden="true">MAISON 1</span>
       <h3 data-i18n="ic1_h3">L'Épicerie — Paris 15e</h3>
-      <div class="addr">12 rue Exemple, 75015</div>
-      <div class="meta" data-i18n-html="ic1_meta">Ouvert dès 11h30<br>Métro à 3 minutes<br>★ 4.9 — Google</div>
+      <div class="meta" data-i18n-html="ic1_meta">Ouvert dès 11h30<br>À emporter</div>
       <a class="page-link" href="joayo-market.html" data-i18n="ic1_link">Page de l'épicerie</a>
     </div>
     <div class="info-card resto-c reveal">
       <span class="corner" aria-hidden="true">MAISON 2</span>
       <h3 data-i18n="ic2_h3">Le Restaurant — Paris 1er</h3>
-      <div class="addr">34 avenue Exemple, 75001</div>
-      <div class="meta" data-i18n-html="ic2_meta">11h30 — 15h00 · 18h30 — 22h00 · ☎ 01 23 45 67 89<br>Métro à 2 minutes<br>★ 4.7 — Google</div>
+      <div class="meta" data-i18n-html="ic2_meta">11h30 — 15h00 · 18h30 — 22h00<br>Sur place</div>
       <a class="page-link" href="joayo-restaurant.html" data-i18n="ic2_link">Page du restaurant</a>
     </div>
   </div>
+  <dl class="infos-practical reveal">
+    <dt data-i18n="a_lang">Langues</dt><dd>Français · English · 한국어</dd>
+    <dt data-i18n="a_adr">Adresses</dt><dd data-i18n="a_adr_v">Site de démonstration — adresses non communiquées</dd>
+  </dl>
 </section>
 
 <!-- FOOTER -->
@@ -521,7 +551,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
     <a href="#histoire" data-i18n="nav_esprit">L'Esprit</a>
     <a href="#infos" data-i18n="nav_find">Nous trouver</a>
   </div>
-  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo — Épicerie : 12 rue Exemple, 75015 · Restaurant : 34 avenue Exemple, 75001 Paris</p>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo — Paris 15e &amp; Paris 1er</p>
 </footer>
 
 <script>
@@ -529,92 +559,116 @@ var I18N = {
 fr: {
   _title:"JOAYO 좋아요 — Épicerie & Restaurant coréens à Paris",
   hint:"Choisissez votre porte",
-  a_open:"Ouvert", a_adr:"Adresses", a_lang:"Langues",
-  r_h2:"Ce qu'on rapporte à la maison", r_hint:"← Faites glisser →",
+  a_adr:"Adresses", a_lang:"Langues",
+  r_h2:"Ce qu'on vend, ce qu'on sert", r_hint:"← Faites glisser →",
   tick1:"Épicerie coréenne", tick2:"Restaurant", tick3:"Paris 15e & 1er", tick4:"Kimchi maison", tick5:"Banchan",
   nav_market:"L'Épicerie", nav_resto:"Le Restaurant", nav_esprit:"L'Esprit", nav_find:"Nous trouver",
-  kicker:"Une maison coréenne, deux adresses à Paris", hero_say:"coréen — le mot qu'on dit quand c'est bon",
-  hero_sub:"Le goût de la Corée, à Paris. <strong>L'épicerie</strong> pour cuisiner chez soi, <strong>le restaurant</strong> pour se régaler sur place — choisissez votre porte.",
+  kicker:"Une maison coréenne, deux adresses à Paris",
+  hero_sub:"Nous avons deux adresses à Paris. Une épicerie dans le 15e, un restaurant dans le 1er.",
   d1_tag:"Maison N°1 — Paris 15e", d1_h2:"L'Épicerie",
   d1_p:"Kimchi et banchan faits maison, ramyeon, sauces, snacks — le garde-manger de Séoul, dans le 15e.",
-  d1_meta:"12 rue Exemple, 75015<br>Ouvert dès 11h30 · ★ 4.9 · Google",
+  d1_meta:"Paris 15e · à emporter<br>Ouvert dès 11h30",
   d1_go2:"Entrer dans l'épicerie",
   d2_tag:"Maison N°2 — Paris 1er", d2_h2:"Le Restaurant",
   d2_p:"Bibimbap au tartare de bœuf, bulgogi, poulet frit — l'institution coréenne en plein cœur de Paris.",
-  d2_meta:"34 avenue Exemple, 75001<br>11h30 — 15h00 · 18h30 — 22h00 · ★ 4.7 · Google",
+  d2_meta:"Paris 1er · sur place<br>11h30 — 15h00 · 18h30 — 22h00",
   d2_go2:"Voir la carte",
   st_h2:"Pourquoi « <span class=\"accent\">Joayo</span> » ?",
   st_p1:"En coréen, <strong>joayo (좋아요)</strong> est le mot qui échappe quand tout va bien — « c'est bon ! », « j'aime ! ». C'est le mot qu'on entend autour d'une table coréenne, au moment où les plats arrivent.",
-  st_p2:"C'est exactement le mot qu'on veut vous entendre dire : à l'épicerie, devant un kimchi qui croque — et à table, devant un bibimbap fumant.",
-  st_note:"— entrez, et dites-le : joayo ✦",
+  st_p2:"C'est le mot qu'on entend le plus dans nos deux adresses.",
   in_over:"Infos pratiques · 오시는 길", in_h2:"Deux portes, un joayo",
   ic1_h3:"L'Épicerie — Paris 15e",
-  ic1_meta:"Ouvert dès 11h30<br>Métro à 3 minutes<br>★ 4.9 — Google",
+  ic1_meta:"Ouvert dès 11h30<br>À emporter",
   ic1_link:"Page de l'épicerie →",
   ic2_h3:"Le Restaurant — Paris 1er",
-  ic2_meta:"11h30 — 15h00 · 18h30 — 22h00 · ☎ 01 23 45 67 89<br>Métro à 2 minutes<br>★ 4.7 — Google",
+  ic2_meta:"11h30 — 15h00 · 18h30 — 22h00<br>Sur place",
   ic2_link:"Page du restaurant →",
-  legal:"Site de démonstration · © 2026 Joayo — Épicerie : 12 rue Exemple, 75015 · Restaurant : 34 avenue Exemple, 75001 Paris"
+  legal:"Site de démonstration · © 2026 Joayo — Paris 15e & Paris 1er",
+  use1:"On y fait ses courses. Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.",
+  use2:"On y mange sur place. Bibimbap, bulgogi, poulet frit. Midi et soir.",
+  c1:"L'épicerie · fait maison",
+  c2:"L'épicerie · selon le jour",
+  c3:"Le restaurant",
+  c4:"Le restaurant",
+  c5:"Le restaurant",
+  c6:"L'épicerie",
+  a_adr_v:"Site de démonstration — adresses non communiquées",
 },
 en: {
   _title:"JOAYO 좋아요 — Korean Grocery & Restaurant in Paris",
   hint:"Choose your door",
-  a_open:"Open", a_adr:"Addresses", a_lang:"Languages",
-  r_h2:"What you take home", r_hint:"← Drag →",
+  a_adr:"Addresses", a_lang:"Languages",
+  r_h2:"What we sell, what we serve", r_hint:"← Drag →",
   tick1:"Korean grocery", tick2:"Restaurant", tick3:"Paris 15th & 1st", tick4:"Homemade kimchi", tick5:"Banchan",
   nav_market:"The Grocery", nav_resto:"The Restaurant", nav_esprit:"The Spirit", nav_find:"Find us",
-  kicker:"One Korean house, two addresses in Paris", hero_say:"Korean — the word you say when it's good",
-  hero_sub:"The taste of Korea, in Paris. <strong>The grocery</strong> to cook at home, <strong>the restaurant</strong> to feast on site — pick your door.",
+  kicker:"One Korean house, two addresses in Paris",
+  hero_sub:"We have two addresses in Paris. A grocery in the 15th, a restaurant in the 1st.",
   d1_tag:"House N°1 — Paris 15th", d1_h2:"The Grocery",
   d1_p:"Homemade kimchi and banchan, ramyeon, sauces, snacks — Seoul's pantry, in the 15th.",
-  d1_meta:"12 rue Exemple, 75015<br>Opens 11:30 am · ★ 4.9 · Google",
+  d1_meta:"Paris 15e · takeaway<br>Opens 11:30 am",
   d1_go2:"Enter the grocery",
   d2_tag:"House N°2 — Paris 1st", d2_h2:"The Restaurant",
   d2_p:"Beef tartare bibimbap, bulgogi, fried chicken — the Korean institution in the heart of Paris.",
-  d2_meta:"34 avenue Exemple, 75001<br>11:30 am–3 pm · 6:30–10 pm · ★ 4.7 · Google",
+  d2_meta:"Paris 1er · eat in<br>11:30 am–3 pm · 6:30–10 pm",
   d2_go2:"See the menu",
   st_h2:"Why “<span class=\"accent\">Joayo</span>”?",
   st_p1:"In Korean, <strong>joayo (좋아요)</strong> is the word that slips out when things are good — “it's good!”, “I like it!”. It is what you hear around a Korean table the moment the dishes arrive.",
-  st_p2:"It is exactly the word we want from you — at the grocery, over kimchi that still crunches, and at the table, over a steaming bibimbap.",
-  st_note:"— come in and say it: joayo ✦",
+  st_p2:"It is the word we hear most in both of our addresses.",
   in_over:"Practical info · 오시는 길", in_h2:"Two doors, one joayo",
   ic1_h3:"The Grocery — Paris 15th",
-  ic1_meta:"Opens 11:30 am<br>Metro 3 minutes away<br>★ 4.9 — Google",
+  ic1_meta:"Opens 11:30 am<br>Takeaway",
   ic1_link:"Grocery page →",
   ic2_h3:"The Restaurant — Paris 1st",
-  ic2_meta:"11:30 am–3:00 pm · 6:30–10:00 pm · ☎ +33 1 23 45 67 89<br>Metro 2 minutes away<br>★ 4.7 — Google",
+  ic2_meta:"11:30 am–3:00 pm · 6:30–10:00 pm<br>Eat in",
   ic2_link:"Restaurant page →",
-  legal:"Site de démonstration · © 2026 Joayo — Grocery: 12 rue Exemple, 75015 · Restaurant: 34 avenue Exemple, 75001 Paris"
+  legal:"Demo site · © 2026 Joayo — Paris 15e & Paris 1er",
+  use1:"You come here to shop. House-made kimchi and banchan, ramyeon, sauces, snacks. To take away.",
+  use2:"You come here to eat. Bibimbap, bulgogi, fried chicken. Lunch and dinner.",
+  c1:"Grocery · house-made",
+  c2:"Grocery · depends on the day",
+  c3:"Restaurant",
+  c4:"Restaurant",
+  c5:"Restaurant",
+  c6:"Grocery",
+  a_adr_v:"Demo site — addresses not published",
 },
 ko: {
   _title:"좋아요 JOAYO — 파리 한국 마켓 & 레스토랑",
   hint:"문을 골라 보세요",
-  a_open:"영업", a_adr:"주소", a_lang:"언어",
-  r_h2:"집으로 가져가는 것들", r_hint:"← 드래그 →",
+  a_adr:"주소", a_lang:"언어",
+  r_h2:"파는 것과 내는 것", r_hint:"← 드래그 →",
   tick1:"한국 마켓", tick2:"레스토랑", tick3:"파리 15구 & 1구", tick4:"직접 담근 김치", tick5:"반찬",
   nav_market:"마켓", nav_resto:"레스토랑", nav_esprit:"좋아요 이야기", nav_find:"오시는 길",
-  kicker:"하나의 좋아요, 파리의 두 매장", hero_say:"맛있을 때 저절로 나오는 바로 그 말",
-  hero_sub:"파리에서 만나는 한국의 맛. 집에서 요리할 땐 <strong>마켓</strong>으로, 바로 먹고 싶을 땐 <strong>레스토랑</strong>으로 — 원하는 문으로 들어오세요.",
+  kicker:"하나의 좋아요, 파리의 두 매장",
+  hero_sub:"파리에 두 곳이 있습니다. 15구의 마켓, 1구의 레스토랑.",
   d1_tag:"1호점 — 파리 15구", d1_h2:"Joayo Market",
   d1_p:"직접 담근 김치와 반찬, 라면, 장류, 과자까지 — 파리 15구의 한국 마켓.",
-  d1_meta:"12 rue Exemple, 75015<br>11:30 오픈 · ★ 4.9 · Google",
+  d1_meta:"파리 15구 · 포장<br>11:30 오픈",
   d1_go2:"마켓 들어가기",
   d2_tag:"2호점 — 파리 1구", d2_h2:"Joayo Restaurant",
   d2_p:"육회비빔밥, 불고기, 치킨 — 파리에서 오래 사랑받아 온 한식 레스토랑.",
-  d2_meta:"34 avenue Exemple, 75001<br>11:30–15:00 · 18:30–22:00 · ★ 4.7 · Google",
+  d2_meta:"파리 1구 · 매장 식사<br>11:30–15:00 · 18:30–22:00",
   d2_go2:"메뉴 보기",
   st_h2:"왜 \"<span class=\"accent\">좋아요</span>\"냐고요?",
   st_p1:"<strong>좋아요</strong> — 맛있을 때, 마음에 들 때 저절로 나오는 말이죠. 한국의 밥상에서 음식이 나오는 순간, 가장 많이 들리는 말이기도 합니다.",
-  st_p2:"저희가 듣고 싶은 말이 바로 그 말입니다. 마켓에서 아삭한 김치에 한 번, 식당에서 뜨끈한 비빔밥에 또 한 번 — \"좋아요!\"",
-  st_note:"— 들어와서 말해 주세요, 좋아요 ✦",
+  st_p2:"두 곳에서 가장 자주 듣는 말입니다.",
   in_over:"오시는 길 · Infos", in_h2:"두 개의 문, 하나의 좋아요",
   ic1_h3:"마켓 — 파리 15구",
-  ic1_meta:"11:30 오픈<br>메트로 3분<br>★ 4.9 — Google",
+  ic1_meta:"11:30 오픈<br>포장",
   ic1_link:"마켓 페이지 →",
   ic2_h3:"레스토랑 — 파리 1구",
-  ic2_meta:"11:30–15:00 · 18:30–22:00 · ☎ 01 23 45 67 89<br>메트로 2분<br>★ 4.7 — Google",
+  ic2_meta:"11:30–15:00 · 18:30–22:00<br>매장 식사",
   ic2_link:"레스토랑 페이지 →",
-  legal:"데모 사이트 · © 2026 좋아요 Joayo — 마켓: 12 rue Exemple, 75015 · 레스토랑: 34 avenue Exemple, 75001 Paris"
+  legal:"데모 사이트 · © 2026 좋아요 Joayo — 파리 15구 & 1구",
+  use1:"장을 보는 곳입니다. 직접 담근 김치와 반찬, 라면, 소스, 과자. 포장해 갑니다.",
+  use2:"앉아서 먹는 곳입니다. 비빔밥, 불고기, 치킨. 점심과 저녁.",
+  c1:"마켓 · 직접 담근",
+  c2:"마켓 · 그날그날",
+  c3:"레스토랑",
+  c4:"레스토랑",
+  c5:"레스토랑",
+  c6:"마켓",
+  a_adr_v:"데모 사이트 — 주소는 공개하지 않습니다",
 }
 };
 
