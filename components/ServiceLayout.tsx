@@ -309,7 +309,13 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             note={x.finder.lead}
           />
           <Reveal className="mt-12">
-            <Finder block={x.finder} plans={s.plans} planExtra={x.planExtra} contact={contact} />
+            <Finder
+              block={x.finder}
+              plans={s.plans}
+              planExtra={x.planExtra}
+              monitorNote={x.monitor.finderNote}
+              contact={contact}
+            />
           </Reveal>
         </div>
       </section>
@@ -448,7 +454,107 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="mx-auto max-w-6xl">
           <Head eyebrow={x.eyebrows.price} title={s.priceTitle} note={s.priceSub} center />
 
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
+          {/* the monitor places lead the section — that is what is actually open */}
+          <Reveal className="mt-12">
+            <div className="overflow-hidden rounded-[26px] bg-ink p-8 md:p-11">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
+                  {x.monitor.eyebrow}
+                </span>
+                <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-bold tracking-wide text-white/85">
+                  {x.monitor.badge}
+                </span>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+                <h3 className="text-[26px] font-extrabold leading-[1.24] tracking-tightest text-white md:text-[38px]">
+                  {x.monitor.title}
+                  <br />
+                  <span className="text-accentlit">{x.monitor.titleAccent}</span>
+                </h3>
+                <p className="flex items-baseline gap-2">
+                  <span className="text-[44px] font-extrabold tracking-tightest text-accentlit md:text-[56px]">
+                    {x.monitor.price}
+                  </span>
+                  <span className="text-sm text-white/55">{x.monitor.unit}</span>
+                </p>
+              </div>
+
+              <p className="mt-5 max-w-2xl text-[14.5px] leading-relaxed text-white/70">
+                {x.monitor.lead}
+              </p>
+
+              <div className="mt-9 grid gap-8 border-t border-white/12 pt-8 md:grid-cols-3 md:gap-10">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accentlit">
+                    {x.monitor.scopeLabel}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {x.monitor.scope.map((v) => (
+                      <li key={v} className="flex items-start gap-2 text-[13px] text-white/85">
+                        <span className="mt-1">
+                          <Check className="text-accentlit" />
+                        </span>
+                        {v}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/45">
+                    {x.monitor.excludeLabel}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {x.monitor.excludes.map((v) => (
+                      <li key={v} className="flex items-start gap-2 text-[13px] text-white/50">
+                        <span aria-hidden="true" className="mt-px leading-none">
+                          &times;
+                        </span>
+                        {v}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/45">
+                    {x.monitor.termsLabel}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {x.monitor.terms.map((v, n) => (
+                      <li key={v} className="flex items-start gap-2.5 text-[13px] text-white/85">
+                        <span
+                          aria-hidden="true"
+                          className="mt-px font-bold tabular-nums text-white/35"
+                        >
+                          {n + 1}
+                        </span>
+                        {v}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Link
+                  href={contact}
+                  className="group inline-flex items-center gap-2 rounded-full bg-accent py-2 pl-6 pr-2 text-sm font-bold text-white transition duration-300 ease-swift hover:bg-accentlit"
+                >
+                  {x.monitor.cta}
+                  <Arrow />
+                </Link>
+                <p className="text-[12.5px] text-white/45">{x.monitor.note}</p>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={60}>
+            <p className="mt-14 text-center text-[12px] font-bold uppercase tracking-[0.18em] text-warmgray">
+              {x.monitor.plansNote}
+            </p>
+          </Reveal>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
             {s.plans.map((p, i) => {
               const tone = p.featured ? 'ink' : 'paper'
               const onDark = tone === 'ink'

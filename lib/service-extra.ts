@@ -55,6 +55,26 @@ export interface PlanExtra {
   items: { best: string; adds?: string; excludes: string[] }[]
 }
 
+export interface MonitorBlock {
+  eyebrow: string
+  badge: string
+  title: string
+  titleAccent: string
+  price: string
+  unit: string
+  lead: string
+  scopeLabel: string
+  scope: string[]
+  excludeLabel: string
+  excludes: string[]
+  termsLabel: string
+  terms: string[]
+  cta: string
+  note: string
+  plansNote: string
+  finderNote: string
+}
+
 export interface NavBlock {
   why: string
   finder: string
@@ -65,6 +85,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
+  monitor: MonitorBlock
   pain: PainBlock
   finder: FinderBlock
   planExtra: PlanExtra
@@ -74,6 +95,25 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
+    monitor: {
+      eyebrow: 'Monitor',
+      badge: '3社限定',
+      title: 'いま、最初の3社を',
+      titleAccent: '募集しています。',
+      price: '€300',
+      unit: '/ 1社',
+      lead: '実装はAIで速く終わらせます。だから戦略から入っても、この金額で成立します。事例をつくらせていただく代わりの価格です。',
+      scopeLabel: '含むもの',
+      scope: ['WHYの言語化と戦略シート(1枚)', '構成とコピー', '1ページ', 'スマホ対応', '公開作業まで'],
+      excludeLabel: '含まないもの',
+      excludes: ['多言語', 'ページの追加', '写真撮影とロゴ制作', '公開後の運用'],
+      termsLabel: 'お願いすること',
+      terms: ['屋号と写真を出した事例掲載', '3ヶ月後に変化を数字で共有', '推薦文を1つ'],
+      cta: 'モニターに応募する',
+      note: '定価は事例が揃ってから公開します。',
+      plansNote: 'モニター期間後の想定価格',
+      finderNote: 'いまはモニター期間です。1ページの範囲なら3社限定 €300。',
+    },
     pain: {
       eyebrow: 'About',
       title: 'サイトのことで、',
@@ -184,6 +224,25 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
+    monitor: {
+      eyebrow: 'Monitor',
+      badge: '3분 한정',
+      title: '지금, 첫 세 분을',
+      titleAccent: '모시고 있습니다.',
+      price: '€300',
+      unit: '/ 1곳',
+      lead: '구현은 AI로 빠르게 끝냅니다. 그래서 전략부터 시작해도 이 금액으로 성립합니다. 사례를 만들게 해 주시는 대신의 가격입니다.',
+      scopeLabel: '포함하는 것',
+      scope: ['WHY 언어화와 전략 시트(1장)', '구성과 카피', '1페이지', '모바일 대응', '오픈까지'],
+      excludeLabel: '포함하지 않는 것',
+      excludes: ['다국어', '페이지 추가', '사진 촬영과 로고 제작', '오픈 후 운영'],
+      termsLabel: '부탁드리는 것',
+      terms: ['상호와 사진을 낸 사례 게재', '3개월 뒤 변화를 숫자로 공유', '추천사 한 줄'],
+      cta: '모니터 신청하기',
+      note: '정가는 사례가 모이면 공개합니다.',
+      plansNote: '모니터 기간 이후의 예상 가격',
+      finderNote: '지금은 모니터 기간입니다. 1페이지 범위라면 3분 한정 €300.',
+    },
     pain: {
       eyebrow: 'About',
       title: '사이트 때문에,',
@@ -294,6 +353,25 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
+    monitor: {
+      eyebrow: 'Monitor',
+      badge: 'Three places',
+      title: 'I am taking the',
+      titleAccent: 'first three clients now.',
+      price: '€300',
+      unit: '/ client',
+      lead: 'The build is fast because I use AI for it, and that is what makes starting from strategy work at this price. It is the price of being allowed to make a case study.',
+      scopeLabel: 'Included',
+      scope: ['The WHY, written up as a one-page strategy sheet', 'Structure and copy', 'One page', 'Mobile', 'Through to launch'],
+      excludeLabel: 'Not included',
+      excludes: ['Other languages', 'Extra pages', 'Photography and logo design', 'Running it after launch'],
+      termsLabel: 'What I ask in return',
+      terms: ['A case study using your name and photos', 'The numbers, three months on', 'One line of testimonial'],
+      cta: 'Apply for a place',
+      note: 'Standard pricing follows once the case studies exist.',
+      plansNote: 'Expected pricing after the monitor period',
+      finderNote: 'The monitor period is open. Within a single page, three places at €300.',
+    },
     pain: {
       eyebrow: 'About',
       title: 'About your site —',

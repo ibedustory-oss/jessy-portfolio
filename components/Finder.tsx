@@ -53,11 +53,13 @@ export default function Finder({
   block,
   plans,
   planExtra,
+  monitorNote,
   contact,
 }: {
   block: FinderBlock
   plans: { name: string; price: string; unit: string }[]
   planExtra: PlanExtra
+  monitorNote: string
   contact: string
 }) {
   const [size, setSize] = useState<number | null>(null)
@@ -164,6 +166,10 @@ export default function Finder({
                 <dd className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal">{result.s.how}</dd>
               </div>
             </dl>
+
+            <p className="mt-5 rounded-2xl bg-tint px-4 py-3 text-[12.5px] leading-relaxed text-accent">
+              {monitorNote}
+            </p>
 
             {excludes.length > 0 && (
               <div className="mt-5 border-t border-line pt-5">
