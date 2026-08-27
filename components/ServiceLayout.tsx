@@ -141,14 +141,14 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_460px_at_16%_-14%,rgba(49,130,246,0.13),transparent_66%)]"
         />
-        <div className="relative mx-auto grid max-w-6xl gap-14 md:grid-cols-[minmax(0,1fr)_minmax(0,23rem)] md:items-center md:gap-16">
+        <div className="relative mx-auto grid max-w-6xl gap-14 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:items-center md:gap-14">
           <div>
           <Reveal>
             <p className="flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/50">
               <span className="h-px w-7 bg-white/35" aria-hidden="true" />
               {s.badge}
             </p>
-            <h1 className="mt-6 text-[32px] font-extrabold leading-[1.2] tracking-tightest text-white md:text-[58px]">
+            <h1 className="mt-6 break-keep text-[26px] font-extrabold leading-[1.26] tracking-tightest text-white md:text-[52px]">
               {s.headline}
               <br />
               {s.headlineAccent}
