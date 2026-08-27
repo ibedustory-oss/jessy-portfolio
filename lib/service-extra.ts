@@ -50,9 +50,8 @@ export interface FinderBlock {
 
 export interface PlanExtra {
   bestLabel: string
-  addsLabel: string
   excludeLabel: string
-  items: { best: string; adds?: string; excludes: string[] }[]
+  items: { best: string; excludes: string[] }[]
 }
 
 export interface MonitorBlock {
@@ -106,7 +105,7 @@ export const EXTRA: Record<Lang, Extra> = {
       scopeLabel: '含むもの',
       scope: ['WHYの言語化と戦略シート(1枚)', '構成とコピー', '多言語', 'ページの追加', 'スマホ対応', '公開作業まで'],
       excludeLabel: '含まないもの',
-      excludes: ['決済システム(追加料金で対応可)', '写真撮影とロゴ制作', 'ドメイン費用'],
+      excludes: ['決済システム(追加料金で対応可)', '写真撮影とロゴ制作', 'ドメイン・サーバー費用'],
       termsLabel: 'お互いに約束すること',
       terms: ['屋号と写真を出した事例掲載', '3ヶ月後に変化を数字で共有', '推薦文を1つ'],
       cta: 'モニターに応募する',
@@ -168,7 +167,7 @@ export const EXTRA: Record<Lang, Extra> = {
       pains: [
         {
           label: '何を伝えればいいか決まっていない',
-          plan: 1,
+          plan: 0,
           weeks: '3〜4週間',
           what: 'WHYの言語化から始めます。誰に・なぜ・何を言わないかが1枚に収まるまで、デザインには入りません。',
         },
@@ -180,13 +179,13 @@ export const EXTRA: Record<Lang, Extra> = {
         },
         {
           label: '多言語で出したい',
-          plan: 1,
+          plan: 0,
           weeks: '4週間',
           what: '日英韓は私が書きます。翻訳ではなく、その言語で読まれる文章として書き直します。仏語はネイティブ監修つきです。',
         },
         {
           label: '公開したあと何をすればいいかわからない',
-          plan: 2,
+          plan: 1,
           weeks: '初月から',
           what: '検索・SNS・紹介のどこから人を呼ぶかを設計図にして、月ごとにやることを決めます。',
         },
@@ -194,17 +193,11 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     planExtra: {
       bestLabel: 'こんな方に',
-      addsLabel: 'ランディングページの内容すべて ＋',
       excludeLabel: '含まないもの',
       items: [
         {
-          best: '伝えたいことが1つに絞れている方。まず1枚で試したい方。',
-          excludes: ['多言語', 'ページの追加', '公開後の運用'],
-        },
-        {
-          best: '事業の顔として、何度も見られる場所が要る方。',
-          adds: 'ランディングページの内容すべて ＋',
-          excludes: ['公開後のマーケティング運用', '写真撮影とロゴ制作'],
+          best: '事業の顔になる場所が要る方。1枚で始めて、あとから増やすこともできます。',
+          excludes: ['決済システム(追加料金で対応可)', '写真撮影とロゴ制作', 'ドメイン・サーバー費用'],
         },
         {
           best: 'サイトはもうあり、公開後のマーケティングまで任せたい方。',
@@ -229,19 +222,19 @@ export const EXTRA: Record<Lang, Extra> = {
       badge: '3분 한정',
       title: '지금, 첫 세 분을',
       titleAccent: '모시고 있습니다.',
-      price: '€300',
-      unit: '/ 1곳',
+      price: '₩450,000',
+      unit: '(€300) / 1곳',
       lead: '처음 세 분과는 파트너로 시작합니다. 무엇을 말할지 정하는 자리부터 같이 앉고, 오픈한 뒤의 숫자까지 함께 봅니다.',
       scopeLabel: '포함하는 것',
       scope: ['WHY 언어화와 전략 시트(1장)', '구성과 카피', '다국어', '페이지 추가', '모바일 대응', '오픈까지'],
       excludeLabel: '포함하지 않는 것',
-      excludes: ['결제 시스템(추가 요금으로 가능)', '사진 촬영과 로고 제작', '도메인 비용'],
+      excludes: ['결제 시스템(추가 요금으로 가능)', '사진 촬영과 로고 제작', '도메인·서버 비용'],
       termsLabel: '서로 약속하는 것',
       terms: ['상호와 사진을 낸 사례 게재', '3개월 뒤 변화를 숫자로 공유', '추천사 한 줄'],
       cta: '모니터 신청하기',
       note: '정가는 사례가 모이면 공개합니다.',
       plansNote: '모니터 기간 이후의 예상 가격',
-      finderNote: '지금은 모니터 기간입니다. 3분 한정 €300. 다국어와 페이지 추가도 포함합니다.',
+      finderNote: '지금은 모니터 기간입니다. 3분 한정 ₩450,000. 다국어와 페이지 추가도 포함합니다.',
     },
     pain: {
       eyebrow: 'About',
@@ -297,7 +290,7 @@ export const EXTRA: Record<Lang, Extra> = {
       pains: [
         {
           label: '무엇을 말해야 할지 정해지지 않았다',
-          plan: 1,
+          plan: 0,
           weeks: '3~4주',
           what: 'WHY를 언어화하는 것부터 합니다. 누구에게·왜·무엇을 말하지 않을지가 한 장에 담기기 전까지는 디자인에 들어가지 않습니다.',
         },
@@ -309,13 +302,13 @@ export const EXTRA: Record<Lang, Extra> = {
         },
         {
           label: '여러 언어로 내고 싶다',
-          plan: 1,
+          plan: 0,
           weeks: '4주',
           what: '한국어·일본어·영어는 제가 씁니다. 번역이 아니라 그 언어로 읽히는 글로 다시 씁니다. 불어는 원어민 감수를 붙입니다.',
         },
         {
           label: '공개한 다음에 뭘 해야 할지 모르겠다',
-          plan: 2,
+          plan: 1,
           weeks: '첫 달부터',
           what: '검색·SNS·소개 중 어디서 사람을 데려올지 설계도로 만들고, 달마다 할 일을 정합니다.',
         },
@@ -323,17 +316,11 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     planExtra: {
       bestLabel: '이런 분께',
-      addsLabel: '랜딩페이지 내용 전부 ＋',
       excludeLabel: '포함하지 않는 것',
       items: [
         {
-          best: '할 말이 하나로 좁혀진 분. 우선 한 장으로 시험해 보고 싶은 분.',
-          excludes: ['다국어', '페이지 추가', '오픈 후 운영'],
-        },
-        {
-          best: '사업의 얼굴로, 여러 번 보게 될 자리가 필요한 분.',
-          adds: '랜딩페이지 내용 전부 ＋',
-          excludes: ['오픈 후 마케팅 운영', '사진 촬영과 로고 제작'],
+          best: '사업의 얼굴이 될 자리가 필요한 분. 한 장으로 시작해 나중에 늘려도 됩니다.',
+          excludes: ['결제 시스템(추가 요금으로 가능)', '사진 촬영과 로고 제작', '도메인·서버 비용'],
         },
         {
           best: '사이트는 이미 있고, 오픈 후 마케팅까지 맡기고 싶은 분.',
@@ -364,7 +351,7 @@ export const EXTRA: Record<Lang, Extra> = {
       scopeLabel: 'Included',
       scope: ['The WHY, written up as a one-page strategy sheet', 'Structure and copy', 'Several languages', 'Additional pages', 'Mobile', 'Through to launch'],
       excludeLabel: 'Not included',
-      excludes: ['A payment system (available for an added fee)', 'Photography and logo design', 'The domain fee'],
+      excludes: ['A payment system (available for an added fee)', 'Photography and logo design', 'Domain and hosting fees'],
       termsLabel: 'What we agree',
       terms: ['A case study using your name and photos', 'The numbers, three months on', 'One line of testimonial'],
       cta: 'Apply for a place',
@@ -426,7 +413,7 @@ export const EXTRA: Record<Lang, Extra> = {
       pains: [
         {
           label: 'I have not decided what to say',
-          plan: 1,
+          plan: 0,
           weeks: '3–4 weeks',
           what: 'We start by writing the WHY. Design waits until who, why, and what we refuse to say all fit on one page.',
         },
@@ -438,13 +425,13 @@ export const EXTRA: Record<Lang, Extra> = {
         },
         {
           label: 'I need it in several languages',
-          plan: 1,
+          plan: 0,
           weeks: '4 weeks',
           what: 'I write Japanese, English and Korean myself — rewritten to read natively, not translated. French goes through a native editor.',
         },
         {
           label: 'I do not know what happens after launch',
-          plan: 2,
+          plan: 1,
           weeks: 'from month one',
           what: 'We map where the traffic comes from — search, social, referral — and set what to do each month.',
         },
@@ -452,17 +439,11 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     planExtra: {
       bestLabel: 'Right if',
-      addsLabel: 'Everything in the landing page, plus',
       excludeLabel: 'Not included',
       items: [
         {
-          best: 'you have one thing to say and want to test it on a single page.',
-          excludes: ['Other languages', 'Extra pages', 'Running it after launch'],
-        },
-        {
-          best: 'this is the face of the business and people will come back to it.',
-          adds: 'Everything in the landing page, plus',
-          excludes: ['Running marketing after launch', 'Photography and logo design'],
+          best: 'you need a place that works as the face of the business. Start with one page and add later.',
+          excludes: ['A payment system (available for an added fee)', 'Photography and logo design', 'Domain and hosting fees'],
         },
         {
           best: 'the site exists and you want the marketing after launch handled too.',

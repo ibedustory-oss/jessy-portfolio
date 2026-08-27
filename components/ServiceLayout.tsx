@@ -470,7 +470,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                   <span className="text-[44px] font-extrabold tracking-tightest text-accentlit md:text-[56px]">
                     {x.monitor.price}
                   </span>
-                  <span className="text-sm text-white/55">{x.monitor.unit}</span>
+                  <span className="break-keep text-sm text-white/55">{x.monitor.unit}</span>
                 </p>
               </div>
 
@@ -548,7 +548,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             </p>
           </Reveal>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mx-auto mt-6 grid max-w-4xl gap-4 md:grid-cols-2">
             {s.plans.map((p, i) => {
               const tone = p.featured ? 'ink' : 'paper'
               const onDark = tone === 'ink'
@@ -574,7 +574,11 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                       >
                         {p.price}
                       </span>
-                      <span className={`text-xs ${onDark ? 'text-white/60' : 'text-warmgray'}`}>
+                      <span
+                        className={`break-keep text-xs ${
+                          onDark ? 'text-white/60' : 'text-warmgray'
+                        }`}
+                      >
                         {p.unit}
                       </span>
                     </p>
@@ -599,15 +603,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                       {x.planExtra.items[i]?.best}
                     </p>
 
-                    {x.planExtra.items[i]?.adds && (
-                      <p
-                        className={`mt-5 text-[12px] font-bold ${
-                          onDark ? 'text-accentlit' : 'text-accent'
-                        }`}
-                      >
-                        {x.planExtra.items[i]?.adds}
-                      </p>
-                    )}
 
                     <ul
                       className={`mt-4 space-y-2.5 border-t pt-5 ${
