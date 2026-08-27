@@ -36,7 +36,7 @@ export default function StickyEdge({
     <div className="grid gap-14 md:grid-cols-12 md:gap-10">
       <div className="md:col-span-5 md:sticky md:top-36 md:self-start">
         <p className="text-[13px] font-bold tracking-wide text-accent">{eyebrow}</p>
-        <h2 className="mt-4 text-4xl font-extrabold leading-[1.12] tracking-tightest md:text-5xl lg:text-6xl">
+        <h2 className="mt-4 break-keep text-[30px] font-extrabold leading-[1.16] tracking-tightest md:text-[44px]">
           {heading}
         </h2>
       </div>
