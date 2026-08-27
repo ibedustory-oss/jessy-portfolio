@@ -5,6 +5,7 @@ import Finder from '@/components/Finder'
 import Reveal from '@/components/Reveal'
 import SectionNav from '@/components/SectionNav'
 import StickyEdge from '@/components/StickyEdge'
+import StrategySheet from '@/components/StrategySheet'
 import type { Lang } from '@/lib/content'
 import { SERVICE } from '@/lib/service'
 import { EXTRA } from '@/lib/service-extra'
@@ -142,7 +143,8 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_460px_at_16%_-14%,rgba(49,130,246,0.13),transparent_66%)]"
         />
-        <div className="relative mx-auto max-w-5xl">
+        <div className="relative mx-auto grid max-w-6xl gap-14 md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] md:items-center md:gap-16">
+          <div>
           <Reveal>
             <p className="flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/50">
               <span className="h-px w-7 bg-white/35" aria-hidden="true" />
@@ -187,9 +189,22 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             </div>
           </Reveal>
 
+          </div>
+
+          <Reveal delay={120} className="md:pt-4">
+            <StrategySheet
+              label={x.sheet.label}
+              refNo={x.sheet.ref}
+              rows={x.sheet.rows}
+              caption={x.sheet.caption}
+            />
+          </Reveal>
+        </div>
+
+        <div className="relative mx-auto mt-16 max-w-6xl md:mt-20">
           {/* stat row, ruled between */}
           <Reveal delay={140}>
-            <dl className="mt-14 grid grid-cols-2 gap-x-5 gap-y-8 border-t border-white/12 pt-8 md:grid-cols-4 md:gap-x-0">
+            <dl className="grid grid-cols-2 gap-x-5 gap-y-8 border-t border-white/12 pt-8 md:grid-cols-4 md:gap-x-0">
               {s.stats.map((st, i) => (
                 <div key={st.l} className={i ? 'md:border-l md:border-white/12 md:pl-6' : 'md:pr-6'}>
                   <dt className="text-[26px] font-extrabold tracking-tightest text-white md:text-[32px]">
@@ -290,7 +305,12 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             note={x.finder.lead}
           />
           <Reveal className="mt-12">
-            <Finder block={x.finder} contact={contact} />
+            <Finder
+              block={x.finder}
+              sheetLabel={x.sheet.label}
+              draftRef={x.sheet.draftRef}
+              contact={contact}
+            />
           </Reveal>
         </div>
       </section>

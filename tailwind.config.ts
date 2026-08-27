@@ -21,6 +21,15 @@ const config: Config = {
         accentlit: '#3182F6',
       },
       fontFamily: {
+        mono: [
+          'ui-monospace',
+          'SFMono-Regular',
+          'SF Mono',
+          'Menlo',
+          'Consolas',
+          'Liberation Mono',
+          'monospace',
+        ],
         sans: [
           'var(--font-sans)',
           '-apple-system',

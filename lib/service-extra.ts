@@ -4,6 +4,14 @@ import type { Lang } from '@/lib/content'
    labels, and the two-axis finder. Kept out of service.ts so the three
    existing language blocks there stay untouched. */
 
+export interface SheetBlock {
+  label: string
+  ref: string
+  draftRef: string
+  rows: { k: string; v?: string }[]
+  caption: string
+}
+
 export interface PainBlock {
   eyebrow: string
   title: string
@@ -29,19 +37,13 @@ export interface FinderBlock {
   titleAccent: string
   lead: string
   sizeLead: string
-  sizeAfter: string
   painLead: string
-  painAfter: string
-  placeholder: string
-  submit: string
   reset: string
-  resultTitle: string
-  resultEmpty: string
-  planLabel: string
+  rowYou: string
+  rowIssue: string
   weeksLabel: string
   whatLabel: string
   howLabel: string
-  excludeLabel: string
   cta: string
   sizes: FinderSize[]
   pains: FinderPain[]
@@ -63,6 +65,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
+  sheet: SheetBlock
   pain: PainBlock
   finder: FinderBlock
   planExtra: PlanExtra
@@ -72,6 +75,21 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
+    sheet: {
+      label: 'Strategy sheet',
+      ref: 'N°01',
+      draftRef: '下書き',
+      rows: [
+        { k: 'Why', v: 'つくる前に、決める。' },
+        { k: 'Who', v: '言葉がまだ決まっていない事業者' },
+        { k: 'Position', v: '制作会社ではなく、一緒に決める相手' },
+        { k: 'Product', v: '戦略シート＋サイト' },
+        { k: 'Price', v: '¥200,000〜' },
+        { k: 'Place', v: 'パリ / オンライン' },
+        { k: 'Message' },
+      ],
+      caption: 'これは私の分です。あなたの分は、まだ白紙です。',
+    },
     pain: {
       eyebrow: 'About',
       title: 'サイトのことで、',
@@ -86,23 +104,17 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     finder: {
       eyebrow: 'Finder',
-      title: 'あなたに合う進め方を、',
-      titleAccent: 'その場でお出しします。',
-      lead: '2つ選ぶだけで、何から始めてどう一緒に進めるかをその場でお見せします。',
+      title: 'あなたのシート、',
+      titleAccent: '最初の数行を書きます。',
+      lead: '2つ選ぶと、シートが上から埋まっていきます。',
       sizeLead: '私は',
-      sizeAfter: 'で、',
       painLead: 'いま',
-      painAfter: 'に困っています。',
-      placeholder: '選んでください',
-      submit: '見てみる',
       reset: 'リセット',
-      resultTitle: 'おすすめの進め方',
-      resultEmpty: '2つ選ぶと、ここに出ます。',
-      planLabel: 'プラン',
+      rowYou: '事業',
+      rowIssue: 'いま',
       weeksLabel: '公開まで',
       whatLabel: '何から始めるか',
       howLabel: 'どう一緒に進めるか',
-      excludeLabel: 'このプランに含まないもの',
       cta: 'この内容で相談する',
       sizes: [
         {
@@ -175,6 +187,21 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
+    sheet: {
+      label: 'Strategy sheet',
+      ref: 'N°01',
+      draftRef: '초안',
+      rows: [
+        { k: 'Why', v: '만들기 전에, 정한다.' },
+        { k: 'Who', v: '할 말이 아직 안 정해진 사업자' },
+        { k: 'Position', v: '제작사가 아니라, 같이 정하는 사람' },
+        { k: 'Product', v: '전략 시트 + 사이트' },
+        { k: 'Price', v: '₩1,200,000~' },
+        { k: 'Place', v: '파리 / 온라인' },
+        { k: 'Message' },
+      ],
+      caption: '이건 제 것입니다. 사장님 것은 아직 백지입니다.',
+    },
     pain: {
       eyebrow: 'About',
       title: '사이트 때문에,',
@@ -189,23 +216,17 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     finder: {
       eyebrow: 'Finder',
-      title: '맞는 진행 방식을',
-      titleAccent: '바로 알려드릴게요.',
-      lead: '두 가지만 고르시면, 무엇부터 어떻게 함께할지 바로 보여 드립니다.',
+      title: '사장님의 시트,',
+      titleAccent: '첫 몇 줄을 채워 봅니다.',
+      lead: '두 가지를 고르시면 시트가 위에서부터 채워집니다.',
       sizeLead: '저는',
-      sizeAfter: '이고,',
       painLead: '지금',
-      painAfter: '이 고민입니다.',
-      placeholder: '선택해 주세요',
-      submit: '확인하기',
       reset: '초기화',
-      resultTitle: '추천 진행 방식',
-      resultEmpty: '두 가지를 고르시면 여기에 나옵니다.',
-      planLabel: '플랜',
+      rowYou: '사업',
+      rowIssue: '지금',
       weeksLabel: '오픈까지',
       whatLabel: '무엇부터',
       howLabel: '어떻게 함께',
-      excludeLabel: '이 플랜에 포함하지 않는 것',
       cta: '이 내용으로 상담하기',
       sizes: [
         {
@@ -278,6 +299,21 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
+    sheet: {
+      label: 'Strategy sheet',
+      ref: 'N°01',
+      draftRef: 'Draft',
+      rows: [
+        { k: 'Why', v: 'Decide before you build.' },
+        { k: 'Who', v: 'Owners who have not settled what to say' },
+        { k: 'Position', v: 'Not a studio. The person who decides with you.' },
+        { k: 'Product', v: 'Strategy sheet and site' },
+        { k: 'Price', v: '¥200,000+' },
+        { k: 'Place', v: 'Paris and remote' },
+        { k: 'Message' },
+      ],
+      caption: 'This one is mine. Yours is still blank.',
+    },
     pain: {
       eyebrow: 'About',
       title: 'About your site —',
@@ -292,23 +328,17 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     finder: {
       eyebrow: 'Finder',
-      title: 'Tell me two things and',
-      titleAccent: "I will tell you where to start.",
-      lead: 'Pick two and I will show you where we start and how we work together.',
+      title: 'Your sheet,',
+      titleAccent: 'the first few lines.',
+      lead: 'Choose two and the sheet fills from the top.',
       sizeLead: 'I am',
-      sizeAfter: ', and',
       painLead: 'right now',
-      painAfter: '.',
-      placeholder: 'choose one',
-      submit: 'Show me',
       reset: 'Reset',
-      resultTitle: 'Where to start',
-      resultEmpty: 'Choose both and it appears here.',
-      planLabel: 'Plan',
+      rowYou: 'Business',
+      rowIssue: 'Now',
       weeksLabel: 'To launch',
       whatLabel: 'Where we start',
       howLabel: 'How we work together',
-      excludeLabel: 'Not in this plan',
       cta: 'Start from this',
       sizes: [
         {

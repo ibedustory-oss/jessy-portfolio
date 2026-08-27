@@ -2,159 +2,125 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import StrategySheet from '@/components/StrategySheet'
 import type { FinderBlock } from '@/lib/service-extra'
 
-function Caret() {
-  return (
-    <svg viewBox="0 0 10 6" className="pointer-events-none h-2 w-3 shrink-0 text-accent" aria-hidden="true">
-      <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function Slot({
-  value,
-  onChange,
-  options,
-  placeholder,
+function Choice({
   label,
+  options,
+  value,
+  onPick,
 }: {
-  value: number | null
-  onChange: (v: number | null) => void
-  options: string[]
-  placeholder: string
   label: string
+  options: string[]
+  value: number | null
+  onPick: (i: number) => void
 }) {
   return (
-    <span className="relative inline-flex min-w-[9.5rem] items-center justify-between gap-2 border-b-2 border-accent/35 pb-1 focus-within:border-accent">
-      <span className={value === null ? 'text-warmgray' : 'font-bold text-accent'}>
-        {value === null ? placeholder : options[value]}
-      </span>
-      <Caret />
-      <select
-        aria-label={label}
-        value={value === null ? '' : value}
-        onChange={(e) => onChange(e.target.value === '' ? null : Number(e.target.value))}
-        className="absolute inset-0 cursor-pointer opacity-0"
-      >
-        <option value="">{placeholder}</option>
-        {options.map((o, i) => (
-          <option key={o} value={i}>
-            {o}
-          </option>
-        ))}
-      </select>
-    </span>
+    <fieldset>
+      <legend className="font-mono text-[10px] uppercase tracking-[0.2em] text-warmgray">
+        {label}
+      </legend>
+      <div className="mt-3.5 flex flex-wrap gap-2">
+        {options.map((o, i) => {
+          const on = value === i
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={on}
+              onClick={() => onPick(i)}
+              className={`rounded-full border px-4 py-2.5 text-left text-[13px] transition duration-300 ease-swift ${
+                on
+                  ? 'border-ink bg-ink font-bold text-white'
+                  : 'border-line bg-paper font-medium text-charcoal hover:border-ink hover:text-ink'
+              }`}
+            >
+              {o}
+            </button>
+          )
+        })}
+      </div>
+    </fieldset>
   )
 }
 
-/* Two choices, written as a sentence, that resolve into one recommendation. */
+/* Two choices that write themselves onto a draft of the sheet. */
 export default function Finder({
   block,
+  sheetLabel,
+  draftRef,
   contact,
 }: {
   block: FinderBlock
+  sheetLabel: string
+  draftRef: string
   contact: string
 }) {
   const [size, setSize] = useState<number | null>(null)
   const [pain, setPain] = useState<number | null>(null)
-  const [shown, setShown] = useState(false)
 
-  const ready = size !== null && pain !== null
-  const result = shown && ready ? { s: block.sizes[size!], p: block.pains[pain!] } : null
+  const s = size === null ? null : block.sizes[size]
+  const p = pain === null ? null : block.pains[pain]
+
+  const rows = [
+    { k: block.rowYou, v: s?.label },
+    { k: block.rowIssue, v: p?.label },
+    { k: block.whatLabel, v: p?.what },
+    { k: block.howLabel, v: s?.how },
+    { k: block.weeksLabel, v: p?.weeks },
+  ]
 
   return (
-    <div className="grid items-start gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.86fr)]">
-      <div className="rounded-3xl border border-line bg-paper p-7 md:p-9">
-        <p className="text-[17px] font-medium leading-[2.6] text-ink md:text-[21px] md:leading-[2.7]">
-          {block.sizeLead}{' '}
-          <Slot
-            value={size}
-            onChange={(v) => {
-              setSize(v)
-              setShown(false)
-            }}
-            options={block.sizes.map((s) => s.label)}
-            placeholder={block.placeholder}
-            label={block.sizeLead}
-          />{' '}
-          {block.sizeAfter}
-          <br />
-          {block.painLead}{' '}
-          <Slot
-            value={pain}
-            onChange={(v) => {
-              setPain(v)
-              setShown(false)
-            }}
-            options={block.pains.map((p) => p.label)}
-            placeholder={block.placeholder}
-            label={block.painLead}
-          />{' '}
-          {block.painAfter}
-        </p>
+    <div className="grid items-start gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:gap-16">
+      <div className="space-y-9">
+        <Choice
+          label={block.sizeLead}
+          options={block.sizes.map((v) => v.label)}
+          value={size}
+          onPick={setSize}
+        />
+        <Choice
+          label={block.painLead}
+          options={block.pains.map((v) => v.label)}
+          value={pain}
+          onPick={setPain}
+        />
 
-        <div className="mt-7 flex flex-wrap gap-2.5">
-          <button
-            type="button"
-            disabled={!ready}
-            onClick={() => setShown(true)}
-            className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-white transition duration-300 ease-swift hover:bg-accenthover disabled:cursor-not-allowed disabled:bg-surface2 disabled:text-warmgray"
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-3 pt-1">
+          <Link
+            href={contact}
+            className={`rounded-full px-6 py-3 text-[13px] font-bold transition duration-300 ease-swift ${
+              s && p
+                ? 'bg-ink text-white hover:bg-accent'
+                : 'pointer-events-none bg-surface2 text-warmgray'
+            }`}
+            aria-disabled={!(s && p)}
+            tabIndex={s && p ? undefined : -1}
           >
-            {block.submit}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setSize(null)
-              setPain(null)
-              setShown(false)
-            }}
-            className="rounded-full border border-line px-6 py-3 text-sm font-bold text-charcoal transition duration-300 hover:border-ink hover:text-ink"
-          >
-            {block.reset}
-          </button>
+            {block.cta}
+          </Link>
+          {(size !== null || pain !== null) && (
+            <button
+              type="button"
+              onClick={() => {
+                setSize(null)
+                setPain(null)
+              }}
+              className="text-[13px] font-medium text-warmgray underline-offset-4 transition-colors hover:text-ink hover:underline"
+            >
+              {block.reset}
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="rounded-3xl border border-line bg-paper p-7 md:p-9">
-        <p className="text-[13px] font-bold tracking-wide text-accent">{block.resultTitle}</p>
-
-        {!result && (
-          <p className="mt-6 text-sm leading-relaxed text-warmgray">{block.resultEmpty}</p>
-        )}
-
-        {result && (
-          <div key={`${size}-${pain}`} className="finder-in mt-5">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">
-              {block.whatLabel}
-            </p>
-            <p className="mt-2 text-[15px] font-medium leading-relaxed text-ink">
-              {result.p.what}
-            </p>
-
-            <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
-              {block.howLabel}
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-charcoal">{result.s.how}</p>
-
-            <p className="mt-6 inline-flex items-baseline gap-2 rounded-full bg-surface px-3.5 py-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-warmgray">
-                {block.weeksLabel}
-              </span>
-              <span className="text-[13px] font-extrabold text-ink">{result.p.weeks}</span>
-            </p>
-
-            <Link
-              href={contact}
-              className="mt-7 flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-[13px] font-bold text-white transition duration-300 ease-swift hover:bg-accent"
-            >
-              {block.cta}
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        )}
-      </div>
+      <StrategySheet
+        label={sheetLabel}
+        refNo={draftRef}
+        rows={rows}
+        onDark={false}
+      />
     </div>
   )
 }
