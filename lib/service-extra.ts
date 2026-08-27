@@ -95,8 +95,8 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     pain: {
       eyebrow: 'About',
-      title: '社長さんたちから、',
-      titleAccent: 'よく聞く話です。',
+      title: 'サイトの相談で、',
+      titleAccent: 'よくこう言われます。',
       quotes: [
         'きれいなサイトはできた。でも、問い合わせは増えなかった。',
         '何を書けばいいか聞かれても、自分でも言葉にできない。',
