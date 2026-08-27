@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import type { FinderBlock, PlanExtra } from '@/lib/service-extra'
+import type { FinderBlock } from '@/lib/service-extra'
 
 function Caret() {
   return (
@@ -51,15 +51,9 @@ function Slot({
 /* Two choices, written as a sentence, that resolve into one recommendation. */
 export default function Finder({
   block,
-  plans,
-  planExtra,
-  monitorNote,
   contact,
 }: {
   block: FinderBlock
-  plans: { name: string; price: string; unit: string }[]
-  planExtra: PlanExtra
-  monitorNote: string
   contact: string
 }) {
   const [size, setSize] = useState<number | null>(null)
@@ -68,9 +62,6 @@ export default function Finder({
 
   const ready = size !== null && pain !== null
   const result = shown && ready ? { s: block.sizes[size!], p: block.pains[pain!] } : null
-  const idx = result ? Math.min(result.p.plan, plans.length - 1) : -1
-  const plan = idx >= 0 ? plans[idx] : null
-  const excludes = idx >= 0 ? planExtra.items[idx]?.excludes ?? [] : []
 
   return (
     <div className="grid items-start gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.86fr)]">
@@ -133,63 +124,30 @@ export default function Finder({
           <p className="mt-6 text-sm leading-relaxed text-warmgray">{block.resultEmpty}</p>
         )}
 
-        {result && plan && (
+        {result && (
           <div key={`${size}-${pain}`} className="finder-in mt-5">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
-              {block.planLabel}
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">
+              {block.whatLabel}
             </p>
-            <p className="mt-1 text-xl font-extrabold tracking-tightest text-ink md:text-2xl">
-              {plan.name}
-            </p>
-            <p className="mt-0.5 text-sm font-bold text-accent">
-              {plan.price} <span className="font-medium text-warmgray">{plan.unit}</span>
+            <p className="mt-2 text-[15px] font-medium leading-relaxed text-ink">
+              {result.p.what}
             </p>
 
-            <p className="mt-4 inline-flex items-baseline gap-2 rounded-full bg-surface px-3.5 py-1.5">
+            <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
+              {block.howLabel}
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-charcoal">{result.s.how}</p>
+
+            <p className="mt-6 inline-flex items-baseline gap-2 rounded-full bg-surface px-3.5 py-1.5">
               <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-warmgray">
                 {block.weeksLabel}
               </span>
               <span className="text-[13px] font-extrabold text-ink">{result.p.weeks}</span>
             </p>
 
-            <dl className="mt-5 space-y-4 border-t border-line pt-5">
-              <div>
-                <dt className="text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
-                  {block.whatLabel}
-                </dt>
-                <dd className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal">{result.p.what}</dd>
-              </div>
-              <div>
-                <dt className="text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
-                  {block.howLabel}
-                </dt>
-                <dd className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal">{result.s.how}</dd>
-              </div>
-            </dl>
-
-            <p className="mt-5 rounded-2xl bg-tint px-4 py-3 text-[12.5px] leading-relaxed text-accent">
-              {monitorNote}
-            </p>
-
-            {excludes.length > 0 && (
-              <div className="mt-5 border-t border-line pt-5">
-                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-warmgray">
-                  {block.excludeLabel}
-                </p>
-                <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5">
-                  {excludes.map((e) => (
-                    <li key={e} className="flex items-center gap-1.5 text-[12.5px] text-warmgray">
-                      <span aria-hidden="true" className="text-[13px] leading-none">&times;</span>
-                      {e}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
             <Link
               href={contact}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-bold text-white transition duration-300 ease-swift hover:bg-accent"
+              className="mt-7 flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-[13px] font-bold text-white transition duration-300 ease-swift hover:bg-accent"
             >
               {block.cta}
               <span aria-hidden="true">→</span>

@@ -309,13 +309,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             note={x.finder.lead}
           />
           <Reveal className="mt-12">
-            <Finder
-              block={x.finder}
-              plans={s.plans}
-              planExtra={x.planExtra}
-              monitorNote={x.monitor.finderNote}
-              contact={contact}
-            />
+            <Finder block={x.finder} contact={contact} />
           </Reveal>
         </div>
       </section>
