@@ -67,13 +67,13 @@ export default function SectionNav({ items }: { items: NavItem[] }) {
     <div className="sticky top-14 z-30 border-b border-line bg-paper md:top-16">
       <div
         ref={bar}
-        className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2.5 md:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 pb-0 pt-2.5 md:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        <div className="relative flex gap-1">
+        <div className="relative flex gap-2">
           {pill && (
             <span
               aria-hidden="true"
-              className="absolute inset-y-0 rounded-full bg-accent transition-[transform,width] duration-500 ease-swift"
+              className="absolute bottom-0 h-[2px] rounded-full bg-ink transition-[transform,width] duration-500 ease-swift"
               style={{ transform: `translateX(${pill.x}px)`, width: pill.w }}
             />
           )}
@@ -86,8 +86,8 @@ export default function SectionNav({ items }: { items: NavItem[] }) {
               type="button"
               onClick={() => go(it.id)}
               aria-current={i === active ? 'true' : undefined}
-              className={`relative whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-bold transition-colors duration-300 md:px-4 ${
-                i === active ? 'text-white' : 'text-warmgray hover:text-ink'
+              className={`relative whitespace-nowrap px-2 pb-2 pt-1 text-[13px] transition-colors duration-300 md:px-3 ${
+                i === active ? 'font-bold text-ink' : 'font-medium text-warmgray hover:text-ink'
               }`}
             >
               {it.label}

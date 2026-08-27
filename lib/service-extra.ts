@@ -10,7 +10,6 @@ export interface PainBlock {
   titleAccent: string
   quotes: string[]
   close: string
-  closeAccent: string
 }
 
 export interface FinderSize {
@@ -83,8 +82,7 @@ export const EXTRA: Record<Lang, Extra> = {
         '同業と並んだとき、うちを選ぶ理由を説明できない。',
         'AIで全部できると言われて触ってみたが、あれこれ時間とお金を使っただけで完成しなかった。',
       ],
-      close: 'どれも、',
-      closeAccent: 'デザインの問題ではありません。',
+      close: 'どれも、デザインの問題ではありません。',
     },
     finder: {
       eyebrow: 'Finder',
@@ -187,8 +185,7 @@ export const EXTRA: Record<Lang, Extra> = {
         '경쟁사와 나란히 놓였을 때, 우리를 골라야 할 이유를 설명하지 못합니다.',
         'AI로 다 된다는데, 결국 이것저것 시간과 돈만 쓰고 완성을 못 했습니다.',
       ],
-      close: '전부',
-      closeAccent: '디자인의 문제가 아닙니다.',
+      close: '전부 디자인의 문제가 아닙니다.',
     },
     finder: {
       eyebrow: 'Finder',
@@ -291,8 +288,7 @@ export const EXTRA: Record<Lang, Extra> = {
         'Next to my competitors, I cannot explain why anyone should pick me.',
         'They said AI could do all of it. I spent the time and the money on bits and pieces and never finished.',
       ],
-      close: 'None of these is',
-      closeAccent: 'a design problem.',
+      close: 'None of these is a design problem.',
     },
     finder: {
       eyebrow: 'Finder',

@@ -26,17 +26,6 @@ function Check({ className = 'text-accent' }: { className?: string }) {
   )
 }
 
-function Pill({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
-  return (
-    <span
-      className={`inline-block rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] ${
-        dark ? 'bg-white/10 text-white/85' : 'bg-accent text-white'
-      }`}
-    >
-      {children}
-    </span>
-  )
-}
 
 /* The section headings run two-tone: the sentence in the base colour, the
    phrase that carries the point in accent. */
@@ -58,9 +47,15 @@ function Head({
   return (
     <Reveal>
       <div className={center ? 'text-center' : ''}>
-        <Pill dark={dark}>{eyebrow}</Pill>
+        <p
+          className={`text-[11px] font-bold uppercase tracking-[0.24em] ${
+            dark ? 'text-white/45' : 'text-warmgray'
+          }`}
+        >
+          {eyebrow}
+        </p>
         <h2
-          className={`mt-4 text-[26px] font-extrabold leading-[1.24] tracking-tightest md:text-[42px] ${
+          className={`mt-5 text-[26px] font-extrabold leading-[1.24] tracking-tightest md:text-[42px] ${
             dark ? 'text-white' : 'text-ink'
           }`}
         >
@@ -68,7 +63,7 @@ function Head({
           {accent && (
             <>
               <br />
-              <span className={dark ? 'text-accentlit' : 'text-accent'}>{accent}</span>
+              {accent}
             </>
           )}
         </h2>
@@ -149,43 +144,45 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         />
         <div className="relative mx-auto max-w-5xl">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[12px] font-semibold text-white/85 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-accentlit" />
+            <p className="flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/50">
+              <span className="h-px w-7 bg-white/35" aria-hidden="true" />
               {s.badge}
-            </span>
+            </p>
             <h1 className="mt-6 text-[32px] font-extrabold leading-[1.2] tracking-tightest text-white md:text-[58px]">
               {s.headline}
               <br />
-              <span className="text-accentlit">{s.headlineAccent}</span>
+              {s.headlineAccent}
             </h1>
             <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/65 md:text-base">
               {s.sub}
             </p>
           </Reveal>
 
-          {/* the joined CTA cluster — three doors in one pill */}
           <Reveal delay={80}>
-            <div className="mt-9 inline-flex flex-wrap items-center gap-1 rounded-full bg-accent p-1.5">
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link
                 href={contact}
-                className="group flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-bold text-white transition-colors duration-300 hover:bg-white/15"
+                className="rounded-full bg-white px-7 py-3 text-[13px] font-bold text-ink transition duration-300 ease-swift hover:bg-white/90"
               >
                 {s.ctaPrimary}
-                <Arrow />
               </Link>
               <a
                 href="#work"
-                className="group flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-bold text-white transition-colors duration-300 hover:bg-white/15"
+                className="group inline-flex items-center gap-1.5 text-[13px] font-bold text-white/65 transition-colors duration-300 hover:text-white"
               >
                 {s.ctaSecondary}
-                <Arrow />
+                <span aria-hidden="true" className="transition-transform duration-300 ease-swift group-hover:translate-x-0.5">
+                  →
+                </span>
               </a>
               <a
                 href="#price"
-                className="group flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-bold text-white transition-colors duration-300 hover:bg-white/15"
+                className="group inline-flex items-center gap-1.5 text-[13px] font-bold text-white/65 transition-colors duration-300 hover:text-white"
               >
                 {s.priceTitle}
-                <Arrow />
+                <span aria-hidden="true" className="transition-transform duration-300 ease-swift group-hover:translate-x-0.5">
+                  →
+                </span>
               </a>
             </div>
           </Reveal>
@@ -195,7 +192,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             <dl className="mt-14 grid grid-cols-2 gap-x-5 gap-y-8 border-t border-white/12 pt-8 md:grid-cols-4 md:gap-x-0">
               {s.stats.map((st, i) => (
                 <div key={st.l} className={i ? 'md:border-l md:border-white/12 md:pl-6' : 'md:pr-6'}>
-                  <dt className="text-[26px] font-extrabold tracking-tightest text-accentlit md:text-[32px]">
+                  <dt className="text-[26px] font-extrabold tracking-tightest text-white md:text-[32px]">
                     {st.v}
                   </dt>
                   <dd className="mt-1.5 max-w-[22ch] text-[12.5px] leading-snug text-white/55">
@@ -216,35 +213,24 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           <Head eyebrow={x.pain.eyebrow} title={x.pain.title} accent={x.pain.titleAccent} dark center />
 
           <Reveal className="mt-14">
-            <div className="grid gap-4 md:grid-cols-2">
+            <ul className="mx-auto max-w-3xl space-y-9 md:space-y-11">
               {x.pain.quotes.map((q, i) => (
-                <div
+                <li
                   key={q}
-                  className="quote-card relative rounded-[20px] bg-white p-6 md:p-7"
-                  style={
-                    {
-                      '--tilt': `${[-1.4, 0.9, -0.6, 1.2][i % 4]}deg`,
-                      animationDelay: `${i * 130}ms`,
-                      marginTop: i % 2 === 1 ? '1.6rem' : undefined,
-                    } as React.CSSProperties
-                  }
+                  className="quote-card border-l border-white/20 pl-6 md:pl-9"
+                  style={{ animationDelay: `${i * 110}ms` } as React.CSSProperties}
                 >
-                  <span
-                    aria-hidden="true"
-                    className="absolute -bottom-2 left-8 h-4 w-4 rotate-45 bg-white"
-                  />
-                  <p className="text-[15px] font-bold leading-[1.7] tracking-tight text-ink">
-                    &ldquo;{q}&rdquo;
+                  <p className="text-[17px] leading-[1.72] text-white/85 md:text-[21px] md:leading-[1.7]">
+                    {q}
                   </p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </Reveal>
 
           <Reveal delay={160}>
-            <p className="mt-20 text-center text-[22px] font-extrabold leading-[1.4] tracking-tightest text-white md:text-[34px]">
+            <p className="mx-auto mt-20 max-w-3xl text-[22px] font-extrabold leading-[1.4] tracking-tightest text-white md:text-[34px]">
               {x.pain.close}
-              <span className="text-accentlit">{x.pain.closeAccent}</span>
             </p>
           </Reveal>
         </div>
@@ -255,42 +241,37 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="mx-auto max-w-5xl">
           <Head eyebrow={s.aiwhy.eyebrow} title={s.aiwhy.title} note={s.aiwhy.lead} center />
 
-          <div className="mt-12 grid gap-4 md:grid-cols-2">
+          <div className="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <div className="h-full overflow-hidden rounded-[22px] border border-line bg-paper">
-                <div className="bg-surface2 py-3 text-center text-[13px] font-bold text-charcoal">
-                  {s.aiwhy.canTitle}
-                </div>
-                <ul className="divide-y divide-line px-6">
+              <div className="border-t border-line pt-6">
+                <p className="text-[13px] font-bold text-warmgray">{s.aiwhy.canTitle}</p>
+                <ul className="mt-5 space-y-3">
                   {s.aiwhy.can.map((c) => (
-                    <li key={c} className="py-4 text-center text-sm text-warmgray">
+                    <li key={c} className="text-sm text-warmgray">
                       {c}
                     </li>
                   ))}
                 </ul>
-                <p className="border-t border-line bg-surface/60 px-6 py-4 text-center text-[12.5px] leading-relaxed text-warmgray">
+                <p className="mt-7 text-[12.5px] leading-relaxed text-warmgray">
                   {s.aiwhy.canNote}
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={90}>
-              <div className="h-full overflow-hidden rounded-[22px] ring-2 ring-ink">
-                <div className="bg-accent py-3 text-center text-[13px] font-bold text-white">
-                  {s.aiwhy.cantTitle}
-                </div>
-                <ul className="divide-y divide-line bg-paper px-6">
+              <div className="border-t-2 border-ink pt-6">
+                <p className="text-[13px] font-extrabold text-ink">{s.aiwhy.cantTitle}</p>
+                <ul className="mt-5 space-y-3">
                   {s.aiwhy.cant.map((c) => (
-                    <li
-                      key={c}
-                      className="flex items-center justify-center gap-2 py-4 text-center text-sm font-bold text-ink"
-                    >
-                      <Check />
+                    <li key={c} className="flex items-start gap-2 text-sm font-bold text-ink">
+                      <span className="mt-1.5">
+                        <Check />
+                      </span>
                       {c}
                     </li>
                   ))}
                 </ul>
-                <p className="border-t border-line bg-tint px-6 py-4 text-center text-[12.5px] font-medium leading-relaxed text-accent">
+                <p className="mt-7 text-[12.5px] font-medium leading-relaxed text-accent">
                   {s.aiwhy.cantNote}
                 </p>
               </div>
@@ -394,56 +375,32 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* ============ PROCESS — numbered, alternating fill ============ */}
+      {/* ============ PROCESS — a numbered index, one step per row ============ */}
       <section id="how" className="scroll-mt-28 border-y border-line bg-surface/60 px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
           <Head eyebrow={x.eyebrows.steps} title={s.stepsTitle} center />
 
-          <div className="mt-12 grid gap-4 md:grid-cols-2">
-            {s.steps.map((st, i) => {
-              const filled = i === 1 || i === 2
-              return (
-                <Reveal key={st.n} delay={(i % 2) * 80}>
-                  <div
-                    className={`relative h-full overflow-hidden rounded-[22px] p-7 md:p-8 ${
-                      filled ? 'bg-ink' : 'border border-line bg-paper'
-                    }`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`text-[40px] font-extrabold leading-none tracking-tightest md:text-[52px] ${
-                        filled ? 'text-white/20' : 'text-accent/25'
-                      }`}
-                    >
+          <ol className="mx-auto mt-12 max-w-3xl border-t border-line">
+            {s.steps.map((st) => (
+              <li key={st.n} className="border-b border-line">
+                <Reveal>
+                  <div className="grid gap-x-8 gap-y-2 py-8 md:grid-cols-[3rem_minmax(0,12rem)_minmax(0,1fr)] md:items-baseline md:py-9">
+                    <span className="text-[12px] font-bold tabular-nums tracking-widest text-accent">
                       {st.n}
                     </span>
-                    <h3
-                      className={`mt-2 text-lg font-extrabold tracking-tight ${
-                        filled ? 'text-white' : 'text-ink'
-                      }`}
-                    >
+                    <h3 className="text-[17px] font-extrabold tracking-tight text-ink">
                       {st.title}
                     </h3>
-                    <div
-                      className={`mt-4 h-px w-full ${filled ? 'bg-white/20' : 'bg-line'}`}
-                      aria-hidden="true"
-                    />
-                    <p
-                      className={`mt-4 text-[13.5px] leading-relaxed ${
-                        filled ? 'text-white/85' : 'text-charcoal'
-                      }`}
-                    >
-                      {st.desc}
-                    </p>
+                    <p className="text-[13.5px] leading-relaxed text-charcoal">{st.desc}</p>
                   </div>
                 </Reveal>
-              )
-            })}
-          </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* ============ PRICE — three tiers, rising in weight ============ */}
+      {/* ============ PRICE ============ */}
       <section id="price" className="scroll-mt-28 px-5 py-24 md:py-32">
         <div className="mx-auto max-w-6xl">
           <Head eyebrow={x.eyebrows.price} title={s.priceTitle} note={s.priceSub} center />
