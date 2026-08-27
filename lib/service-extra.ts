@@ -87,7 +87,7 @@ export const EXTRA: Record<Lang, Extra> = {
       yTop: 'ローカライズ',
       yBottom: '韓国式',
       points: [
-        { name: 'フュージョン', x: 26, y: 26 },
+        { name: '韓国風ビストロ', x: 26, y: 26 },
         { name: 'ファインダイニング', x: 70, y: 20 },
         { name: '町の定食', x: 28, y: 72 },
         { name: 'うちの店', x: 74, y: 74, goal: true },
