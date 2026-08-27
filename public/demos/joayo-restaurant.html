@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er</title>
-<meta name="description" content="Joayo Restaurant : cuisine coréenne authentique à Paris 1er, en plein cœur de Paris. Bibimbap au tartare de bœuf, bulgogi, poulet frit. 34 avenue Exemple.">
+<meta name="description" content="Joayo Restaurant : cuisine coréenne à Paris 1er. Bibimbap au tartare de bœuf, bulgogi, poulet frit. Site de démonstration.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
@@ -140,9 +140,6 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .menu-item .desc{margin-top:8px;font-size:14px;color:var(--ink-60);max-width:46ch;}
 .menu-item .price{font-family:'Fraunces',serif;font-weight:560;font-size:17px;white-space:nowrap;}
 .menu-note{margin-top:22px;font-size:13px;color:var(--ink-60);}
-.lunch-box,.resto-side,.ambiance{background:var(--paper-2);padding:30px;margin-bottom:18px;}
-.lunch-box h3,.ambiance h3{font-family:'Fraunces',serif;font-weight:560;font-size:21px;margin-bottom:10px;}
-.lunch-box p,.ambiance p{font-size:14.5px;color:var(--ink-60);}
 .service-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
 .service-chips span{border:1px solid var(--line);border-radius:999px;padding:7px 15px;
   font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);}
@@ -163,11 +160,6 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .a-note a{color:var(--paper);text-decoration:none;font-size:11.5px;letter-spacing:.2em;
   text-transform:uppercase;border-bottom:1px solid rgba(247,244,239,.5);padding-bottom:5px;}
 
-/* reviews */
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:5vw;}
-.review{border-top:1px solid var(--line);padding-top:22px;}
-.review .stars{color:var(--red);font-size:11px;letter-spacing:.2em;}
-.review p{margin-top:14px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
   font-size:18px;line-height:1.5;}
 .review .who{margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);}
 
@@ -497,16 +489,11 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
       <p class="jd-line" data-i18n="jd_line">Ce que le temps a fait, on ne le presse pas. Kimchi, jang, bouillons — la patience d'abord.</p>
       <p class="sub" data-i18n-html="hero_sub">La cuisine coréenne authentique du 1er arrondissement.</p>
       <div class="cta-row">
-        <a class="btn" href="tel:+33123456789" data-i18n="cta_book">Réserver — 01 23 45 67 89</a>
-        <span class="addr-pill">34 avenue Exemple, 75001</span>
+        <a class="btn" href="#pratique" data-i18n="cta_book">Réserver</a>
+        <span class="addr-pill" data-i18n="addr_pill">Paris 1er · adresse de démonstration</span>
       </div>
     </div>
   <aside class="ardoise reveal">
-    <div class="rating-sticker" title="Google">
-      <div class="score">4.7</div>
-      <div class="stars">★★★★☆</div>
-      <div class="count" data-i18n="rating_count">Google</div>
-    </div>
     <div class="a-head" data-i18n="ar_head">Les signatures</div>
     <div class="a-head-kr kr">대표 메뉴</div>
     <div class="dish">
@@ -530,7 +517,7 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
 <section id="menu" data-rail>
   <div class="section-head reveal">
     <div class="over" data-i18n="me_over">La carte · 메뉴</div>
-    <h2 data-i18n="me_h2">Ce qu'on mange vraiment en Corée</h2>
+    <h2 data-i18n="me_h2">La carte</h2>
     <p data-i18n="me_p">Cuisine authentique et chaleureuse, menu végétarien disponible. Comptez 20 à 30 € par personne.</p>
   </div>
   <div class="menu-wrap">
@@ -545,49 +532,42 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
       <div class="menu-item" data-mi="1">
         <div>
           <span class="name" data-i18n="m2_name">Dolsot Bibimbap</span><span class="kr">돌솥비빔밥</span>
-          <div class="desc" data-i18n="m2_desc">Riz et légumes servis dans un bol de pierre brûlant, bœuf mariné, œuf, gochujang</div>
         </div>
         <span class="price">14,50 €</span>
       </div>
       <div class="menu-item" data-mi="2">
         <div>
           <span class="name" data-i18n="m3_name">Bulgogi de porc</span><span class="kr">제육불고기</span>
-          <div class="desc" data-i18n="m3_desc">Porc mariné sauté, légèrement pimenté, riz et banchan du jour</div>
         </div>
         <span class="price">15,00 €</span>
       </div>
       <div class="menu-item" data-mi="3">
         <div>
           <span class="name" data-i18n="m4_name">Japchae</span><span class="kr">잡채</span>
-          <div class="desc" data-i18n="m4_desc">Nouilles de patate douce sautées, bœuf et légumes — un classique des fêtes coréennes</div>
         </div>
         <span class="price">14,00 €</span>
       </div>
       <div class="menu-item" data-mi="4">
         <div>
           <span class="name" data-i18n="m5_name">Poulet frit coréen</span><span class="kr">치킨</span>
-          <div class="desc" data-i18n="m5_desc">Double friture croustillante, sauce au choix — celui dont tout le monde parle</div>
         </div>
         <span class="price">16,00 €</span>
       </div>
       <div class="menu-item" data-mi="5">
         <div>
           <span class="name" data-i18n="m6_name">BBQ coréen</span><span class="kr">바비큐</span>
-          <div class="desc" data-i18n="m6_desc">Grillades marinées à la coréenne, servies avec riz et banchan</div>
         </div>
         <span class="price">19,50 €</span>
       </div>
       <div class="menu-item" data-mi="6">
         <div>
           <span class="name" data-i18n="m7_name">Kimchi Jjigae</span><span class="kr">김치찌개</span>
-          <div class="desc" data-i18n="m7_desc">Ragoût de kimchi mijoté, porc et tofu — le plat réconfort absolu</div>
         </div>
         <span class="price">13,50 €</span>
       </div>
       <div class="menu-item" data-mi="7">
         <div>
           <span class="name" data-i18n="m8_name">Mandu</span><span class="kr">만두</span>
-          <div class="desc" data-i18n="m8_desc">Raviolis coréens vapeur ou grillés</div>
         </div>
         <span class="price">8,50 €</span>
       </div>
@@ -619,13 +599,8 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
           <div><span data-i18n="h_dinner">Soir</span><span>18h30 — 22h00</span></div>
           <div><span data-i18n="h_note" style="opacity:.75;">Horaires du jour sur Google Maps</span></div>
         </div>
-        <div class="addr">34 avenue Exemple, 75001 Paris</div>
-        <p style="margin:14px 0 16px;font-weight:800;font-size:17px;"><a href="tel:+33123456789" style="color:inherit;">01 23 45 67 89</a></p>
-        <a class="btn" href="tel:+33123456789" data-i18n="rc_btn">Réserver par téléphone</a>
-      </div>
-      <div class="lunch-box">
-        <div class="big" data-i18n="lb_big">★ 4.7 sur Google</div>
-        <p data-i18n="lb_p">Le rendez-vous des initiés depuis des années, au cœur de Paris.</p>
+        <div class="addr" data-i18n="rc_addr">Paris 1er · adresse de démonstration</div>
+        <a class="btn" href="#pratique" data-i18n="rc_btn">Réserver</a>
       </div>
     </aside>
   </div>
@@ -634,37 +609,13 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
 <!-- AMBIANCE -->
 <div class="ambiance reveal">
   <div>
-    <h2 data-i18n="am_h2">Une salle en bois, une lumière tamisée, Séoul au cœur de Paris.</h2>
+    <h2 data-i18n="am_h2">La salle</h2>
     <p data-i18n="am_p">Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.</p>
   </div>
   <img src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
 </div>
 
 <!-- AVIS -->
-<section id="avis" data-rail>
-  <div class="section-head reveal">
-    <div class="over" data-i18n="av_over">Ils sont venus · 리뷰</div>
-    <h2 data-i18n="av_h2">Aimé des habitués</h2>
-    <p data-i18n="av_p">Une institution du quartier, adoptée par les habitués depuis des années.</p>
-  </div>
-  <div class="reviews">
-    <div class="review reveal">
-      <div class="stars">★★★★★</div>
-      <p data-i18n="rv1_p">« Une salle chaleureuse en plein cœur de Paris, une cuisine authentique. Le bibimbap au tartare de bœuf est parfait. »</p>
-      <div class="who" data-i18n="rv1_who">— Habitué du quartier</div>
-    </div>
-    <div class="review reveal">
-      <div class="stars">★★★★★</div>
-      <p data-i18n="rv2_p">« Le poulet frit est excellent et le japchae un régal. Idéal pour un déjeuner au centre de Paris. »</p>
-      <div class="who" data-i18n="rv2_who">— Déjeuner d'initiés</div>
-    </div>
-    <div class="review reveal">
-      <div class="stars">★★★★★</div>
-      <p data-i18n="rv3_p">« Cuisine coréenne authentique, service attentionné, menu végétarien disponible. On y retourne. »</p>
-      <div class="who" data-i18n="rv3_who">— Visiteuse conquise</div>
-    </div>
-  </div>
-</section>
 
 <!-- INFOS -->
 <section id="infos" data-rail>
@@ -675,7 +626,7 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
   <div class="infos-grid">
     <div class="info-card reveal">
       <h3 data-i18n="ic1_h3">Adresse</h3>
-      <p>34 avenue Exemple<br>75001 Paris</p>
+      <p data-i18n-html="ic1_p">Paris 1er<br>Adresse de démonstration</p>
       <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
     </div>
     <div class="info-card reveal">
@@ -685,12 +636,12 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
     </div>
     <div class="info-card reveal">
       <h3 data-i18n="ic3_h3">Y aller</h3>
-      <p data-i18n-html="ic3_p">Métro à 2 minutes<br>Bus à proximité</p>
+      <p data-i18n-html="ic3_p">Métro et bus à proximité</p>
       <small data-i18n="ic3_small">En plein cœur de Paris.</small>
     </div>
     <div class="info-card reveal">
       <h3 data-i18n="ic4_h3">Réservation</h3>
-      <p><a href="tel:+33123456789">01 23 45 67 89</a></p>
+      <p data-i18n="ic4_p">Par téléphone ou sur place</p>
       <small data-i18n="ic4_small">Réservation conseillée le soir et le week-end.</small>
     </div>
   </div>
@@ -712,7 +663,7 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
     <a href="joayo-market.html" data-i18n="nav_market">L'Épicerie</a>
     <a href="#infos" data-i18n="nav_find">Infos</a>
   </div>
-  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89</p>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Restaurant — Paris 1er</p>
 </footer>
 
 <script>
@@ -723,13 +674,12 @@ fr: {
   tick1:"Joayo Restaurant", tick2:"Bibimbap au tartare de bœuf", tick3:"Bulgogi", tick4:"Poulet frit", tick5:"Paris 1er",
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
-  rating_count:"Google",
   ar_head:"Les signatures", ar_note:"Toute la carte ↓",
   kicker:"Midi & soir — en plein cœur de Paris",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
-  cta_book:"Réserver — 01 23 45 67 89",
-  me_over:"La carte · 메뉴", me_h2:"Ce qu'on mange vraiment en Corée",
+  cta_book:"Réserver",
+  me_over:"La carte · 메뉴", me_h2:"La carte",
   me_p:"Cuisine authentique et chaleureuse, menu végétarien disponible. Comptez 20 à 30 € par personne.",
   m1_name:"Bibimbap au tartare de bœuf", m1_desc:"La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf",
   m2_name:"Dolsot Bibimbap", m2_desc:"Riz et légumes servis dans un bol de pierre brûlant, bœuf mariné, œuf, gochujang",
@@ -744,25 +694,23 @@ fr: {
   rc_h3:"Infos & réservation",
   rc_p:"Le quartier est animé, la salle est petite — réservez, et votre soirée coréenne est assurée.",
   h_lunch:"Midi", h_dinner:"Soir", h_note:"Horaires du jour sur Google Maps",
-  rc_btn:"Réserver par téléphone",
-  lb_big:"★ 4.7 sur Google", lb_p:"Le rendez-vous des initiés depuis des années, au cœur de Paris.",
-  am_h2:"Une salle en bois, une lumière tamisée, Séoul au cœur de Paris.",
-  am_p:"Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.",
-  av_over:"Ils sont venus · 리뷰", av_h2:"Aimé des habitués",
-  av_p:"Une institution du quartier, adoptée par les habitués depuis des années.",
-  rv1_p:"« Une salle chaleureuse en plein cœur de Paris, une cuisine authentique. Le bibimbap au tartare de bœuf est parfait. »", rv1_who:"— Habitué du quartier",
-  rv2_p:"« Le poulet frit est excellent et le japchae un régal. Idéal pour un déjeuner au centre de Paris. »", rv2_who:"— Déjeuner d'initiés",
-  rv3_p:"« Cuisine coréenne authentique, service attentionné, menu végétarien disponible. On y retourne. »", rv3_who:"— Visiteuse conquise",
+  rc_btn:"Réserver", 
+  am_h2:"La salle",
+  am_p:"Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.", 
   in_over:"Infos pratiques · 오시는 길", in_h2:"Venir dîner chez le Joayo",
   ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
   ic2_h3:"Horaires", ic2_p:"Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00", ic2_small:"Horaires du jour sur Google Maps.",
-  ic3_h3:"Y aller", ic3_p:"Métro à 2 minutes<br>Bus à proximité", ic3_small:"En plein cœur de Paris.",
+  ic3_h3:"Y aller", ic3_p:"Métro et bus à proximité", ic3_small:"En plein cœur de Paris.",
   ic4_h3:"Réservation", ic4_small:"Réservation conseillée le soir et le week-end.",
   cr_h2:"Envie de refaire ces plats chez vous ?",
   cr_p:"Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.",
   cr_btn:"Découvrir l'épicerie",
   foot_sub:"RESTAURANT",
-  legal:"Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89"
+  legal:"Site de démonstration · © 2026 Joayo Restaurant — Paris 1er",
+  addr_pill:"Paris 1er · adresse de démonstration",
+  rc_addr:"Paris 1er · adresse de démonstration",
+  ic1_p:"Paris 1er<br>Adresse de démonstration",
+  ic4_p:"Par téléphone ou sur place",
 },
 en: {
   _title:"JOAYO Restaurant 좋아요 레스토랑 — Korean Cuisine, Paris 1st",
@@ -770,13 +718,12 @@ en: {
   tick1:"Joayo Restaurant", tick2:"Beef tartare bibimbap", tick3:"Bulgogi", tick4:"Fried chicken", tick5:"Paris 1st",
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
-  rating_count:"Google",
   ar_head:"The signatures", ar_note:"See the full menu ↓",
   kicker:"Lunch & dinner — in the heart of Paris",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
-  cta_book:"Book — +33 1 23 45 67 89",
-  me_over:"The menu · 메뉴", me_h2:"What people really eat in Korea",
+  cta_book:"Book a table",
+  me_over:"The menu · 메뉴", me_h2:"The menu",
   me_p:"Authentic, warm cooking, vegetarian menu available. Expect €20–30 per person.",
   m1_name:"Beef tartare bibimbap", m1_desc:"The house signature — rice, vegetables, seasoned beef tartare, egg yolk",
   m2_name:"Dolsot Bibimbap", m2_desc:"Rice and vegetables in a sizzling stone bowl, marinated beef, egg, gochujang",
@@ -791,25 +738,23 @@ en: {
   rc_h3:"Info & booking",
   rc_p:"The neighborhood is lively and the room is small — book ahead and your Korean evening is safe.",
   h_lunch:"Lunch", h_dinner:"Dinner", h_note:"Today's hours on Google Maps",
-  rc_btn:"Book by phone",
-  lb_big:"★ 4.7 on Google", lb_p:"An insiders' favorite for years, in the heart of Paris.",
-  am_h2:"Warm wood, soft lighting — Seoul in the heart of Paris.",
-  am_p:"A cosy room mixing woodwork and contemporary touches — perfect after a stroll around the neighborhood.",
-  av_over:"They came by · 리뷰", av_h2:"A neighborhood favorite",
-  av_p:"An neighborhood institution, adopted by regulars for years.",
-  rv1_p:"“A warm dining room in the heart of Paris, authentic cooking. The beef tartare bibimbap is perfect.”", rv1_who:"— Neighborhood regular",
-  rv2_p:"“The fried chicken is excellent and the japchae a delight. Ideal for lunch in central Paris.”", rv2_who:"— Insiders' lunch",
-  rv3_p:"“Authentic Korean food, attentive service, vegetarian menu available. We'll be back.”", rv3_who:"— Happy visitor",
+  rc_btn:"Book a table", 
+  am_h2:"The room",
+  am_p:"A cosy room mixing woodwork and contemporary touches — perfect after a stroll around the neighborhood.", 
   in_over:"Practical info · 오시는 길", in_h2:"Come dine at the Joayo",
   ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
   ic2_h3:"Hours", ic2_p:"Lunch: 11:30 am — 3:00 pm<br>Dinner: 6:30 — 10:00 pm", ic2_small:"Today's hours on Google Maps.",
-  ic3_h3:"Getting there", ic3_p:"Metro 2 minutes away<br>Buses nearby", ic3_small:"In the heart of Paris.",
+  ic3_h3:"Getting there", ic3_p:"Metro and buses nearby", ic3_small:"In the heart of Paris.",
   ic4_h3:"Booking", ic4_small:"Booking recommended for dinner and weekends.",
   cr_h2:"Want to cook these dishes at home?",
   cr_p:"The joayo also keeps a market: homemade kimchi and banchan, ramyeon, sauces and the whole Korean pantry, in the 15th.",
   cr_btn:"Discover the grocery",
   foot_sub:"RESTAURANT",
-  legal:"Site de démonstration · © 2026 Joayo Restaurant — 34 avenue Exemple, 75001 Paris · +33 1 23 45 67 89"
+  legal:"Demo site · © 2026 Joayo Restaurant — Paris 1er",
+  addr_pill:"Paris 1er · demo address",
+  rc_addr:"Paris 1er · demo address",
+  ic1_p:"Paris 1er<br>Demo address",
+  ic4_p:"By phone or in person",
 },
 ko: {
   _title:"좋아요 레스토랑 JOAYO Restaurant — 파리 1구 한식당",
@@ -817,13 +762,12 @@ ko: {
   tick1:"좋아요 레스토랑", tick2:"육회비빔밥", tick3:"불고기", tick4:"치킨", tick5:"파리 1구",
   brand_sub:"레스토랑 · Restaurant",
   nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
-  rating_count:"Google",
   ar_head:"대표 메뉴", ar_note:"전체 메뉴 보기 ↓",
   kicker:"점심 & 저녁 — 파리 시내 한복판",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
   hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
-  cta_book:"예약 — 01 23 45 67 89",
-  me_over:"메뉴 · La carte", me_h2:"한국에서 먹던 그 맛 그대로",
+  cta_book:"예약하기",
+  me_over:"메뉴 · La carte", me_h2:"메뉴",
   me_p:"정성스러운 정통 한식, 채식 메뉴 있음. 1인 예산은 20~30€ 정도입니다.",
   m1_name:"육회비빔밥", m1_desc:"시그니처 메뉴 — 신선한 육회와 노른자를 얹은 비빔밥",
   m2_name:"돌솥비빔밥", m2_desc:"뜨거운 돌솥에 나물과 불고기, 계란, 고추장",
@@ -838,25 +782,23 @@ ko: {
   rc_h3:"예약 안내",
   rc_p:"자리가 많지 않아요 — 전화로 예약하고 오시면 기다리지 않고 드실 수 있습니다.",
   h_lunch:"점심", h_dinner:"저녁", h_note:"당일 영업시간은 구글 지도 참고",
-  rc_btn:"전화로 예약하기",
-  lb_big:"구글 ★ 4.7", lb_p:"파리 시내 한복판, 파리지앵 단골이 많은 집.",
-  am_h2:"나무 인테리어, 따뜻한 조명 — 파리 한복판의 서울.",
-  am_p:"우드톤과 모던함이 어우러진 아늑한 공간 — 동네 산책 후 들르기 딱 좋아요.",
-  av_over:"리뷰 · Avis", av_h2:"단골이 많은 집",
-  av_p:"동네에서 오래 사랑받아 온, 단골이 많은 한식당입니다.",
-  rv1_p:"“분위기 좋은 동네 한식당. 육회비빔밥이 진짜 맛있어요.”", rv1_who:"— 동네 단골손님",
-  rv2_p:"“치킨이 훌륭하고 잡채도 일품입니다. 시내 중심 점심으로 딱이에요.”", rv2_who:"— 점심 단골",
-  rv3_p:"“정통 한식에 세심한 서비스, 채식 메뉴까지. 또 올 거예요.”", rv3_who:"— 만족한 손님",
+  rc_btn:"예약하기", 
+  am_h2:"홀",
+  am_p:"우드톤과 모던함이 어우러진 아늑한 공간 — 동네 산책 후 들르기 딱 좋아요.", 
   in_over:"오시는 길 · Infos", in_h2:"좋아요 레스토랑으로 오세요",
   ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
   ic2_h3:"영업시간", ic2_p:"점심: 11:30 — 15:00<br>저녁: 18:30 — 22:00", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
-  ic3_h3:"오시는 길", ic3_p:"메트로 2분<br>버스 정류장 인근", ic3_small:"시내 중심에 있습니다.",
+  ic3_h3:"오시는 길", ic3_p:"메트로·버스 인근", ic3_small:"시내 중심에 있습니다.",
   ic4_h3:"예약", ic4_small:"저녁과 주말은 예약을 권장합니다.",
   cr_h2:"이 메뉴, 집에서도 만들고 싶다면?",
   cr_p:"좋아요 마켓이 있습니다 — 직접 담근 김치와 반찬, 라면, 장류까지. 파리 15구.",
   cr_btn:"마켓 보러 가기",
   foot_sub:"레스토랑",
-  legal:"데모 사이트 · © 2026 좋아요 레스토랑 — 34 avenue Exemple, 75001 Paris · 01 23 45 67 89"
+  legal:"데모 사이트 · © 2026 좋아요 레스토랑 — 파리 1구",
+  addr_pill:"파리 1구 · 데모 주소",
+  rc_addr:"파리 1구 · 데모 주소",
+  ic1_p:"파리 1구<br>데모 주소",
+  ic4_p:"전화 또는 매장에서",
 }
 };
 

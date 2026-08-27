@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JOAYO Market 좋아요 마켓 — Épicerie coréenne, Paris 15e</title>
-<meta name="description" content="Joayo Market : épicerie coréenne à Paris 15e. Kimchi et banchan faits maison, ramyeon, sauces, snacks et boissons de Corée. 12 rue Exemple, 75015.">
+<meta name="description" content="Joayo Market : épicerie coréenne à Paris 15e. Kimchi et banchan faits maison, ramyeon, sauces, snacks. Site de démonstration.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
@@ -104,15 +104,21 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 
 /* rayons — a numbered index, not emoji cards */
 .grid-rayons{display:grid;grid-template-columns:repeat(2,1fr);gap:0 6vw;}
-.rayon{position:relative;padding:30px 0 30px 52px;border-top:1px solid var(--line);
+.rayon{position:relative;padding:30px 0 30px 0;border-top:1px solid var(--line);
   transition:padding-left .45s cubic-bezier(.23,1,.32,1);}
-.rayon:hover{padding-left:62px;}
+.rayon:hover{padding-left:10px;}
 .rayon .icon{position:absolute;left:0;top:32px;
   font-family:'Fraunces',serif;font-style:italic;font-weight:420;
   font-size:16px;color:var(--red);}
 .rayon h3{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(20px,2.2vw,27px);line-height:1.15;}
 .rayon .kr{font-size:11.5px;letter-spacing:.14em;color:var(--ink-60);margin-top:6px;}
 .rayon p{margin-top:12px;font-size:14.5px;color:var(--ink-60);max-width:40ch;}
+.rayon.lead{grid-column:1/-1;padding-top:38px;padding-bottom:38px;border-top-color:var(--ink);}
+.rayon.lead h3{font-size:clamp(28px,3.4vw,44px);}
+.rayon.lead p{font-size:16px;max-width:52ch;color:var(--ink);}
+.rayon.small{padding-top:22px;padding-bottom:22px;}
+.rayon.small h3{font-size:clamp(17px,1.8vw,21px);}
+.ray-when{margin-top:10px;font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--red);}
 .rayon .badge{position:absolute;top:30px;right:0;font-size:10px;letter-spacing:.22em;
   text-transform:uppercase;color:var(--red);font-weight:600;}
 .rayon.highlight h3{color:var(--red);}
@@ -163,11 +169,6 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .a-note a{color:var(--paper);text-decoration:none;font-size:11.5px;letter-spacing:.2em;
   text-transform:uppercase;border-bottom:1px solid rgba(247,244,239,.5);padding-bottom:5px;}
 
-/* reviews */
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:5vw;}
-.review{border-top:1px solid var(--line);padding-top:22px;}
-.review .stars{color:var(--red);font-size:11px;letter-spacing:.2em;}
-.review p{margin-top:14px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
   font-size:18px;line-height:1.5;}
 .review .who{margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);}
 
@@ -201,7 +202,6 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
   section{padding:64px 20px;}
   .grid-rayons{grid-template-columns:1fr;gap:0;}
   .menu-wrap{grid-template-columns:1fr;gap:36px;}
-  .reviews{grid-template-columns:1fr;gap:34px;}
   .infos-grid{grid-template-columns:1fr;gap:34px;}
   .kimchi-banner{margin:0 20px;min-height:44vh;}
 }
@@ -355,10 +355,6 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 .hero.pantry .cta-row .btn:after{background:var(--paper);color:var(--ink);}
 .hero.pantry .cta-row .btn:hover{background:var(--red);border-color:var(--red);}
 .hero.pantry .addr-pill{margin-top:0;}
-.pt-seal{text-align:right;padding-bottom:6px;}
-.pt-seal .score{font-family:'Fraunces',serif;font-weight:560;font-size:44px;line-height:1;}
-.pt-seal .stars{color:var(--red);font-size:12px;letter-spacing:.2em;margin-top:4px;}
-.pt-seal .count{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-60);margin-top:6px;}
 .receipt{position:relative;z-index:3;background:var(--ink);color:var(--paper);
   overflow:hidden;white-space:nowrap;padding:13px 0;}
 .receipt-track{display:inline-block;will-change:transform;}
@@ -367,7 +363,6 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 @media(max-width:900px){
   .hero.pantry{min-height:auto;padding-top:92px;}
   .pt-inner{grid-template-columns:1fr;gap:26px;padding:0 20px 44px;}
-  .pt-seal{text-align:left;}
   .pt-vert{display:none;}
   .pt-veil{background:linear-gradient(180deg,rgba(247,244,239,.94) 0%,rgba(247,244,239,.86) 48%,rgba(247,244,239,.5) 100%);}
 }
@@ -416,16 +411,11 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
       <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Ouvert dès 11h30 — Paris 15e</span></div>
       <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Market</span></h1>
       <p class="pt-line" data-i18n="pt_line">On a déménagé une épicerie de Séoul, rayon par rayon.</p>
-      <p class="sub" data-i18n-html="hero_sub">Le garde-manger de Séoul, dans le 15e.</p>
+      <p class="sub" data-i18n-html="hero_sub">Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.</p>
       <div class="cta-row">
         <a class="btn" href="#rayons" data-i18n="pt_cta">Voir les rayons</a>
-        <span class="addr-pill">12 rue Exemple, 75015 Paris</span>
+        <span class="addr-pill" data-i18n="addr_pill">Paris 15e · adresse de démonstration</span>
       </div>
-    </div>
-    <div class="pt-seal">
-      <div class="score">4.9</div>
-      <div class="stars">★★★★★</div>
-      <div class="count" data-i18n="rating_count">Google</div>
     </div>
   </div>
 
@@ -441,47 +431,40 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 <section id="rayons" data-rail>
   <div class="section-head reveal">
     <div class="over" data-i18n="ry_over">Les rayons · 매대</div>
-    <h2 data-i18n="ry_h2">Tout Séoul, en rayons</h2>
+    <h2 data-i18n="ry_h2">Pour le dîner de ce soir</h2>
     <p data-i18n="ry_p">Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.</p>
   </div>
   <div class="ray-wrap">
   <div class="grid-rayons">
-    <div class="rayon highlight reveal" data-ray="0">
+    <div class="rayon highlight lead reveal" data-ray="0">
       <div class="badge" data-i18n="r1_badge">Fait maison</div>
-      <div class="icon">01</div>
       <h3 data-i18n="r1_h3">Kimchi & Banchan</h3>
       <div class="kr">김치 · 반찬</div>
-      <p data-i18n="r1_p">Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats d'accompagnement prêts à emporter.</p>
+      <p data-i18n="r1_p">Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats prêts à emporter.</p>
+      <p class="ray-when" data-i18n="r1_when">Pour prendre du kimchi en rentrant.</p>
     </div>
     <div class="rayon reveal" data-ray="1">
-      <div class="icon">02</div>
       <h3 data-i18n="r2_h3">Ramyeon & Nouilles</h3>
       <div class="kr">라면 · 면</div>
       <p data-i18n="r2_p">Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.</p>
     </div>
     <div class="rayon reveal" data-ray="2">
-      <div class="icon">03</div>
       <h3 data-i18n="r3_h3">Sauces & Condiments</h3>
       <div class="kr">장 · 소스</div>
-      <p data-i18n="r3_p">Gochujang, doenjang, huile de sésame, sauce soja coréenne — la base de tout.</p>
+      <p data-i18n="r3_p">Gochujang, doenjang, huile de sésame, sauce soja coréenne.</p>
+      <p class="ray-when" data-i18n="r3_when">Pour refaire un jjigae à la maison.</p>
     </div>
-    <div class="rayon reveal" data-ray="3">
-      <div class="icon">04</div>
+    <div class="rayon small reveal" data-ray="3">
       <h3 data-i18n="r4_h3">Surgelés</h3>
       <div class="kr">냉동식품</div>
-      <p data-i18n="r4_p">Mandu, tteok pour tteokbokki, poissons et fruits de mer — le congélateur qui dépanne les soirs de flemme.</p>
     </div>
-    <div class="rayon reveal" data-ray="4">
-      <div class="icon">05</div>
+    <div class="rayon small reveal" data-ray="4">
       <h3 data-i18n="r5_h3">Snacks & Douceurs</h3>
       <div class="kr">과자</div>
-      <p data-i18n="r5_p">Choco pie, chips au miel, bonbons — le rayon préféré des enfants (et des adultes qui assument).</p>
     </div>
-    <div class="rayon reveal" data-ray="5">
-      <div class="icon">06</div>
+    <div class="rayon small reveal" data-ray="5">
       <h3 data-i18n="r6_h3">Boissons & Soju</h3>
       <div class="kr">음료 · 주류</div>
-      <p data-i18n="r6_p">Soju, makgeolli, thés et boissons pétillantes coréennes bien fraîches.</p>
     </div>
   </div>
     <div class="ray-stage" aria-hidden="true">
@@ -505,30 +488,6 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 </div>
 
 <!-- AVIS -->
-<section id="avis" data-rail>
-  <div class="section-head reveal">
-    <div class="over" data-i18n="av_over">Ils sont venus · 리뷰</div>
-    <h2 data-i18n="av_h2">★★★★★ sur Google</h2>
-    <p data-i18n="av_p">Des avis cinq étoiles. Le quartier a adopté le joayo.</p>
-  </div>
-  <div class="reviews">
-    <div class="review reveal">
-      <div class="stars">★★★★★</div>
-      <p data-i18n="rv1_p">« Enfin une vraie épicerie coréenne dans le 15e. Le kimchi maison est incroyable, on sent que tout est fait avec soin. »</p>
-      <div class="who" data-i18n="rv1_who">— Cliente du quartier</div>
-    </div>
-    <div class="review reveal">
-      <div class="stars">★★★★★</div>
-      <p data-i18n="rv2_p">« Accueil adorable, produits qu'on ne trouve nulle part ailleurs dans le coin. J'y retourne chaque semaine. »</p>
-      <div class="who" data-i18n="rv2_who">— Habitué</div>
-    </div>
-    <div class="review reveal">
-      <div class="stars">★★★★★</div>
-      <p data-i18n="rv3_p">« Petit par la taille, immense par le choix. Les banchan à emporter sont une tuerie. »</p>
-      <div class="who" data-i18n="rv3_who">— Voisin du quartier</div>
-    </div>
-  </div>
-</section>
 
 <!-- INFOS -->
 <section id="infos" data-rail>
@@ -539,7 +498,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   <div class="infos-grid">
     <div class="info-card reveal">
       <h3 data-i18n="ic1_h3">Adresse</h3>
-      <p>12 rue Exemple<br>75015 Paris</p>
+      <p data-i18n-html="ic_addr">Paris 15e<br>Adresse de démonstration</p>
       <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
     </div>
     <div class="info-card reveal">
@@ -576,7 +535,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
     <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
     <a href="#infos" data-i18n="nav_find">Nous trouver</a>
   </div>
-  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Market — 12 rue Exemple, 75015 Paris</p>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Market — Paris 15e</p>
 </footer>
 
 <script>
@@ -587,23 +546,18 @@ fr: {
   tick1:"Joayo Market", tick2:"Kimchi maison", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15e",
   brand_sub:"Market · 마켓",
   nav_home:"Accueil", nav_rayons:"Les Rayons", nav_resto:"Le Restaurant", nav_find:"Nous trouver",
-  rating_count:"Google",
   kicker:"Ouvert dès 11h30 — Paris 15e",
   hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"좋아요 마켓",
-  hero_sub:"Le garde-manger de Séoul, dans le 15e. Kimchi et banchan <strong>faits maison</strong>, et tout ce qu'il faut pour cuisiner coréen chez vous.",
-  ry_over:"Les rayons · 매대", ry_h2:"Tout Séoul, en rayons",
+  hero_sub:"Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.",
+  ry_over:"Les rayons · 매대", ry_h2:"Pour le dîner de ce soir",
   ry_p:"Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.",
-  r1_badge:"Fait maison", r1_h3:"Kimchi & Banchan", r1_p:"Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats d'accompagnement prêts à emporter.",
+  r1_badge:"Fait maison", r1_h3:"Kimchi & Banchan", r1_p:"Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats prêts à emporter.",
   r2_h3:"Ramyeon & Nouilles", r2_p:"Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.",
-  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, huile de sésame, sauce soja coréenne — la base de tout.",
+  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, huile de sésame, sauce soja coréenne.",
   r4_h3:"Surgelés", r4_p:"Mandu, tteok pour tteokbokki, poissons et fruits de mer — le congélateur qui dépanne les soirs de flemme.",
   r5_h3:"Snacks & Douceurs", r5_p:"Choco pie, chips au miel, bonbons — le rayon préféré des enfants (et des adultes qui assument).",
   r6_h3:"Boissons & Soju", r6_p:"Soju, makgeolli, thés et boissons pétillantes coréennes bien fraîches.",
-  kb_h2:"Le kimchi, on le fait nous-mêmes.", kb_p:"Chaque semaine, sur place. En grande quantité pour vos fêtes ? Demandez au comptoir.",
-  av_over:"Ils sont venus · 리뷰", av_h2:"★★★★★ sur Google", av_p:"Des avis cinq étoiles. Le quartier a adopté le joayo.",
-  rv1_p:"« Enfin une vraie épicerie coréenne dans le 15e. Le kimchi maison est incroyable, on sent que tout est fait avec soin. »", rv1_who:"— Cliente du quartier",
-  rv2_p:"« Accueil adorable, produits qu'on ne trouve nulle part ailleurs dans le coin. J'y retourne chaque semaine. »", rv2_who:"— Habitué",
-  rv3_p:"« Petit par la taille, immense par le choix. Les banchan à emporter sont une tuerie. »", rv3_who:"— Voisin du quartier",
+  kb_h2:"Le kimchi, on le fait nous-mêmes.", kb_p:"Chaque semaine, sur place. En grande quantité pour vos fêtes ? Demandez au comptoir.", 
   in_over:"Infos pratiques · 오시는 길", in_h2:"Passer au marché",
   ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
   ic2_h3:"Horaires", ic2_p:"Ouverture dès 11h30", ic2_small:"Horaires du jour sur Google Maps.",
@@ -613,7 +567,11 @@ fr: {
   cr_p:"Le joayo a aussi une table : bibimbap au tartare de bœuf, bulgogi et poulet frit, en plein cœur de Paris.",
   cr_btn:"Découvrir le restaurant",
   foot_sub:"MARKET",
-  legal:"Site de démonstration · © 2026 Joayo Market — 12 rue Exemple, 75015 Paris"
+  legal:"Site de démonstration · © 2026 Joayo Market — Paris 15e",
+  addr_pill:"Paris 15e · adresse de démonstration",
+  ic_addr:"Paris 15e<br>Adresse de démonstration",
+  r1_when:"Pour prendre du kimchi en rentrant.",
+  r3_when:"Pour refaire un jjigae à la maison.",
 },
 en: {
   _title:"JOAYO Market 좋아요 마켓 — Korean Grocery, Paris 15th",
@@ -621,23 +579,18 @@ en: {
   tick1:"Joayo Market", tick2:"Homemade kimchi", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15th",
   brand_sub:"Market · 마켓",
   nav_home:"Home", nav_rayons:"The Aisles", nav_resto:"The Restaurant", nav_find:"Find us",
-  rating_count:"Google",
   kicker:"Opens 11:30 am — Paris 15th",
   hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"좋아요 마켓",
-  hero_sub:"Seoul's pantry, in the 15th. <strong>Homemade</strong> kimchi and banchan, plus everything you need to cook Korean at home.",
-  ry_over:"The aisles · 매대", ry_h2:"All of Seoul, on shelves",
+  hero_sub:"House-made kimchi and banchan, ramyeon, sauces, snacks. To take away.",
+  ry_over:"The aisles · 매대", ry_h2:"For tonight's dinner",
   ry_p:"Everything you need to cook Korean at home — and things you won't find anywhere else in the neighborhood.",
-  r1_badge:"Homemade", r1_h3:"Kimchi & Banchan", r1_p:"Made in-house every week. Cabbage, radish and cucumber kimchi, plus ready-to-go side dishes.",
+  r1_badge:"Homemade", r1_h3:"Kimchi & Banchan", r1_p:"Made on site every week. Cabbage, radish and cucumber kimchi, and small dishes ready to take away.",
   r2_h3:"Ramyeon & Noodles", r2_p:"The ramyeon wall: classics, limited editions, and spice levels for every kind of brave.",
-  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, sesame oil, Korean soy sauce — the foundation of everything.",
+  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, sesame oil, Korean soy sauce.",
   r4_h3:"Frozen", r4_p:"Mandu, tteok for tteokbokki, fish and seafood — the freezer that saves lazy weeknights.",
   r5_h3:"Snacks & Sweets", r5_p:"Choco pie, honey butter chips, candy — the kids' favorite aisle (and the adults who own it).",
   r6_h3:"Drinks & Soju", r6_p:"Soju, makgeolli, teas and Korean sodas, always cold.",
-  kb_h2:"The kimchi? We make it ourselves.", kb_p:"Every week, in-house. Need a party-sized batch? Ask at the counter.",
-  av_over:"They came by · 리뷰", av_h2:"★★★★★ on Google", av_p:"Five-star reviews. The neighborhood has adopted the joayo.",
-  rv1_p:"“Finally a real Korean grocery in the 15th. The homemade kimchi is incredible — you can tell everything is made with care.”", rv1_who:"— Neighborhood regular",
-  rv2_p:"“Lovely welcome, products you can't find anywhere else around here. I come back every week.”", rv2_who:"— Regular",
-  rv3_p:"“Small in size, huge in choice. The takeaway banchan are addictive.”", rv3_who:"— A neighbor from the block",
+  kb_h2:"The kimchi? We make it ourselves.", kb_p:"Every week, in-house. Need a party-sized batch? Ask at the counter.", 
   in_over:"Practical info · 오시는 길", in_h2:"Stop by the market",
   ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
   ic2_h3:"Hours", ic2_p:"Opens at 11:30 am", ic2_small:"Today's hours on Google Maps.",
@@ -647,7 +600,11 @@ en: {
   cr_p:"The joayo also sets a table: beef tartare bibimbap, bulgogi and fried chicken, in the heart of Paris.",
   cr_btn:"Discover the restaurant",
   foot_sub:"MARKET",
-  legal:"Site de démonstration · © 2026 Joayo Market — 12 rue Exemple, 75015 Paris"
+  legal:"Demo site · © 2026 Joayo Market — Paris 15e",
+  addr_pill:"Paris 15e · demo address",
+  ic_addr:"Paris 15e<br>Demo address",
+  r1_when:"For picking up kimchi on the way home.",
+  r3_when:"For making jjigae again at home.",
 },
 ko: {
   _title:"좋아요 마켓 JOAYO Market — 파리 15구 한국 마켓",
@@ -655,23 +612,18 @@ ko: {
   tick1:"좋아요 마켓", tick2:"직접 담근 김치", tick3:"반찬", tick4:"라면", tick5:"파리 15구",
   brand_sub:"마켓 · Market",
   nav_home:"홈", nav_rayons:"매대 안내", nav_resto:"레스토랑", nav_find:"오시는 길",
-  rating_count:"Google",
   kicker:"11:30 오픈 — 파리 15구",
   hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"JOAYO MARKET",
-  hero_sub:"파리 15구의 한국 마켓. <strong>직접 담근</strong> 김치와 반찬, 그리고 집에서 한식을 만들 때 필요한 모든 것.",
-  ry_over:"매대 안내 · Rayons", ry_h2:"서울 마트를 통째로 옮겨 왔습니다",
+  hero_sub:"직접 담근 김치와 반찬, 라면, 소스, 과자. 포장해 갑니다.",
+  ry_over:"매대 안내 · Rayons", ry_h2:"오늘 저녁을 위해",
   ry_p:"집에서 한식을 만들 때 필요한 모든 것 — 파리에서 구하기 힘든 것까지 다 있습니다.",
-  r1_badge:"직접 만듦", r1_h3:"김치 & 반찬", r1_p:"매주 매장에서 직접 만듭니다. 배추김치, 깍두기, 오이소박이, 바로 먹을 수 있는 밑반찬까지.",
+  r1_badge:"직접 만듦", r1_h3:"김치 & 반찬", r1_p:"매주 매장에서 담급니다. 배추·무·오이김치와 바로 가져갈 수 있는 반찬.",
   r2_h3:"라면 & 면류", r2_p:"클래식부터 신상, 한정판까지 — 취향대로, 맵기별로 골라 가세요.",
-  r3_h3:"장류 & 소스", r3_p:"고추장, 된장, 참기름, 간장 — 한식의 기본기를 갖췄습니다.",
+  r3_h3:"장류 & 소스", r3_p:"고추장, 된장, 참기름, 한국 간장.",
   r4_h3:"냉동식품", r4_p:"만두, 떡볶이 떡, 해산물까지 — 바쁜 날 저녁을 책임지는 냉동 코너.",
   r5_h3:"과자 & 간식", r5_p:"초코파이, 허니버터칩, 젤리 — 아이도 어른도 그냥 지나치기 힘든 코너.",
   r6_h3:"음료 & 주류", r6_p:"소주, 막걸리, 식혜, 탄산음료까지 시원하게 준비되어 있습니다.",
-  kb_h2:"김치는 저희가 직접 담급니다.", kb_p:"매주 매장에서 담가요. 명절이나 모임용 대량 주문은 카운터에 문의해 주세요.",
-  av_over:"리뷰 · Avis", av_h2:"구글 ★★★★★", av_p:"별 다섯 개 리뷰가 이어집니다. 동네가 인정한 마켓입니다.",
-  rv1_p:"“15구에 드디어 제대로 된 한국 마켓이 생겼어요. 직접 담근 김치가 정말 맛있습니다.”", rv1_who:"— 동네 단골손님",
-  rv2_p:"“사장님이 친절하고, 다른 데서 못 구하는 것들이 많아요. 매주 갑니다.”", rv2_who:"— 단골손님",
-  rv3_p:"“가게는 작지만 없는 게 없어요. 포장 반찬 강력 추천합니다.”", rv3_who:"— 동네 이웃",
+  kb_h2:"김치는 저희가 직접 담급니다.", kb_p:"매주 매장에서 담가요. 명절이나 모임용 대량 주문은 카운터에 문의해 주세요.", 
   in_over:"오시는 길 · Infos", in_h2:"마켓에 들러 보세요",
   ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
   ic2_h3:"영업시간", ic2_p:"11:30 오픈", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
@@ -681,7 +633,11 @@ ko: {
   cr_p:"좋아요 레스토랑이 있습니다 — 육회비빔밥, 불고기, 치킨. 파리 시내 한복판.",
   cr_btn:"레스토랑 보러 가기",
   foot_sub:"마켓",
-  legal:"데모 사이트 · © 2026 좋아요 마켓 — 12 rue Exemple, 75015 Paris"
+  legal:"데모 사이트 · © 2026 좋아요 마켓 — 파리 15구",
+  addr_pill:"파리 15구 · 데모 주소",
+  ic_addr:"파리 15구<br>데모 주소",
+  r1_when:"퇴근길에 김치 한 통.",
+  r3_when:"집에서 찌개 한 번 더.",
 }
 };
 
