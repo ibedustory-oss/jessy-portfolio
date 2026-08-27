@@ -19,6 +19,9 @@ const config: Config = {
         accent: '#1B64DA',
         accenthover: '#1957C2',
         accentlit: '#3182F6',
+        night: '#151A2D',
+        night2: '#0D1120',
+        nightline: '#2A3150',
       },
       fontFamily: {
         sans: [
