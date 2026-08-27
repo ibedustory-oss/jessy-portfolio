@@ -142,10 +142,10 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
   return (
     <div>
       {/* ============ HERO — one dark screen, one message ============ */}
-      <section className="relative overflow-hidden bg-night px-5 pb-16 pt-20 md:pb-24 md:pt-28">
+      <section className="relative overflow-hidden bg-ink px-5 pb-16 pt-20 md:pb-24 md:pt-28">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(1100px_520px_at_18%_-10%,rgba(49,130,246,0.28),transparent_65%),radial-gradient(760px_420px_at_92%_110%,rgba(27,100,218,0.22),transparent_70%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_460px_at_16%_-14%,rgba(49,130,246,0.13),transparent_66%)]"
         />
         <div className="relative mx-auto max-w-5xl">
           <Reveal>
@@ -216,16 +216,16 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           <Head eyebrow={x.pain.eyebrow} title={x.pain.title} accent={x.pain.titleAccent} dark center />
 
           <Reveal className="mt-14">
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               {x.pain.quotes.map((q, i) => (
                 <div
                   key={q}
                   className="quote-card relative rounded-[20px] bg-white p-6 md:p-7"
                   style={
                     {
-                      '--tilt': `${[-1.4, 0.9, -0.6][i]}deg`,
+                      '--tilt': `${[-1.4, 0.9, -0.6, 1.2][i % 4]}deg`,
                       animationDelay: `${i * 130}ms`,
-                      marginTop: i === 1 ? '1.6rem' : undefined,
+                      marginTop: i % 2 === 1 ? '1.6rem' : undefined,
                     } as React.CSSProperties
                   }
                 >
@@ -395,9 +395,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       </section>
 
       {/* ============ PROCESS — numbered, alternating fill ============ */}
-      <section id="how" className="scroll-mt-28 bg-night px-5 py-24 md:py-32">
+      <section id="how" className="scroll-mt-28 border-y border-line bg-surface/60 px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
-          <Head eyebrow={x.eyebrows.steps} title={s.stepsTitle} dark center />
+          <Head eyebrow={x.eyebrows.steps} title={s.stepsTitle} center />
 
           <div className="mt-12 grid gap-4 md:grid-cols-2">
             {s.steps.map((st, i) => {
@@ -406,13 +406,13 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                 <Reveal key={st.n} delay={(i % 2) * 80}>
                   <div
                     className={`relative h-full overflow-hidden rounded-[22px] p-7 md:p-8 ${
-                      filled ? 'bg-accent' : 'bg-paper'
+                      filled ? 'bg-ink' : 'border border-line bg-paper'
                     }`}
                   >
                     <span
                       aria-hidden="true"
                       className={`text-[40px] font-extrabold leading-none tracking-tightest md:text-[52px] ${
-                        filled ? 'text-white/25' : 'text-surface2'
+                        filled ? 'text-white/20' : 'text-accent/25'
                       }`}
                     >
                       {st.n}
@@ -425,7 +425,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                       {st.title}
                     </h3>
                     <div
-                      className={`mt-4 h-px w-full ${filled ? 'bg-white/25' : 'bg-line'}`}
+                      className={`mt-4 h-px w-full ${filled ? 'bg-white/20' : 'bg-line'}`}
                       aria-hidden="true"
                     />
                     <p
@@ -450,17 +450,13 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {s.plans.map((p, i) => {
-              const tone = p.featured ? 'accent' : i === s.plans.length - 1 ? 'night' : 'paper'
-              const onDark = tone !== 'paper'
+              const tone = p.featured ? 'ink' : 'paper'
+              const onDark = tone === 'ink'
               return (
                 <Reveal key={p.name} delay={i * 80}>
                   <div
                     className={`flex h-full flex-col rounded-[22px] p-7 md:p-8 ${
-                      tone === 'accent'
-                        ? 'bg-accent'
-                        : tone === 'night'
-                          ? 'bg-night'
-                          : 'border border-line bg-paper'
+                      tone === 'ink' ? 'bg-ink' : 'border border-line bg-paper'
                     }`}
                   >
                     <h3
@@ -473,7 +469,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                     <p className="mt-4 flex items-baseline gap-1.5">
                       <span
                         className={`text-[28px] font-extrabold tracking-tightest md:text-[32px] ${
-                          onDark ? 'text-white' : 'text-ink'
+                          onDark ? 'text-accentlit' : 'text-ink'
                         }`}
                       >
                         {p.price}
@@ -502,7 +498,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                           }`}
                         >
                           <span className="mt-1">
-                            <Check className={onDark ? 'text-white' : 'text-accent'} />
+                            <Check className={onDark ? 'text-accentlit' : 'text-accent'} />
                           </span>
                           {f}
                         </li>
@@ -511,11 +507,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                     <Link
                       href={contact}
                       className={`mt-7 block rounded-full py-3 text-center text-[13px] font-bold transition duration-300 ease-swift ${
-                        tone === 'accent'
-                          ? 'bg-white text-accent hover:bg-white/90'
-                          : tone === 'night'
-                            ? 'bg-white/[0.14] text-white ring-1 ring-inset ring-white/30 hover:bg-white/25'
-                            : 'bg-ink text-white hover:bg-accent'
+                        tone === 'ink'
+                          ? 'bg-accent text-white hover:bg-accentlit'
+                          : 'border border-line bg-paper text-ink hover:border-ink'
                       }`}
                     >
                       {p.cta}
@@ -590,10 +584,10 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       </section>
 
       {/* ============ FINAL ============ */}
-      <section className="relative overflow-hidden bg-night px-5 py-24 md:py-32">
+      <section className="relative overflow-hidden bg-ink px-5 py-24 md:py-32">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(49,130,246,0.34),transparent_62%)] blur-2xl"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(49,130,246,0.18),transparent_62%)] blur-2xl"
         />
         <div className="relative mx-auto max-w-2xl text-center">
           <Reveal>
