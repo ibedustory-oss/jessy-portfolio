@@ -29,9 +29,9 @@ export default function StrategySheet({
           {rows.map((r, i) => (
             <div
               key={r.k}
-              className="grid grid-cols-[4.6rem_minmax(0,1fr)] items-baseline gap-3 border-b border-dashed border-ink/15 py-[11px]"
+              className="grid grid-cols-[6.75rem_minmax(0,1fr)] items-baseline gap-3 border-b border-dashed border-ink/15 py-[11px]"
             >
-              <dt className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-ink/40">
+              <dt className="break-keep font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink/40">
                 {r.k}
               </dt>
               <dd className="relative text-[12.5px] font-medium leading-snug text-ink">

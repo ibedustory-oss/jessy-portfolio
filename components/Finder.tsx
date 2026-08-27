@@ -62,8 +62,8 @@ export default function Finder({ block, contact }: { block: FinderBlock; contact
   ]
 
   return (
-    <div className="grid items-start gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,23rem)] md:gap-14">
-      <div className="space-y-9">
+    <div className="grid items-start gap-12">
+      <div className="space-y-8">
         <Choice
           label={block.sizeLead}
           options={block.sizes.map((v) => v.label)}
@@ -76,8 +76,18 @@ export default function Finder({ block, contact }: { block: FinderBlock; contact
           value={pain}
           onPick={setPain}
         />
+      </div>
 
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-3 pt-1">
+      <div className="max-w-[26rem]">
+        <StrategySheet
+          label={block.sheetLabel}
+          refNo={block.draftRef}
+          rows={rows}
+          onDark={false}
+        />
+      </div>
+
+      <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
           <Link
             href={contact}
             className={`inline-flex items-baseline gap-3 border-b pb-1 text-[14px] font-bold transition-colors duration-300 ${
@@ -102,15 +112,7 @@ export default function Finder({ block, contact }: { block: FinderBlock; contact
               {block.reset}
             </button>
           )}
-        </div>
       </div>
-
-      <StrategySheet
-        label={block.sheetLabel}
-        refNo={block.draftRef}
-        rows={rows}
-        onDark={false}
-      />
     </div>
   )
 }

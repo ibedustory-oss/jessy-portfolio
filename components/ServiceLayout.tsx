@@ -186,33 +186,37 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       {/* ============ 03 · the working, not the finished thing ============ */}
       <section id="sheet" className="scroll-mt-20 px-6 py-24 md:px-10 md:py-36">
         <div className="mx-auto max-w-[1200px]">
-          <div className="grid gap-y-14 md:grid-cols-12 md:gap-x-10">
-            <div className="md:col-span-5">
+          <div className="grid gap-y-16 md:grid-cols-12 md:gap-x-10">
+            <div className="md:col-span-4">
               <Reveal>
                 <Label n="02">{x.finder.eyebrow}</Label>
-                <h2 className="mt-8 max-w-[16ch] break-keep text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[44px]">
+              </Reveal>
+              <Reveal delay={60}>
+                <div className="mt-12 max-w-[24rem] md:sticky md:top-24 md:mt-16">
+                  <PositionMap map={x.map} />
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="md:col-span-7 md:col-start-6">
+              <Reveal>
+                <h2 className="max-w-[16ch] break-keep text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[44px]">
                   {x.finder.title}
                   <br />
                   {x.finder.titleAccent}
                 </h2>
-                <p className="mt-7 max-w-[38ch] text-[14.5px] leading-[1.85] text-warmgray">
+                <p className="mt-7 max-w-[40ch] text-[14.5px] leading-[1.85] text-warmgray">
                   {x.finder.lead}
                 </p>
               </Reveal>
-            </div>
 
-            <div className="md:col-span-6 md:col-start-7">
               <Reveal delay={80}>
-                <PositionMap map={x.map} />
+                <div className="mt-14 border-t border-line pt-12">
+                  <Finder block={x.finder} contact={contact} />
+                </div>
               </Reveal>
             </div>
           </div>
-
-          <Reveal>
-            <div className="mt-24 border-t border-line pt-14 md:mt-32">
-              <Finder block={x.finder} contact={contact} />
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -381,61 +385,68 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                 </div>
               </Reveal>
 
-              {/* price, as two entries rather than two cards */}
+            </div>
+          </div>
+
+          <div className="mt-24 grid gap-y-10 border-t border-line pt-16 md:mt-32 md:grid-cols-12 md:gap-x-10">
+            <div className="md:col-span-3">
               <Reveal>
-                <div className="mt-24 border-t border-line pt-12 md:mt-32">
-                  <Label n="05">{x.eyebrows.price}</Label>
-                  <div className="mt-10 grid gap-y-12 md:grid-cols-2 md:gap-x-12">
-                    {s.plans.map((p, i) => (
-                      <div key={p.name}>
-                        <h3
-                          className={`text-[17px] font-extrabold tracking-tight ${
+                <Label n="05">{x.eyebrows.price}</Label>
+              </Reveal>
+            </div>
+
+            <div className="md:col-span-8 md:col-start-5">
+              <Reveal>
+                <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-12">
+                  {s.plans.map((p, i) => (
+                    <div key={p.name}>
+                      <h3
+                        className={`text-[17px] font-extrabold tracking-tight ${
+                          p.featured ? 'text-ink' : 'text-charcoal'
+                        }`}
+                      >
+                        {p.name}
+                      </h3>
+                      <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
+                        <span
+                          className={`text-[30px] font-extrabold tracking-tightest md:text-[36px] ${
                             p.featured ? 'text-ink' : 'text-charcoal'
                           }`}
                         >
-                          {p.name}
-                        </h3>
-                        <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
-                          <span
-                            className={`text-[30px] font-extrabold tracking-tightest md:text-[36px] ${
-                              p.featured ? 'text-ink' : 'text-charcoal'
-                            }`}
-                          >
-                            {p.price}
-                          </span>
-                          <span className="break-keep text-xs text-warmgray">{p.unit}</span>
-                        </p>
-                        <p className="mt-4 max-w-[36ch] text-[13.5px] leading-[1.8] text-charcoal">
-                          {p.desc}
-                        </p>
-                        <p className="mt-5 max-w-[38ch] text-[13px] leading-[1.8] text-warmgray">
-                          <span className="font-bold text-accent">{x.planExtra.bestLabel}</span>{' '}
-                          {x.planExtra.items[i]?.best}
-                        </p>
-                        <ul className="mt-6 space-y-1.5 border-t border-line pt-5">
-                          {p.features.map((f) => (
-                            <li key={f} className="text-[13.5px] text-charcoal">
-                              {f}
-                            </li>
-                          ))}
-                        </ul>
-                        <p className="mt-5 text-[12.5px] leading-[1.75] text-warmgray">
-                          <span className="font-mono text-[10px] uppercase tracking-[0.18em]">
-                            {x.planExtra.excludeLabel}
-                          </span>{' '}
-                          {x.planExtra.items[i]?.excludes.join(' · ')}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                          {p.price}
+                        </span>
+                        <span className="break-keep text-xs text-warmgray">{p.unit}</span>
+                      </p>
+                      <p className="mt-4 max-w-[36ch] text-[13.5px] leading-[1.8] text-charcoal">
+                        {p.desc}
+                      </p>
+                      <p className="mt-5 max-w-[38ch] text-[13px] leading-[1.8] text-warmgray">
+                        <span className="font-bold text-accent">{x.planExtra.bestLabel}</span>{' '}
+                        {x.planExtra.items[i]?.best}
+                      </p>
+                      <ul className="mt-6 space-y-1.5 border-t border-line pt-5">
+                        {p.features.map((f) => (
+                          <li key={f} className="text-[13.5px] text-charcoal">
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="mt-5 text-[12.5px] leading-[1.75] text-warmgray">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.18em]">
+                          {x.planExtra.excludeLabel}
+                        </span>{' '}
+                        {x.planExtra.items[i]?.excludes.join(' · ')}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-                  <p className="mt-12 max-w-[52ch] text-[12.5px] leading-[1.85] text-warmgray">
-                    {s.priceNote}
-                  </p>
+                <p className="mt-12 max-w-[52ch] text-[12.5px] leading-[1.85] text-warmgray">
+                  {s.priceNote}
+                </p>
 
-                  <div className="mt-12">
-                    <Cta href={contact}>{s.ctaPrimary}</Cta>
-                  </div>
+                <div className="mt-12">
+                  <Cta href={contact}>{s.ctaPrimary}</Cta>
                 </div>
               </Reveal>
             </div>
