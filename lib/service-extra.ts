@@ -69,8 +69,6 @@ export interface MonitorBlock {
   termsLabel: string
   terms: string[]
   cta: string
-  note: string
-  plansNote: string
   finderNote: string
 }
 
@@ -109,8 +107,6 @@ export const EXTRA: Record<Lang, Extra> = {
       termsLabel: 'お互いに約束すること',
       terms: ['屋号と写真を出した事例掲載', '3ヶ月後に変化を数字で共有', '推薦文を1つ'],
       cta: 'モニターに応募する',
-      note: '定価は事例が揃ってから公開します。',
-      plansNote: 'モニター期間後の想定価格',
       finderNote: 'いまはモニター期間です。3社限定 €300。多言語とページ追加も含みます。',
     },
     pain: {
@@ -232,8 +228,6 @@ export const EXTRA: Record<Lang, Extra> = {
       termsLabel: '서로 약속하는 것',
       terms: ['상호와 사진을 낸 사례 게재', '3개월 뒤 변화를 숫자로 공유', '추천사 한 줄'],
       cta: '모니터 신청하기',
-      note: '정가는 사례가 모이면 공개합니다.',
-      plansNote: '모니터 기간 이후의 예상 가격',
       finderNote: '지금은 모니터 기간입니다. 3분 한정 ₩450,000. 다국어와 페이지 추가도 포함합니다.',
     },
     pain: {
@@ -355,8 +349,6 @@ export const EXTRA: Record<Lang, Extra> = {
       termsLabel: 'What we agree',
       terms: ['A case study using your name and photos', 'The numbers, three months on', 'One line of testimonial'],
       cta: 'Apply for a place',
-      note: 'Standard pricing follows once the case studies exist.',
-      plansNote: 'Expected pricing after the monitor period',
       finderNote: 'The monitor period is open — three places at €300, several languages and extra pages included.',
     },
     pain: {

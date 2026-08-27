@@ -529,7 +529,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                 </div>
               </div>
 
-              <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-9">
                 <Link
                   href={contact}
                   className="group inline-flex items-center gap-2 rounded-full bg-accent py-2 pl-6 pr-2 text-sm font-bold text-white transition duration-300 ease-swift hover:bg-accentlit"
@@ -537,18 +537,12 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                   {x.monitor.cta}
                   <Arrow />
                 </Link>
-                <p className="text-[12.5px] text-white/45">{x.monitor.note}</p>
               </div>
             </div>
           </Reveal>
 
-          <Reveal delay={60}>
-            <p className="mt-14 text-center text-[12px] font-bold uppercase tracking-[0.18em] text-warmgray">
-              {x.monitor.plansNote}
-            </p>
-          </Reveal>
 
-          <div className="mx-auto mt-6 grid max-w-4xl gap-4 md:grid-cols-2">
+          <div className="mx-auto mt-14 grid max-w-4xl gap-4 md:grid-cols-2">
             {s.plans.map((p, i) => {
               const tone = p.featured ? 'ink' : 'paper'
               const onDark = tone === 'ink'
