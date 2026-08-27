@@ -137,10 +137,24 @@ summary:focus-visible {
 }
 .finder-in { animation: finder-in 0.55s cubic-bezier(0.23, 1, 0.32, 1) both; }
 
-/* the pain quotes rise as the black section arrives */
-@keyframes quote-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: none; }
+/* the objections arrive the way a message does */
+@keyframes msg-in {
+  0%   { opacity: 0; transform: translateY(14px) scale(0.94); }
+  100% { opacity: 1; transform: none; }
 }
-.reveal.is-visible .quote-card { animation: quote-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) both; }
-.reveal .quote-card { opacity: 0; }
+.reveal.is-visible .msg-in { animation: msg-in 0.5s cubic-bezier(0.34, 1.24, 0.5, 1) both; }
+.reveal .msg-in { opacity: 0; }
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+  30%           { opacity: 1; transform: translateY(-3px); }
+}
+.reveal.is-visible .typing span { animation: typing-dot 1.35s ease-in-out infinite; }
+
+/* the conclusion gets underlined once the notes have landed */
+@keyframes underline-draw {
+  from { stroke-dashoffset: 340; }
+  to   { stroke-dashoffset: 0; }
+}
+.reveal.is-visible .draw { animation: underline-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; }
+.reveal .draw { stroke-dashoffset: 340; }

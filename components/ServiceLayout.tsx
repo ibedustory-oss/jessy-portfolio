@@ -219,28 +219,53 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="mx-auto max-w-5xl">
           <Head eyebrow={x.pain.eyebrow} title={x.pain.title} accent={x.pain.titleAccent} dark />
 
-          <ul className="mt-14 space-y-11 md:space-y-14">
-            {x.pain.quotes.map((q, i) => (
-              <li key={q} className="quote-card" style={{ animationDelay: `${i * 130}ms` }}>
-                <p className="relative max-w-[42ch] pl-11 text-[19px] leading-[1.68] text-white/85 md:text-[24px] md:leading-[1.6]">
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-0 top-[-0.04em] select-none text-[46px] leading-[0.8] text-accentlit/40"
+          <Reveal className="mt-14">
+            <ul className="max-w-[36rem] space-y-3.5">
+              {x.pain.quotes.map((q, i) => (
+                <li key={q}>
+                  <p
+                    className="msg-in inline-block rounded-2xl rounded-tl-sm bg-[#F7F5F0] px-5 py-4 text-[15px] leading-[1.68] text-ink shadow-[0_10px_24px_-14px_rgba(0,0,0,0.7)] md:px-6 md:py-[18px] md:text-[16px]"
+                    style={{ animationDelay: `${i * 220}ms` }}
                   >
-                    &ldquo;
-                  </span>
-                  {q}
-                  <span aria-hidden="true" className="select-none text-accentlit/40">
-                    &rdquo;
-                  </span>
-                </p>
+                    {q}
+                  </p>
+                </li>
+              ))}
+              <li>
+                <span
+                  className="msg-in typing inline-flex items-center gap-1.5 rounded-2xl rounded-tl-sm bg-[#F7F5F0]/80 px-5 py-4"
+                  style={{ animationDelay: `${x.pain.quotes.length * 220}ms` }}
+                  aria-hidden="true"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-ink/45" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-ink/45 [animation-delay:0.18s]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-ink/45 [animation-delay:0.36s]" />
+                </span>
               </li>
-            ))}
-          </ul>
+            </ul>
+          </Reveal>
 
           <Reveal>
-            <p className="mt-20 text-[22px] font-extrabold leading-[1.4] tracking-tightest text-white md:text-[32px]">
-              {x.pain.close}
+            <p className="mt-24 md:mt-28">
+              <span className="relative inline-block text-[24px] font-extrabold leading-[1.36] tracking-tightest text-white md:text-[40px]">
+                {x.pain.close}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 340 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-3 left-0 h-[10px] w-full text-accentlit md:-bottom-4 md:h-3"
+                >
+                  <path
+                    className="draw"
+                    d="M3 8.6C62 4.2 142 2.8 208 4.8c38 1.1 76 2.9 129 1.6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeDasharray="340"
+                  />
+                </svg>
+              </span>
             </p>
           </Reveal>
         </div>
