@@ -4,12 +4,14 @@ import type { Lang } from '@/lib/content'
    labels, and the two-axis finder. Kept out of service.ts so the three
    existing language blocks there stay untouched. */
 
-export interface SheetBlock {
+export interface MapBlock {
   label: string
-  ref: string
-  draftRef: string
-  rows: { k: string; v?: string }[]
-  caption: string
+  sample: string
+  xLeft: string
+  xRight: string
+  yTop: string
+  yBottom: string
+  points: { name: string; x: number; y: number; goal?: boolean }[]
 }
 
 export interface PainBlock {
@@ -33,6 +35,8 @@ export interface FinderPain {
 
 export interface FinderBlock {
   eyebrow: string
+  sheetLabel: string
+  draftRef: string
   title: string
   titleAccent: string
   lead: string
@@ -65,7 +69,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
-  sheet: SheetBlock
+  map: MapBlock
   pain: PainBlock
   finder: FinderBlock
   planExtra: PlanExtra
@@ -75,20 +79,19 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
-    sheet: {
-      label: 'Strategy sheet',
-      ref: 'N°01',
-      draftRef: '下書き',
-      rows: [
-        { k: 'Why', v: 'つくる前に、決める。' },
-        { k: 'Who', v: '言葉がまだ決まっていない事業者' },
-        { k: 'Position', v: '制作会社ではなく、一緒に決める相手' },
-        { k: 'Product', v: '戦略シート＋サイト' },
-        { k: 'Price', v: '¥200,000〜' },
-        { k: 'Place', v: 'パリ / オンライン' },
-        { k: 'Message' },
+    map: {
+      label: 'Positioning map',
+      sample: '例 · パリの韓国料理店',
+      xLeft: '日常',
+      xRight: '特別な日',
+      yTop: 'ローカライズ',
+      yBottom: '韓国式',
+      points: [
+        { name: 'フュージョン', x: 26, y: 26 },
+        { name: 'ファインダイニング', x: 70, y: 20 },
+        { name: '町の定食', x: 28, y: 72 },
+        { name: '取るべき場所', x: 74, y: 74, goal: true },
       ],
-      caption: 'これは私の分です。あなたの分は、まだ白紙です。',
     },
     pain: {
       eyebrow: 'About',
@@ -103,7 +106,9 @@ export const EXTRA: Record<Lang, Extra> = {
       close: 'どれも、デザインの問題ではありません。',
     },
     finder: {
-      eyebrow: 'Finder',
+      eyebrow: 'Sheet',
+      sheetLabel: 'Strategy sheet',
+      draftRef: '下書き',
       title: 'あなたのシート、',
       titleAccent: '最初の数行を書きます。',
       lead: '2つ選ぶと、シートが上から埋まっていきます。',
@@ -175,7 +180,7 @@ export const EXTRA: Record<Lang, Extra> = {
         },
       ],
     },
-    nav: { why: 'なぜ', finder: '診断', work: '実績', how: '進め方', price: '料金', faq: '質問' },
+    nav: { why: 'なぜ', finder: 'シート', work: '実績', how: '進め方', price: '料金', faq: '質問' },
     eyebrows: {
       work: 'Work',
       included: 'Scope',
@@ -187,20 +192,19 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
-    sheet: {
-      label: 'Strategy sheet',
-      ref: 'N°01',
-      draftRef: '초안',
-      rows: [
-        { k: 'Why', v: '만들기 전에, 정한다.' },
-        { k: 'Who', v: '할 말이 아직 안 정해진 사업자' },
-        { k: 'Position', v: '제작사가 아니라, 같이 정하는 사람' },
-        { k: 'Product', v: '전략 시트 + 사이트' },
-        { k: 'Price', v: '₩1,200,000~' },
-        { k: 'Place', v: '파리 / 온라인' },
-        { k: 'Message' },
+    map: {
+      label: 'Positioning map',
+      sample: '예시 · 파리의 한식당',
+      xLeft: '일상',
+      xRight: '특별한 날',
+      yTop: '현지화',
+      yBottom: '한국식',
+      points: [
+        { name: '퓨전 비스트로', x: 26, y: 26 },
+        { name: '파인다이닝', x: 70, y: 20 },
+        { name: '동네 백반', x: 28, y: 72 },
+        { name: '우리가 설 자리', x: 74, y: 74, goal: true },
       ],
-      caption: '이건 제 것입니다. 사장님 것은 아직 백지입니다.',
     },
     pain: {
       eyebrow: 'About',
@@ -215,7 +219,9 @@ export const EXTRA: Record<Lang, Extra> = {
       close: '전부 디자인의 문제가 아닙니다.',
     },
     finder: {
-      eyebrow: 'Finder',
+      eyebrow: 'Sheet',
+      sheetLabel: 'Strategy sheet',
+      draftRef: '초안',
       title: '사장님의 시트,',
       titleAccent: '첫 몇 줄을 채워 봅니다.',
       lead: '두 가지를 고르시면 시트가 위에서부터 채워집니다.',
@@ -287,7 +293,7 @@ export const EXTRA: Record<Lang, Extra> = {
         },
       ],
     },
-    nav: { why: '왜', finder: '진단', work: '작업물', how: '진행', price: '비용', faq: '질문' },
+    nav: { why: '왜', finder: '시트', work: '작업물', how: '진행', price: '비용', faq: '질문' },
     eyebrows: {
       work: 'Work',
       included: 'Scope',
@@ -299,20 +305,19 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
-    sheet: {
-      label: 'Strategy sheet',
-      ref: 'N°01',
-      draftRef: 'Draft',
-      rows: [
-        { k: 'Why', v: 'Decide before you build.' },
-        { k: 'Who', v: 'Owners who have not settled what to say' },
-        { k: 'Position', v: 'Not a studio. The person who decides with you.' },
-        { k: 'Product', v: 'Strategy sheet and site' },
-        { k: 'Price', v: '¥200,000+' },
-        { k: 'Place', v: 'Paris and remote' },
-        { k: 'Message' },
+    map: {
+      label: 'Positioning map',
+      sample: 'Example · Korean restaurant, Paris',
+      xLeft: 'Everyday',
+      xRight: 'Occasion',
+      yTop: 'Localised',
+      yBottom: 'Korean',
+      points: [
+        { name: 'Fusion bistro', x: 26, y: 26 },
+        { name: 'Fine dining', x: 70, y: 20 },
+        { name: 'Neighbourhood', x: 28, y: 72 },
+        { name: 'Where you stand', x: 74, y: 74, goal: true },
       ],
-      caption: 'This one is mine. Yours is still blank.',
     },
     pain: {
       eyebrow: 'About',
@@ -327,7 +332,9 @@ export const EXTRA: Record<Lang, Extra> = {
       close: 'None of these is a design problem.',
     },
     finder: {
-      eyebrow: 'Finder',
+      eyebrow: 'Sheet',
+      sheetLabel: 'Strategy sheet',
+      draftRef: 'Draft',
       title: 'Your sheet,',
       titleAccent: 'the first few lines.',
       lead: 'Choose two and the sheet fills from the top.',
@@ -399,7 +406,7 @@ export const EXTRA: Record<Lang, Extra> = {
         },
       ],
     },
-    nav: { why: 'Why', finder: 'Finder', work: 'Work', how: 'Process', price: 'Price', faq: 'FAQ' },
+    nav: { why: 'Why', finder: 'Sheet', work: 'Work', how: 'Process', price: 'Price', faq: 'FAQ' },
     eyebrows: {
       work: 'Work',
       included: 'Scope',

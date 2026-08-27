@@ -46,17 +46,7 @@ function Choice({
 }
 
 /* Two choices that write themselves onto a draft of the sheet. */
-export default function Finder({
-  block,
-  sheetLabel,
-  draftRef,
-  contact,
-}: {
-  block: FinderBlock
-  sheetLabel: string
-  draftRef: string
-  contact: string
-}) {
+export default function Finder({ block, contact }: { block: FinderBlock; contact: string }) {
   const [size, setSize] = useState<number | null>(null)
   const [pain, setPain] = useState<number | null>(null)
 
@@ -72,7 +62,7 @@ export default function Finder({
   ]
 
   return (
-    <div className="grid items-start gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:gap-16">
+    <div className="grid items-start gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,23rem)] md:gap-14">
       <div className="space-y-9">
         <Choice
           label={block.sizeLead}
@@ -116,8 +106,8 @@ export default function Finder({
       </div>
 
       <StrategySheet
-        label={sheetLabel}
-        refNo={draftRef}
+        label={block.sheetLabel}
+        refNo={block.draftRef}
         rows={rows}
         onDark={false}
       />

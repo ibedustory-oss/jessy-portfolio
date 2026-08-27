@@ -2,10 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
+import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
 import SectionNav from '@/components/SectionNav'
 import StickyEdge from '@/components/StickyEdge'
-import StrategySheet from '@/components/StrategySheet'
 import type { Lang } from '@/lib/content'
 import { SERVICE } from '@/lib/service'
 import { EXTRA } from '@/lib/service-extra'
@@ -36,18 +36,16 @@ function Head({
   accent,
   note,
   dark,
-  center,
 }: {
   eyebrow: string
   title: string
   accent?: string
   note?: string
   dark?: boolean
-  center?: boolean
 }) {
   return (
     <Reveal>
-      <div className={center ? 'text-center' : ''}>
+      <div>
         <p
           className={`text-[11px] font-bold uppercase tracking-[0.24em] ${
             dark ? 'text-white/45' : 'text-warmgray'
@@ -71,8 +69,8 @@ function Head({
         {note && (
           <p
             className={`mt-4 max-w-2xl text-sm leading-relaxed md:text-[15px] ${
-              center ? 'mx-auto' : ''
-            } ${dark ? 'text-white/60' : 'text-warmgray'}`}
+              dark ? 'text-white/60' : 'text-warmgray'
+            }`}
           >
             {note}
           </p>
@@ -128,7 +126,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
   const navItems = [
     { id: 'why', label: x.nav.why },
-    { id: 'finder', label: x.nav.finder },
+    { id: 'sheet', label: x.nav.finder },
     { id: 'work', label: x.nav.work },
     { id: 'how', label: x.nav.how },
     { id: 'price', label: x.nav.price },
@@ -143,7 +141,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_460px_at_16%_-14%,rgba(49,130,246,0.13),transparent_66%)]"
         />
-        <div className="relative mx-auto grid max-w-6xl gap-14 md:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] md:items-center md:gap-16">
+        <div className="relative mx-auto grid max-w-6xl gap-14 md:grid-cols-[minmax(0,1fr)_minmax(0,23rem)] md:items-center md:gap-16">
           <div>
           <Reveal>
             <p className="flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/50">
@@ -191,18 +189,12 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
           </div>
 
-          <Reveal delay={120} className="md:pt-4">
-            <StrategySheet
-              label={x.sheet.label}
-              refNo={x.sheet.ref}
-              rows={x.sheet.rows}
-              caption={x.sheet.caption}
-            />
+          <Reveal delay={120}>
+            <PositionMap map={x.map} />
           </Reveal>
         </div>
 
         <div className="relative mx-auto mt-16 max-w-6xl md:mt-20">
-          {/* stat row, ruled between */}
           <Reveal delay={140}>
             <dl className="grid grid-cols-2 gap-x-5 gap-y-8 border-t border-white/12 pt-8 md:grid-cols-4 md:gap-x-0">
               {s.stats.map((st, i) => (
@@ -225,26 +217,29 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       {/* ============ PAIN — the reader's own words, on black ============ */}
       <section id="why" className="scroll-mt-28 bg-ink px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
-          <Head eyebrow={x.pain.eyebrow} title={x.pain.title} accent={x.pain.titleAccent} dark center />
+          <Head eyebrow={x.pain.eyebrow} title={x.pain.title} accent={x.pain.titleAccent} dark />
 
-          <Reveal className="mt-14">
-            <ul className="mx-auto max-w-3xl space-y-9 md:space-y-11">
-              {x.pain.quotes.map((q, i) => (
-                <li
-                  key={q}
-                  className="quote-card border-l border-white/20 pl-6 md:pl-9"
-                  style={{ animationDelay: `${i * 110}ms` } as React.CSSProperties}
-                >
-                  <p className="text-[17px] leading-[1.72] text-white/85 md:text-[21px] md:leading-[1.7]">
-                    {q}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          <ul className="mt-14 space-y-11 md:space-y-14">
+            {x.pain.quotes.map((q, i) => (
+              <li key={q} className="quote-card" style={{ animationDelay: `${i * 130}ms` }}>
+                <p className="relative max-w-[42ch] pl-11 text-[19px] leading-[1.68] text-white/85 md:text-[24px] md:leading-[1.6]">
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-[-0.04em] select-none text-[46px] leading-[0.8] text-accentlit/40"
+                  >
+                    &ldquo;
+                  </span>
+                  {q}
+                  <span aria-hidden="true" className="select-none text-accentlit/40">
+                    &rdquo;
+                  </span>
+                </p>
+              </li>
+            ))}
+          </ul>
 
-          <Reveal delay={160}>
-            <p className="mx-auto mt-20 max-w-3xl text-[22px] font-extrabold leading-[1.4] tracking-tightest text-white md:text-[34px]">
+          <Reveal>
+            <p className="mt-20 text-[22px] font-extrabold leading-[1.4] tracking-tightest text-white md:text-[32px]">
               {x.pain.close}
             </p>
           </Reveal>
@@ -254,9 +249,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       {/* ============ WHY — what AI made cheap, what it cannot decide ============ */}
       <section className="px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
-          <Head eyebrow={s.aiwhy.eyebrow} title={s.aiwhy.title} note={s.aiwhy.lead} center />
+          <Head eyebrow={s.aiwhy.eyebrow} title={s.aiwhy.title} note={s.aiwhy.lead} />
 
-          <div className="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-2 md:gap-16">
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-16">
             <Reveal>
               <div className="border-t border-line pt-6">
                 <p className="text-[13px] font-bold text-warmgray">{s.aiwhy.canTitle}</p>
@@ -296,7 +291,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       </section>
 
       {/* ============ FINDER — two choices, one recommendation ============ */}
-      <section id="finder" className="scroll-mt-28 bg-tint/70 px-5 py-24 md:py-32">
+      <section id="sheet" className="scroll-mt-28 bg-tint/70 px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
           <Head
             eyebrow={x.finder.eyebrow}
@@ -305,19 +300,14 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             note={x.finder.lead}
           />
           <Reveal className="mt-12">
-            <Finder
-              block={x.finder}
-              sheetLabel={x.sheet.label}
-              draftRef={x.sheet.draftRef}
-              contact={contact}
-            />
+            <Finder block={x.finder} contact={contact} />
           </Reveal>
         </div>
       </section>
 
       {/* ============ WORK ============ */}
       <section id="work" className="scroll-mt-28 px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-5xl">
           <Head eyebrow={x.eyebrows.work} title={s.workTitle} note={s.workSub} />
 
           <Reveal delay={80}>
@@ -382,7 +372,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
       {/* ============ SCOPE — heading pinned, the work scrolls past ============ */}
       <section className="border-y border-line bg-surface/50 px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-5xl">
           <StickyEdge
             eyebrow={x.eyebrows.included}
             heading={s.includedTitle}
@@ -398,9 +388,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       {/* ============ PROCESS — a numbered index, one step per row ============ */}
       <section id="how" className="scroll-mt-28 border-y border-line bg-surface/60 px-5 py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
-          <Head eyebrow={x.eyebrows.steps} title={s.stepsTitle} center />
+          <Head eyebrow={x.eyebrows.steps} title={s.stepsTitle} />
 
-          <ol className="mx-auto mt-12 max-w-3xl border-t border-line">
+          <ol className="mt-12 border-t border-line">
             {s.steps.map((st) => (
               <li key={st.n} className="border-b border-line">
                 <Reveal>
@@ -422,10 +412,10 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
       {/* ============ PRICE ============ */}
       <section id="price" className="scroll-mt-28 px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <Head eyebrow={x.eyebrows.price} title={s.priceTitle} note={s.priceSub} center />
+        <div className="mx-auto max-w-5xl">
+          <Head eyebrow={x.eyebrows.price} title={s.priceTitle} note={s.priceSub} />
 
-          <div className="mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-2">
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
             {s.plans.map((p, i) => {
               const tone = p.featured ? 'ink' : 'paper'
               const onDark = tone === 'ink'
@@ -546,7 +536,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           </div>
 
           <Reveal delay={120}>
-            <p className="mx-auto mt-8 max-w-2xl text-center text-[12.5px] leading-relaxed text-warmgray">
+            <p className="mt-8 max-w-2xl text-[12.5px] leading-relaxed text-warmgray">
               {s.priceNote}
             </p>
           </Reveal>
@@ -555,8 +545,8 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
       {/* ============ COMPARE ============ */}
       <section className="border-y border-line bg-surface/50 px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-4xl">
-          <Head eyebrow={x.eyebrows.compare} title={s.compareTitle} center />
+        <div className="mx-auto max-w-5xl">
+          <Head eyebrow={x.eyebrows.compare} title={s.compareTitle} />
           <Reveal className="mt-12">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] border-collapse text-left">
@@ -600,8 +590,8 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
       {/* ============ FAQ ============ */}
       <section id="faq" className="scroll-mt-28 px-5 py-24 md:py-32">
-        <div className="mx-auto max-w-3xl">
-          <Head eyebrow={x.eyebrows.faq} title={s.faqTitle} center />
+        <div className="mx-auto max-w-5xl">
+          <Head eyebrow={x.eyebrows.faq} title={s.faqTitle} />
           <Reveal className="mt-12">
             <Faq items={s.faq} />
           </Reveal>
@@ -614,7 +604,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(49,130,246,0.18),transparent_62%)] blur-2xl"
         />
-        <div className="relative mx-auto max-w-2xl text-center">
+        <div className="relative mx-auto max-w-5xl">
           <Reveal>
             <h2 className="text-[28px] font-extrabold leading-[1.28] tracking-tightest text-white md:text-[42px]">
               {s.finalTitle}

@@ -16,8 +16,8 @@ export default function StrategySheet({
   onDark?: boolean
 }) {
   return (
-    <figure className="relative mx-auto w-full max-w-[400px]">
-      <div className={`relative -rotate-[1.4deg] rounded-[3px] bg-[#FCFBF7] px-7 pb-7 pt-6 ${onDark ? 'shadow-[0_34px_70px_-18px_rgba(0,0,0,0.62)]' : 'shadow-[0_22px_48px_-16px_rgba(25,31,40,0.22)]'} ring-1 ring-black/[0.06]`}>
+    <figure className="relative w-full">
+      <div className={`relative rounded-[3px] bg-[#FCFBF7] px-7 pb-7 pt-6 ${onDark ? 'shadow-[0_34px_70px_-18px_rgba(0,0,0,0.62)]' : 'shadow-[0_22px_48px_-16px_rgba(25,31,40,0.22)]'} ring-1 ring-black/[0.06]`}>
         <div className="flex items-baseline justify-between border-b border-ink/20 pb-3">
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink/55">
             {label}
