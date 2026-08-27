@@ -87,7 +87,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       </section>
 
       {/* ============ 02 · what gets said, and what AI cannot settle ============ */}
-      <section id="why" className="scroll-mt-20 px-6 py-24 md:px-10 md:py-36">
+      <section id="why" className="scroll-mt-20 px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-[1200px]">
           <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-3">
@@ -124,31 +124,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               </ul>
 
               <Reveal>
-                <p className="mt-16 md:mt-20">
-                  <span className="relative inline-block break-keep text-[24px] font-extrabold leading-[1.32] tracking-tightest md:text-[38px]">
-                    {x.pain.close}
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 340 12"
-                      preserveAspectRatio="none"
-                      className="absolute -bottom-3 left-0 h-[9px] w-full text-accent md:-bottom-4"
-                    >
-                      <path
-                        className="draw"
-                        d="M3 8.6C62 4.2 142 2.8 208 4.8c38 1.1 76 2.9 129 1.6"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeDasharray="340"
-                      />
-                    </svg>
-                  </span>
-                </p>
-              </Reveal>
-
-              <Reveal>
-                <div className="mt-24 grid gap-10 border-t border-line pt-12 md:mt-28 md:grid-cols-2 md:gap-16">
+                <div className="mt-20 grid gap-10 border-t border-line pt-12 md:grid-cols-2 md:gap-16">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-warmgray">
                       {s.aiwhy.canTitle}
@@ -183,8 +159,37 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         </div>
       </section>
 
+      {/* ============ the turn, alone and loud ============ */}
+      <section className="bg-ink px-6 py-28 md:px-10 md:py-40">
+        <div className="mx-auto max-w-[1200px]">
+          <Reveal>
+            <p className="grid md:grid-cols-12">
+              <span className="relative inline-block text-[26px] font-extrabold leading-[1.32] tracking-tightest text-white md:col-span-11 md:col-start-2 md:text-[38px] lg:break-keep lg:text-[50px] lg:leading-[1.2] xl:text-[62px]">
+                {x.pain.close}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 340 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-4 left-0 h-[10px] w-full text-accentlit md:-bottom-7 md:h-[14px]"
+                >
+                  <path
+                    className="draw"
+                    d="M3 8.6C62 4.2 142 2.8 208 4.8c38 1.1 76 2.9 129 1.6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeDasharray="340"
+                  />
+                </svg>
+              </span>
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ============ 03 · the working, not the finished thing ============ */}
-      <section id="sheet" className="scroll-mt-20 px-6 py-24 md:px-10 md:py-36">
+      <section id="sheet" className="scroll-mt-20 bg-surface/50 px-6 py-24 md:px-10 md:py-36">
         <div className="mx-auto max-w-[1200px]">
           <div className="grid gap-y-16 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-4">
@@ -221,7 +226,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       </section>
 
       {/* ============ 04 · the decision behind each one ============ */}
-      <section id="work" className="scroll-mt-20 px-6 py-24 md:px-10 md:py-36">
+      <section id="work" className="scroll-mt-20 px-6 py-28 md:px-10 md:py-44">
         <div className="mx-auto max-w-[1200px]">
           <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-3">
@@ -231,7 +236,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             </div>
             <div className="md:col-span-7 md:col-start-5">
               <Reveal>
-                <h2 className="max-w-[16ch] break-keep text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[44px]">
+                <h2 className="max-w-[18ch] break-keep text-[23px] font-extrabold leading-[1.3] tracking-tightest md:text-[32px]">
                   {s.workTitle}
                 </h2>
                 <p className="mt-7 max-w-[44ch] text-[14.5px] leading-[1.85] text-warmgray">
@@ -245,15 +250,16 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             {s.demos.map((d, i) => {
               const c = x.cases.items[i]
               const flip = i % 2 === 1
+              const lead = i === 0
               return (
                 <Reveal key={d.href}>
-                  <article className="grid gap-y-8 border-t border-line py-14 md:grid-cols-12 md:gap-x-10 md:py-20">
+                  <article className={`grid gap-y-8 border-t border-line md:grid-cols-12 md:gap-x-10 ${lead ? 'py-16 md:py-24' : 'py-14 md:py-18'}`}>
                     <a
                       href={`${BP}/${d.href}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${d.label} (new tab)`}
-                      className={`group block md:col-span-5 ${
+                      className={`group block ${lead ? 'md:col-span-7' : 'md:col-span-5'} ${
                         flip ? 'md:order-2 md:col-start-8' : ''
                       }`}
                     >
@@ -267,12 +273,18 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                     </a>
 
                     <div
-                      className={`md:col-span-6 ${flip ? 'md:order-1 md:col-start-1' : 'md:col-start-7'}`}
+                      className={`${lead ? 'md:col-span-4 md:col-start-9' : 'md:col-span-6'} ${
+                        flip ? 'md:order-1 md:col-start-1' : lead ? '' : 'md:col-start-7'
+                      }`}
                     >
                       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-warmgray">
                         {c.meta}
                       </p>
-                      <h3 className="mt-3 text-[26px] font-extrabold tracking-tightest md:text-[34px]">
+                      <h3
+                        className={`mt-3 font-extrabold tracking-tightest ${
+                          lead ? 'text-[30px] md:text-[42px]' : 'text-[24px] md:text-[30px]'
+                        }`}
+                      >
                         <a
                           href={`${BP}/${d.href}`}
                           target="_blank"
@@ -339,7 +351,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
       </section>
 
       {/* ============ 05 · how it runs, and what it costs ============ */}
-      <section id="how" className="scroll-mt-20 border-y border-line bg-surface/50 px-6 py-24 md:px-10 md:py-36">
+      <section id="how" className="scroll-mt-20 border-t border-line px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-[1200px]">
           <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-3">
