@@ -4,6 +4,14 @@ import type { Lang } from '@/lib/content'
    labels, and the two-axis finder. Kept out of service.ts so the three
    existing language blocks there stay untouched. */
 
+export interface CaseBlock {
+  intro: string
+  problemLabel: string
+  decisionLabel: string
+  outputLabel: string
+  items: { meta: string; problem: string; decision: string; output: string }[]
+}
+
 export interface MapBlock {
   label: string
   sample: string
@@ -69,6 +77,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
+  cases: CaseBlock
   map: MapBlock
   pain: PainBlock
   finder: FinderBlock
@@ -79,6 +88,38 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
+    cases: {
+      intro: '実在の店舗ではありません。「誰に・なぜ・どう売るか」を先に決めて、その判断のままつくった自主制作です。',
+      problemLabel: '問題',
+      decisionLabel: '決めたこと',
+      outputLabel: 'かたち',
+      items: [
+        {
+          meta: 'Restaurant & épicerie / Paris',
+          problem: '飲食と物販を一つの看板でやると、どちらの店なのかが伝わらない。',
+          decision: '入り口を二枚に分けた。同じブランドの下で、食べる店と買う店の役割をはっきりさせる。',
+          output: '扉が二枚のトップページ。どちらを開くかが、訪問者への最初の問いになる。',
+        },
+        {
+          meta: 'Pilates / Paris',
+          problem: 'スタジオは料金と設備で比べられ、教える人の考え方が見えない。',
+          decision: '設備ではなく人を主役にした。読み物として設計し、指導者の判断を誌面で見せる。',
+          output: '表紙がめくれて中面が始まる構成。号数と目次を持つ一冊として組んだ。',
+        },
+        {
+          meta: 'Cabinet japonais / Paris',
+          problem: '整体は体験しないと伝わらない。効能を並べるほど、かえって疑わしく見える。',
+          decision: '効果を売らず、身体の側から語らせた。「Le corps sait se redresser.」を軸に据える。',
+          output: '余白と短い言葉だけで構成した、静かな一枚。',
+        },
+        {
+          meta: 'Cuisine coréenne / Paris',
+          problem: '高級店ほど、情報を足すほど安く見える。',
+          decision: '席数と条件を先に出した。「Quinze couverts.」を見出しにして、選ぶ側を絞る。',
+          output: '写真を絞り、組版と余白だけで格をつくったページ。',
+        },
+      ],
+    },
     map: {
       label: 'Positioning map',
       sample: '例 · パリの韓国料理店',
@@ -192,6 +233,38 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
+    cases: {
+      intro: '실제 매장이 아닙니다. 누구에게·왜·어떻게 팔지를 먼저 정하고, 그 판단 그대로 만든 자체 제작입니다.',
+      problemLabel: '문제',
+      decisionLabel: '정한 것',
+      outputLabel: '형태',
+      items: [
+        {
+          meta: 'Restaurant & épicerie / Paris',
+          problem: '식당과 판매를 한 간판으로 하면 어느 쪽 가게인지 전달되지 않는다.',
+          decision: '입구를 두 개로 나눴다. 같은 브랜드 아래에서 먹는 곳과 사는 곳의 역할을 분명히 한다.',
+          output: '문이 두 개인 첫 화면. 어느 쪽을 열지가 방문자에게 던지는 첫 질문이 된다.',
+        },
+        {
+          meta: 'Pilates / Paris',
+          problem: '스튜디오는 가격과 시설로 비교되고, 가르치는 사람의 생각은 보이지 않는다.',
+          decision: '시설이 아니라 사람을 주인공으로 세웠다. 읽을거리로 설계해 지도자의 판단을 지면에 담는다.',
+          output: '표지가 넘어가며 본문이 시작되는 구성. 호수와 목차를 가진 한 권으로 짰다.',
+        },
+        {
+          meta: 'Cabinet japonais / Paris',
+          problem: '정체는 받아보지 않으면 전달되지 않는다. 효능을 늘어놓을수록 오히려 의심스러워 보인다.',
+          decision: '효과를 팔지 않고 몸 쪽에서 말하게 했다. "Le corps sait se redresser."를 축으로 삼는다.',
+          output: '여백과 짧은 문장만으로 구성한 조용한 한 장.',
+        },
+        {
+          meta: 'Cuisine coréenne / Paris',
+          problem: '고급 매장일수록 정보를 더할수록 싸 보인다.',
+          decision: '좌석 수와 조건을 먼저 내놨다. "Quinze couverts."를 제목으로 걸어 고르는 쪽을 좁힌다.',
+          output: '사진을 줄이고 조판과 여백만으로 격을 만든 페이지.',
+        },
+      ],
+    },
     map: {
       label: 'Positioning map',
       sample: '예시 · 파리의 한식당',
@@ -305,6 +378,38 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
+    cases: {
+      intro: 'None of these are real shops. Each began by deciding who it is for, why, and how it sells, and was then built exactly as that decision.',
+      problemLabel: 'Problem',
+      decisionLabel: 'Decision',
+      outputLabel: 'Form',
+      items: [
+        {
+          meta: 'Restaurant & épicerie / Paris',
+          problem: 'One sign over both a kitchen and a shop tells a passer-by neither.',
+          decision: 'Split the entrance in two. One brand, two clearly separated jobs: a place to eat and a place to buy.',
+          output: 'A cover made of two doors. Which one you open is the first question the site asks.',
+        },
+        {
+          meta: 'Pilates / Paris',
+          problem: 'Studios get compared on price and equipment, and the teacher behind them stays invisible.',
+          decision: 'Put the person ahead of the room. Build it as something to read, where her judgement is the content.',
+          output: 'A cover that turns into a spread, with an issue number and a contents page.',
+        },
+        {
+          meta: 'Cabinet japonais / Paris',
+          problem: 'Manual therapy does not translate to someone who has not had it. Listing benefits makes it sound less credible.',
+          decision: 'Stop selling the effect and let the body speak. Build everything around "Le corps sait se redresser."',
+          output: 'One quiet page held together by white space and a few short lines.',
+        },
+        {
+          meta: 'Cuisine coréenne / Paris',
+          problem: 'The more a fine dining room explains itself, the cheaper it reads.',
+          decision: 'Lead with the constraint. "Quinze couverts." as the headline, which narrows who books before they scroll.',
+          output: 'Few photographs, and the standing built from typesetting and space alone.',
+        },
+      ],
+    },
     map: {
       label: 'Positioning map',
       sample: 'Example · Korean restaurant, Paris',

@@ -2,11 +2,17 @@
 
 import { useState } from 'react'
 
-export default function Faq({ items }: { items: { q: string; a: string }[] }) {
+export default function Faq({
+  items,
+  onDark,
+}: {
+  items: { q: string; a: string }[]
+  onDark?: boolean
+}) {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <div className="divide-y divide-line border-y border-line">
+    <div className={`divide-y border-y ${onDark ? 'divide-white/12 border-white/12' : 'divide-line border-line'}`}>
       {items.map((it, i) => {
         const isOpen = open === i
         return (
@@ -19,7 +25,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
             >
               <span
                 className={`text-[15px] font-bold transition-colors duration-300 md:text-base ${
-                  isOpen ? 'text-accent' : 'text-ink'
+                  isOpen ? (onDark ? 'text-accentlit' : 'text-accent') : onDark ? 'text-white' : 'text-ink'
                 }`}
               >
                 {it.q}
@@ -32,12 +38,12 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
               >
                 <span
                   className={`absolute left-0 top-1/2 h-[1.5px] w-4 -translate-y-1/2 rounded-full transition-colors duration-300 ${
-                    isOpen ? 'bg-accent' : 'bg-charcoal'
+                    isOpen ? (onDark ? 'bg-accentlit' : 'bg-accent') : onDark ? 'bg-white/50' : 'bg-charcoal'
                   }`}
                 />
                 <span
                   className={`absolute left-1/2 top-0 h-4 w-[1.5px] -translate-x-1/2 rounded-full transition-colors duration-300 ${
-                    isOpen ? 'bg-accent' : 'bg-charcoal'
+                    isOpen ? (onDark ? 'bg-accentlit' : 'bg-accent') : onDark ? 'bg-white/50' : 'bg-charcoal'
                   }`}
                 />
               </span>
@@ -47,7 +53,7 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
               style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
             >
               <div className="overflow-hidden">
-                <p className="pb-6 pr-10 text-sm leading-relaxed text-charcoal">{it.a}</p>
+                <p className={`pb-6 pr-10 text-sm leading-relaxed ${onDark ? 'text-white/60' : 'text-charcoal'}`}>{it.a}</p>
               </div>
             </div>
           </div>

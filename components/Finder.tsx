@@ -21,7 +21,7 @@ function Choice({
       <legend className="font-mono text-[10px] uppercase tracking-[0.2em] text-warmgray">
         {label}
       </legend>
-      <div className="mt-3.5 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap gap-x-7 gap-y-3.5">
         {options.map((o, i) => {
           const on = value === i
           return (
@@ -30,10 +30,10 @@ function Choice({
               type="button"
               aria-pressed={on}
               onClick={() => onPick(i)}
-              className={`rounded-full border px-4 py-2.5 text-left text-[13px] transition duration-300 ease-swift ${
+              className={`border-b-2 pb-1.5 text-left text-[14px] transition-colors duration-300 ${
                 on
-                  ? 'border-ink bg-ink font-bold text-white'
-                  : 'border-line bg-paper font-medium text-charcoal hover:border-ink hover:text-ink'
+                  ? 'border-accent font-bold text-ink'
+                  : 'border-transparent font-medium text-warmgray hover:border-line hover:text-ink'
               }`}
             >
               {o}
@@ -80,10 +80,10 @@ export default function Finder({ block, contact }: { block: FinderBlock; contact
         <div className="flex flex-wrap items-center gap-x-7 gap-y-3 pt-1">
           <Link
             href={contact}
-            className={`rounded-full px-6 py-3 text-[13px] font-bold transition duration-300 ease-swift ${
+            className={`inline-flex items-baseline gap-3 border-b pb-1 text-[14px] font-bold transition-colors duration-300 ${
               s && p
-                ? 'bg-ink text-white hover:bg-accent'
-                : 'pointer-events-none bg-surface2 text-warmgray'
+                ? 'border-ink/30 text-ink hover:border-ink'
+                : 'pointer-events-none border-transparent text-warmgray'
             }`}
             aria-disabled={!(s && p)}
             tabIndex={s && p ? undefined : -1}
