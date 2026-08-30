@@ -327,27 +327,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             })}
           </div>
 
-          <Reveal>
-            <div className="border-t border-line pt-10">
-              <a
-                href={`${BP}/${s.showroom.href}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-baseline gap-3 text-[15px] font-bold transition-colors duration-300 hover:text-accent"
-              >
-                {s.showroom.label}
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-warmgray">
-                  {s.showroom.cta}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 ease-swift group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </a>
-            </div>
-          </Reveal>
         </div>
       </section>
 

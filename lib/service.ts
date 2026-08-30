@@ -52,10 +52,8 @@ export interface ServiceContent {
 }
 
 const BASE = [
-  { label: 'JOAYO', href: 'demos/joayo-homepage.html', img: 'demo-joayo.jpg', url: 'joayo.paris' },
+  { label: 'JOAYO', href: 'demos/joayo-restaurant.html', img: 'demo-joayo.jpg', url: 'joayo.paris' },
   { label: 'MILATES', href: 'demos/milates-paris.html', img: 'demo-milates.jpg', url: 'milates.paris' },
-  { label: 'MATSU SEITAI', href: 'demos/matsu-seitai.html', img: 'demo-seitai.jpg', url: 'matsu-seitai.paris' },
-  { label: 'JEONG', href: 'demos/jeong-paris.html', img: 'demo-jeong.jpg', url: 'jeong.paris' },
 ]
 const withGenre = (g: string[]) => BASE.map((d, i) => ({ ...d, genre: g[i] }))
 
@@ -93,7 +91,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
       url: 'le-showroom',
       cta: '入場する',
     },
-    demos: withGenre(['飲食 / 2店舗ブランド', 'ウェルネス / 個人スタジオ', '治療院 / パリ', '高級店 / パリ']),
+    demos: withGenre(['韓国料理店 / パリ1区', 'ウェルネス / 個人スタジオ']),
     includedTitle: '一緒に考えること',
     includedSub: 'Webサイトは、この積み上げの最後にできる成果物です。',
     included: [
@@ -197,7 +195,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
       url: 'le-showroom',
       cta: '입장하기',
     },
-    demos: withGenre(['외식 / 두 매장 브랜드', '웰니스 / 개인 스튜디오', '클리닉 / 파리', '파인다이닝 / 파리']),
+    demos: withGenre(['한식당 / 파리 1구', '웰니스 / 개인 스튜디오']),
     includedTitle: '함께 정리하는 것',
     includedSub: '웹사이트는 이 과정의 맨 끝에 나오는 결과물입니다.',
     included: [
@@ -301,7 +299,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
       url: 'le-showroom',
       cta: 'Enter',
     },
-    demos: withGenre(['Food / two-venue brand', 'Wellness / private studio', 'Clinic / Paris', 'Fine dining / Paris']),
+    demos: withGenre(['Korean restaurant / Paris 1er', 'Wellness / private studio']),
     includedTitle: 'What we work out together',
     includedSub: 'The website is the final artifact of this stack.',
     included: [
