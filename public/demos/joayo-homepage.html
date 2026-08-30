@@ -302,6 +302,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset
 .info-card a.page-link:hover{color:var(--red);border-color:var(--red);}
 
 /* ============ FOOTER ============ */
+.demo-credit{
+  margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--ink-60);
+}
+.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;transition:border-color .3s ease;}
+.demo-credit a:hover{border-color:var(--ink);}
+.demo-credit i{font-style:normal;}
 footer{background:var(--ink);color:var(--paper);padding:100px 40px 40px;text-align:center;}
 footer .foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(60px,11vw,150px);line-height:1;letter-spacing:-.015em;}
 footer .foot-logo span{font-style:italic;color:var(--red);}
@@ -552,6 +559,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
     <a href="#infos" data-i18n="nav_find">Nous trouver</a>
   </div>
   <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo — Paris 15e &amp; Paris 1er</p>
+  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
 </footer>
 
 <script>
@@ -593,6 +601,8 @@ fr: {
   c5:"Le restaurant",
   c6:"L'épicerie",
   a_adr_v:"Site de démonstration — adresses non communiquées",
+  credit:"Un concept conçu par Jessy Jung",
+  credit_link:"Voir le service",
 },
 en: {
   _title:"JOAYO 좋아요 — Korean Grocery & Restaurant in Paris",
@@ -631,6 +641,8 @@ en: {
   c5:"Restaurant",
   c6:"Grocery",
   a_adr_v:"Demo site — addresses not published",
+  credit:"A concept by Jessy Jung",
+  credit_link:"See the service",
 },
 ko: {
   _title:"좋아요 JOAYO — 파리 한국 마켓 & 레스토랑",
@@ -669,6 +681,8 @@ ko: {
   c5:"레스토랑",
   c6:"마켓",
   a_adr_v:"데모 사이트 — 주소는 공개하지 않습니다",
+  credit:"Jessy Jung의 콘셉트 작업",
+  credit_link:"서비스 보기",
 }
 };
 

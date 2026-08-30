@@ -180,6 +180,13 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .info-card .addr{color:var(--ink);font-family:'Fraunces',serif;font-style:italic;font-size:18px;margin-bottom:10px;}
 
 /* footer */
+.demo-credit{
+  margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--ink-60);
+}
+.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;transition:border-color .3s ease;}
+.demo-credit a:hover{border-color:var(--ink);}
+.demo-credit i{font-style:normal;}
 footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-align:center;}
 .foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,9vw,124px);line-height:1;letter-spacing:-.015em;}
 .foot-logo span{font-style:italic;color:var(--red);}
@@ -536,6 +543,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
     <a href="#infos" data-i18n="nav_find">Nous trouver</a>
   </div>
   <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Market — Paris 15e</p>
+  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
 </footer>
 
 <script>
@@ -572,6 +580,8 @@ fr: {
   ic_addr:"Paris 15e<br>Adresse de démonstration",
   r1_when:"Pour prendre du kimchi en rentrant.",
   r3_when:"Pour refaire un jjigae à la maison.",
+  credit:"Un concept conçu par Jessy Jung",
+  credit_link:"Voir le service",
 },
 en: {
   _title:"JOAYO Market 좋아요 마켓 — Korean Grocery, Paris 15th",
@@ -605,6 +615,8 @@ en: {
   ic_addr:"Paris 15e<br>Demo address",
   r1_when:"For picking up kimchi on the way home.",
   r3_when:"For making jjigae again at home.",
+  credit:"A concept by Jessy Jung",
+  credit_link:"See the service",
 },
 ko: {
   _title:"좋아요 마켓 JOAYO Market — 파리 15구 한국 마켓",
@@ -638,6 +650,8 @@ ko: {
   ic_addr:"파리 15구<br>데모 주소",
   r1_when:"퇴근길에 김치 한 통.",
   r3_when:"집에서 찌개 한 번 더.",
+  credit:"Jessy Jung의 콘셉트 작업",
+  credit_link:"서비스 보기",
 }
 };
 

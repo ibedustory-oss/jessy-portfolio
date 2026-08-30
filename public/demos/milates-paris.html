@@ -575,6 +575,14 @@ h2 i{font-style:italic;font-weight:400;color:var(--framboise);}
 .ig-tile:hover .veil{opacity:1;}
 
 /* ============ FOOTER ============ */
+.demo-credit{
+  grid-column:1/-1;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;
+}
+.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;transition:border-color .3s ease;}
+.demo-credit a:hover{border-color:var(--ink);}
+.demo-credit i{font-style:normal;}
 footer{
   border-top:1px solid var(--line);
   padding:54px 42px 40px;
@@ -1097,6 +1105,7 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   <div class="f-left" data-i18n="foot_l">Pilates privé · Paris · sur rendez-vous</div>
   <div class="f-mark">M<i>i</i>lates</div>
   <div class="f-right">Site de démonstration · © 2026 Milates — <a href="#" target="_blank" rel="noopener">@milates.demo</a></div>
+  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
 </footer>
 
 <script>
@@ -1165,6 +1174,8 @@ fr: {
   w_quote:"« Je ne compte pas les répétitions. Je regarde comment vous vous relevez. »",
   ig_note:"« Je poste ce que je vois pendant les séances. C'est le plus simple pour montrer ce qu'on fait. »",
   ig_cta:"Suivre Milates sur Instagram",
+  credit:"Un concept conçu par Jessy Jung",
+  credit_link:"Voir le service",
 },
 en: {
   _title:"Milates Paris",
@@ -1229,6 +1240,8 @@ en: {
   w_quote:"\"I don't count repetitions. I watch how you get back up.\"",
   ig_note:"\"I post what I see during sessions. It's the simplest way to show what we do.\"",
   ig_cta:"Follow Milates on Instagram",
+  credit:"A concept by Jessy Jung",
+  credit_link:"See the service",
 },
 ko: {
   _title:"밀라테스 Milates Paris",
@@ -1293,6 +1306,8 @@ ko: {
   w_quote:"「횟수는 세지 않습니다. 어떻게 일어나는지를 봅니다.」",
   ig_note:"「수업 중에 본 것을 올립니다. 무엇을 하는지 보여주기엔 이게 제일 간단해서요.」",
   ig_cta:"인스타그램에서 Milates 팔로우하기",
+  credit:"Jessy Jung의 콘셉트 작업",
+  credit_link:"서비스 보기",
 }
 };
 

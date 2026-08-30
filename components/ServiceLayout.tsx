@@ -67,7 +67,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/40">
               {s.badge}
             </p>
-            <h1 className="mt-10 max-w-[19ch] break-keep text-[34px] font-extrabold leading-[1.16] tracking-tightest text-white md:text-[68px]">
+            <h1 className="mt-10 max-w-[19ch] text-[26px] font-extrabold leading-[1.3] tracking-tightest text-white sm:text-[34px] md:text-[50px] md:leading-[1.18] lg:break-keep lg:text-[72px] xl:text-[84px]">
               {s.headline}
               <br />
               {s.headlineAccent}
@@ -164,7 +164,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="mx-auto max-w-[1200px]">
           <Reveal>
             <p className="grid md:grid-cols-12">
-              <span className="relative inline-block text-[26px] font-extrabold leading-[1.32] tracking-tightest text-white md:col-span-11 md:col-start-2 md:text-[38px] lg:break-keep lg:text-[50px] lg:leading-[1.2] xl:text-[62px]">
+              <span className="relative inline-block text-[26px] font-extrabold leading-[1.32] tracking-tightest text-white md:col-span-11 md:col-start-2 md:text-[40px] lg:break-keep lg:text-[54px] lg:leading-[1.18] xl:text-[68px]">
                 {x.pain.close}
                 <svg
                   aria-hidden="true"
@@ -205,7 +205,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
             <div className="md:col-span-7 md:col-start-6">
               <Reveal>
-                <h2 className="max-w-[16ch] break-keep text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[44px]">
+                <h2 className="max-w-[22ch] break-keep text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[36px] lg:text-[44px]">
                   {x.finder.title}
                   <br />
                   {x.finder.titleAccent}
@@ -484,7 +484,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
               <Reveal>
                 <div className="mt-24 md:mt-32">
-                  <h2 className="max-w-[16ch] break-keep text-[28px] font-extrabold leading-[1.24] tracking-tightest text-white md:text-[44px]">
+                  <h2 className="max-w-[16ch] break-keep text-[30px] font-extrabold leading-[1.22] tracking-tightest text-white md:text-[48px] lg:text-[60px]">
                     {s.finalTitle}
                   </h2>
                   <p className="mt-6 max-w-[40ch] text-[15px] leading-[1.9] text-white/60">

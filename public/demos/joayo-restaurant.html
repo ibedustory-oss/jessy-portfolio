@@ -177,6 +177,13 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
 .info-card .addr{color:var(--ink);font-family:'Fraunces',serif;font-style:italic;font-size:18px;margin-bottom:10px;}
 
 /* footer */
+.demo-credit{
+  margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--ink-60);
+}
+.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;transition:border-color .3s ease;}
+.demo-credit a:hover{border-color:var(--ink);}
+.demo-credit i{font-style:normal;}
 footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-align:center;}
 .foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,9vw,124px);line-height:1;letter-spacing:-.015em;}
 .foot-logo span{font-style:italic;color:var(--red);}
@@ -664,6 +671,7 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
     <a href="#infos" data-i18n="nav_find">Infos</a>
   </div>
   <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Restaurant — Paris 1er</p>
+  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
 </footer>
 
 <script>
@@ -711,6 +719,8 @@ fr: {
   rc_addr:"Paris 1er · adresse de démonstration",
   ic1_p:"Paris 1er<br>Adresse de démonstration",
   ic4_p:"Par téléphone ou sur place",
+  credit:"Un concept conçu par Jessy Jung",
+  credit_link:"Voir le service",
 },
 en: {
   _title:"JOAYO Restaurant 좋아요 레스토랑 — Korean Cuisine, Paris 1st",
@@ -755,6 +765,8 @@ en: {
   rc_addr:"Paris 1er · demo address",
   ic1_p:"Paris 1er<br>Demo address",
   ic4_p:"By phone or in person",
+  credit:"A concept by Jessy Jung",
+  credit_link:"See the service",
 },
 ko: {
   _title:"좋아요 레스토랑 JOAYO Restaurant — 파리 1구 한식당",
@@ -799,6 +811,8 @@ ko: {
   rc_addr:"파리 1구 · 데모 주소",
   ic1_p:"파리 1구<br>데모 주소",
   ic4_p:"전화 또는 매장에서",
+  credit:"Jessy Jung의 콘셉트 작업",
+  credit_link:"서비스 보기",
 }
 };
 
