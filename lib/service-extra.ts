@@ -124,11 +124,11 @@ export const EXTRA: Record<Lang, Extra> = {
     offer: {
       badge: 'パリ · 小さな店のための戦略とWebサイト',
       cta: '無料診断を受ける',
-      facts: ['準備はいりません', '30分で、何を先にやるかを整理', '診断メモは依頼と関係なくお渡しします'],
+      facts: ['無料 · 30分 · 準備は不要'],
     },
     tools: {
       eyebrow: '01.5 / 仕事',
-      title: '判断は、こう置いていきます。',
+      title: 'つくる前に、決めます。',
       p1a: '最初にやるのは、デザインではなく整理です。街のどこに立っているのかを',
       p1b: 'に置き、値づけと届け方を',
       p1c: 'で四つに分けます。ここが決まらないうちは、色も写真も決められません。',
@@ -351,11 +351,11 @@ export const EXTRA: Record<Lang, Extra> = {
     offer: {
       badge: '파리 · 작은 가게를 위한 전략과 웹사이트',
       cta: '무료 진단 받기',
-      facts: ['준비물 없음', '30분 안에 무엇부터 할지 정리', '진단 메모는 의뢰와 상관없이 드립니다'],
+      facts: ['무료 · 30분 · 준비물 없음'],
     },
     tools: {
       eyebrow: '01.5 / 하는 일',
-      title: '판단은 이렇게 남깁니다.',
+      title: '만들기 전에, 정합니다.',
       p1a: '먼저 하는 건 디자인이 아니라 정리입니다. 이 동네 어디에 서 있는지를 ',
       p1b: '에 찍고, 값과 파는 방식을 ',
       p1c: '으로 네 칸에 나눕니다. 여기가 정해지기 전에는 색도 사진도 고를 수 없습니다.',
@@ -578,11 +578,11 @@ export const EXTRA: Record<Lang, Extra> = {
     offer: {
       badge: 'Paris · Strategy and websites for small businesses',
       cta: 'Book a free diagnosis',
-      facts: ['Nothing to prepare', 'Thirty minutes, priorities sorted', 'You keep the diagnosis notes either way'],
+      facts: ['Free · 30 minutes · nothing to prepare'],
     },
     tools: {
       eyebrow: '01.5 / The work',
-      title: 'Where the decisions get written.',
+      title: 'We decide before we build.',
       p1a: 'The first work is not design, it is sorting. Where the shop stands on its street goes onto a ',
       p1b: ', and the price and the way it sells get split four ways on the ',
       p1c: '. Until that settles, no colour or photograph can be chosen.',

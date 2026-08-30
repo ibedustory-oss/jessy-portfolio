@@ -4,7 +4,8 @@ import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
-import HeroDesk from '@/components/HeroDesk'
+import HeroChange from '@/components/HeroChange'
+import InkPen from '@/components/InkPen'
 import StrategySheet from '@/components/StrategySheet'
 import { Term } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
@@ -33,7 +34,7 @@ function Label({
           dark ? 'text-white/40' : 'text-warmgray'
         }`}
       >
-        <span className={dark ? 'text-white/25' : 'text-ink/25'}>{n}</span>
+        <span className={dark ? 'text-pen/80' : 'text-pen'}>{n}</span>
         <span className="px-2.5">/</span>
         {children}
       </p>
@@ -127,64 +128,59 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
   return (
     <div className="bg-ink pb-2 md:pb-5">
       {/* ============ HERO — one tight column of ask, one column of proof ============ */}
-      <section className="overflow-x-clip px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-y-16 lg:grid-cols-12 lg:gap-x-12">
-          <Reveal className="lg:col-span-6">
+      <section className="relative overflow-x-clip px-6 pb-20 pt-20 md:px-12 md:pb-28 md:pt-24">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <span className="absolute -left-40 top-1/3 block h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(240,194,75,0.16),transparent)]" />
+          <span className="absolute -right-32 -top-24 block h-[620px] w-[620px] rounded-full bg-[radial-gradient(closest-side,rgba(49,130,246,0.16),transparent)]" />
+        </div>
+        <InkPen markSelector="[data-mark]" />
+        <div className="mx-auto grid max-w-[1340px] items-center gap-y-14 lg:grid-cols-12 lg:gap-x-14">
+          <Reveal className="lg:col-span-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/40">
               {x.offer.badge}
             </p>
-            <h1 className={`mt-7 ${bk} text-[26px] font-extrabold leading-[1.22] tracking-tightest text-white sm:text-[36px] md:text-[44px] lg:text-[34px] xl:text-[43px]`}>
-              <span className="relative inline-block">
+            <h1 className={`mt-6 ${bk} text-[30px] font-extrabold leading-[1.14] tracking-tightest text-white sm:text-[40px] md:text-[48px] lg:text-[38px] xl:text-[53px]`}>
+              <span className="relative inline-block" data-mark>
                 {s.headline}
                 <HandLine className="-bottom-1 h-[6px] text-accentlit md:h-[9px]" />
               </span>
               <br />
               {s.headlineAccent}
             </h1>
-            <p className="mt-7 max-w-[38ch] text-[15px] leading-[1.85] text-white/60">{s.sub}</p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <p className="mt-5 max-w-[30ch] text-[14.5px] leading-[1.8] text-white/60">{s.sub}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-4">
               <Button href={contact}>{x.offer.cta}</Button>
-              <a
-                href="#work"
-                className="group inline-flex items-baseline gap-2 px-1 text-[14px] font-bold text-white/70 transition-colors duration-300 hover:text-white"
-              >
-                {s.ctaSecondary}
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 ease-swift group-hover:translate-y-0.5"
-                >
-                  ↓
-                </span>
-              </a>
             </div>
-            <ul className="mt-8 space-y-2">
-              {x.offer.facts.map((f) => (
-                <li
-                  key={f}
-                  className="flex items-baseline gap-2.5 font-mono text-[11px] tracking-[0.06em] text-white/45"
-                >
-                  <span aria-hidden="true" className="text-accentlit">
-                    —
-                  </span>
+            <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[10.5px] tracking-[0.06em] text-white/45">
+              {x.offer.facts.map((f, i) => (
+                <span key={f} className="flex items-baseline gap-3">
+                  {i > 0 && (
+                    <span aria-hidden="true" className="text-accentlit/60">
+                      ·
+                    </span>
+                  )}
                   {f}
-                </li>
+                </span>
               ))}
-            </ul>
+            </p>
           </Reveal>
 
-          <Reveal delay={120} className="lg:col-span-6">
-            <HeroDesk
+          <Reveal delay={120} className="lg:col-span-7">
+            <HeroChange
               label={x.sheet.label}
               refNo={x.sheet.ref}
-              meta={x.sheet.meta}
-              hypLabel={x.sheet.hypLabel}
-              rows={x.sheet.rows.map((r, i) => ({ ...r, no: String(i + 1).padStart(2, '0') }))}
-              footer={x.sheet.footer}
-              page={x.sheet.page}
-              img={`${BP}/images/demo-milates.jpg`}
-              video={`${BP}/demos/milates-video/cover.mp4`}
-              alt="MILATES — studio de pilates, Paris"
-              domain="milates.demo"
+              rows={[0, 4, 7].map((i) => ({
+                k: x.sheet.rows[i].k,
+                v: x.sheet.rows[i].v ?? '',
+                key: x.sheet.rows[i].key,
+              }))}
+              shots={[
+                { img: `${BP}/images/demo-joayo.jpg`, domain: 'joayo.paris', alt: 'JOAYO' },
+                { img: `${BP}/images/demo-milates.jpg`, domain: 'milates.paris', alt: 'MILATES' },
+              ]}
             />
           </Reveal>
         </div>
@@ -276,42 +272,40 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
       {/* ============ between the sheets · what the work actually is ============ */}
       <Paper id="work-method" className="mt-2 overflow-x-clip md:mt-5">
-        <div className="grid gap-y-10 md:grid-cols-12 md:gap-x-10">
-          <div className="md:col-span-4">
-            <Reveal>
-              <Label n="01.5">{x.tools.eyebrow.split('/')[1]?.trim() ?? x.tools.eyebrow}</Label>
-            </Reveal>
-          </div>
-          <div className="md:col-span-7 md:col-start-6">
-            <Reveal>
-              <h2 className={`max-w-[24ch] ${bk} text-[25px] font-extrabold leading-[1.26] tracking-tightest md:text-[33px]`}>
-                {x.tools.title}
-              </h2>
-            </Reveal>
-            <Reveal delay={60}>
-              <p className="mt-8 max-w-[46ch] text-[14.5px] leading-[2] text-warmgray">
-                {x.tools.p1a}
-                <Term tool={x.tools.items[0]} />
-                {x.tools.p1b}
-                <Term tool={x.tools.items[1]} />
-                {x.tools.p1c}
-              </p>
-            </Reveal>
-            <Reveal delay={100}>
-              <p className="mt-6 max-w-[46ch] text-[14.5px] leading-[2] text-warmgray">
-                {x.tools.p2a}
-                <Term tool={x.tools.items[2]} />
-                {x.tools.p2b}
-                <Term tool={x.tools.items[3]} />
-                {x.tools.p2c}
-              </p>
-            </Reveal>
-            <Reveal delay={140}>
-              <p className="mt-8 max-w-[40ch] border-l-2 border-accent/50 pl-4 text-[13.5px] leading-relaxed text-ink">
-                {x.tools.close}
-              </p>
-            </Reveal>
-          </div>
+        <div className="mx-auto max-w-[54rem] text-center">
+          <Reveal>
+            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-warmgray">
+              {x.tools.eyebrow}
+            </p>
+          </Reveal>
+          <Reveal delay={60}>
+            <h2 className={`mx-auto mt-7 max-w-[20ch] ${bk} text-[29px] font-extrabold leading-[1.18] tracking-tightest md:text-[44px]`}>
+              {x.tools.title}
+            </h2>
+          </Reveal>
+          <Reveal delay={110}>
+            <p className="mx-auto mt-10 max-w-[42ch] text-[15px] leading-[2.05] text-warmgray">
+              {x.tools.p1a}
+              <Term tool={x.tools.items[0]} />
+              {x.tools.p1b}
+              <Term tool={x.tools.items[1]} />
+              {x.tools.p1c}
+            </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <p className="mx-auto mt-7 max-w-[42ch] text-[15px] leading-[2.05] text-warmgray">
+              {x.tools.p2a}
+              <Term tool={x.tools.items[2]} />
+              {x.tools.p2b}
+              <Term tool={x.tools.items[3]} />
+              {x.tools.p2c}
+            </p>
+          </Reveal>
+          <Reveal delay={190}>
+            <p className="mx-auto mt-12 max-w-[30ch] border-t border-ink/15 pt-7 text-[15.5px] font-bold leading-relaxed text-ink">
+              <span className="hl">{x.tools.close}</span>
+            </p>
+          </Reveal>
         </div>
       </Paper>
 

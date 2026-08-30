@@ -19,6 +19,8 @@ const config: Config = {
         accent: '#1B64DA',
         accenthover: '#1957C2',
         accentlit: '#3182F6',
+        pen: '#D25A41',
+        mark: '#F0C24B',
       },
       fontFamily: {
         mono: [

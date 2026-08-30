@@ -91,7 +91,7 @@ export default function StrategySheet({
                     aria-hidden="true"
                     viewBox="0 0 220 44"
                     preserveAspectRatio="none"
-                    className="pointer-events-none absolute -inset-x-3 -inset-y-[7px]"
+                    className="pointer-events-none absolute -left-3 -right-3 top-1/2 h-[27px] -translate-y-1/2"
                   >
                     <path
                       d="M14 21 C 28 5, 196 3, 209 17 C 216 32, 168 41, 74 39 C 30 38, 8 32, 16 19"

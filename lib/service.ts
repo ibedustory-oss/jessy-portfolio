@@ -60,9 +60,9 @@ const withGenre = (g: string[]) => BASE.map((d, i) => ({ ...d, genre: g[i] }))
 export const SERVICE: Record<Lang, ServiceContent> = {
   ja: {
     badge: 'いま相談を受け付けています',
-    headline: '「なぜ選ばれるのか」から、',
+    headline: '選ばれる理由から、',
     headlineAccent: '一緒につくります。',
-    sub: 'Webサイトの制作会社ではありません。何を言うかを決め、サイトの形にして、公開したあとの数字まで一緒に見る、マーケティングのパートナーです。',
+    sub: 'Webサイトの制作会社ではありません。何を言うかから、一緒に決めます。',
     ctaPrimary: '相談する',
     ctaSecondary: 'つくったものを見る',
     stats: [
@@ -167,7 +167,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
     badge: '지금 상담 신청을 받고 있습니다',
     headline: '"왜 선택받는지"부터,',
     headlineAccent: '함께 만듭니다.',
-    sub: '웹사이트 제작사가 아닙니다. 무엇을 말할지부터 같이 정하고, 그걸 사이트로 옮기고, 오픈한 뒤의 숫자까지 같이 보는 마케팅 파트너입니다.',
+    sub: '웹사이트 제작사가 아닙니다. 무엇을 말할지부터 같이 정합니다.',
     ctaPrimary: '상담하기',
     ctaSecondary: '작업물 보기',
     stats: [
@@ -272,7 +272,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
     badge: 'Currently taking new projects',
     headline: 'First the why.',
     headlineAccent: 'Then the website.',
-    sub: 'Not a web studio. We decide what to say, build the site, and then keep watching the numbers together. A marketing partner, not a vendor.',
+    sub: 'Not a web studio. We start by deciding what to say.',
     ctaPrimary: 'Start a conversation',
     ctaSecondary: 'See the work',
     stats: [
