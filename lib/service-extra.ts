@@ -97,6 +97,13 @@ export interface NavBlock {
 export interface Extra {
   offer: { badge: string; cta: string; facts: string[] }
   sheetLead: string
+  heroLine: {
+    pre: string
+    slots: string[]
+    post: string
+    payoff: string
+    sub: string
+  }
   tools: {
     eyebrow: string
     title: string
@@ -126,6 +133,13 @@ export const EXTRA: Record<Lang, Extra> = {
       badge: 'パリ · 小さな店のための戦略とWebサイト',
       cta: '無料診断を受ける',
       facts: ['無料 · 30分 · 準備は不要'],
+    },
+    heroLine: {
+      pre: 'パリで',
+      slots: ['韓国料理店', 'ピラティススタジオ', '花屋', '本屋', 'カフェ'],
+      post: 'をやっている方へ。',
+      payoff: 'なぜ選ばれるのかを先に決めて、それをサイトにします。',
+      sub: '決まっていないまま作ったものは、全部飾りになります。',
     },
     sheetLead: '30分の診断のあと、こういう一枚をお渡しします。',
     tools: {
@@ -355,6 +369,13 @@ export const EXTRA: Record<Lang, Extra> = {
       cta: '무료 진단 받기',
       facts: ['무료 · 30분 · 준비물 없음'],
     },
+    heroLine: {
+      pre: '파리에서',
+      slots: ['한식당', '필라테스 스튜디오', '꽃집', '서점', '카페'],
+      post: '하시는 사장님께.',
+      payoff: '왜 선택받는지를 먼저 정하고, 그걸 사이트로 만듭니다.',
+      sub: '정해지지 않은 채로 만든 건, 전부 장식이 됩니다.',
+    },
     sheetLead: '30분 진단이 끝나면, 이런 한 장을 드립니다.',
     tools: {
       eyebrow: '하는 일',
@@ -582,6 +603,13 @@ export const EXTRA: Record<Lang, Extra> = {
       badge: 'Paris · Strategy and websites for small businesses',
       cta: 'Book a free diagnosis',
       facts: ['Free · 30 minutes · nothing to prepare'],
+    },
+    heroLine: {
+      pre: 'For the',
+      slots: ['Korean restaurant', 'pilates studio', 'florist', 'bookshop', 'café'],
+      post: 'in Paris.',
+      payoff: 'We settle why you get chosen, then build the site from it.',
+      sub: 'Anything built before that is decoration.',
     },
     sheetLead: 'Thirty minutes in, you leave with a page like this.',
     tools: {

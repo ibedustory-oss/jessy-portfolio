@@ -236,9 +236,18 @@ summary:focus-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.hero-change.is-on .pen-stroke,
-.reveal.is-visible .hero-mark .pen-stroke {
+.hero-change.is-on .pen-stroke {
   animation: pen-draw 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
+}
+/* each cliché gets crossed out in turn */
+.reveal.is-visible .hero-strike .pen-stroke {
+  animation: pen-draw 0.42s cubic-bezier(0.4, 0, 0.2, 1) 0.55s forwards;
+}
+.reveal.is-visible .hero-strike.strike-2 .pen-stroke {
+  animation-delay: 0.85s;
+}
+.reveal.is-visible .hero-strike.strike-3 .pen-stroke {
+  animation-delay: 1.15s;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-change {
