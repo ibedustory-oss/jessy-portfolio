@@ -214,6 +214,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
 .cover-ph{
   grid-column:2;grid-row:1;position:relative;overflow:hidden;
   aspect-ratio:3/4.05;
+  margin-right:calc(-1 * clamp(20px,3vw,40px));
+  margin-top:calc(-1 * clamp(10px,2vw,34px));
+  -webkit-mask-image:
+    linear-gradient(96deg, transparent 0, rgba(0,0,0,.5) 6%, #000 22%),
+    linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, rgba(0,0,0,.55) 100%);
+  mask-image:
+    linear-gradient(96deg, transparent 0, rgba(0,0,0,.5) 6%, #000 22%),
+    linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, rgba(0,0,0,.55) 100%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+/* the studio light is cooler than the paper — warm it so the two share a room */
+.cover-ph::after{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(100deg, rgba(248,246,244,.5) 0, rgba(248,246,244,0) 30%),
+    radial-gradient(120% 90% at 70% 20%, rgba(192,51,79,.05), transparent 60%);
+  mix-blend-mode:normal;
 }
 .cover-ph img,.cover-ph .cov-vid{
   width:100%;height:100%;object-fit:cover;display:block;
@@ -645,7 +663,17 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
   .sommaire a{padding:14px 0 14px 16px;}
   .cover-stage{grid-template-columns:1fr;gap:22px;}
   .masthead{position:relative;top:auto;left:auto;right:auto;font-size:clamp(52px,15vw,120px);text-shadow:none;margin-bottom:6px;}
-  .cover-ph{grid-column:1;grid-row:auto;aspect-ratio:3/3.4;}
+  .cover-ph{
+    grid-column:1;grid-row:auto;aspect-ratio:3/3.4;
+    margin-right:-20px;margin-left:-20px;margin-top:0;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0, #000 10%, #000 88%, transparent 100%);
+    -webkit-mask-composite:source-over;mask-composite:add;
+  }
+  /* the page bleeds past the screen edge, so the vertical caption moves inboard */
+  .cover-ph .edge-cap{right:32px;}
+  .cover-ph .hand-note{left:34px;bottom:52px;}
+  .cover-ph::after{background:linear-gradient(to bottom, rgba(248,246,244,.55) 0, rgba(248,246,244,0) 26%);}
   .cover-text{grid-column:1;grid-row:auto;padding-top:0;}
 }
 /* ============ an open spread — the right page turns ============ */
