@@ -182,6 +182,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               footer={x.sheet.footer}
               page={x.sheet.page}
               img={`${BP}/images/demo-milates.jpg`}
+              video={`${BP}/demos/milates-video/cover.mp4`}
               alt="MILATES — studio de pilates, Paris"
               domain="milates.demo"
             />

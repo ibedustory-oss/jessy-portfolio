@@ -16,6 +16,7 @@ export default function HeroDesk({
   footer,
   page,
   img,
+  video,
   alt,
   domain,
 }: {
@@ -27,6 +28,7 @@ export default function HeroDesk({
   footer?: string
   page?: string
   img: string
+  video?: string
   alt: string
   domain: string
 }) {
@@ -61,38 +63,24 @@ export default function HeroDesk({
           </span>
         </div>
         <div className="relative h-[340px] sm:h-[420px] md:h-[500px]">
-          <Image src={img} alt={alt} fill priority className="object-cover object-right-top" />
+          {video ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={img}
+              aria-label={alt}
+              className="h-full w-full object-cover object-right-top"
+            >
+              <source src={video} type="video/mp4" />
+            </video>
+          ) : (
+            <Image src={img} alt={alt} fill priority className="object-cover object-right-top" />
+          )}
         </div>
       </div>
-
-      {/* the pen's arrow: from the sheet up to the site */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 140 110"
-        className="hd-arrow pointer-events-none absolute left-[46%] top-[38%] z-20 hidden w-[15%] md:block"
-      >
-        <path
-          d="M10 100 C 22 58, 52 24, 116 18"
-          fill="none"
-          stroke="#D25A41"
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          vectorEffect="non-scaling-stroke"
-          className="pen-stroke"
-          opacity="0.9"
-        />
-        <path
-          d="M100 6 L118 17 L102 32"
-          fill="none"
-          stroke="#D25A41"
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          className="pen-stroke pen-stroke-2"
-          opacity="0.9"
-        />
-      </svg>
 
       {/* the sheet itself, tilted the way paper actually sits */}
       <div className="hd-sheet relative z-10 mx-auto -mt-14 w-[92%] md:absolute md:-bottom-10 md:-left-8 md:mx-0 md:mt-0 md:w-[50%]">
