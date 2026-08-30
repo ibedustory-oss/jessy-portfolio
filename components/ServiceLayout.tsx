@@ -75,6 +75,29 @@ function Cta({
   )
 }
 
+function Button({
+  href,
+  children,
+  ghost,
+}: {
+  href: string
+  children: React.ReactNode
+  ghost?: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[14px] font-bold transition duration-300 ease-swift ${
+        ghost
+          ? 'border border-white/25 text-white hover:border-white/60'
+          : 'bg-accent text-white hover:bg-accentlit'
+      }`}
+    >
+      {children}
+    </Link>
+  )
+}
+
 export default function ServiceLayout({ lang }: { lang: Lang }) {
   const s = SERVICE[lang]
   const x = EXTRA[lang]
@@ -83,7 +106,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
   return (
     <div>
       {/* ============ 01 · one message, nothing under it ============ */}
-      <section className="flex min-h-[78vh] items-end bg-ink px-6 pb-20 pt-24 md:min-h-[86vh] md:px-10 md:pb-28">
+      <section className="bg-ink px-6 pb-20 pt-28 md:px-10 md:pb-24 md:pt-36">
         <div className="mx-auto w-full max-w-[1200px]">
           <Reveal>
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/40">
@@ -112,15 +135,51 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               <br />
               {s.headlineAccent}
             </h1>
-            <div className="mt-12 grid gap-10 md:grid-cols-12">
-              <p className="text-[15px] leading-[1.9] text-white/60 md:col-span-5 md:col-start-6">
-                {s.sub}
-              </p>
-            </div>
-            <div className="mt-12 md:mt-16">
-              <Cta href={contact} dark>
-                {s.ctaPrimary}
-              </Cta>
+            <div className="mt-12 grid gap-y-14 md:mt-14 md:grid-cols-12 md:gap-x-10">
+              <div className="md:col-span-5 md:self-center">
+                <p className="max-w-[38ch] text-[15px] leading-[1.9] text-white/60">{s.sub}</p>
+                <div className="mt-9 flex flex-wrap items-center gap-4">
+                  <Button href={contact}>{s.ctaPrimary}</Button>
+                  <a
+                    href="#work"
+                    className="group inline-flex items-baseline gap-2 px-1 text-[14px] font-bold text-white/70 transition-colors duration-300 hover:text-white"
+                  >
+                    {s.ctaSecondary}
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform duration-300 ease-swift group-hover:translate-y-0.5"
+                    >
+                      ↓
+                    </span>
+                  </a>
+                </div>
+                <p className="mt-7 font-mono text-[10px] tracking-[0.14em] text-white/35">
+                  {x.heroTrust}
+                </p>
+              </div>
+
+              <div className="md:col-span-6 md:col-start-7">
+                <div className="relative">
+                  <Image
+                    src={`${BP}/images/demo-joayo.jpg`}
+                    alt="JOAYO — restaurant coréen, Paris 1er"
+                    width={1500}
+                    height={1000}
+                    priority
+                    className="ml-auto w-full rounded-[4px] ring-1 ring-white/15 md:w-[88%]"
+                  />
+                  <div className="relative z-10 -mt-12 w-[85%] md:absolute md:-bottom-9 md:left-0 md:mt-0 md:w-[56%]">
+                    <StrategySheet
+                      label={x.sheet.label}
+                      refNo={x.sheet.ref}
+                      rows={x.sheet.rows
+                        .map((r, i) => ({ ...r, no: String(i + 1).padStart(2, '0') }))
+                        .filter((_, i) => [0, 4, 5, 7].includes(i))}
+                      hypLabel={x.sheet.hypLabel}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -433,7 +492,10 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               <Reveal>
                 <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-12">
                   {s.plans.map((p, i) => (
-                    <div key={p.name}>
+                    <div
+                      key={p.name}
+                      className={p.featured ? 'md:-ml-8 md:border-l-2 md:border-accent md:pl-8' : ''}
+                    >
                       <h3
                         className={`text-[17px] font-extrabold tracking-tight ${
                           p.featured ? 'text-ink' : 'text-charcoal'
@@ -507,34 +569,20 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             </div>
           </div>
 
-          {/* the argument is over; here is the thing itself, then the ask */}
-          <div className="mt-28 grid gap-y-14 border-t border-white/12 pt-16 md:mt-36 md:grid-cols-12 md:gap-x-10">
-            <Reveal className="md:col-span-4">
-              <div className="max-w-[24rem]">
-                <StrategySheet
-                  label={x.sheet.label}
-                  refNo={x.sheet.ref}
-                  rows={x.sheet.rows}
-                  caption={x.sheet.caption}
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={80} className="md:col-span-7 md:col-start-6">
+          <div className="mt-28 grid gap-y-10 border-t border-white/12 pt-16 md:mt-36 md:grid-cols-12 md:gap-x-10">
+            <Reveal className="md:col-span-7 md:col-start-5">
               <h2 className="max-w-[16ch] break-keep text-[30px] font-extrabold leading-[1.22] tracking-tightest text-white md:text-[48px] lg:text-[60px]">
                 {s.finalTitle}
               </h2>
               <p className="mt-6 max-w-[40ch] text-[15px] leading-[1.9] text-white/60">
                 {s.finalSub}
               </p>
-              <div className="mt-11">
-                <Cta href={contact} dark>
-                  {s.finalCta}
-                </Cta>
+              <div className="mt-10 flex flex-wrap items-center gap-5">
+                <Button href={contact}>{s.finalCta}</Button>
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/30">
+                  {s.finalNote}
+                </p>
               </div>
-              <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.24em] text-white/30">
-                {s.finalNote}
-              </p>
             </Reveal>
           </div>
         </div>

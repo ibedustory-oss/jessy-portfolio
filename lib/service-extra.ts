@@ -7,7 +7,9 @@ import type { Lang } from '@/lib/content'
 export interface SheetBlock {
   label: string
   ref: string
-  rows: { k: string; v?: string }[]
+  meta: string
+  hypLabel: string
+  rows: { k: string; v?: string; key?: boolean; hyp?: boolean }[]
   caption: string
 }
 
@@ -91,6 +93,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
+  heroTrust: string
   sheetRefs: SheetRefs
   sheet: SheetBlock
   cases: CaseBlock
@@ -104,6 +107,7 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
+    heroTrust: 'パリ拠点 · 日英韓は自分で書く · 24時間以内に返信',
     sheetRefs: {
       pain: 'シート 01 · 診断',
       alt: 'シート 03 · 代替案',
@@ -113,17 +117,19 @@ export const EXTRA: Record<Lang, Extra> = {
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
+      meta: '作成 Jessy Jung · 対象 JOAYO — Restaurant coréen, Paris 1er',
+      hypLabel: '仮説',
       rows: [
-        { k: '診断', v: '「つくる」は安くなった。空いたのは、決める仕事。' },
-        { k: '用事', v: '何を言うか決められない時に、呼ばれる' },
-        { k: '代替案', v: '制作会社 / テンプレート / 自分でAI' },
-        { k: '戦場', v: 'パリの小さな店と事業者' },
-        { k: '勝ち筋', v: '決めてから作る。3言語を自分で' },
-        { k: '危うい仮説', v: '「決め」にお金を払う人がいるか' },
-        { k: '北極星', v: '紹介で来る相談の数' },
-        { k: '初手', v: 'モニター3件を事例にする' },
+        { k: '診断', v: 'パリ中心部の韓国料理は、観光客向けの一軒として読まれる' },
+        { k: '用事', v: '座ってちゃんとした一食を食べたい時' },
+        { k: '代替案', v: '近隣の韓国風ビストロ / チェーン' },
+        { k: '戦場', v: 'パリ1区。昼と夜、予約のお客' },
+        { k: '勝ち筋', v: '速さではなく、時間のかかり方を看板に', key: true },
+        { k: '危うい仮説', v: '待つことを価値と読んでもらえるか', hyp: true },
+        { k: '北極星', v: '再訪の予約数' },
+        { k: '初手', v: '甕の庭をトップに。メニュー説明は1品だけ' },
       ],
-      caption: 'これは私の分です。あなたの分は、まだ白紙です。',
+      caption: '',
     },
     cases: {
       intro: '実在の店舗ではありません。「誰に・なぜ・どう売るか」を先に決めて、その判断のままつくった自主制作です。',
@@ -258,6 +264,7 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
+    heroTrust: '파리 기반 · 한·일·영 직접 작성 · 24시간 안에 답장',
     sheetRefs: {
       pain: '시트 01 · 진단',
       alt: '시트 03 · 대안',
@@ -267,17 +274,19 @@ export const EXTRA: Record<Lang, Extra> = {
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
+      meta: '작성 Jessy Jung · 대상 JOAYO — 한식당, 파리 1구',
+      hypLabel: '가설',
       rows: [
-        { k: '진단', v: '만드는 일은 싸졌다. 비어 있는 건 정하는 일.' },
-        { k: '찾는 순간', v: '무슨 말을 해야 할지 모르게 됐을 때' },
-        { k: '대안', v: '제작사 / 템플릿 / 직접 AI' },
-        { k: '싸울 곳', v: '파리의 작은 가게와 사업자' },
-        { k: '이기는 법', v: '정한 다음에 만든다. 언어도 직접 쓴다' },
-        { k: '위험한 가설', v: '"정하는 일"에 돈을 낼 사람이 있는가' },
-        { k: '북극성', v: '소개로 들어오는 상담 수' },
-        { k: '첫 수', v: '모니터 세 건을 사례로 만든다' },
+        { k: '진단', v: '파리 한복판의 한식은 관광객용 한 곳으로 읽힌다' },
+        { k: '찾는 순간', v: '앉아서 제대로 된 한 끼를 먹고 싶을 때' },
+        { k: '대안', v: '주변의 퓨전 비스트로 / 프랜차이즈' },
+        { k: '싸울 곳', v: '파리 1구. 점심과 저녁, 예약 손님' },
+        { k: '이기는 법', v: '빠름이 아니라, 시간이 드는 방식을 간판으로', key: true },
+        { k: '위험한 가설', v: '기다림을 가치로 읽어줄 것인가', hyp: true },
+        { k: '북극성', v: '다시 찾는 예약의 수' },
+        { k: '첫 수', v: '장독대를 첫 화면에. 메뉴 설명은 하나만' },
       ],
-      caption: '이건 제 것입니다. 사장님 것은 아직 백지입니다.',
+      caption: '',
     },
     cases: {
       intro: '실제 매장이 아닙니다. 누구에게·왜·어떻게 팔지를 먼저 정하고, 그 판단 그대로 만든 자체 제작입니다.',
@@ -412,6 +421,7 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
+    heroTrust: 'Based in Paris · JA/KO/EN written in-house · Replies within a day',
     sheetRefs: {
       pain: 'Sheet 01 · Diagnosis',
       alt: 'Sheet 03 · Alternatives',
@@ -421,17 +431,19 @@ export const EXTRA: Record<Lang, Extra> = {
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
+      meta: 'By Jessy Jung · For JOAYO — Korean restaurant, Paris 1er',
+      hypLabel: 'bet',
       rows: [
-        { k: 'Diagnosis', v: 'Building got cheap. Deciding is the open seat.' },
-        { k: 'The job', v: 'Called in when the words will not settle' },
-        { k: 'Alternatives', v: 'A studio / a template / DIY with AI' },
-        { k: 'Where we play', v: 'Small businesses in Paris. JA·EN·KO markets' },
-        { k: 'How we win', v: 'Decide first, then build. All three languages written by hand' },
-        { k: 'Riskiest bet', v: 'That people will pay for deciding' },
-        { k: 'North star', v: 'Consultations that arrive by referral' },
-        { k: 'First move', v: 'Turn three monitor projects into cases' },
+        { k: 'Diagnosis', v: 'Korean food in central Paris reads as a tourist stop' },
+        { k: 'The job', v: 'A proper sit-down meal, not a quick fix' },
+        { k: 'Alternatives', v: 'Nearby Korean-style bistros and chains' },
+        { k: 'Where we play', v: 'Paris 1er. Lunch, dinner, bookings' },
+        { k: 'How we win', v: 'Lead with how long things take, not how fast', key: true },
+        { k: 'Riskiest bet', v: 'That waiting reads as value', hyp: true },
+        { k: 'North star', v: 'Returning reservations' },
+        { k: 'First move', v: 'Jars on the first screen. One dish described' },
       ],
-      caption: 'This one is mine. Yours is still blank.',
+      caption: '',
     },
     cases: {
       intro: 'None of these are real shops. Each began by deciding who it is for, why, and how it sells, and was then built exactly as that decision.',
