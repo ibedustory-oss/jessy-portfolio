@@ -96,6 +96,7 @@ export interface NavBlock {
 
 export interface Extra {
   offer: { badge: string; cta: string; facts: string[] }
+  sheetLead: string
   tools: {
     eyebrow: string
     title: string
@@ -126,6 +127,7 @@ export const EXTRA: Record<Lang, Extra> = {
       cta: '無料診断を受ける',
       facts: ['無料 · 30分 · 準備は不要'],
     },
+    sheetLead: '30分の診断のあと、こういう一枚をお渡しします。',
     tools: {
       eyebrow: '仕事の中身',
       title: 'つくる前に、決めます。',
@@ -353,6 +355,7 @@ export const EXTRA: Record<Lang, Extra> = {
       cta: '무료 진단 받기',
       facts: ['무료 · 30분 · 준비물 없음'],
     },
+    sheetLead: '30분 진단이 끝나면, 이런 한 장을 드립니다.',
     tools: {
       eyebrow: '하는 일',
       title: '만들기 전에, 정합니다.',
@@ -580,6 +583,7 @@ export const EXTRA: Record<Lang, Extra> = {
       cta: 'Book a free diagnosis',
       facts: ['Free · 30 minutes · nothing to prepare'],
     },
+    sheetLead: 'Thirty minutes in, you leave with a page like this.',
     tools: {
       eyebrow: 'The work',
       title: 'We decide before we build.',

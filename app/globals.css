@@ -226,28 +226,22 @@ summary:focus-visible {
   }
 }
 
-/* hero change — the site arrives, then the line that made it is circled */
-.hero-change .hc-sites,
-.hero-change .hc-card {
+/* hero change — the page settles, then the decided line is circled */
+.hero-change {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(14px);
   transition: opacity 0.9s cubic-bezier(0.23, 1, 0.32, 1), transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.hero-change.is-on .hc-sites {
+.hero-change.is-on {
   opacity: 1;
   transform: translateY(0);
 }
-.hero-change.is-on .hc-card {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.5s;
-}
-.hero-change.is-on .hc-card .pen-stroke {
-  animation: pen-draw 0.7s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;
+.hero-change.is-on .pen-stroke,
+.reveal.is-visible .hero-mark .pen-stroke {
+  animation: pen-draw 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-change .hc-sites,
-  .hero-change .hc-card {
+  .hero-change {
     opacity: 1;
     transform: none;
     transition: none;

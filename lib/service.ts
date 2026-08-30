@@ -165,7 +165,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
 
   ko: {
     badge: '지금 상담 신청을 받고 있습니다',
-    headline: '"왜 선택받는지"부터,',
+    headline: '왜 선택받는지부터,',
     headlineAccent: '함께 만듭니다.',
     sub: '웹사이트 제작사가 아닙니다. 무엇을 말할지부터 같이 정합니다.',
     ctaPrimary: '상담하기',

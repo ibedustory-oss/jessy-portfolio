@@ -4,7 +4,6 @@ import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
-import HeroChange from '@/components/HeroChange'
 import StrategySheet from '@/components/StrategySheet'
 import { Term } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
@@ -115,57 +114,52 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
   return (
     <div className="bg-ink pb-2 md:pb-5">
-      {/* ============ HERO — one tight column of ask, one column of proof ============ */}
-      <section className="relative overflow-x-clip px-6 pb-20 pt-20 md:px-12 md:pb-28 md:pt-24">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 overflow-hidden"
-        >
-          <span className="absolute -left-40 top-1/3 block h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(240,194,75,0.16),transparent)]" />
-          <span className="absolute -right-32 -top-24 block h-[620px] w-[620px] rounded-full bg-[radial-gradient(closest-side,rgba(49,130,246,0.16),transparent)]" />
-        </div>
-        <div className="mx-auto grid max-w-[1340px] items-center gap-y-14 lg:grid-cols-12 lg:gap-x-14">
-          <Reveal className="lg:col-span-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/40">
+      {/* ============ HERO — words at full scale, one mark, one door ============ */}
+      <section className="relative flex min-h-[76vh] items-center px-6 py-24 md:px-10 md:py-28">
+        <div className="mx-auto w-full max-w-[1240px]">
+          <Reveal>
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/45">
               {x.offer.badge}
             </p>
-            <h1 className={`mt-6 ${bk} text-[30px] font-extrabold leading-[1.14] tracking-tightest text-white sm:text-[40px] md:text-[48px] lg:text-[38px] xl:text-[53px]`}>
-              <span className="relative inline-block">
+          </Reveal>
+          <Reveal delay={80}>
+            <h1
+              className={`mt-10 max-w-[15ch] ${bk} text-[clamp(34px,6.6vw,92px)] font-extrabold leading-[1.04] tracking-tightest text-white`}
+            >
+              <span className="hero-mark relative inline-block">
                 {s.headline}
-                <HandLine className="-bottom-1 h-[6px] text-accentlit md:h-[9px]" />
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 220 44"
+                  preserveAspectRatio="none"
+                  className="pointer-events-none absolute -left-[3%] top-1/2 h-[128%] w-[106%] -translate-y-1/2"
+                >
+                  <path
+                    d="M14 21 C 28 5, 196 3, 209 17 C 216 32, 168 41, 74 39 C 30 38, 8 32, 16 19"
+                    fill="none"
+                    stroke="#D25A41"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                    className="pen-stroke"
+                    opacity="0.85"
+                  />
+                </svg>
               </span>
               <br />
               {s.headlineAccent}
             </h1>
-            <p className="mt-5 max-w-[30ch] text-[14.5px] leading-[1.8] text-white/60">{s.sub}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-4">
-              <Button href={contact}>{x.offer.cta}</Button>
-            </div>
-            <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[10.5px] tracking-[0.06em] text-white/45">
-              {x.offer.facts.map((f, i) => (
-                <span key={f} className="flex items-baseline gap-3">
-                  {i > 0 && (
-                    <span aria-hidden="true" className="text-accentlit/60">
-                      ·
-                    </span>
-                  )}
-                  {f}
-                </span>
-              ))}
+          </Reveal>
+          <Reveal delay={130}>
+            <p className="mt-10 max-w-[36ch] text-[clamp(15px,1.3vw,18px)] leading-[1.7] text-white/65">
+              {s.sub}
             </p>
           </Reveal>
-
-          <Reveal delay={120} className="lg:col-span-7">
-            <HeroChange
-              label={x.sheet.label}
-              refNo={x.sheet.ref}
-              meta={x.sheet.meta}
-              rows={[0, 4, 7].map((i) => ({
-                k: x.sheet.rows[i].k,
-                v: x.sheet.rows[i].v ?? '',
-                key: x.sheet.rows[i].key,
-              }))}
-            />
+          <Reveal delay={180}>
+            <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <Button href={contact}>{x.offer.cta}</Button>
+              <p className="font-mono text-[11px] tracking-[0.08em] text-white/45">{x.offer.facts[0]}</p>
+            </div>
           </Reveal>
         </div>
       </section>

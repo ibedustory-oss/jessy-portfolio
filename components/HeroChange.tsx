@@ -2,20 +2,26 @@
 
 import { useEffect, useState } from 'react'
 
-/* The document, at full size and nothing else. Thumbnails of the demo sites
-   made the page look like a small portfolio; the sheet is the thing being
-   sold, so it gets the room. */
+/* The right half of the hero is a page, not a card: masthead at the top,
+   three lines of the decision in the middle, the annex note and folio at
+   the foot. No shadow, no tilt — it is printed, not placed. */
 
 export default function HeroChange({
+  lead,
   label,
   refNo,
   meta,
   rows,
+  footer,
+  page,
 }: {
+  lead: string
   label: string
   refNo: string
   meta?: string
-  rows: { k: string; v: string; key?: boolean; hyp?: boolean }[]
+  rows: { k: string; v: string; key?: boolean }[]
+  footer?: string
+  page?: string
 }) {
   const [on, setOn] = useState(false)
   useEffect(() => {
@@ -28,41 +34,39 @@ export default function HeroChange({
   }, [])
 
   return (
-    <div className={`hero-change relative ${on ? 'is-on' : ''}`}>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -inset-x-10 -inset-y-8 bg-[radial-gradient(closest-side,rgba(255,255,255,0.09),transparent)]"
-      />
-      <figure className="hc-card relative -rotate-[1.1deg] rounded-[4px] bg-[#FCFBF7] px-7 pb-7 pt-6 shadow-[0_60px_110px_-30px_rgba(0,0,0,0.9)] ring-1 ring-black/[0.06] sm:px-9 sm:pb-9 sm:pt-8">
-        <figcaption className="flex items-baseline justify-between border-b-2 border-ink pb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink sm:text-[11px]">
-          <span>{label}</span>
-          <span className="tracking-[0.12em] text-ink/40">{refNo}</span>
-        </figcaption>
-        {meta && (
-          <p className="mt-2.5 font-mono text-[9px] tracking-[0.08em] text-ink/45">{meta}</p>
-        )}
-        <dl className="mt-1">
-          {rows.map((r) => (
-            <div
-              key={r.k}
-              className="grid grid-cols-[6.6rem_minmax(0,1fr)] items-baseline gap-x-4 border-b border-dashed border-ink/15 py-3.5 last:border-b-0 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-x-6"
+    <figure className={`hero-change hc-card flex h-full flex-col ${on ? 'is-on' : ''}`}>
+      <p className="mb-7 flex items-baseline gap-2.5 text-[13px] font-bold leading-snug text-ink sm:text-[14px]">
+        <span aria-hidden="true" className="mt-[0.55em] h-px w-6 shrink-0 bg-pen" />
+        {lead}
+      </p>
+      <figcaption className="flex items-baseline justify-between border-b-2 border-ink pb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink sm:text-[11px]">
+        <span>{label}</span>
+        <span className="tracking-[0.12em] text-ink/40">{refNo}</span>
+      </figcaption>
+      {meta && <p className="mt-3 font-mono text-[9px] tracking-[0.08em] text-ink/45">{meta}</p>}
+
+      <dl className="flex flex-1 flex-col justify-center py-6">
+        {rows.map((r) => (
+          <div
+            key={r.k}
+            className="grid grid-cols-[6.6rem_minmax(0,1fr)] items-baseline gap-x-4 border-b border-dashed border-ink/15 py-5 last:border-b-0 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-x-7"
+          >
+            <dt className="break-keep font-mono text-[9.5px] uppercase tracking-[0.1em] text-ink/45 sm:text-[10px]">
+              {r.k}
+            </dt>
+            <dd
+              className={`text-[15px] leading-snug text-ink sm:text-[clamp(15px,1.42vw,19px)] ${
+                r.key ? 'font-bold' : 'font-medium'
+              }`}
             >
-              <dt className="break-keep font-mono text-[9.5px] uppercase tracking-[0.1em] text-ink/45 sm:text-[10px]">
-                {r.k}
-              </dt>
-              <dd
-                className={`text-[14px] leading-snug text-ink sm:text-[16.5px] ${
-                  r.key ? 'font-bold' : 'font-medium'
-                }`}
-              >
-                <span className="relative inline-block">
+              <span className="relative inline-block">
                 {r.v}
                 {r.key && (
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 220 44"
                     preserveAspectRatio="none"
-                    className="pointer-events-none absolute -left-4 top-1/2 h-[38px] w-[calc(100%+32px)] -translate-y-1/2"
+                    className="pointer-events-none absolute -left-4 top-1/2 h-[42px] w-[calc(100%+32px)] -translate-y-1/2"
                   >
                     <path
                       d="M14 21 C 28 5, 196 3, 209 17 C 216 32, 168 41, 74 39 C 30 38, 8 32, 16 19"
@@ -76,12 +80,18 @@ export default function HeroChange({
                     />
                   </svg>
                 )}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </figure>
-    </div>
+              </span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      {(footer || page) && (
+        <div className="flex items-baseline justify-between border-t border-ink/20 pt-3 font-mono text-[8.5px] tracking-[0.1em] text-ink/45">
+          <span>{footer}</span>
+          <span className="shrink-0">{page}</span>
+        </div>
+      )}
+    </figure>
   )
 }
