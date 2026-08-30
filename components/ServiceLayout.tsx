@@ -4,6 +4,7 @@ import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
+import StrategySheet from '@/components/StrategySheet'
 import type { Lang } from '@/lib/content'
 import { SERVICE } from '@/lib/service'
 import { EXTRA } from '@/lib/service-extra'
@@ -482,25 +483,38 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                 <Faq items={s.faq.slice(0, 3)} onDark />
               </Reveal>
 
-              <Reveal>
-                <div className="mt-24 md:mt-32">
-                  <h2 className="max-w-[16ch] break-keep text-[30px] font-extrabold leading-[1.22] tracking-tightest text-white md:text-[48px] lg:text-[60px]">
-                    {s.finalTitle}
-                  </h2>
-                  <p className="mt-6 max-w-[40ch] text-[15px] leading-[1.9] text-white/60">
-                    {s.finalSub}
-                  </p>
-                  <div className="mt-11">
-                    <Cta href={contact} dark>
-                      {s.finalCta}
-                    </Cta>
-                  </div>
-                  <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.24em] text-white/30">
-                    {s.finalNote}
-                  </p>
-                </div>
-              </Reveal>
             </div>
+          </div>
+
+          {/* the argument is over; here is the thing itself, then the ask */}
+          <div className="mt-28 grid gap-y-14 border-t border-white/12 pt-16 md:mt-36 md:grid-cols-12 md:gap-x-10">
+            <Reveal className="md:col-span-4">
+              <div className="max-w-[24rem]">
+                <StrategySheet
+                  label={x.sheet.label}
+                  refNo={x.sheet.ref}
+                  rows={x.sheet.rows}
+                  caption={x.sheet.caption}
+                />
+              </div>
+            </Reveal>
+
+            <Reveal delay={80} className="md:col-span-7 md:col-start-6">
+              <h2 className="max-w-[16ch] break-keep text-[30px] font-extrabold leading-[1.22] tracking-tightest text-white md:text-[48px] lg:text-[60px]">
+                {s.finalTitle}
+              </h2>
+              <p className="mt-6 max-w-[40ch] text-[15px] leading-[1.9] text-white/60">
+                {s.finalSub}
+              </p>
+              <div className="mt-11">
+                <Cta href={contact} dark>
+                  {s.finalCta}
+                </Cta>
+              </div>
+              <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.24em] text-white/30">
+                {s.finalNote}
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>

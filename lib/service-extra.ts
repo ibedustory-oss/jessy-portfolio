@@ -4,6 +4,13 @@ import type { Lang } from '@/lib/content'
    labels, and the two-axis finder. Kept out of service.ts so the three
    existing language blocks there stay untouched. */
 
+export interface SheetBlock {
+  label: string
+  ref: string
+  rows: { k: string; v?: string }[]
+  caption: string
+}
+
 export interface CaseBlock {
   intro: string
   problemLabel: string
@@ -77,6 +84,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
+  sheet: SheetBlock
   cases: CaseBlock
   map: MapBlock
   pain: PainBlock
@@ -88,6 +96,20 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
+    sheet: {
+      label: 'Strategy sheet',
+      ref: 'N°01',
+      rows: [
+        { k: 'Why', v: 'つくる前に、決める。' },
+        { k: 'Who', v: '言葉がまだ決まっていない事業者' },
+        { k: 'Position', v: '制作会社ではなく、一緒に決める相手' },
+        { k: 'Product', v: '戦略シート＋サイト' },
+        { k: 'Price', v: '¥200,000〜' },
+        { k: 'Place', v: 'パリ / オンライン' },
+        { k: 'Message' },
+      ],
+      caption: 'これは私の分です。あなたの分は、まだ白紙です。',
+    },
     cases: {
       intro: '実在の店舗ではありません。「誰に・なぜ・どう売るか」を先に決めて、その判断のままつくった自主制作です。',
       problemLabel: '問題',
@@ -233,6 +255,20 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
+    sheet: {
+      label: 'Strategy sheet',
+      ref: 'N°01',
+      rows: [
+        { k: 'Why', v: '만들기 전에, 정한다.' },
+        { k: 'Who', v: '할 말이 아직 안 정해진 사업자' },
+        { k: 'Position', v: '제작사가 아니라, 같이 정하는 사람' },
+        { k: 'Product', v: '전략 시트 + 사이트' },
+        { k: 'Price', v: '₩1,200,000~' },
+        { k: 'Place', v: '파리 / 온라인' },
+        { k: 'Message' },
+      ],
+      caption: '이건 제 것입니다. 사장님 것은 아직 백지입니다.',
+    },
     cases: {
       intro: '실제 매장이 아닙니다. 누구에게·왜·어떻게 팔지를 먼저 정하고, 그 판단 그대로 만든 자체 제작입니다.',
       problemLabel: '문제',
@@ -378,6 +414,20 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
+    sheet: {
+      label: 'Strategy sheet',
+      ref: 'N°01',
+      rows: [
+        { k: 'Why', v: 'Decide before you build.' },
+        { k: 'Who', v: 'Owners who have not settled what to say' },
+        { k: 'Position', v: 'Not a studio. The person who decides with you.' },
+        { k: 'Product', v: 'Strategy sheet and site' },
+        { k: 'Price', v: '¥200,000+' },
+        { k: 'Place', v: 'Paris and remote' },
+        { k: 'Message' },
+      ],
+      caption: 'This one is mine. Yours is still blank.',
+    },
     cases: {
       intro: 'None of these are real shops. Each began by deciding who it is for, why, and how it sells, and was then built exactly as that decision.',
       problemLabel: 'Problem',
