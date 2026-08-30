@@ -6,6 +6,7 @@ import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
 import HeroDesk from '@/components/HeroDesk'
 import StrategySheet from '@/components/StrategySheet'
+import ToolPreview from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
 import { SERVICE } from '@/lib/service'
 import { EXTRA } from '@/lib/service-extra'
@@ -298,6 +299,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               <p className="mt-6 max-w-[40ch] text-[14.5px] leading-[1.85] text-warmgray">
                 {x.finder.lead}
               </p>
+              <div className="mt-7">
+                <ToolPreview title={x.tools.title} items={x.tools.items} />
+              </div>
             </Reveal>
 
             <Reveal delay={80}>
@@ -325,9 +329,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                 <h2 className={`max-w-[18ch] ${bk} text-[24px] font-extrabold leading-[1.3] tracking-tightest text-white md:text-[32px]`}>
                   {s.workTitle}
                 </h2>
-                <p className="mt-5 max-w-[44ch] text-[14px] leading-[1.85] text-white/50">
-                  {x.cases.intro}
-                </p>
               </Reveal>
             </div>
           </div>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er</title>
-<meta name="description" content="Joayo Restaurant : cuisine coréenne à Paris 1er. Bibimbap au tartare de bœuf, bulgogi, poulet frit. Site de démonstration.">
+<meta name="description" content="Joayo Restaurant : cuisine coréenne à Paris 1er. Bibimbap au tartare de bœuf, bulgogi, poulet frit.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
@@ -192,6 +192,89 @@ footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-alig
   letter-spacing:.2em;text-transform:uppercase;}
 .foot-links a:hover{color:var(--red);}
 .legal{font-size:11.5px;color:rgba(247,244,239,.4);}
+
+/* la salle */
+.salle{padding:110px 40px;background:var(--paper-2);}
+.salle-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:5vw;align-items:center;}
+.salle-ph{border-radius:6px;overflow:hidden;box-shadow:0 44px 80px -34px rgba(22,19,15,.5);}
+.salle-ph img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.salle-copy .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:11px;margin-bottom:16px;}
+.salle-copy h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(30px,3.4vw,44px);line-height:1.1;}
+.salle-copy p{margin-top:18px;color:var(--ink-60);font-size:15.5px;max-width:38ch;}
+.salle-note{font-family:'Fraunces',serif;font-style:italic;color:var(--ink)!important;font-size:17px!important;}
+
+/* strategy sheet colophon */
+.sc{background:var(--ink);padding:120px 40px;}
+.sc-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:.8fr 1fr;gap:6vw;align-items:center;}
+.sc-over{color:rgba(247,244,239,.45);font-weight:600;text-transform:uppercase;letter-spacing:.24em;font-size:10.5px;margin-bottom:18px;}
+.sc-h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(28px,3vw,40px);line-height:1.12;color:var(--paper);}
+.sc-p{margin-top:16px;color:rgba(247,244,239,.55);font-size:14.5px;max-width:36ch;line-height:1.85;}
+.sc-link{display:inline-block;margin-top:26px;color:var(--paper);text-decoration:none;font-weight:600;font-size:13px;letter-spacing:.06em;border-bottom:1px solid rgba(247,244,239,.3);padding-bottom:3px;transition:border-color .3s;}
+.sc-link:hover{border-color:var(--paper);}
+.sc-link i{font-style:normal;}
+.sc-paper{background:#FCFBF7;border-radius:3px;padding:26px 28px 20px;box-shadow:0 46px 90px -28px rgba(0,0,0,.75);transform:rotate(-1.2deg);}
+.sc-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:9px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10px;letter-spacing:.22em;color:var(--ink);}
+.sc-ref{letter-spacing:.12em;color:rgba(22,19,15,.4);}
+.sc-meta{margin:8px 0 2px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8.5px;letter-spacing:.08em;color:rgba(22,19,15,.45);}
+.sc-row{display:grid;grid-template-columns:1.4rem 6.4rem minmax(0,1fr);gap:0 10px;align-items:baseline;padding:8px 0;border-bottom:1px dashed rgba(22,19,15,.16);}
+.sc-row:last-of-type{border-bottom:0;}
+.sc-row .n{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8.5px;color:rgba(22,19,15,.35);}
+.sc-row .k{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:rgba(22,19,15,.45);}
+.sc-row .v{position:relative;font-size:12.5px;line-height:1.5;color:var(--ink);font-weight:500;}
+.sc-key .v{font-weight:700;}
+.sc-ring{position:absolute;left:-10px;right:-10px;top:-6px;bottom:-6px;width:calc(100% + 20px);height:calc(100% + 12px);pointer-events:none;}
+.sc-hyp{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red);}
+.sc-foot{display:flex;justify-content:space-between;margin-top:12px;border-top:1px solid rgba(22,19,15,.2);padding-top:8px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8px;letter-spacing:.1em;color:rgba(22,19,15,.45);}
+html[lang="ko"] .sc-h2{font-family:'Noto Serif KR',serif;}
+@media (max-width:900px){
+  .salle-inner,.sc-inner{grid-template-columns:1fr;gap:44px;}
+  .salle{padding:80px 22px;}
+  .sc{padding:84px 22px;}
+  .sc-paper{transform:none;}
+  .sc-row{grid-template-columns:1.2rem 4.8rem minmax(0,1fr);}
+}
+
+/* generative hero — ink & plum */
+.ghero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 100%, #1B140A 0%, #120E08 46%, #0D0A06 100%);color:var(--paper);}
+.ghero canvas{position:absolute;inset:0;width:100%;height:100%;}
+.g-veil{position:absolute;inset:0;background:linear-gradient(to top, rgba(13,10,6,.55), transparent 46%);}
+.ghero-inner{position:relative;z-index:2;max-width:1320px;width:100%;margin:0 auto;padding:120px 40px 140px;}
+.ghero .kicker{color:rgba(247,244,239,.55);}
+.ghero .kicker .dot{background:var(--red);}
+.ghero h1{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(54px,9vw,128px);line-height:.98;letter-spacing:-.015em;margin-top:22px;}
+.ghero h1 .accent{color:#D8552F;font-style:italic;}
+.g-line{margin-top:26px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
+  font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(247,244,239,.72);max-width:44ch;}
+.ghero .cta-row{margin-top:34px;}
+.ghero .btn{background:var(--red);border-color:var(--red);color:var(--paper);}
+.ghero .btn:hover{background:#D8552F;border-color:#D8552F;}
+.g-ghost{color:rgba(247,244,239,.75);text-decoration:none;font-weight:600;font-size:12.5px;
+  letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid rgba(247,244,239,.25);
+  padding-bottom:3px;transition:color .3s,border-color .3s;}
+.g-ghost:hover{color:var(--paper);border-color:var(--paper);}
+.g-pill{display:inline-block;margin-top:30px;border-color:rgba(247,244,239,.22);color:rgba(247,244,239,.5);}
+.ghero .jd-vert{position:absolute;top:50%;right:26px;transform:translateY(-50%);z-index:2;
+  writing-mode:vertical-rl;font-size:11px;letter-spacing:.42em;color:rgba(247,244,239,.4);
+  font-family:'Noto Serif KR',serif;}
+@media (max-width:760px){
+  .ghero{min-height:86vh;}
+  .ghero-inner{padding:96px 22px 120px;}
+  .ghero .jd-vert{display:none;}
+}
+
+/* korean typography pass */
+html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .sc-over,
+html[lang="ko"] .salle-copy .over{letter-spacing:.12em;}
+html[lang="ko"] .section-head h2{font-size:clamp(25px,3vw,38px);}
+html[lang="ko"] .salle-copy h2{font-size:clamp(24px,2.9vw,36px);}
+html[lang="ko"] .sc-h2{font-size:clamp(23px,2.6vw,33px);font-family:'Noto Serif KR',serif;}
+html[lang="ko"] .g-line{font-style:normal;font-family:'Noto Serif KR',serif;font-weight:500;
+  font-size:clamp(15px,1.6vw,18px);line-height:1.8;}
+html[lang="ko"] .sc-row .k{letter-spacing:.04em;}
+html[lang="ko"] .sc-row .v{font-size:12px;line-height:1.65;}
+html[lang="ko"] .salle-note{font-style:normal;font-family:'Noto Serif KR',serif;}
+html[lang="ko"] .g-ghost{letter-spacing:.1em;}
 
 /* reveal */
 body.js-anim .reveal{opacity:0;transform:translateY(24px);filter:blur(5px);
@@ -480,41 +563,20 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
 </nav>
 
 <!-- HERO -->
-<header id="top" class="hero jangdok" data-rail>
-  <div class="jd-ph" aria-hidden="true">
-    <img src="https://images.pexels.com/photos/34416819/pexels-photo-34416819.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="">
-  </div>
-  <div class="jd-veil" aria-hidden="true"></div>
+<header id="top" class="ghero" data-rail>
+  <canvas id="gTree" aria-hidden="true"></canvas>
+  <canvas id="gPetals" aria-hidden="true"></canvas>
+  <div class="g-veil" aria-hidden="true"></div>
   <span class="jd-vert" data-i18n="jd_vert">장독대 — 시간이 맛이 되는 곳</span>
-
-  <div class="jd-inner">
-    <div class="jd-copy">
-      <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Midi &amp; soir — en plein cœur de Paris</span></div>
-      <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Restaurant</span></h1>
-      <p class="jd-line" data-i18n="jd_line">Ce que le temps a fait, on ne le presse pas. Kimchi, jang, bouillons — la patience d'abord.</p>
-      <p class="sub" data-i18n-html="hero_sub">La cuisine coréenne authentique du 1er arrondissement.</p>
-      <div class="cta-row">
-        <a class="btn" href="#infos" data-i18n="cta_book">Réserver</a>
-        <span class="addr-pill" data-i18n="addr_pill">Paris 1er · adresse de démonstration</span>
-      </div>
+  <div class="ghero-inner">
+    <div class="kicker gk"><span class="dot"></span> <span data-i18n="kicker">Midi &amp; soir — Paris 1er</span></div>
+    <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Restaurant</span></h1>
+    <p class="g-line" data-i18n="jd_line">Ce que le temps a fait, on ne le presse pas. Kimchi, jang, bouillons — la patience d'abord.</p>
+    <div class="cta-row">
+      <a class="btn" href="#infos" data-i18n="cta_book">Réserver</a>
+      <a class="g-ghost" href="#menu"><span data-i18n="nav_menu">La Carte</span> ↓</a>
     </div>
-  <aside class="ardoise reveal">
-    <div class="a-head" data-i18n="ar_head">Les signatures</div>
-    <div class="a-head-kr kr">대표 메뉴</div>
-    <div class="dish">
-      <span class="n"><span data-i18n="m1_name">Bibimbap au tartare de bœuf</span><small>육회비빔밥</small></span>
-      <span class="p">16,50 €</span><i class="seal" aria-hidden="true">좋</i>
-    </div>
-    <div class="dish">
-      <span class="n"><span data-i18n="m5_name">Poulet frit coréen</span><small>치킨</small></span>
-      <span class="p">16,00 €</span><i class="seal" aria-hidden="true">좋</i>
-    </div>
-    <div class="dish">
-      <span class="n"><span data-i18n="m3_name">Bulgogi de porc</span><small>제육불고기</small></span>
-      <span class="p">15,00 €</span><i class="seal" aria-hidden="true">좋</i>
-    </div>
-    <div class="a-note"><a href="#menu" data-i18n="ar_note">Toute la carte ↓</a></div>
-  </aside>
+    <span class="addr-pill g-pill" data-i18n="addr_pill">12 rue du Jour, Paris 1er</span>
   </div>
 </header>
 
@@ -523,7 +585,6 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
   <div class="section-head reveal">
     <div class="over" data-i18n="me_over">La carte · 메뉴</div>
     <h2 data-i18n="me_h2">La carte</h2>
-    <p data-i18n="me_p">Cuisine authentique et chaleureuse, menu végétarien disponible. Comptez 20 à 30 € par personne.</p>
   </div>
   <div class="menu-wrap">
     <div class="menu-list reveal">
@@ -592,33 +653,39 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
         <img data-mp="2" src="https://images.pexels.com/photos/1109024/pexels-photo-1109024.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
         <img data-mp="3" src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
         <img data-mp="4" src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="5" src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+        <img data-mp="5" src="https://images.pexels.com/photos/5785545/pexels-photo-5785545.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
         <img data-mp="6" src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="7" src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+        <img data-mp="7" src="https://images.pexels.com/photos/32196396/pexels-photo-32196396/free-photo-of-delicious-korean-dumplings-in-seoul-steamer.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
       </div>
       <div class="resto-card">
         <h3 data-i18n="rc_h3">Infos & réservation</h3>
-        <p data-i18n="rc_p">Le quartier est animé, la salle est petite — réservez, et votre soirée coréenne est assurée.</p>
+        <p data-i18n="rc_p">La salle est petite — réservez.</p>
         <div class="hours">
           <div><span data-i18n="h_lunch">Midi</span><span>11h30 — 15h00</span></div>
           <div><span data-i18n="h_dinner">Soir</span><span>18h30 — 22h00</span></div>
           <div><span data-i18n="h_note" style="opacity:.75;">Horaires du jour sur Google Maps</span></div>
         </div>
-        <div class="addr" data-i18n="rc_addr">Paris 1er · adresse de démonstration</div>
+        <div class="addr" data-i18n="rc_addr">12 rue du Jour, 75001 Paris</div>
         <a class="btn" href="#infos" data-i18n="rc_btn">Réserver</a>
       </div>
     </aside>
   </div>
 </section>
 
-<!-- AMBIANCE -->
-<div class="ambiance reveal">
-  <div>
-    <h2 data-i18n="am_h2">La salle</h2>
-    <p data-i18n="am_p">Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.</p>
+<!-- LA SALLE -->
+<section class="salle" data-rail>
+  <div class="salle-inner">
+    <figure class="salle-ph reveal">
+      <img src="https://images.pexels.com/photos/31735995/pexels-photo-31735995/free-photo-of-cozy-korean-restaurant-interior-in-seoul.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="lazy">
+    </figure>
+    <div class="salle-copy reveal">
+      <div class="over" data-i18n="am_over">La salle · 홀</div>
+      <h2 data-i18n="am_h2">La salle</h2>
+      <p data-i18n="am_p">Boiseries, tables rapprochées, lumière chaude. Une salle faite pour rester, pas pour tourner.</p>
+      <p class="salle-note" data-i18n="am_note">Le soir, la table près de la fenêtre part en premier.</p>
+    </div>
   </div>
-  <img src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
-</div>
+</section>
 
 <!-- AVIS -->
 
@@ -631,7 +698,7 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
   <div class="infos-grid">
     <div class="info-card reveal">
       <h3 data-i18n="ic1_h3">Adresse</h3>
-      <p data-i18n-html="ic1_p">Paris 1er<br>Adresse de démonstration</p>
+      <p data-i18n-html="ic1_p">12 rue du Jour<br>75001 Paris</p>
       <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
     </div>
     <div class="info-card reveal">
@@ -641,14 +708,39 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
     </div>
     <div class="info-card reveal">
       <h3 data-i18n="ic3_h3">Y aller</h3>
-      <p data-i18n-html="ic3_p">Métro et bus à proximité</p>
-      <small data-i18n="ic3_small">En plein cœur de Paris.</small>
+      <p data-i18n-html="ic3_p">Métro Louvre — Rivoli (ligne 1)<br>Les Halles (RER A)</p>
+      <small data-i18n="ic3_small">À cinq minutes du Louvre à pied.</small>
     </div>
     <div class="info-card reveal">
       <h3 data-i18n="ic4_h3">Réservation</h3>
       <p data-i18n="ic4_p">Par téléphone ou sur place</p>
       <small data-i18n="ic4_small">Réservation conseillée le soir et le week-end.</small>
     </div>
+  </div>
+</section>
+
+<!-- STRATEGY SHEET COLOPHON -->
+<section class="sc" data-rail>
+  <div class="sc-inner">
+    <div class="sc-side reveal">
+      <div class="sc-over" data-i18n="sh_over">La stratégie derrière ce site</div>
+      <h2 class="sc-h2" data-i18n="sh_h2">Une feuille, huit lignes.</h2>
+      <p class="sc-p" data-i18n="sh_p">Avant la première maquette, chaque choix de cette page a été posé sur une feuille.</p>
+      <a class="sc-link" href="../"><span data-i18n="sh_link">Le service de Jessy Jung</span> <i aria-hidden="true">↗</i></a>
+    </div>
+    <figure class="sc-paper reveal" aria-label="Strategy sheet">
+      <div class="sc-head"><span>STRATEGY SHEET</span><span class="sc-ref">N°02</span></div>
+      <p class="sc-meta" data-i18n="sh_meta">JOAYO — restaurant coréen, Paris 1er · par Jessy Jung</p>
+      <div class="sc-row"><span class="n">01</span><span class="k" data-i18n="sh_k1">Diagnostic</span><span class="v" data-i18n="sh_v1">Au cœur de Paris, la cuisine coréenne est lue comme une halte à touristes</span></div>
+      <div class="sc-row"><span class="n">02</span><span class="k" data-i18n="sh_k2">Le moment</span><span class="v" data-i18n="sh_v2">Quand on cherche un vrai dîner, pas une attraction</span></div>
+      <div class="sc-row"><span class="n">03</span><span class="k" data-i18n="sh_k3">Alternatives</span><span class="v" data-i18n="sh_v3">Chaînes asiatiques / bistrots du quartier</span></div>
+      <div class="sc-row"><span class="n">04</span><span class="k" data-i18n="sh_k4">Le terrain</span><span class="v" data-i18n="sh_v4">Paris 1er, dîners sans hâte</span></div>
+      <div class="sc-row sc-key"><span class="n">05</span><span class="k" data-i18n="sh_k5">Comment gagner</span><span class="v"><span data-i18n="sh_v5">Pas la vitesse — le temps qu'il faut, en enseigne</span><svg class="sc-ring" viewBox="0 0 220 44" preserveAspectRatio="none" aria-hidden="true"><path d="M14 21 C 28 5, 196 3, 209 17 C 216 32, 168 41, 74 39 C 30 38, 8 32, 16 19" fill="none" stroke="#BE3418" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.8"/></svg></span></div>
+      <div class="sc-row"><span class="n">06</span><span class="k" data-i18n="sh_k6">Pari risqué</span><span class="v"><b class="sc-hyp" data-i18n="sh_hyp">[pari]</b> <span data-i18n="sh_v6">L'attente sera-t-elle lue comme une valeur</span></span></div>
+      <div class="sc-row"><span class="n">07</span><span class="k" data-i18n="sh_k7">Étoile polaire</span><span class="v" data-i18n="sh_v7">Les réservations qui reviennent</span></div>
+      <div class="sc-row"><span class="n">08</span><span class="k" data-i18n="sh_k8">Premier geste</span><span class="v" data-i18n="sh_v8">Les jangdokdae, à l'encre, en premier écran. Une seule description au menu</span></div>
+      <div class="sc-foot"><span data-i18n="sh_annex">Annexes : positioning · 4P · funnel</span><span>1 / 12</span></div>
+    </figure>
   </div>
 </section>
 
@@ -659,11 +751,181 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
     <a href="#menu" data-i18n="nav_menu">La Carte</a>
     <a href="#infos" data-i18n="nav_find">Infos</a>
   </div>
-  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Restaurant — Paris 1er</p>
+  <p class="legal" data-i18n="legal">© 2026 Joayo Restaurant — 12 rue du Jour, Paris 1er</p>
   <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
 </footer>
 
 <script>
+/* generative ink — jangdokdae painted in brush strokes, plum behind, petals drift */
+(function(){
+  var host=document.querySelector('.ghero'); if(!host) return;
+  var tc=document.getElementById('gTree'), pc=document.getElementById('gPetals');
+  var tx=tc.getContext('2d'), px=pc.getContext('2d');
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W,H,dpr,growers=[],jars=[],petals=[],raf=null;
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    var r=host.getBoundingClientRect(); W=r.width; H=r.height;
+    [tc,pc].forEach(function(cv){cv.width=W*dpr; cv.height=H*dpr;
+      cv.getContext('2d').setTransform(dpr,0,0,dpr,0,0);});
+  }
+  function warm(d){
+    var t=Math.min(d/7,1);
+    var r=Math.round(104+t*86), g=Math.round(78+t*76), b=Math.round(44+t*52);
+    return 'rgba('+r+','+g+','+b+','+(0.6-0.3*t)+')';
+  }
+  function blossom(x,y){
+    var n=2+((Math.random()*3)|0);
+    for(var i=0;i<n;i++){
+      var a=Math.random()*6.283, rr=Math.random()*4;
+      tx.beginPath();
+      tx.arc(x+Math.cos(a)*rr, y+Math.sin(a)*rr, 0.8+Math.random()*1.3, 0, 6.283);
+      tx.fillStyle=Math.random()<0.7?'rgba(190,52,24,'+(0.25+Math.random()*0.28)+')'
+                                    :'rgba(233,180,168,'+(0.22+Math.random()*0.22)+')';
+      tx.fill();
+    }
+  }
+  function jarR(t,R){
+    var belly=Math.sin(Math.PI*Math.min(t*1.06,1));
+    var r=R*(0.52+0.5*Math.pow(belly,0.85));
+    if(t>0.9) r=R*(0.62-(t-0.9)*1.4);
+    return Math.max(r,R*0.34);
+  }
+  function paintSlice(j,t){
+    var y=j.base-t*j.h, r=jarR(t,j.R);
+    var jitter=(Math.random()-0.5)*1.6;
+    tx.beginPath();
+    tx.moveTo(j.x-r+jitter, y);
+    tx.lineTo(j.x+r+jitter, y);
+    tx.strokeStyle='rgba('+(58+Math.random()*18|0)+','+(40+Math.random()*14|0)+','+(26+Math.random()*10|0)+','+(0.5+Math.random()*0.25)+')';
+    tx.lineWidth=2.2;
+    tx.stroke();
+    if(Math.random()<0.5){
+      tx.beginPath();
+      tx.moveTo(j.x+r*0.45, y); tx.lineTo(j.x+r*0.8, y);
+      tx.strokeStyle='rgba(214,158,92,'+(0.05+Math.random()*0.07)+')';
+      tx.lineWidth=2.2; tx.stroke();
+    }
+    if(t>=1){
+      tx.beginPath();
+      tx.ellipse(j.x, y-2, jarR(1,j.R)+j.R*0.1, j.R*0.13, 0, Math.PI, 0);
+      tx.strokeStyle='rgba(74,52,32,0.85)'; tx.lineWidth=2.6; tx.stroke();
+      tx.beginPath();
+      tx.arc(j.x, y-j.R*0.16, 2.4, 0, 6.283);
+      tx.fillStyle='rgba(74,52,32,0.8)'; tx.fill();
+    }
+  }
+  function groundStroke(x,y,len){
+    tx.beginPath(); tx.moveTo(x,y); tx.lineTo(x+len,y+(Math.random()-0.5)*2);
+    tx.strokeStyle='rgba(96,76,52,'+(0.08+Math.random()*0.1)+')';
+    tx.lineWidth=1.6; tx.stroke();
+  }
+  function seed(){
+    tx.clearRect(0,0,W,H); growers=[]; jars=[];
+    var sides=[0.1+Math.random()*0.1, 0.86+Math.random()*0.08];
+    if(W>900) sides.push(0.62+Math.random()*0.1);
+    for(var i=0;i<sides.length;i++){
+      growers.push({x:W*sides[i], y:H+8,
+        a:-Math.PI/2+(Math.random()-0.5)*0.4,
+        rem:H*(0.14+Math.random()*0.06), w:4.2+Math.random()*1.4, d:0});
+    }
+    /* main cluster right of the text, like a real terrace; a few small far left */
+    var scale=Math.min(W/1440,1.15);
+    var cluster=[
+      {f:0.60,R:64},{f:0.70,R:88},{f:0.80,R:74},{f:0.90,R:92},{f:0.975,R:60}
+    ];
+    if(W<760) cluster=[{f:0.62,R:52},{f:0.78,R:70},{f:0.93,R:56}];
+    for(var k=0;k<cluster.length;k++){
+      var R=cluster[k].R*scale*(0.92+Math.random()*0.16);
+      jars.push({x:W*cluster[k].f+(Math.random()-0.5)*W*0.015, base:H-16-Math.random()*8, R:R,
+        h:R*(1.62+Math.random()*0.2), t:0, rate:0.008+Math.random()*0.005});
+    }
+    for(var k2=0;k2<2;k2++){
+      var R2=(22+Math.random()*14)*scale;
+      jars.push({x:W*(0.05+k2*0.075)+(Math.random()-0.5)*W*0.01, base:H-12, R:R2,
+        h:R2*1.6, t:0, rate:0.009+Math.random()*0.004});
+    }
+    for(var g2=0;g2<Math.round(W/26);g2++)
+      groundStroke(Math.random()*W, H-6-Math.random()*8, 14+Math.random()*30);
+  }
+  function step(g,speed){
+    var st=Math.min(speed,g.rem);
+    var nx=g.x+Math.cos(g.a)*st, ny=g.y+Math.sin(g.a)*st;
+    tx.beginPath(); tx.moveTo(g.x,g.y); tx.lineTo(nx,ny);
+    tx.strokeStyle=warm(g.d); tx.lineWidth=Math.max(g.w,0.4); tx.lineCap='round'; tx.stroke();
+    g.x=nx; g.y=ny; g.rem-=st;
+    g.a+=(Math.random()-0.5)*0.14;
+    if(g.rem>0) return [g];
+    if(g.d>=7){ blossom(g.x,g.y); return []; }
+    var kids=[], n2=(growers.length>360||Math.random()<0.2)?1:2;
+    for(var i=0;i<n2;i++){
+      var spread=(0.24+Math.random()*0.4)*(i===0?-1:1)*(n2===1?(Math.random()<0.5?-1:1):1);
+      kids.push({x:g.x,y:g.y,a:g.a+spread,
+        rem:(H*(0.05+Math.random()*0.05))*Math.pow(0.86,g.d),
+        w:g.w*0.62,d:g.d+1});
+    }
+    return kids;
+  }
+  function jarStep(j,mult){
+    if(j.t>=1) return false;
+    var from=j.t;
+    j.t=Math.min(1, j.t+j.rate*mult);
+    var stepT=1/Math.max(24,j.h/2);
+    for(var t=Math.ceil(from/stepT)*stepT; t<=j.t; t+=stepT) paintSlice(j,Math.min(t,1));
+    if(j.t>=1) paintSlice(j,1);
+    return true;
+  }
+  function seedPetals(){
+    petals=[];
+    for(var i=0;i<34;i++) petals.push({x:Math.random()*W, y:Math.random()*H,
+      vy:-(0.08+Math.random()*0.2), ph:Math.random()*6.283, r:0.8+Math.random()*1.5,
+      red:Math.random()<0.6});
+  }
+  function drawPetals(t){
+    px.clearRect(0,0,W,H);
+    for(var i=0;i<petals.length;i++){
+      var q=petals[i], al=0.15+0.15*Math.sin(t*0.001+q.ph);
+      q.y+=q.vy; q.x+=Math.sin(t*0.0006+q.ph)*0.25;
+      if(q.y<-6){ q.y=H+6; q.x=Math.random()*W; }
+      px.beginPath(); px.arc(q.x,q.y,q.r,0,6.283);
+      px.fillStyle=q.red?'rgba(216,85,47,'+al+')':'rgba(224,196,150,'+al+')';
+      px.fill();
+    }
+  }
+  function frame(t){
+    var next=[];
+    for(var i=0;i<growers.length;i++){
+      var out=step(growers[i],1.7);
+      for(var j2=0;j2<out.length;j2++) next.push(out[j2]);
+    }
+    growers=next;
+    for(var k=0;k<jars.length;k++) jarStep(jars[k],1);
+    drawPetals(t);
+    raf=requestAnimationFrame(frame);
+  }
+  function start(){
+    size(); seed(); seedPetals();
+    if(raf) cancelAnimationFrame(raf);
+    if(reduced){
+      var guard=0;
+      while(growers.length&&guard++<4000){
+        var next=[];
+        for(var i=0;i<growers.length;i++){
+          var out=step(growers[i],9);
+          for(var j2=0;j2<out.length;j2++) next.push(out[j2]);
+        }
+        growers=next;
+      }
+      for(var k=0;k<jars.length;k++) jarStep(jars[k],400);
+      drawPetals(0);
+      return;
+    }
+    raf=requestAnimationFrame(frame);
+  }
+  var rt=null;
+  window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(start,240); });
+  start();
+})();
 var I18N = {
 fr: {
   _title:"JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er",
@@ -672,12 +934,11 @@ fr: {
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
   ar_head:"Les signatures", ar_note:"Toute la carte ↓",
-  kicker:"Midi & soir — en plein cœur de Paris",
+  kicker:"Midi & soir — Paris 1er",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
   cta_book:"Réserver",
   me_over:"La carte · 메뉴", me_h2:"La carte",
-  me_p:"Cuisine authentique et chaleureuse, menu végétarien disponible. Comptez 20 à 30 € par personne.",
   m1_name:"Bibimbap au tartare de bœuf", m1_desc:"La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf",
   m2_name:"Dolsot Bibimbap", m2_desc:"Riz et légumes servis dans un bol de pierre brûlant, bœuf mariné, œuf, gochujang",
   m3_name:"Bulgogi de porc", m3_desc:"Porc mariné sauté, légèrement pimenté, riz et banchan du jour",
@@ -689,27 +950,41 @@ fr: {
   menu_note:"Carte indicative — retrouvez la carte complète au restaurant.",
   sv1:"Menu végétarien", sv2:"Réservation conseillée", sv3:"20 — 30 € / personne", sv4:"Cœur de Paris", sv5:"Déjeuner jusqu'à 15h00",
   rc_h3:"Infos & réservation",
-  rc_p:"Le quartier est animé, la salle est petite — réservez, et votre soirée coréenne est assurée.",
+  rc_p:"La salle est petite — réservez.",
   h_lunch:"Midi", h_dinner:"Soir", h_note:"Horaires du jour sur Google Maps",
   rc_btn:"Réserver", 
-  am_h2:"La salle",
-  am_p:"Ambiance chaleureuse entre boiseries et touches contemporaines — parfait après une balade dans le quartier.", 
+  am_over:"La salle · 홀", am_h2:"La salle",
+  am_p:"Boiseries, tables rapprochées, lumière chaude.",
+  am_note:"Le soir, la table près de la fenêtre part en premier.", 
   in_over:"Infos pratiques · 오시는 길", in_h2:"Venir dîner chez le Joayo",
   ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
   ic2_h3:"Horaires", ic2_p:"Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00", ic2_small:"Horaires du jour sur Google Maps.",
-  ic3_h3:"Y aller", ic3_p:"Métro et bus à proximité", ic3_small:"En plein cœur de Paris.",
+  ic3_h3:"Y aller", ic3_p:"Métro Louvre — Rivoli (ligne 1)<br>Les Halles (RER A)", ic3_small:"À cinq minutes du Louvre à pied.",
   ic4_h3:"Réservation", ic4_small:"Réservation conseillée le soir et le week-end.",
   cr_h2:"Envie de refaire ces plats chez vous ?",
   cr_p:"Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.",
   cr_btn:"Découvrir l'épicerie",
   foot_sub:"RESTAURANT",
-  legal:"Site de démonstration · © 2026 Joayo Restaurant — Paris 1er",
-  addr_pill:"Paris 1er · adresse de démonstration",
-  rc_addr:"Paris 1er · adresse de démonstration",
-  ic1_p:"Paris 1er<br>Adresse de démonstration",
+  legal:"© 2026 Joayo Restaurant — 12 rue du Jour, Paris 1er",
+  addr_pill:"12 rue du Jour, Paris 1er",
+  rc_addr:"12 rue du Jour, 75001 Paris",
+  ic1_p:"12 rue du Jour<br>75001 Paris",
   ic4_p:"Par téléphone ou sur place",
   credit:"Un concept conçu par Jessy Jung",
   credit_link:"Voir le service",
+  sh_over:"La stratégie derrière ce site", sh_h2:"Une feuille, huit lignes.",
+  sh_p:"Avant la première maquette, chaque choix de cette page a été posé sur une feuille.",
+  sh_link:"Le service de Jessy Jung",
+  sh_meta:"JOAYO — restaurant coréen, Paris 1er · par Jessy Jung",
+  sh_k1:"Diagnostic", sh_v1:"Au cœur de Paris, la cuisine coréenne est lue comme une halte à touristes",
+  sh_k2:"Le moment", sh_v2:"Quand on cherche un vrai dîner, pas une attraction",
+  sh_k3:"Alternatives", sh_v3:"Chaînes asiatiques / bistrots du quartier",
+  sh_k4:"Le terrain", sh_v4:"Paris 1er, dîners sans hâte",
+  sh_k5:"Comment gagner", sh_v5:"Pas la vitesse — le temps qu'il faut, en enseigne",
+  sh_k6:"Pari risqué", sh_hyp:"[pari]", sh_v6:"L'attente sera-t-elle lue comme une valeur",
+  sh_k7:"Étoile polaire", sh_v7:"Les réservations qui reviennent",
+  sh_k8:"Premier geste", sh_v8:"Les jangdokdae, à l'encre, en premier écran. Une seule description au menu",
+  sh_annex:"Annexes : positioning · 4P · funnel",
 },
 en: {
   _title:"JOAYO Restaurant 좋아요 레스토랑 — Korean Cuisine, Paris 1st",
@@ -718,12 +993,11 @@ en: {
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
   ar_head:"The signatures", ar_note:"See the full menu ↓",
-  kicker:"Lunch & dinner — in the heart of Paris",
+  kicker:"Lunch & dinner — Paris 1er",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
   cta_book:"Book a table",
   me_over:"The menu · 메뉴", me_h2:"The menu",
-  me_p:"Authentic, warm cooking, vegetarian menu available. Expect €20–30 per person.",
   m1_name:"Beef tartare bibimbap", m1_desc:"The house signature — rice, vegetables, seasoned beef tartare, egg yolk",
   m2_name:"Dolsot Bibimbap", m2_desc:"Rice and vegetables in a sizzling stone bowl, marinated beef, egg, gochujang",
   m3_name:"Pork bulgogi", m3_desc:"Stir-fried marinated pork, gently spicy, rice and banchan of the day",
@@ -735,27 +1009,41 @@ en: {
   menu_note:"Sample menu — the full menu is at the restaurant.",
   sv1:"Vegetarian menu", sv2:"Booking recommended", sv3:"€20–30 per person", sv4:"Heart of Paris", sv5:"Lunch until 3:00 pm",
   rc_h3:"Info & booking",
-  rc_p:"The neighborhood is lively and the room is small — book ahead and your Korean evening is safe.",
+  rc_p:"The room is small — book ahead.",
   h_lunch:"Lunch", h_dinner:"Dinner", h_note:"Today's hours on Google Maps",
   rc_btn:"Book a table", 
-  am_h2:"The room",
-  am_p:"A cosy room mixing woodwork and contemporary touches — perfect after a stroll around the neighborhood.", 
+  am_over:"The room · 홀", am_h2:"The room",
+  am_p:"Woodwork, close-set tables, warm light.",
+  am_note:"In the evening, the window table goes first.", 
   in_over:"Practical info · 오시는 길", in_h2:"Come dine at the Joayo",
   ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
   ic2_h3:"Hours", ic2_p:"Lunch: 11:30 am — 3:00 pm<br>Dinner: 6:30 — 10:00 pm", ic2_small:"Today's hours on Google Maps.",
-  ic3_h3:"Getting there", ic3_p:"Metro and buses nearby", ic3_small:"In the heart of Paris.",
+  ic3_h3:"Getting there", ic3_p:"Métro Louvre — Rivoli (line 1)<br>Les Halles (RER A)", ic3_small:"A five-minute walk from the Louvre.",
   ic4_h3:"Booking", ic4_small:"Booking recommended for dinner and weekends.",
   cr_h2:"Want to cook these dishes at home?",
   cr_p:"The joayo also keeps a market: homemade kimchi and banchan, ramyeon, sauces and the whole Korean pantry, in the 15th.",
   cr_btn:"Discover the grocery",
   foot_sub:"RESTAURANT",
-  legal:"Demo site · © 2026 Joayo Restaurant — Paris 1er",
-  addr_pill:"Paris 1er · demo address",
-  rc_addr:"Paris 1er · demo address",
-  ic1_p:"Paris 1er<br>Demo address",
+  legal:"© 2026 Joayo Restaurant — 12 rue du Jour, Paris 1er",
+  addr_pill:"12 rue du Jour, Paris 1er",
+  rc_addr:"12 rue du Jour, 75001 Paris",
+  ic1_p:"12 rue du Jour<br>75001 Paris",
   ic4_p:"By phone or in person",
   credit:"A concept by Jessy Jung",
   credit_link:"See the service",
+  sh_over:"The strategy behind this site", sh_h2:"One sheet, eight lines.",
+  sh_p:"Before the first mockup, every choice on this page was set down on one sheet.",
+  sh_link:"Jessy Jung's service",
+  sh_meta:"JOAYO — Korean restaurant, Paris 1er · by Jessy Jung",
+  sh_k1:"Diagnosis", sh_v1:"In central Paris, Korean food reads as a tourist stop",
+  sh_k2:"The job", sh_v2:"Looking for a real dinner, not an attraction",
+  sh_k3:"Alternatives", sh_v3:"Asian chains / neighborhood bistros",
+  sh_k4:"Where we play", sh_v4:"Paris 1er, unhurried dinners",
+  sh_k5:"How we win", sh_v5:"Not speed — the time it takes, as the signboard",
+  sh_k6:"Riskiest bet", sh_hyp:"[bet]", sh_v6:"Will waiting be read as value",
+  sh_k7:"North star", sh_v7:"Reservations that come back",
+  sh_k8:"First move", sh_v8:"Jangdokdae in ink on the first screen. One description on the menu",
+  sh_annex:"Annex: positioning map · 4P · funnel",
 },
 ko: {
   _title:"좋아요 레스토랑 JOAYO Restaurant — 파리 1구 한식당",
@@ -764,12 +1052,11 @@ ko: {
   brand_sub:"레스토랑 · Restaurant",
   nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
   ar_head:"대표 메뉴", ar_note:"전체 메뉴 보기 ↓",
-  kicker:"점심 & 저녁 — 파리 시내 한복판",
+  kicker:"점심 & 저녁 — 파리 1구",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
   hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
   cta_book:"예약하기",
   me_over:"메뉴 · La carte", me_h2:"메뉴",
-  me_p:"정성스러운 정통 한식, 채식 메뉴 있음. 1인 예산은 20~30€ 정도입니다.",
   m1_name:"육회비빔밥", m1_desc:"시그니처 메뉴 — 신선한 육회와 노른자를 얹은 비빔밥",
   m2_name:"돌솥비빔밥", m2_desc:"뜨거운 돌솥에 나물과 불고기, 계란, 고추장",
   m3_name:"제육불고기", m3_desc:"매콤하게 볶은 제육, 밥과 오늘의 반찬",
@@ -781,27 +1068,41 @@ ko: {
   menu_note:"대표 메뉴입니다 — 전체 메뉴는 매장에서 확인해 주세요.",
   sv1:"채식 메뉴", sv2:"예약 권장", sv3:"1인 20~30€", sv4:"시내 한복판", sv5:"점심 15시까지",
   rc_h3:"예약 안내",
-  rc_p:"자리가 많지 않아요 — 전화로 예약하고 오시면 기다리지 않고 드실 수 있습니다.",
+  rc_p:"자리가 많지 않습니다 — 예약하고 오세요.",
   h_lunch:"점심", h_dinner:"저녁", h_note:"당일 영업시간은 구글 지도 참고",
   rc_btn:"예약하기", 
-  am_h2:"홀",
-  am_p:"우드톤과 모던함이 어우러진 아늑한 공간 — 동네 산책 후 들르기 딱 좋아요.", 
+  am_over:"홀 · La salle", am_h2:"홀",
+  am_p:"우드 인테리어, 가까운 테이블, 따뜻한 조명.",
+  am_note:"저녁엔 창가 자리가 먼저 나갑니다.", 
   in_over:"오시는 길 · Infos", in_h2:"좋아요 레스토랑으로 오세요",
   ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
   ic2_h3:"영업시간", ic2_p:"점심: 11:30 — 15:00<br>저녁: 18:30 — 22:00", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
-  ic3_h3:"오시는 길", ic3_p:"메트로·버스 인근", ic3_small:"시내 중심에 있습니다.",
+  ic3_h3:"오시는 길", ic3_p:"메트로 Louvre — Rivoli (1호선)<br>Les Halles (RER A)", ic3_small:"루브르에서 걸어서 5분.",
   ic4_h3:"예약", ic4_small:"저녁과 주말은 예약을 권장합니다.",
   cr_h2:"이 메뉴, 집에서도 만들고 싶다면?",
   cr_p:"좋아요 마켓이 있습니다 — 직접 담근 김치와 반찬, 라면, 장류까지. 파리 15구.",
   cr_btn:"마켓 보러 가기",
   foot_sub:"레스토랑",
-  legal:"데모 사이트 · © 2026 좋아요 레스토랑 — 파리 1구",
-  addr_pill:"파리 1구 · 데모 주소",
-  rc_addr:"파리 1구 · 데모 주소",
-  ic1_p:"파리 1구<br>데모 주소",
+  legal:"© 2026 좋아요 레스토랑 — 12 rue du Jour, 파리 1구",
+  addr_pill:"12 rue du Jour, 파리 1구",
+  rc_addr:"12 rue du Jour, 75001 Paris",
+  ic1_p:"12 rue du Jour<br>75001 Paris",
   ic4_p:"전화 또는 매장에서",
   credit:"Jessy Jung의 콘셉트 작업",
   credit_link:"서비스 보기",
+  sh_over:"이 사이트의 전략", sh_h2:"한 장, 여덟 줄.",
+  sh_p:"첫 시안보다 먼저, 이 페이지의 모든 판단을 한 장에 적었습니다.",
+  sh_link:"Jessy Jung의 서비스",
+  sh_meta:"JOAYO — 파리 1구 한식당 · 작성 Jessy Jung",
+  sh_k1:"진단", sh_v1:"파리 한복판의 한식은 관광객용 한 곳으로 읽힌다",
+  sh_k2:"찾는 순간", sh_v2:"구경이 아니라 제대로 된 저녁을 찾을 때",
+  sh_k3:"대안", sh_v3:"아시아 체인 / 동네 비스트로",
+  sh_k4:"싸울 곳", sh_v4:"파리 1구, 느긋한 저녁",
+  sh_k5:"이기는 법", sh_v5:"빠름이 아니라, 시간이 드는 방식을 간판으로",
+  sh_k6:"위험한 가설", sh_hyp:"[가설]", sh_v6:"기다림을 가치로 읽어줄 것인가",
+  sh_k7:"북극성", sh_v7:"다시 오는 예약의 수",
+  sh_k8:"첫 수", sh_v8:"먹으로 그린 장독대를 첫 화면에. 메뉴 설명은 하나만",
+  sh_annex:"별지: 포지셔닝 맵 · 4P · 퍼널 설계",
 }
 };
 

@@ -6,7 +6,7 @@
 <title>Milates Paris</title>
 <meta name="description" content="Milates — Pilates privé avec Mina, à Paris. Séances 1:1, prénatal et plein air, en français, anglais ou coréen. Réservation par message Instagram @milates.demo.">
 <meta property="og:title" content="MILATES — Pilates privé à Paris (démo)">
-<meta property="og:description" content="Le pilates comme un rendez-vous à soi. Site de démonstration par Jessy Jung.">
+<meta property="og:description" content="Le pilates comme un rendez-vous à soi. Un concept de Jessy Jung.">
 <meta property="og:image" content="https://ibedustory-oss.github.io/jessy-portfolio/images/demo-milates.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -214,10 +214,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--framboise);outline-
   grid-column:2;grid-row:1;position:relative;overflow:hidden;
   aspect-ratio:3/4.05;
 }
-.cover-ph img{
-  width:100%;height:100%;object-fit:cover;
+.cover-ph img,.cover-ph .cov-vid{
+  width:100%;height:100%;object-fit:cover;display:block;
   transform:scale(1.06);
   animation:coverin 2.6s cubic-bezier(.23,1,.32,1) both;
+}
+@media (prefers-reduced-motion: reduce){
+  .cover-ph .cov-vid{animation:none;transform:scale(1.02);}
 }
 @keyframes coverin{from{transform:scale(1.14);}to{transform:scale(1.06);}}
 .cover-ph .edge-cap{
@@ -574,6 +577,39 @@ h2 i{font-style:italic;font-weight:400;color:var(--framboise);}
 }
 .ig-tile:hover .veil{opacity:1;}
 
+/* ============ COLOPHON ============ */
+.sc{background:var(--ink);padding:120px 6vw;}
+.sc-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:.8fr 1fr;gap:6vw;align-items:center;}
+.sc-over{color:rgba(248,246,244,.45);font-weight:600;text-transform:uppercase;letter-spacing:.24em;font-size:10.5px;margin-bottom:18px;font-family:var(--body);}
+.sc-h2{font-family:var(--display);font-weight:500;font-size:clamp(28px,3vw,40px);line-height:1.12;color:var(--plaster);}
+.sc-p{margin-top:16px;color:rgba(248,246,244,.55);font-size:14.5px;max-width:36ch;line-height:1.85;}
+.sc-link{display:inline-block;margin-top:26px;color:var(--plaster);text-decoration:none;font-weight:600;font-size:13px;letter-spacing:.06em;border-bottom:1px solid rgba(248,246,244,.3);padding-bottom:3px;transition:border-color .3s;}
+.sc-link:hover{border-color:var(--plaster);}
+.sc-link i{font-style:normal;}
+.sc-paper{background:#FCFBF7;border-radius:3px;padding:26px 28px 20px;box-shadow:0 46px 90px -28px rgba(0,0,0,.7);transform:rotate(-1.2deg);}
+.sc-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #211B1D;padding-bottom:9px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10px;letter-spacing:.22em;color:#211B1D;}
+.sc-ref{letter-spacing:.12em;color:rgba(33,27,29,.4);}
+.sc-meta{margin:8px 0 2px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8.5px;letter-spacing:.08em;color:rgba(33,27,29,.45);}
+.sc-row{display:grid;grid-template-columns:1.4rem 6.4rem minmax(0,1fr);gap:0 10px;align-items:baseline;padding:8px 0;border-bottom:1px dashed rgba(33,27,29,.16);}
+.sc-row:last-of-type{border-bottom:0;}
+.sc-row .n{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8.5px;color:rgba(33,27,29,.35);}
+.sc-row .k{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:rgba(33,27,29,.45);}
+.sc-row .v{position:relative;font-size:12.5px;line-height:1.5;color:#211B1D;font-weight:500;font-family:var(--body);}
+.sc-key .v{font-weight:700;}
+.sc-ring{position:absolute;left:-10px;right:-10px;top:-6px;bottom:-6px;width:calc(100% + 20px);height:calc(100% + 12px);pointer-events:none;}
+.sc-hyp{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--framboise);}
+.sc-foot{display:flex;justify-content:space-between;margin-top:12px;border-top:1px solid rgba(33,27,29,.2);padding-top:8px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:8px;letter-spacing:.1em;color:rgba(33,27,29,.45);}
+html[lang="ko"] .sc-h2{font-family:'Noto Serif KR',serif;font-weight:600;font-size:clamp(23px,2.6vw,33px);}
+html[lang="ko"] .sc-over{letter-spacing:.12em;}
+html[lang="ko"] .sc-row .k{letter-spacing:.04em;}
+html[lang="ko"] .sc-row .v{font-size:12px;line-height:1.65;}
+@media (max-width:900px){
+  .sc-inner{grid-template-columns:1fr;gap:44px;}
+  .sc{padding:84px 22px;}
+  .sc-paper{transform:none;}
+  .sc-row{grid-template-columns:1.2rem 4.8rem minmax(0,1fr);}
+}
+
 /* ============ FOOTER ============ */
 .demo-credit{
   grid-column:1/-1;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
@@ -700,6 +736,9 @@ body.js-anim .reveal.in{opacity:1;transform:none;}
 /* recto = the cover */
 .pgf.recto{background:var(--ink);}
 .pgf.recto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.pgf.recto>.sp-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+.pgf.recto>.sp-vid+img{opacity:0;}
+.pgf.recto .veil,.pgf.recto .fold,.pgf.recto .edges,.pgf.recto .cov{z-index:2;}
 .pgf.recto .veil{
   position:absolute;inset:0;
   background:
@@ -839,6 +878,10 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
 
   <div class="pg pg-right" id="pgRight">
     <div class="pgf recto">
+      <video class="sp-vid" autoplay muted loop playsinline preload="metadata"
+             poster="milates-video/cover-poster.jpg" aria-hidden="true">
+        <source src="milates-video/method.mp4" type="video/mp4">
+      </video>
       <img src="milates-photos/studio5.jpg" alt="">
       <div class="veil"></div>
       <div class="fold"></div>
@@ -892,7 +935,12 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
     <h1 class="masthead"><span>M<i>i</i>la—tes.</span></h1>
 
     <div class="cover-ph">
-      <img src="milates-photos/studio2.jpg" alt="Mina guide une élève en séance privée au reformer">
+      <video class="cov-vid" autoplay muted loop playsinline preload="metadata"
+             poster="milates-video/cover-poster.jpg"
+             aria-label="Une séance privée, filmée au studio">
+        <source src="milates-video/cover.mp4" type="video/mp4">
+        <img src="milates-photos/studio2.jpg" alt="Mina guide une élève en séance privée au reformer">
+      </video>
       <span class="edge-cap" data-i18n="edge">Séances privées — Paris</span>
       <span class="hand-note" aria-hidden="true">오늘도, 숨 한 번 크게 쉬어요 — Mina 💕</span>
     </div>
@@ -1100,11 +1148,36 @@ html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
   </div>
 </section>
 
+<!-- STRATEGY SHEET COLOPHON -->
+<section class="sc" data-trail>
+  <div class="sc-inner">
+    <div class="sc-side reveal">
+      <div class="sc-over" data-i18n="sh_over">La stratégie derrière ce site</div>
+      <h2 class="sc-h2" data-i18n="sh_h2">Une feuille, huit lignes.</h2>
+      <p class="sc-p" data-i18n="sh_p">Avant la première maquette, chaque choix de ce numéro a été posé sur une feuille.</p>
+      <a class="sc-link" href="../"><span data-i18n="sh_link">Le service de Jessy Jung</span> <i aria-hidden="true">↗</i></a>
+    </div>
+    <figure class="sc-paper reveal" aria-label="Strategy sheet">
+      <div class="sc-head"><span>STRATEGY SHEET</span><span class="sc-ref">N°01</span></div>
+      <p class="sc-meta" data-i18n="sh_meta">MILATES — pilates privé, Paris · par Jessy Jung</p>
+      <div class="sc-row"><span class="n">01</span><span class="k" data-i18n="sh_k1">Diagnostic</span><span class="v" data-i18n="sh_v1">Les studios se comparent au prix et aux machines ; la personne reste invisible</span></div>
+      <div class="sc-row"><span class="n">02</span><span class="k" data-i18n="sh_k2">Le moment</span><span class="v" data-i18n="sh_v2">Quand on cherche une professeure qui comprend son corps</span></div>
+      <div class="sc-row"><span class="n">03</span><span class="k" data-i18n="sh_k3">Alternatives</span><span class="v" data-i18n="sh_v3">Grands studios / apps / YouTube</span></div>
+      <div class="sc-row"><span class="n">04</span><span class="k" data-i18n="sh_k4">Le terrain</span><span class="v" data-i18n="sh_v4">Paris, séances 1:1 sur rendez-vous</span></div>
+      <div class="sc-row sc-key"><span class="n">05</span><span class="k" data-i18n="sh_k5">Comment gagner</span><span class="v"><span data-i18n="sh_v5">La professeure, pas la salle, est l'histoire</span><svg class="sc-ring" viewBox="0 0 220 44" preserveAspectRatio="none" aria-hidden="true"><path d="M14 21 C 28 5, 196 3, 209 17 C 216 32, 168 41, 74 39 C 30 38, 8 32, 16 19" fill="none" stroke="#C0334F" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.8"/></svg></span></div>
+      <div class="sc-row"><span class="n">06</span><span class="k" data-i18n="sh_k6">Pari risqué</span><span class="v"><b class="sc-hyp" data-i18n="sh_hyp">[pari]</b> <span data-i18n="sh_v6">Sa façon de penser deviendra-t-elle des réservations</span></span></div>
+      <div class="sc-row"><span class="n">07</span><span class="k" data-i18n="sh_k7">Étoile polaire</span><span class="v" data-i18n="sh_v7">Les réservations qui demandent Mina</span></div>
+      <div class="sc-row"><span class="n">08</span><span class="k" data-i18n="sh_k8">Premier geste</span><span class="v" data-i18n="sh_v8">Un numéro de magazine, de la couverture au sommaire</span></div>
+      <div class="sc-foot"><span data-i18n="sh_annex">Annexes : positioning · 4P · funnel</span><span>1 / 12</span></div>
+    </figure>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="f-left" data-i18n="foot_l">Pilates privé · Paris · sur rendez-vous</div>
   <div class="f-mark">M<i>i</i>lates</div>
-  <div class="f-right">Site de démonstration · © 2026 Milates — <a href="#" target="_blank" rel="noopener">@milates.demo</a></div>
+  <div class="f-right">© 2026 Milates — <a href="#" target="_blank" rel="noopener">@milates.demo</a></div>
   <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
 </footer>
 
@@ -1176,6 +1249,19 @@ fr: {
   ig_cta:"Suivre Milates sur Instagram",
   credit:"Un concept conçu par Jessy Jung",
   credit_link:"Voir le service",
+  sh_over:"La stratégie derrière ce site", sh_h2:"Une feuille, huit lignes.",
+  sh_p:"Avant la première maquette, chaque choix de ce numéro a été posé sur une feuille.",
+  sh_link:"Le service de Jessy Jung",
+  sh_meta:"MILATES — pilates privé, Paris · par Jessy Jung",
+  sh_k1:"Diagnostic", sh_v1:"Les studios se comparent au prix et aux machines ; la personne reste invisible",
+  sh_k2:"Le moment", sh_v2:"Quand on cherche une professeure qui comprend son corps",
+  sh_k3:"Alternatives", sh_v3:"Grands studios / apps / YouTube",
+  sh_k4:"Le terrain", sh_v4:"Paris, séances 1:1 sur rendez-vous",
+  sh_k5:"Comment gagner", sh_v5:"La professeure, pas la salle, est l'histoire",
+  sh_k6:"Pari risqué", sh_hyp:"[pari]", sh_v6:"Sa façon de penser deviendra-t-elle des réservations",
+  sh_k7:"Étoile polaire", sh_v7:"Les réservations qui demandent Mina",
+  sh_k8:"Premier geste", sh_v8:"Un numéro de magazine, de la couverture au sommaire",
+  sh_annex:"Annexes : positioning · 4P · funnel",
 },
 en: {
   _title:"Milates Paris",
@@ -1242,25 +1328,38 @@ en: {
   ig_cta:"Follow Milates on Instagram",
   credit:"A concept by Jessy Jung",
   credit_link:"See the service",
+  sh_over:"The strategy behind this site", sh_h2:"One sheet, eight lines.",
+  sh_p:"Before the first mockup, every choice in this issue was set down on one sheet.",
+  sh_link:"Jessy Jung's service",
+  sh_meta:"MILATES — private pilates, Paris · by Jessy Jung",
+  sh_k1:"Diagnosis", sh_v1:"Studios get compared on price and equipment; the person stays invisible",
+  sh_k2:"The job", sh_v2:"Finding a teacher who understands your body",
+  sh_k3:"Alternatives", sh_v3:"Big studios / apps / YouTube",
+  sh_k4:"Where we play", sh_v4:"Paris, one-to-one booked sessions",
+  sh_k5:"How we win", sh_v5:"The teacher, not the room, is the story",
+  sh_k6:"Riskiest bet", sh_hyp:"[bet]", sh_v6:"That her thinking turns into bookings",
+  sh_k7:"North star", sh_v7:"Bookings that ask for Mina by name",
+  sh_k8:"First move", sh_v8:"A magazine issue, cover to contents",
+  sh_annex:"Annex: positioning map · 4P · funnel",
 },
 ko: {
   _title:"밀라테스 Milates Paris",
   suite:"메소드 — 호흡부터 시작합니다",
-  sp_left:"하나의 스튜디오, 한 명의 선생님, 한 번에 한 세션.", sp_dek:"나를 만나는 시간으로서의 필라테스.", sp_hint:"페이지를 넘기세요",
+  sp_left:"선생님 한 명이, 한 번에 한 사람만 봅니다.", sp_dek:"나를 돌보는 시간, 필라테스.", sp_hint:"페이지를 넘기세요",
   mag_issue:"N°01 · 프라이빗 필라테스", mag_cta:"이번 호 열기", mag_hint:"클릭하거나 스크롤하세요",
-  mag_l1:"한 세션에 한 사람", mag_s1:"메소드",
+  mag_l1:"한 번에 한 사람", mag_s1:"메소드",
   mag_l2:"서울에서 파리로", mag_s2:"미나",
-  mag_l3:"세 가지 방식", mag_s3:"세션",
+  mag_l3:"수업은 세 가지", mag_s3:"세션",
   edge:"프라이빗 세션 — 파리",
   br_in:"들이쉬고", br_out:"내쉬고", br_note:"원을 따라 호흡해 보세요",
   nav_methode:"수업 철학", nav_mina:"미나", nav_seances:"레슨", nav_reserver:"예약", som:"차례",
   issue2:"1:1 프라이빗 필라테스",
-  dek:"필라테스는 온전히 나를 위한 시간. <b>미나</b> 선생님이 1:1로 함께합니다 — 스튜디오에서, 임신 중에도, 야외에서도. 수업을 몸에 맞추지, 몸을 수업에 맞추지 않아요.",
+  dek:"온전히 나를 위한 시간. <b>미나</b> 선생님이 1:1로 봅니다 — 스튜디오에서, 임신 중에, 야외에서. 몸을 수업에 맞추지 않고, 수업을 몸에 맞춥니다.",
   cta_book:"DM으로 예약하기", cta_method:"수업 철학 보기",
   caption:"숨쉬기 — 정렬 — 중심", edge:"예약제 · 파리",
   k_methode:"수업 철학",
   me_h2:"한 시간, 한 사람의 <i>몸.</i>",
-  me_p:"정해진 루틴을 따라가는 수업이 아니에요. 그날의 컨디션에서 시작해, 내 속도로 나아갑니다.",
+  me_p:"정해진 루틴을 따라가지 않습니다. 그날의 몸에서 시작해 내 속도로 나아갑니다.",
   m1_h3:"숨쉬기", m1_sm:"Respirer", m1_p:"첫 동작에 들어가기 전에, 어떻게 숨 쉬는지부터 봅니다. 많은 분들이 자기도 모르게 어깨로 숨을 참고 있습니다.",
   m2_h3:"정렬", m2_sm:"S'aligner", m2_p:"어깨 높이, 골반의 위치, 발이 닿는 방식. 어디가 기울었는지 적어두고 거기서 시작합니다.",
   m3_h3:"중심 잡기", m3_sm:"S'ancrer", m3_p:"중심은 마지막에. 등도 고관절도 목도, 결국 중심이 잡고 있기 때문입니다.",
@@ -1299,15 +1398,28 @@ ko: {
   dm_btn:"미나에게 DM 보내기",
   k_ig:"스튜디오",
   ig_h2:"스튜디오의 순간들, <i>사진으로.</i>",
-  ig_p:"동작 설명, 수업의 뒷모습, 미나의 짧은 메모.",
+  ig_p:"동작 설명과 수업의 뒷모습, 미나의 짧은 메모.",
   foot_l:"1:1 프라이빗 필라테스 · 파리 · 예약제",
   me_note:"볼 것은 매번 달라집니다. 화요일의 몸과 토요일의 몸은 같지 않습니다.",
   w_first:"첫 수업에서는 간단한 것부터 봅니다. 어떻게 걷는지, 어떻게 앉는지, 어떻게 일어나는지.",
-  w_quote:"「횟수는 세지 않습니다. 어떻게 일어나는지를 봅니다.」",
-  ig_note:"「수업 중에 본 것을 올립니다. 무엇을 하는지 보여주기엔 이게 제일 간단해서요.」",
+  w_quote:"\"횟수는 세지 않아요. 어떻게 일어나는지를 봅니다.\"",
+  ig_note:"\"수업 중에 본 걸 올려요. 무슨 수업인지 보여주기엔 이게 제일 빠르더라고요.\"",
   ig_cta:"인스타그램에서 Milates 팔로우하기",
   credit:"Jessy Jung의 콘셉트 작업",
   credit_link:"서비스 보기",
+  sh_over:"이 사이트의 전략", sh_h2:"한 장, 여덟 줄.",
+  sh_p:"첫 시안보다 먼저, 이 화보의 모든 판단을 한 장에 적었습니다.",
+  sh_link:"Jessy Jung의 서비스",
+  sh_meta:"MILATES — 파리 1:1 필라테스 · 작성 Jessy Jung",
+  sh_k1:"진단", sh_v1:"스튜디오는 가격과 시설로 비교되고, 사람은 보이지 않는다",
+  sh_k2:"찾는 순간", sh_v2:"내 몸에 맞는 선생님을 찾을 때",
+  sh_k3:"대안", sh_v3:"대형 스튜디오 / 앱 / 유튜브 홈트",
+  sh_k4:"싸울 곳", sh_v4:"파리, 1:1 예약제 수업",
+  sh_k5:"이기는 법", sh_v5:"시설이 아니라, 가르치는 사람을 주인공으로",
+  sh_k6:"위험한 가설", sh_hyp:"[가설]", sh_v6:"강사의 생각이 예약으로 이어질까",
+  sh_k7:"북극성", sh_v7:"지명 예약의 수",
+  sh_k8:"첫 수", sh_v8:"잡지 한 권처럼. 표지부터 목차까지",
+  sh_annex:"별지: 포지셔닝 맵 · 4P · 퍼널 설계",
 }
 };
 

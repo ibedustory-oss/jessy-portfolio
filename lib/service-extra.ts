@@ -16,7 +16,6 @@ export interface SheetBlock {
 }
 
 export interface CaseBlock {
-  intro: string
   problemLabel: string
   decisionLabel: string
   outputLabel: string
@@ -96,6 +95,7 @@ export interface NavBlock {
 
 export interface Extra {
   offer: { badge: string; cta: string; facts: string[] }
+  tools: { title: string; items: { key: 'map' | 'fourp' | 'canvas' | 'funnel'; label: string }[] }
   sheetRefs: SheetRefs
   sheet: SheetBlock
   cases: CaseBlock
@@ -113,6 +113,15 @@ export const EXTRA: Record<Lang, Extra> = {
       badge: 'パリ · 小さな店のための戦略とWebサイト',
       cta: '無料診断を受ける',
       facts: ['準備はいりません', '30分で、何を先にやるかを整理', '診断メモは依頼と関係なくお渡しします'],
+    },
+    tools: {
+      title: '一緒に使う道具',
+      items: [
+        { key: 'map' as const, label: 'ポジショニングマップ' },
+        { key: 'fourp' as const, label: '4P' },
+        { key: 'canvas' as const, label: 'リーンキャンバス' },
+        { key: 'funnel' as const, label: 'ファネル' },
+      ],
     },
     sheetRefs: {
       pain: 'シート 01 · 診断',
@@ -140,7 +149,6 @@ export const EXTRA: Record<Lang, Extra> = {
       page: '1 / 12',
     },
     cases: {
-      intro: '実在の店舗ではありません。「誰に・なぜ・どう売るか」を先に決めて、その判断のままつくった自主制作です。',
       problemLabel: '問題',
       decisionLabel: '決めたこと',
       outputLabel: 'かたち',
@@ -277,6 +285,15 @@ export const EXTRA: Record<Lang, Extra> = {
       cta: '무료 진단 받기',
       facts: ['준비물 없음', '30분 안에 무엇부터 할지 정리', '진단 메모는 의뢰와 상관없이 드립니다'],
     },
+    tools: {
+      title: '함께 쓰는 도구',
+      items: [
+        { key: 'map' as const, label: '포지셔닝 맵' },
+        { key: 'fourp' as const, label: '4P' },
+        { key: 'canvas' as const, label: '린 캔버스' },
+        { key: 'funnel' as const, label: '퍼널' },
+      ],
+    },
     sheetRefs: {
       pain: '시트 01 · 진단',
       alt: '시트 03 · 대안',
@@ -303,7 +320,6 @@ export const EXTRA: Record<Lang, Extra> = {
       page: '1 / 12',
     },
     cases: {
-      intro: '실제 매장이 아닙니다. 누구에게·왜·어떻게 팔지를 먼저 정하고, 그 판단 그대로 만든 자체 제작입니다.',
       problemLabel: '문제',
       decisionLabel: '정한 것',
       outputLabel: '형태',
@@ -440,6 +456,15 @@ export const EXTRA: Record<Lang, Extra> = {
       cta: 'Book a free diagnosis',
       facts: ['Nothing to prepare', 'Thirty minutes, priorities sorted', 'You keep the diagnosis notes either way'],
     },
+    tools: {
+      title: 'Tools on the desk',
+      items: [
+        { key: 'map' as const, label: 'Positioning map' },
+        { key: 'fourp' as const, label: '4P' },
+        { key: 'canvas' as const, label: 'Lean canvas' },
+        { key: 'funnel' as const, label: 'Funnel' },
+      ],
+    },
     sheetRefs: {
       pain: 'Sheet 01 · Diagnosis',
       alt: 'Sheet 03 · Alternatives',
@@ -466,7 +491,6 @@ export const EXTRA: Record<Lang, Extra> = {
       page: '1 / 12',
     },
     cases: {
-      intro: 'None of these are real shops. Each began by deciding who it is for, why, and how it sells, and was then built exactly as that decision.',
       problemLabel: 'Problem',
       decisionLabel: 'Decision',
       outputLabel: 'Form',
