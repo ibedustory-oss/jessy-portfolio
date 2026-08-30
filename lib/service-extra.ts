@@ -127,7 +127,7 @@ export const EXTRA: Record<Lang, Extra> = {
       facts: ['無料 · 30分 · 準備は不要'],
     },
     tools: {
-      eyebrow: '01.5 / 仕事',
+      eyebrow: '仕事の中身',
       title: 'つくる前に、決めます。',
       p1a: '最初にやるのは、デザインではなく整理です。街のどこに立っているのかを',
       p1b: 'に置き、値づけと届け方を',
@@ -135,7 +135,7 @@ export const EXTRA: Record<Lang, Extra> = {
       p2a: '次に、仮説を一枚にします。誰の何を、どうやって、どこで稼ぐのか。',
       p2b: 'に書き出して、危ういところに印をつけます。オープン後は',
       p2c: 'のどこで人が落ちているかを見て、直す場所を決めます。',
-      close: '八行のシートは、この四枚の要約です。',
+      close: 'ここが決まってから、はじめて手を動かします。',
       items: [
         {
           key: 'map' as const,
@@ -250,7 +250,7 @@ export const EXTRA: Record<Lang, Extra> = {
       ],
     },
     pain: {
-      eyebrow: 'About',
+      eyebrow: 'よく聞く話',
       title: 'サイトの相談で、',
       titleAccent: 'よくこう言われます。',
       quotes: [
@@ -262,7 +262,7 @@ export const EXTRA: Record<Lang, Extra> = {
       close: 'どれも、デザインの問題ではありません。',
     },
     finder: {
-      eyebrow: 'Sheet',
+      eyebrow: '進め方を決める',
       sheetLabel: 'Strategy sheet',
       draftRef: '下書き',
       title: '2つ選ぶだけで、',
@@ -338,12 +338,12 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     nav: { why: 'なぜ', finder: 'シート', work: '実績', how: '進め方', price: '料金', faq: '質問' },
     eyebrows: {
-      work: 'Work',
-      included: 'Scope',
-      steps: 'Process',
-      price: 'Price',
-      compare: 'Compare',
-      faq: 'FAQ',
+      work: 'つくったもの',
+      included: '範囲',
+      steps: '進め方',
+      price: '進め方',
+      compare: '比較',
+      faq: 'よくある質問',
     },
   },
 
@@ -354,7 +354,7 @@ export const EXTRA: Record<Lang, Extra> = {
       facts: ['무료 · 30분 · 준비물 없음'],
     },
     tools: {
-      eyebrow: '01.5 / 하는 일',
+      eyebrow: '하는 일',
       title: '만들기 전에, 정합니다.',
       p1a: '먼저 하는 건 디자인이 아니라 정리입니다. 이 동네 어디에 서 있는지를 ',
       p1b: '에 찍고, 값과 파는 방식을 ',
@@ -362,7 +362,7 @@ export const EXTRA: Record<Lang, Extra> = {
       p2a: '그다음 가설을 한 장으로 만듭니다. 누구의 무엇을, 어떻게, 어디서 버는지 ',
       p2b: '에 적고 위험한 칸에 표시합니다. 오픈한 뒤에는 ',
       p2c: '의 어디에서 사람이 빠지는지 보고 고칠 곳을 정합니다.',
-      close: '여덟 줄짜리 시트는 이 네 장의 요약입니다.',
+      close: '여기까지 정하고 나서야 손을 움직입니다.',
       items: [
         {
           key: 'map' as const,
@@ -477,7 +477,7 @@ export const EXTRA: Record<Lang, Extra> = {
       ],
     },
     pain: {
-      eyebrow: 'About',
+      eyebrow: '자주 듣는 말',
       title: '사장님들께',
       titleAccent: '자주 듣는 말입니다.',
       quotes: [
@@ -489,7 +489,7 @@ export const EXTRA: Record<Lang, Extra> = {
       close: '전부 디자인의 문제가 아닙니다.',
     },
     finder: {
-      eyebrow: 'Sheet',
+      eyebrow: '진행 방식 정하기',
       sheetLabel: 'Strategy sheet',
       draftRef: '초안',
       title: '두 가지만 고르시면,',
@@ -565,12 +565,12 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     nav: { why: '왜', finder: '시트', work: '작업물', how: '진행', price: '비용', faq: '질문' },
     eyebrows: {
-      work: 'Work',
-      included: 'Scope',
-      steps: 'Process',
-      price: 'Price',
-      compare: 'Compare',
-      faq: 'FAQ',
+      work: '만든 것',
+      included: '범위',
+      steps: '진행',
+      price: '진행 방식',
+      compare: '비교',
+      faq: '자주 묻는 질문',
     },
   },
 
@@ -581,7 +581,7 @@ export const EXTRA: Record<Lang, Extra> = {
       facts: ['Free · 30 minutes · nothing to prepare'],
     },
     tools: {
-      eyebrow: '01.5 / The work',
+      eyebrow: 'The work',
       title: 'We decide before we build.',
       p1a: 'The first work is not design, it is sorting. Where the shop stands on its street goes onto a ',
       p1b: ', and the price and the way it sells get split four ways on the ',
@@ -589,7 +589,7 @@ export const EXTRA: Record<Lang, Extra> = {
       p2a: 'Then the bet goes on one page: whose problem, solved how, earning where. It is written on a ',
       p2b: ' and the risky square is marked. After opening, the ',
       p2c: ' shows where people drop, and that decides what gets fixed.',
-      close: 'The eight-line sheet is the summary of those four pages.',
+      close: 'Only once this is settled does anything get built.',
       items: [
         {
           key: 'map' as const,
@@ -704,7 +704,7 @@ export const EXTRA: Record<Lang, Extra> = {
       ],
     },
     pain: {
-      eyebrow: 'About',
+      eyebrow: 'What owners tell me',
       title: 'What owners',
       titleAccent: 'keep telling me.',
       quotes: [
@@ -716,7 +716,7 @@ export const EXTRA: Record<Lang, Extra> = {
       close: 'None of these is a design problem.',
     },
     finder: {
-      eyebrow: 'Sheet',
+      eyebrow: 'Setting the plan',
       sheetLabel: 'Strategy sheet',
       draftRef: 'Draft',
       title: 'Two choices,',
@@ -792,12 +792,12 @@ export const EXTRA: Record<Lang, Extra> = {
     },
     nav: { why: 'Why', finder: 'Sheet', work: 'Work', how: 'Process', price: 'Price', faq: 'FAQ' },
     eyebrows: {
-      work: 'Work',
+      work: 'What I built',
       included: 'Scope',
       steps: 'Process',
-      price: 'Price',
+      price: 'How it runs',
       compare: 'Compare',
-      faq: 'FAQ',
+      faq: 'Questions',
     },
   },
 }

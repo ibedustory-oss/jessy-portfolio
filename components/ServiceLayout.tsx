@@ -5,7 +5,6 @@ import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
 import HeroChange from '@/components/HeroChange'
-import InkPen from '@/components/InkPen'
 import StrategySheet from '@/components/StrategySheet'
 import { Term } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
@@ -20,12 +19,10 @@ function Label({
   n,
   children,
   dark,
-  sheetRef,
 }: {
   n: string
   children: React.ReactNode
   dark?: boolean
-  sheetRef?: string
 }) {
   return (
     <div>
@@ -38,15 +35,6 @@ function Label({
         <span className="px-2.5">/</span>
         {children}
       </p>
-      {sheetRef && (
-        <p
-          className={`mt-3 inline-block border-l-2 pl-2.5 font-mono text-[9.5px] tracking-[0.12em] ${
-            dark ? 'border-accentlit/60 text-white/45' : 'border-accent/50 text-warmgray'
-          }`}
-        >
-          ↳ {sheetRef}
-        </p>
-      )}
     </div>
   )
 }
@@ -136,14 +124,13 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           <span className="absolute -left-40 top-1/3 block h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(240,194,75,0.16),transparent)]" />
           <span className="absolute -right-32 -top-24 block h-[620px] w-[620px] rounded-full bg-[radial-gradient(closest-side,rgba(49,130,246,0.16),transparent)]" />
         </div>
-        <InkPen markSelector="[data-mark]" />
         <div className="mx-auto grid max-w-[1340px] items-center gap-y-14 lg:grid-cols-12 lg:gap-x-14">
           <Reveal className="lg:col-span-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/40">
               {x.offer.badge}
             </p>
             <h1 className={`mt-6 ${bk} text-[30px] font-extrabold leading-[1.14] tracking-tightest text-white sm:text-[40px] md:text-[48px] lg:text-[38px] xl:text-[53px]`}>
-              <span className="relative inline-block" data-mark>
+              <span className="relative inline-block">
                 {s.headline}
                 <HandLine className="-bottom-1 h-[6px] text-accentlit md:h-[9px]" />
               </span>
@@ -172,15 +159,12 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             <HeroChange
               label={x.sheet.label}
               refNo={x.sheet.ref}
+              meta={x.sheet.meta}
               rows={[0, 4, 7].map((i) => ({
                 k: x.sheet.rows[i].k,
                 v: x.sheet.rows[i].v ?? '',
                 key: x.sheet.rows[i].key,
               }))}
-              shots={[
-                { img: `${BP}/images/demo-joayo.jpg`, domain: 'joayo.paris', alt: 'JOAYO' },
-                { img: `${BP}/images/demo-milates.jpg`, domain: 'milates.paris', alt: 'MILATES' },
-              ]}
             />
           </Reveal>
         </div>
@@ -191,7 +175,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
           <div className="md:col-span-3">
             <Reveal>
-              <Label n="01" sheetRef={x.sheetRefs.pain}>
+              <Label n="01">
                 {x.pain.eyebrow}
               </Label>
             </Reveal>
@@ -249,9 +233,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink">
                     {s.aiwhy.cantTitle}
-                  </p>
-                  <p className="mt-1.5 inline-block border-l-2 border-accent/50 pl-2.5 font-mono text-[9.5px] tracking-[0.12em] text-warmgray">
-                    ↳ {x.sheetRefs.alt}
                   </p>
                   <ul className="mt-3 space-y-2">
                     {s.aiwhy.cant.map((c) => (
@@ -314,7 +295,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="grid gap-y-14 md:grid-cols-12 md:gap-x-10">
           <div className="md:col-span-4">
             <Reveal>
-              <Label n="02" sheetRef={x.sheetRefs.field}>
+              <Label n="02">
                 {x.finder.eyebrow}
               </Label>
             </Reveal>
@@ -445,7 +426,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
           <div className="md:col-span-3">
             <Reveal>
-              <Label n="04" sheetRef={x.sheetRefs.north}>
+              <Label n="04">
                 {x.eyebrows.price}
               </Label>
             </Reveal>
@@ -455,7 +436,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               <h2 className={`max-w-[16ch] ${bk} text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[42px]`}>
                 {s.priceTitle}
               </h2>
-              <p className="mt-4 text-[13.5px] text-warmgray">{s.priceSub}</p>
 
               {/* the road, in one line */}
               <p className="mt-9 flex flex-wrap items-baseline gap-x-3 gap-y-2 border-y border-ink/10 py-4">
@@ -474,38 +454,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             </Reveal>
 
             <Reveal delay={80}>
-              <div className="mt-12 grid gap-y-12 md:grid-cols-2 md:gap-x-12">
-                {s.plans.map((p, i) => (
-                  <div
-                    key={p.name}
-                    className={p.featured ? 'md:-ml-8 md:border-l-2 md:border-accent md:pl-8' : ''}
-                  >
-                    <h3 className={`text-[16px] font-extrabold tracking-tight ${p.featured ? 'text-accent' : 'text-ink'}`}>
-                      {p.name}
-                    </h3>
-                    <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
-                      <span className="text-[28px] font-extrabold tracking-tightest text-ink md:text-[34px]">
-                        {p.price}
-                      </span>
-                      <span className={`${bk} text-xs text-warmgray`}>{p.unit}</span>
-                    </p>
-                    <p className="mt-3 max-w-[36ch] text-[13px] leading-[1.8] text-charcoal">{p.desc}</p>
-                    <ul className="mt-5 space-y-1.5 border-t border-ink/10 pt-4">
-                      {p.features.map((f) => (
-                        <li key={f} className="text-[13px] text-charcoal">
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-4 text-[12px] leading-[1.75] text-warmgray">
-                      <span className="font-bold text-accent">{x.planExtra.bestLabel}</span>{' '}
-                      {x.planExtra.items[i]?.best}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <p className="mt-10 max-w-[52ch] text-[12px] leading-[1.85] text-warmgray">{s.priceNote}</p>
               <div className="mt-10">
                 <Button href={contact}>{x.offer.cta}</Button>
               </div>

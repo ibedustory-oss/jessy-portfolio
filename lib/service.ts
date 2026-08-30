@@ -110,7 +110,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
       { n: '04', title: '渡す', desc: 'ドメインを設定して公開。更新のやり方もお渡しします。' },
       { n: '05', title: '動かす', desc: '公開してからが本番です。北極星の数字を月に一度いっしょに見て、次の一手を決めます。' },
     ],
-    priceTitle: '料金',
+    priceTitle: '聞くところから、公開したあとまで。',
     priceSub: '税別。着手前に金額を確定します。',
     plans: [
       {
@@ -215,7 +215,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
       { n: '04', title: '전달', desc: '도메인을 연결해 오픈합니다. 수정 방법도 함께 드립니다.' },
       { n: '05', title: '운영', desc: '오픈하고 나서가 진짜 시작입니다. 북극성 지표를 한 달에 한 번 같이 보고, 다음 한 수를 정합니다.' },
     ],
-    priceTitle: '요금',
+    priceTitle: '듣는 것부터, 오픈한 뒤까지.',
     priceSub: '부가세 별도. 착수 전에 금액을 확정합니다.',
     plans: [
       {
@@ -320,7 +320,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
       { n: '04', title: 'Hand over', desc: 'Domain set up, site live, and a guide to updating it yourself.' },
       { n: '05', title: 'Run', desc: 'Launch is where it starts. Once a month we look at the north-star number together and pick the next move.' },
     ],
-    priceTitle: 'Pricing',
+    priceTitle: 'From listening to after opening.',
     priceSub: 'Tax excluded. Fixed before work begins.',
     plans: [
       {
