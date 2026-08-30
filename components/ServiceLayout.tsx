@@ -6,7 +6,7 @@ import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
 import HeroDesk from '@/components/HeroDesk'
 import StrategySheet from '@/components/StrategySheet'
-import ToolPreview from '@/components/ToolPreview'
+import { Term } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
 import { SERVICE } from '@/lib/service'
 import { EXTRA } from '@/lib/service-extra'
@@ -273,6 +273,47 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         </div>
       </Paper>
 
+      {/* ============ between the sheets · what the work actually is ============ */}
+      <Paper id="work-method" className="mt-2 overflow-x-clip md:mt-5">
+        <div className="grid gap-y-10 md:grid-cols-12 md:gap-x-10">
+          <div className="md:col-span-4">
+            <Reveal>
+              <Label n="01.5">{x.tools.eyebrow.split('/')[1]?.trim() ?? x.tools.eyebrow}</Label>
+            </Reveal>
+          </div>
+          <div className="md:col-span-7 md:col-start-6">
+            <Reveal>
+              <h2 className={`max-w-[24ch] ${bk} text-[25px] font-extrabold leading-[1.26] tracking-tightest md:text-[33px]`}>
+                {x.tools.title}
+              </h2>
+            </Reveal>
+            <Reveal delay={60}>
+              <p className="mt-8 max-w-[46ch] text-[14.5px] leading-[2] text-warmgray">
+                {x.tools.p1a}
+                <Term tool={x.tools.items[0]} />
+                {x.tools.p1b}
+                <Term tool={x.tools.items[1]} />
+                {x.tools.p1c}
+              </p>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="mt-6 max-w-[46ch] text-[14.5px] leading-[2] text-warmgray">
+                {x.tools.p2a}
+                <Term tool={x.tools.items[2]} />
+                {x.tools.p2b}
+                <Term tool={x.tools.items[3]} />
+                {x.tools.p2c}
+              </p>
+            </Reveal>
+            <Reveal delay={140}>
+              <p className="mt-8 max-w-[40ch] border-l-2 border-accent/50 pl-4 text-[13.5px] leading-relaxed text-ink">
+                {x.tools.close}
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </Paper>
+
       {/* ============ SHEET 2 · the method, worked live ============ */}
       <Paper id="sheet" className="mt-2 md:mt-5">
         <div className="grid gap-y-14 md:grid-cols-12 md:gap-x-10">
@@ -299,9 +340,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               <p className="mt-6 max-w-[40ch] text-[14.5px] leading-[1.85] text-warmgray">
                 {x.finder.lead}
               </p>
-              <div className="mt-7">
-                <ToolPreview title={x.tools.title} items={x.tools.items} />
-              </div>
             </Reveal>
 
             <Reveal delay={80}>

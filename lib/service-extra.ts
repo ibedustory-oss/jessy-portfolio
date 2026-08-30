@@ -1,3 +1,4 @@
+import type { Tool } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
 
 /* Content for the rebuilt services page: the pain section, the section nav
@@ -95,7 +96,18 @@ export interface NavBlock {
 
 export interface Extra {
   offer: { badge: string; cta: string; facts: string[] }
-  tools: { title: string; items: { key: 'map' | 'fourp' | 'canvas' | 'funnel'; label: string }[] }
+  tools: {
+    eyebrow: string
+    title: string
+    p1a: string
+    p1b: string
+    p1c: string
+    p2a: string
+    p2b: string
+    p2c: string
+    close: string
+    items: Tool[]
+  }
   sheetRefs: SheetRefs
   sheet: SheetBlock
   cases: CaseBlock
@@ -115,12 +127,68 @@ export const EXTRA: Record<Lang, Extra> = {
       facts: ['準備はいりません', '30分で、何を先にやるかを整理', '診断メモは依頼と関係なくお渡しします'],
     },
     tools: {
-      title: '一緒に使う道具',
+      eyebrow: '01.5 / 仕事',
+      title: '判断は、こう置いていきます。',
+      p1a: '最初にやるのは、デザインではなく整理です。街のどこに立っているのかを',
+      p1b: 'に置き、値づけと届け方を',
+      p1c: 'で四つに分けます。ここが決まらないうちは、色も写真も決められません。',
+      p2a: '次に、仮説を一枚にします。誰の何を、どうやって、どこで稼ぐのか。',
+      p2b: 'に書き出して、危ういところに印をつけます。オープン後は',
+      p2c: 'のどこで人が落ちているかを見て、直す場所を決めます。',
+      close: '八行のシートは、この四枚の要約です。',
       items: [
-        { key: 'map' as const, label: 'ポジショニングマップ' },
-        { key: 'fourp' as const, label: '4P' },
-        { key: 'canvas' as const, label: 'リーンキャンバス' },
-        { key: 'funnel' as const, label: 'ファネル' },
+        {
+          key: 'map' as const,
+          label: 'ポジショニングマップ',
+          ref: 'N°04',
+          meta: '例 · パリの韓国料理店',
+          axisX: ['日常', '特別な日'] as [string, string],
+          axisY: ['現地化', '韓国式'] as [string, string],
+          dots: [
+            { n: '定食屋', x: 46, y: 82 },
+            { n: 'フュージョン', x: 44, y: 34 },
+            { n: '高級店', x: 126, y: 30 },
+            { n: 'うちの店', x: 118, y: 76, me: true },
+          ],
+        },
+        {
+          key: 'fourp' as const,
+          label: '4P',
+          ref: 'N°05',
+          meta: '例 · パリの韓国料理店',
+          rows: [
+            { k: 'PRODUCT', v: '時間のかかる仕込み', me: true },
+            { k: 'PRICE', v: '20〜30€' },
+            { k: 'PLACE', v: 'パリ1区・夜' },
+            { k: 'PROMOTION', v: '再訪と紹介' },
+          ],
+        },
+        {
+          key: 'canvas' as const,
+          label: 'リーンキャンバス',
+          ref: 'N°07',
+          meta: '例 · パリの韓国料理店',
+          rows: [
+            { k: 'PROBLEM', v: '観光地扱い' },
+            { k: 'SOLUTION', v: '仕込みを見せる' },
+            { k: 'UVP', v: '時間が味になる', me: true },
+            { k: 'CUSTOMER', v: '近所の常連' },
+            { k: 'COST', v: '仕込みの手間' },
+            { k: 'REVENUE', v: '客単価×再訪' },
+          ],
+        },
+        {
+          key: 'funnel' as const,
+          label: 'ファネル',
+          ref: 'N°09',
+          meta: '例 · 予約までの4段',
+          rows: [
+            { k: '見つける', v: '1,000' },
+            { k: 'サイト', v: '320' },
+            { k: 'メニュー', v: '140' },
+            { k: '予約', v: '38', me: true },
+          ],
+        },
       ],
     },
     sheetRefs: {
@@ -135,14 +203,14 @@ export const EXTRA: Record<Lang, Extra> = {
       meta: '例 · パリのピラティススタジオ',
       hypLabel: '仮説',
       rows: [
-        { k: '診断', v: 'スタジオは料金と設備で比べられ、人が見えない' },
-        { k: '用事', v: '自分の体に合う先生を探す時' },
-        { k: '代替案', v: '大型スタジオ / アプリ / YouTube' },
-        { k: '戦場', v: 'パリ、1:1予約制のレッスン' },
-        { k: '勝ち筋', v: '設備ではなく、教える人を主役に', key: true },
-        { k: '危うい仮説', v: '先生の考えは予約につながるか', hyp: true },
-        { k: '北極星', v: '指名予約の数' },
-        { k: '初手', v: '雑誌のように。表紙から目次まで' },
+        { k: 'Diagnosis', v: 'スタジオは料金と設備で比べられ、人が見えない' },
+        { k: 'The job', v: '自分の体に合う先生を探す時' },
+        { k: 'Alternatives', v: '大型スタジオ / アプリ / YouTube' },
+        { k: 'Where we play', v: 'パリ、1:1予約制のレッスン' },
+        { k: 'How we win', v: '設備ではなく、教える人を主役に', key: true },
+        { k: 'Riskiest bet', v: '先生の考えは予約につながるか', hyp: true },
+        { k: 'North star', v: '指名予約の数' },
+        { k: 'First move', v: '雑誌のように。表紙から目次まで' },
       ],
       caption: '',
       footer: '別紙: ポジショニングマップ · 4P · ファネル設計',
@@ -286,12 +354,68 @@ export const EXTRA: Record<Lang, Extra> = {
       facts: ['준비물 없음', '30분 안에 무엇부터 할지 정리', '진단 메모는 의뢰와 상관없이 드립니다'],
     },
     tools: {
-      title: '함께 쓰는 도구',
+      eyebrow: '01.5 / 하는 일',
+      title: '판단은 이렇게 남깁니다.',
+      p1a: '먼저 하는 건 디자인이 아니라 정리입니다. 이 동네 어디에 서 있는지를 ',
+      p1b: '에 찍고, 값과 파는 방식을 ',
+      p1c: '으로 네 칸에 나눕니다. 여기가 정해지기 전에는 색도 사진도 고를 수 없습니다.',
+      p2a: '그다음 가설을 한 장으로 만듭니다. 누구의 무엇을, 어떻게, 어디서 버는지 ',
+      p2b: '에 적고 위험한 칸에 표시합니다. 오픈한 뒤에는 ',
+      p2c: '의 어디에서 사람이 빠지는지 보고 고칠 곳을 정합니다.',
+      close: '여덟 줄짜리 시트는 이 네 장의 요약입니다.',
       items: [
-        { key: 'map' as const, label: '포지셔닝 맵' },
-        { key: 'fourp' as const, label: '4P' },
-        { key: 'canvas' as const, label: '린 캔버스' },
-        { key: 'funnel' as const, label: '퍼널' },
+        {
+          key: 'map' as const,
+          label: '포지셔닝 맵',
+          ref: 'N°04',
+          meta: '예시 · 파리의 한식당',
+          axisX: ['일상', '특별한 날'] as [string, string],
+          axisY: ['현지화', '한국식'] as [string, string],
+          dots: [
+            { n: '백반집', x: 46, y: 82 },
+            { n: '퓨전', x: 44, y: 34 },
+            { n: '파인다이닝', x: 126, y: 30 },
+            { n: '우리 가게', x: 118, y: 76, me: true },
+          ],
+        },
+        {
+          key: 'fourp' as const,
+          label: '4P',
+          ref: 'N°05',
+          meta: '예시 · 파리의 한식당',
+          rows: [
+            { k: 'PRODUCT', v: '시간이 드는 방식', me: true },
+            { k: 'PRICE', v: '20~30€' },
+            { k: 'PLACE', v: '파리 1구 · 저녁' },
+            { k: 'PROMOTION', v: '재방문과 소개' },
+          ],
+        },
+        {
+          key: 'canvas' as const,
+          label: '린 캔버스',
+          ref: 'N°07',
+          meta: '예시 · 파리의 한식당',
+          rows: [
+            { k: 'PROBLEM', v: '관광지 취급' },
+            { k: 'SOLUTION', v: '장독대를 앞에' },
+            { k: 'UVP', v: '시간이 맛이 됨', me: true },
+            { k: 'CUSTOMER', v: '동네 단골' },
+            { k: 'COST', v: '숙성과 손' },
+            { k: 'REVENUE', v: '객단가×재방문' },
+          ],
+        },
+        {
+          key: 'funnel' as const,
+          label: '퍼널',
+          ref: 'N°09',
+          meta: '예시 · 예약까지 네 단계',
+          rows: [
+            { k: '발견', v: '1,000' },
+            { k: '사이트', v: '320' },
+            { k: '메뉴', v: '140' },
+            { k: '예약', v: '38', me: true },
+          ],
+        },
       ],
     },
     sheetRefs: {
@@ -306,14 +430,14 @@ export const EXTRA: Record<Lang, Extra> = {
       meta: '예시 · 파리의 필라테스 스튜디오',
       hypLabel: '가설',
       rows: [
-        { k: '진단', v: '스튜디오는 가격과 시설로 비교되고, 사람은 보이지 않는다' },
-        { k: '찾는 순간', v: '내 몸에 맞는 선생님을 찾을 때' },
-        { k: '대안', v: '대형 스튜디오 / 앱 / 유튜브 홈트' },
-        { k: '싸울 곳', v: '파리, 1:1 예약제 수업' },
-        { k: '이기는 법', v: '시설이 아니라, 가르치는 사람을 주인공으로', key: true },
-        { k: '위험한 가설', v: '강사의 생각이 예약으로 이어질까', hyp: true },
-        { k: '북극성', v: '지명 예약의 수' },
-        { k: '첫 수', v: '잡지 한 권처럼. 표지부터 목차까지' },
+        { k: 'Diagnosis', v: '스튜디오는 가격과 시설로 비교되고, 사람은 보이지 않는다' },
+        { k: 'The job', v: '내 몸에 맞는 선생님을 찾을 때' },
+        { k: 'Alternatives', v: '대형 스튜디오 / 앱 / 유튜브 홈트' },
+        { k: 'Where we play', v: '파리, 1:1 예약제 수업' },
+        { k: 'How we win', v: '시설이 아니라, 가르치는 사람을 주인공으로', key: true },
+        { k: 'Riskiest bet', v: '강사의 생각이 예약으로 이어질까', hyp: true },
+        { k: 'North star', v: '지명 예약의 수' },
+        { k: 'First move', v: '잡지 한 권처럼. 표지부터 목차까지' },
       ],
       caption: '',
       footer: '별지: 포지셔닝 맵 · 4P · 퍼널 설계',
@@ -457,12 +581,68 @@ export const EXTRA: Record<Lang, Extra> = {
       facts: ['Nothing to prepare', 'Thirty minutes, priorities sorted', 'You keep the diagnosis notes either way'],
     },
     tools: {
-      title: 'Tools on the desk',
+      eyebrow: '01.5 / The work',
+      title: 'Where the decisions get written.',
+      p1a: 'The first work is not design, it is sorting. Where the shop stands on its street goes onto a ',
+      p1b: ', and the price and the way it sells get split four ways on the ',
+      p1c: '. Until that settles, no colour or photograph can be chosen.',
+      p2a: 'Then the bet goes on one page: whose problem, solved how, earning where. It is written on a ',
+      p2b: ' and the risky square is marked. After opening, the ',
+      p2c: ' shows where people drop, and that decides what gets fixed.',
+      close: 'The eight-line sheet is the summary of those four pages.',
       items: [
-        { key: 'map' as const, label: 'Positioning map' },
-        { key: 'fourp' as const, label: '4P' },
-        { key: 'canvas' as const, label: 'Lean canvas' },
-        { key: 'funnel' as const, label: 'Funnel' },
+        {
+          key: 'map' as const,
+          label: 'positioning map',
+          ref: 'N°04',
+          meta: 'Example · a Korean restaurant in Paris',
+          axisX: ['Everyday', 'Occasion'] as [string, string],
+          axisY: ['Localised', 'Korean'] as [string, string],
+          dots: [
+            { n: 'Canteen', x: 46, y: 82 },
+            { n: 'Fusion', x: 44, y: 34 },
+            { n: 'Fine dining', x: 126, y: 30 },
+            { n: 'This shop', x: 118, y: 76, me: true },
+          ],
+        },
+        {
+          key: 'fourp' as const,
+          label: '4P',
+          ref: 'N°05',
+          meta: 'Example · a Korean restaurant in Paris',
+          rows: [
+            { k: 'PRODUCT', v: 'Food that takes time', me: true },
+            { k: 'PRICE', v: '€20–30' },
+            { k: 'PLACE', v: 'Paris 1er · evenings' },
+            { k: 'PROMOTION', v: 'Return visits' },
+          ],
+        },
+        {
+          key: 'canvas' as const,
+          label: 'lean canvas',
+          ref: 'N°07',
+          meta: 'Example · a Korean restaurant in Paris',
+          rows: [
+            { k: 'PROBLEM', v: 'Read as tourist' },
+            { k: 'SOLUTION', v: 'Jangdokdae first' },
+            { k: 'UVP', v: 'Time becomes taste', me: true },
+            { k: 'CUSTOMER', v: 'Local regulars' },
+            { k: 'COST', v: 'Slow prep' },
+            { k: 'REVENUE', v: 'Spend × return' },
+          ],
+        },
+        {
+          key: 'funnel' as const,
+          label: 'funnel',
+          ref: 'N°09',
+          meta: 'Example · four steps to a booking',
+          rows: [
+            { k: 'Found', v: '1,000' },
+            { k: 'Site', v: '320' },
+            { k: 'Menu', v: '140' },
+            { k: 'Booked', v: '38', me: true },
+          ],
+        },
       ],
     },
     sheetRefs: {
