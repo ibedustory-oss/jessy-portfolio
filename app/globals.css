@@ -178,3 +178,57 @@ summary:focus-visible {
   opacity: 0.4;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* hero desk — plays once on load, then holds still */
+.hero-desk .hd-sheet {
+  opacity: 0;
+  transform: translateY(16px) rotate(0deg);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.hero-desk.is-on .hd-sheet {
+  opacity: 1;
+  transform: translateY(0) rotate(-2deg);
+}
+.hero-desk .hd-site {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 1.7s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 1.7s;
+}
+.hero-desk.is-on .hd-site {
+  opacity: 1;
+  transform: none;
+}
+.pen-stroke {
+  stroke-dasharray: 720;
+  stroke-dashoffset: 720;
+}
+.hero-desk.is-on .pen-stroke {
+  animation: pen-draw 0.7s cubic-bezier(0.23, 1, 0.32, 1) 1s forwards;
+}
+.hero-desk.is-on .hd-arrow .pen-stroke {
+  animation-delay: 1.35s;
+}
+.hero-desk.is-on .hd-arrow .pen-stroke-2 {
+  animation-delay: 1.7s;
+  animation-duration: 0.3s;
+}
+@keyframes pen-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-desk .hd-sheet,
+  .hero-desk .hd-site {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-desk.is-on .hd-sheet {
+    transform: rotate(-2deg);
+  }
+  .pen-stroke {
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+}

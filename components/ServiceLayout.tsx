@@ -4,7 +4,7 @@ import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
-import HeroLoop from '@/components/HeroLoop'
+import HeroDesk from '@/components/HeroDesk'
 import StrategySheet from '@/components/StrategySheet'
 import type { Lang } from '@/lib/content'
 import { SERVICE } from '@/lib/service'
@@ -172,7 +172,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-6">
-            <HeroLoop
+            <HeroDesk
               label={x.sheet.label}
               refNo={x.sheet.ref}
               meta={x.sheet.meta}
@@ -182,6 +182,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               page={x.sheet.page}
               img={`${BP}/images/demo-milates.jpg`}
               alt="MILATES — studio de pilates, Paris"
+              domain="milates.demo"
             />
           </Reveal>
         </div>

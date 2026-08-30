@@ -12,6 +12,7 @@ export default function StrategySheet({
   page,
   onDark = true,
   animateWrites = false,
+  pen = false,
 }: {
   label: string
   refNo: string
@@ -23,6 +24,7 @@ export default function StrategySheet({
   page?: string
   onDark?: boolean
   animateWrites?: boolean
+  pen?: boolean
 }) {
   return (
     <figure className="relative w-full">
@@ -47,7 +49,7 @@ export default function StrategySheet({
           {rows.map((r, i) => (
             <div
               key={r.k}
-              className="grid grid-cols-[1.3rem_5.9rem_minmax(0,1fr)] items-baseline gap-x-2.5 border-b border-dashed border-ink/15 py-[9px] last:border-b-0 md:gap-x-3"
+              className="grid grid-cols-[1.2rem_4.6rem_minmax(0,1fr)] md:grid-cols-[1.3rem_5.9rem_minmax(0,1fr)] items-baseline gap-x-2.5 border-b border-dashed border-ink/15 py-[9px] last:border-b-0 md:gap-x-3"
             >
               <span className="font-mono text-[8.5px] tracking-[0.06em] text-ink/35">
                 {r.no ?? String(i + 1).padStart(2, '0')}
@@ -67,7 +69,7 @@ export default function StrategySheet({
                   </span>
                 )}
                 {r.v ?? <span className="block h-3.5" />}
-                {r.key && r.v && (
+                {r.key && r.v && !pen && (
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 200 8"
@@ -81,6 +83,25 @@ export default function StrategySheet({
                       strokeWidth="1.6"
                       strokeLinecap="round"
                       opacity="0.55"
+                    />
+                  </svg>
+                )}
+                {r.key && r.v && pen && (
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 220 44"
+                    preserveAspectRatio="none"
+                    className="pointer-events-none absolute -inset-x-3 -inset-y-[7px]"
+                  >
+                    <path
+                      d="M14 21 C 28 5, 196 3, 209 17 C 216 32, 168 41, 74 39 C 30 38, 8 32, 16 19"
+                      fill="none"
+                      stroke="#D25A41"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      vectorEffect="non-scaling-stroke"
+                      className="pen-stroke"
+                      opacity="0.8"
                     />
                   </svg>
                 )}
