@@ -119,7 +119,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
         unit: '〜 (€800〜)',
         desc: '1ページでも、10ページでも。戦略から立ち上げる、事業の顔になるサイト。',
         features: [
-          'WHYの言語化と戦略シート(WHY・STP・4P)',
+          '戦略シート8行(診断 → 初手)',
           '構成とコピー',
           'ページ数は相談して決定',
           '多言語',
@@ -224,7 +224,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
         unit: '~ (€800~)',
         desc: '한 페이지든, 열 페이지든. 전략부터 세우는, 사업의 얼굴이 되는 사이트.',
         features: [
-          'WHY 언어화와 전략 시트(WHY·STP·4P)',
+          '전략 시트 여덟 줄(진단 → 첫 수)',
           '구성과 카피',
           '페이지 수는 상담 후 결정',
           '다국어',
@@ -329,7 +329,7 @@ export const SERVICE: Record<Lang, ServiceContent> = {
         unit: '+ (€800+)',
         desc: 'One page or ten. The face of your business, built from strategy up.',
         features: [
-          'The WHY as a strategy sheet (why, STP, 4Ps)',
+          'The eight-line strategy sheet (diagnosis to first move)',
           'Structure and copy',
           'Page count decided together',
           'Multilingual',

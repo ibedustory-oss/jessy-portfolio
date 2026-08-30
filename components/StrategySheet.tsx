@@ -8,6 +8,8 @@ export default function StrategySheet({
   hypLabel,
   rows,
   caption,
+  footer,
+  page,
   onDark = true,
   animateWrites = false,
 }: {
@@ -17,6 +19,8 @@ export default function StrategySheet({
   hypLabel?: string
   rows: { k: string; v?: string; no?: string; key?: boolean; hyp?: boolean }[]
   caption?: string
+  footer?: string
+  page?: string
   onDark?: boolean
   animateWrites?: boolean
 }) {
@@ -84,6 +88,15 @@ export default function StrategySheet({
             </div>
           ))}
         </dl>
+
+        {footer && (
+          <div className="mt-3 flex items-baseline justify-between gap-4 border-t border-ink/20 pt-2">
+            <span className="font-mono text-[8px] tracking-[0.1em] text-ink/45">{footer}</span>
+            {page && (
+              <span className="shrink-0 font-mono text-[8px] tracking-[0.14em] text-ink/45">{page}</span>
+            )}
+          </div>
+        )}
       </div>
 
       {caption && (

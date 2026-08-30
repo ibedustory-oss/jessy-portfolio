@@ -11,6 +11,8 @@ export interface SheetBlock {
   hypLabel: string
   rows: { k: string; v?: string; key?: boolean; hyp?: boolean }[]
   caption: string
+    footer?: string
+    page?: string
 }
 
 export interface CaseBlock {
@@ -93,7 +95,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
-  heroTrust: string
+  offer: { badge: string; cta: string; facts: string[] }
   sheetRefs: SheetRefs
   sheet: SheetBlock
   cases: CaseBlock
@@ -107,7 +109,11 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
-    heroTrust: 'パリ拠点 · 日英韓は自分で書く · 24時間以内に返信',
+    offer: {
+      badge: 'パリ · 小さな店のための戦略とWebサイト',
+      cta: '無料診断を受ける',
+      facts: ['準備はいりません', '30分で、何を先にやるかを整理', '診断メモは依頼と関係なくお渡しします'],
+    },
     sheetRefs: {
       pain: 'シート 01 · 診断',
       alt: 'シート 03 · 代替案',
@@ -117,19 +123,21 @@ export const EXTRA: Record<Lang, Extra> = {
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
-      meta: '作成 Jessy Jung · 対象 JOAYO — Restaurant coréen, Paris 1er',
+      meta: '例 · パリのピラティススタジオ',
       hypLabel: '仮説',
       rows: [
-        { k: '診断', v: 'パリ中心部の韓国料理は、観光客向けの一軒として読まれる' },
-        { k: '用事', v: '座ってちゃんとした一食を食べたい時' },
-        { k: '代替案', v: '近隣の韓国風ビストロ / チェーン' },
-        { k: '戦場', v: 'パリ1区。昼と夜、予約のお客' },
-        { k: '勝ち筋', v: '速さではなく、時間のかかり方を看板に', key: true },
-        { k: '危うい仮説', v: '待つことを価値と読んでもらえるか', hyp: true },
-        { k: '北極星', v: '再訪の予約数' },
-        { k: '初手', v: '甕の庭をトップに。メニュー説明は1品だけ' },
+        { k: '診断', v: 'スタジオは料金と設備で比べられ、人が見えない' },
+        { k: '用事', v: '自分の体に合う先生を探す時' },
+        { k: '代替案', v: '大型スタジオ / アプリ / YouTube' },
+        { k: '戦場', v: 'パリ、1:1予約制のレッスン' },
+        { k: '勝ち筋', v: '設備ではなく、教える人を主役に', key: true },
+        { k: '危うい仮説', v: '先生の考えは予約につながるか', hyp: true },
+        { k: '北極星', v: '指名予約の数' },
+        { k: '初手', v: '雑誌のように。表紙から目次まで' },
       ],
       caption: '',
+      footer: '別紙: ポジショニングマップ · 4P · ファネル設計',
+      page: '1 / 12',
     },
     cases: {
       intro: '実在の店舗ではありません。「誰に・なぜ・どう売るか」を先に決めて、その判断のままつくった自主制作です。',
@@ -264,7 +272,11 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
-    heroTrust: '파리 기반 · 한·일·영 직접 작성 · 24시간 안에 답장',
+    offer: {
+      badge: '파리 · 작은 가게를 위한 전략과 웹사이트',
+      cta: '무료 진단 받기',
+      facts: ['준비물 없음', '30분 안에 무엇부터 할지 정리', '진단 메모는 의뢰와 상관없이 드립니다'],
+    },
     sheetRefs: {
       pain: '시트 01 · 진단',
       alt: '시트 03 · 대안',
@@ -274,19 +286,21 @@ export const EXTRA: Record<Lang, Extra> = {
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
-      meta: '작성 Jessy Jung · 대상 JOAYO — 한식당, 파리 1구',
+      meta: '예시 · 파리의 필라테스 스튜디오',
       hypLabel: '가설',
       rows: [
-        { k: '진단', v: '파리 한복판의 한식은 관광객용 한 곳으로 읽힌다' },
-        { k: '찾는 순간', v: '앉아서 제대로 된 한 끼를 먹고 싶을 때' },
-        { k: '대안', v: '주변의 퓨전 비스트로 / 프랜차이즈' },
-        { k: '싸울 곳', v: '파리 1구. 점심과 저녁, 예약 손님' },
-        { k: '이기는 법', v: '빠름이 아니라, 시간이 드는 방식을 간판으로', key: true },
-        { k: '위험한 가설', v: '기다림을 가치로 읽어줄 것인가', hyp: true },
-        { k: '북극성', v: '다시 찾는 예약의 수' },
-        { k: '첫 수', v: '장독대를 첫 화면에. 메뉴 설명은 하나만' },
+        { k: '진단', v: '스튜디오는 가격과 시설로 비교되고, 사람은 보이지 않는다' },
+        { k: '찾는 순간', v: '내 몸에 맞는 선생님을 찾을 때' },
+        { k: '대안', v: '대형 스튜디오 / 앱 / 유튜브 홈트' },
+        { k: '싸울 곳', v: '파리, 1:1 예약제 수업' },
+        { k: '이기는 법', v: '시설이 아니라, 가르치는 사람을 주인공으로', key: true },
+        { k: '위험한 가설', v: '강사의 생각이 예약으로 이어질까', hyp: true },
+        { k: '북극성', v: '지명 예약의 수' },
+        { k: '첫 수', v: '잡지 한 권처럼. 표지부터 목차까지' },
       ],
       caption: '',
+      footer: '별지: 포지셔닝 맵 · 4P · 퍼널 설계',
+      page: '1 / 12',
     },
     cases: {
       intro: '실제 매장이 아닙니다. 누구에게·왜·어떻게 팔지를 먼저 정하고, 그 판단 그대로 만든 자체 제작입니다.',
@@ -421,7 +435,11 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
-    heroTrust: 'Based in Paris · JA/KO/EN written in-house · Replies within a day',
+    offer: {
+      badge: 'Paris · Strategy and websites for small businesses',
+      cta: 'Book a free diagnosis',
+      facts: ['Nothing to prepare', 'Thirty minutes, priorities sorted', 'You keep the diagnosis notes either way'],
+    },
     sheetRefs: {
       pain: 'Sheet 01 · Diagnosis',
       alt: 'Sheet 03 · Alternatives',
@@ -431,19 +449,21 @@ export const EXTRA: Record<Lang, Extra> = {
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
-      meta: 'By Jessy Jung · For JOAYO — Korean restaurant, Paris 1er',
+      meta: 'Example · A Pilates studio in Paris',
       hypLabel: 'bet',
       rows: [
-        { k: 'Diagnosis', v: 'Korean food in central Paris reads as a tourist stop' },
-        { k: 'The job', v: 'A proper sit-down meal, not a quick fix' },
-        { k: 'Alternatives', v: 'Nearby Korean-style bistros and chains' },
-        { k: 'Where we play', v: 'Paris 1er. Lunch, dinner, bookings' },
-        { k: 'How we win', v: 'Lead with how long things take, not how fast', key: true },
-        { k: 'Riskiest bet', v: 'That waiting reads as value', hyp: true },
-        { k: 'North star', v: 'Returning reservations' },
-        { k: 'First move', v: 'Jars on the first screen. One dish described' },
+        { k: 'Diagnosis', v: 'Studios get compared on price and equipment; the person stays invisible' },
+        { k: 'The job', v: 'Finding a teacher who fits your body' },
+        { k: 'Alternatives', v: 'Big studios / apps / YouTube workouts' },
+        { k: 'Where we play', v: 'Paris, one-to-one booked sessions' },
+        { k: 'How we win', v: 'The teacher, not the room, is the story', key: true },
+        { k: 'Riskiest bet', v: 'That her thinking turns into bookings', hyp: true },
+        { k: 'North star', v: 'Bookings that ask for her by name' },
+        { k: 'First move', v: 'Build it as a magazine, cover to contents' },
       ],
       caption: '',
+      footer: 'Annex: positioning map · 4P · funnel',
+      page: '1 / 12',
     },
     cases: {
       intro: 'None of these are real shops. Each began by deciding who it is for, why, and how it sells, and was then built exactly as that decision.',
