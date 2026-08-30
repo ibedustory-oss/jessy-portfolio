@@ -74,6 +74,13 @@ export interface PlanExtra {
   items: { best: string; excludes: string[] }[]
 }
 
+export interface SheetRefs {
+  pain: string
+  alt: string
+  field: string
+  north: string
+}
+
 export interface NavBlock {
   why: string
   finder: string
@@ -84,6 +91,7 @@ export interface NavBlock {
 }
 
 export interface Extra {
+  sheetRefs: SheetRefs
   sheet: SheetBlock
   cases: CaseBlock
   map: MapBlock
@@ -96,6 +104,12 @@ export interface Extra {
 
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
+    sheetRefs: {
+      pain: 'シート 01 · 診断',
+      alt: 'シート 03 · 代替案',
+      field: 'シート 04–05 · 戦場と勝ち筋',
+      north: 'シート 07 · 北極星',
+    },
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
@@ -196,7 +210,7 @@ export const EXTRA: Record<Lang, Extra> = {
           label: '何を伝えればいいか決まっていない',
           plan: 0,
           weeks: '3〜4週間',
-          what: 'WHYの言語化から始めます。誰に・なぜ・何を言わないかが1枚に収まるまで、デザインには入りません。',
+          what: '診断から始めます。何が障害かが1行で書けるまで、デザインには入りません。',
         },
         {
           label: 'サイトはあるが問い合わせが来ない',
@@ -244,17 +258,23 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   ko: {
+    sheetRefs: {
+      pain: '시트 01 · 진단',
+      alt: '시트 03 · 대안',
+      field: '시트 04–05 · 싸울 곳과 이기는 법',
+      north: '시트 07 · 북극성',
+    },
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
       rows: [
-        { k: '진단', v: '"만들기"는 싸졌다. 비어 있는 건 정하는 일.' },
-        { k: '부르는 이유', v: '무엇을 말할지 정하지 못할 때' },
+        { k: '진단', v: '만드는 일은 싸졌다. 비어 있는 건 정하는 일.' },
+        { k: '찾는 순간', v: '무슨 말을 해야 할지 모르게 됐을 때' },
         { k: '대안', v: '제작사 / 템플릿 / 직접 AI' },
         { k: '싸울 곳', v: '파리의 작은 가게와 사업자' },
-        { k: '이기는 법', v: '정한 다음 만든다. 언어도 직접' },
+        { k: '이기는 법', v: '정한 다음에 만든다. 언어도 직접 쓴다' },
         { k: '위험한 가설', v: '"정하는 일"에 돈을 낼 사람이 있는가' },
-        { k: '북극성', v: '소개로 오는 상담 수' },
+        { k: '북극성', v: '소개로 들어오는 상담 수' },
         { k: '첫 수', v: '모니터 세 건을 사례로 만든다' },
       ],
       caption: '이건 제 것입니다. 사장님 것은 아직 백지입니다.',
@@ -298,10 +318,10 @@ export const EXTRA: Record<Lang, Extra> = {
       title: '사장님들께',
       titleAccent: '자주 듣는 말입니다.',
       quotes: [
-        '예쁜 사이트는 나왔습니다. 그런데 문의는 늘지 않았습니다.',
-        '뭘 써야 하냐고 물으시는데, 저도 말로 정리가 안 됩니다.',
-        '경쟁사와 나란히 놓였을 때, 우리를 골라야 할 이유를 설명하지 못합니다.',
-        'AI로 다 된다는데, 결국 이것저것 시간과 돈만 쓰고 완성을 못 했습니다.',
+        '예쁜 사이트는 나왔어요. 그런데 문의는 안 늘더라고요.',
+        '뭘 써야 하냐고 묻는데, 저도 말로는 정리가 안 돼요.',
+        '옆 가게랑 나란히 놓고 보면, 우리를 골라야 할 이유를 저도 설명 못 하겠어요.',
+        'AI로 다 된다길래 해봤는데, 이것저것 시간이랑 돈만 쓰고 완성을 못 했어요.',
       ],
       close: '전부 디자인의 문제가 아닙니다.',
     },
@@ -310,7 +330,7 @@ export const EXTRA: Record<Lang, Extra> = {
       sheetLabel: 'Strategy sheet',
       draftRef: '초안',
       title: '두 가지만 고르시면,',
-      titleAccent: '진행 방식이 한 장이 됩니다.',
+      titleAccent: '초안 한 장이 나옵니다.',
       lead: '첫 상담은 이 초안에서 시작합니다.',
       sizeLead: '저는',
       painLead: '지금',
@@ -328,11 +348,11 @@ export const EXTRA: Record<Lang, Extra> = {
         },
         {
           label: '혼자 사업을 하는 중',
-          how: '이미 있는 말과 실적을 정리한 다음, 부족한 부분만 만듭니다. 처음부터 다시 하지 않습니다.',
+          how: '이미 가지고 계신 문장과 결과물부터 정리하고, 부족한 부분만 새로 만듭니다. 처음부터 다시 하지 않습니다.',
         },
         {
           label: '작은 팀으로 하는 중',
-          how: '결정권이 있는 분도 첫 미팅에 함께 들어와 주십시오. 나중에 원점으로 돌아가는 걸 막기 위해서입니다.',
+          how: '결정권 있는 분도 첫 미팅에 같이 계시는 게 좋습니다. 나중에 원점으로 돌아가는 일을 막기 위해서입니다.',
         },
         {
           label: '매장을 운영 중',
@@ -341,10 +361,10 @@ export const EXTRA: Record<Lang, Extra> = {
       ],
       pains: [
         {
-          label: '무엇을 말해야 할지 정해지지 않았다',
+          label: '무슨 말을 해야 할지 모르겠다',
           plan: 0,
           weeks: '3~4주',
-          what: 'WHY를 언어화하는 것부터 합니다. 누구에게·왜·무엇을 말하지 않을지가 한 장에 담기기 전까지는 디자인에 들어가지 않습니다.',
+          what: '진단부터 합니다. 무엇이 걸림돌인지 한 줄로 적히기 전까지는 디자인에 들어가지 않습니다.',
         },
         {
           label: '사이트는 있는데 문의가 없다',
@@ -353,16 +373,16 @@ export const EXTRA: Record<Lang, Extra> = {
           what: '지금 사이트를 읽고 어디서 이탈하는지 봅니다. 새로 만드는 것보다 한 페이지로 좁히는 게 빠를 때가 많습니다.',
         },
         {
-          label: '여러 언어로 내고 싶다',
+          label: '여러 언어로 운영하고 싶다',
           plan: 0,
           weeks: '4주',
           what: '한국어·일본어·영어는 제가 씁니다. 번역이 아니라 그 언어로 읽히는 글로 다시 씁니다. 불어는 원어민 감수를 붙입니다.',
         },
         {
-          label: '공개한 다음에 뭘 해야 할지 모르겠다',
+          label: '오픈한 다음에 뭘 해야 할지 모르겠다',
           plan: 1,
           weeks: '첫 달부터',
-          what: '검색·SNS·소개 중 어디서 사람을 데려올지 설계도로 만들고, 달마다 할 일을 정합니다.',
+          what: '검색·SNS·소개 중 어디서 손님이 오게 할지 정하고, 북극성 지표를 같이 보면서 달마다 다음 한 수를 정합니다.',
         },
       ],
     },
@@ -392,6 +412,12 @@ export const EXTRA: Record<Lang, Extra> = {
   },
 
   en: {
+    sheetRefs: {
+      pain: 'Sheet 01 · Diagnosis',
+      alt: 'Sheet 03 · Alternatives',
+      field: 'Sheet 04–05 · Where and how',
+      north: 'Sheet 07 · North star',
+    },
     sheet: {
       label: 'Strategy sheet',
       ref: 'N°01',
@@ -492,7 +518,7 @@ export const EXTRA: Record<Lang, Extra> = {
           label: 'I have not decided what to say',
           plan: 0,
           weeks: '3–4 weeks',
-          what: 'We start by writing the WHY. Design waits until who, why, and what we refuse to say all fit on one page.',
+          what: 'We start with the diagnosis. Design waits until the obstacle fits on one line.',
         },
         {
           label: 'I have a site but no enquiries',

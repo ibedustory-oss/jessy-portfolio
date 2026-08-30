@@ -8,12 +8,14 @@ export default function StrategySheet({
   rows,
   caption,
   onDark = true,
+  animateWrites = false,
 }: {
   label: string
   refNo: string
   rows: { k: string; v?: string }[]
   caption?: string
   onDark?: boolean
+  animateWrites?: boolean
 }) {
   return (
     <figure className="relative w-full">
@@ -34,7 +36,12 @@ export default function StrategySheet({
               <dt className="break-keep font-mono text-[9.5px] uppercase tracking-[0.14em] text-ink/40">
                 {r.k}
               </dt>
-              <dd className="relative text-[12.5px] font-medium leading-snug text-ink">
+              <dd
+                key={animateWrites ? (r.v ?? 'blank') : undefined}
+                className={`relative text-[12.5px] font-medium leading-snug text-ink ${
+                  animateWrites && r.v ? 'sheet-write' : ''
+                }`}
+              >
                 {r.v ?? <span className="block h-3.5" />}
                 {i === 0 && r.v && (
                   <svg

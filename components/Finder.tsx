@@ -84,6 +84,7 @@ export default function Finder({ block, contact }: { block: FinderBlock; contact
           refNo={block.draftRef}
           rows={rows}
           onDark={false}
+          animateWrites
         />
       </div>
 

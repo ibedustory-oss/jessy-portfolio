@@ -11,17 +11,38 @@ import { EXTRA } from '@/lib/service-extra'
 
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
-function Label({ n, children, dark }: { n: string; children: React.ReactNode; dark?: boolean }) {
+function Label({
+  n,
+  children,
+  dark,
+  sheetRef,
+}: {
+  n: string
+  children: React.ReactNode
+  dark?: boolean
+  sheetRef?: string
+}) {
   return (
-    <p
-      className={`font-mono text-[10px] uppercase tracking-[0.28em] ${
-        dark ? 'text-white/40' : 'text-warmgray'
-      }`}
-    >
-      <span className={dark ? 'text-white/25' : 'text-ink/25'}>{n}</span>
-      <span className="px-2.5">/</span>
-      {children}
-    </p>
+    <div>
+      <p
+        className={`font-mono text-[10px] uppercase tracking-[0.28em] ${
+          dark ? 'text-white/40' : 'text-warmgray'
+        }`}
+      >
+        <span className={dark ? 'text-white/25' : 'text-ink/25'}>{n}</span>
+        <span className="px-2.5">/</span>
+        {children}
+      </p>
+      {sheetRef && (
+        <p
+          className={`mt-3 inline-block border-l-2 pl-2.5 font-mono text-[9.5px] tracking-[0.12em] ${
+            dark ? 'border-accentlit/60 text-white/45' : 'border-accent/50 text-warmgray'
+          }`}
+        >
+          ↳ {sheetRef}
+        </p>
+      )}
+    </div>
   )
 }
 
@@ -69,7 +90,25 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
               {s.badge}
             </p>
             <h1 className="mt-10 max-w-[19ch] text-[26px] font-extrabold leading-[1.3] tracking-tightest text-white sm:text-[34px] md:text-[50px] md:leading-[1.18] lg:break-keep lg:text-[72px] xl:text-[84px]">
-              {s.headline}
+              <span className="relative inline-block">
+                {s.headline}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 340 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-1 left-0 h-[7px] w-full text-accentlit md:-bottom-2 md:h-[11px]"
+                >
+                  <path
+                    className="draw"
+                    d="M3 8.6C62 4.2 142 2.8 208 4.8c38 1.1 76 2.9 129 1.6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.6"
+                    strokeLinecap="round"
+                    strokeDasharray="340"
+                  />
+                </svg>
+              </span>
               <br />
               {s.headlineAccent}
             </h1>
@@ -93,7 +132,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-3">
               <Reveal>
-                <Label n="01">{x.pain.eyebrow}</Label>
+                <Label n="01" sheetRef={x.sheetRefs.pain}>{x.pain.eyebrow}</Label>
               </Reveal>
             </div>
 
@@ -141,6 +180,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink">
                       {s.aiwhy.cantTitle}
+                    </p>
+                    <p className="mt-2 inline-block border-l-2 border-accent/50 pl-2.5 font-mono text-[9.5px] tracking-[0.12em] text-warmgray">
+                      ↳ {x.sheetRefs.alt}
                     </p>
                     <ul className="mt-5 space-y-2.5">
                       {s.aiwhy.cant.map((c) => (
@@ -195,7 +237,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           <div className="grid gap-y-16 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-4">
               <Reveal>
-                <Label n="02">{x.finder.eyebrow}</Label>
+                <Label n="02" sheetRef={x.sheetRefs.field}>{x.finder.eyebrow}</Label>
               </Reveal>
               <Reveal delay={60}>
                 <div className="mt-12 max-w-[24rem] md:sticky md:top-24 md:mt-16">
@@ -336,7 +378,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-3">
               <Reveal>
-                <Label n="04">{x.eyebrows.steps}</Label>
+                <Label n="04" sheetRef={x.sheetRefs.north}>{x.eyebrows.steps}</Label>
               </Reveal>
             </div>
             <div className="md:col-span-8 md:col-start-5">

@@ -137,6 +137,13 @@ summary:focus-visible {
 }
 .finder-in { animation: finder-in 0.55s cubic-bezier(0.23, 1, 0.32, 1) both; }
 
+/* a sheet line being written: ink settling onto the paper */
+@keyframes sheet-write {
+  from { opacity: 0; transform: translateY(3px); filter: blur(1.5px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+.sheet-write { animation: sheet-write 0.45s cubic-bezier(0.23, 1, 0.32, 1) both; }
+
 /* the objections arrive the way a message does */
 @keyframes msg-in {
   0%   { opacity: 0; transform: translateY(14px) scale(0.94); }
