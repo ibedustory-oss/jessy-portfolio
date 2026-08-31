@@ -139,6 +139,18 @@ a{color:inherit;text-decoration:none;}
 .about-ph{align-self:end;}
 .about-ph .ph{height:clamp(230px,30vw,330px);}
 
+/* ---------- how a Korean table is built ---------- */
+.rule{display:grid;grid-template-columns:12% 1fr;align-items:start;
+  border-top:1px solid var(--line);padding:60px 0 70px;}
+.rule-lbl{padding:2px 0 0 34px;}
+.rule-body{padding:0 6% 0 2%;}
+.rule-h{font-size:clamp(20px,1.9vw,25px);font-weight:400;line-height:1.42;letter-spacing:-.005em;max-width:26ch;}
+.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 7%;margin-top:46px;}
+.rule-i{border-top:1px solid var(--ink);padding-top:18px;}
+.rule-k{font-family:var(--kr);font-size:25px;font-weight:500;line-height:1;letter-spacing:.01em;}
+.rule-r{margin-top:9px;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);}
+.rule-p{margin-top:16px;font-size:13px;line-height:1.85;color:var(--ink-60);max-width:30ch;}
+
 /* ---------- signature + menu ---------- */
 .sig{display:grid;grid-template-columns:24% 22% 1fr;align-items:stretch;border-top:1px solid var(--line);}
 .sig-ph .ph{height:100%;min-height:clamp(300px,34vw,430px);}
@@ -196,6 +208,10 @@ a{color:inherit;text-decoration:none;}
   .about-lbl{display:none;}
   .about-txt{padding:40px 6% 44px 24px;}
   .about-ph .ph{height:100%;min-height:260px;}
+  .rule{grid-template-columns:1fr;padding:44px 0 52px;}
+  .rule-lbl{padding-left:24px;}
+  .rule-body{padding:22px 24px 0;}
+  .rule-grid{gap:0 5%;margin-top:36px;}
   .sig{grid-template-columns:34% 1fr;}
   .sig-txt{padding:36px 24px 34px;}
   .menu{grid-column:1/3;border-left:0;border-top:1px solid var(--line);padding:36px 24px 34px;}
@@ -226,6 +242,12 @@ a{color:inherit;text-decoration:none;}
   .about-txt h1{font-size:26px;max-width:none;}
   .about-txt p{max-width:none;}
   .about-ph .ph{height:52vw;min-height:0;}
+  .rule{padding:36px 0 40px;}
+  .rule-lbl{padding-left:18px;}
+  .rule-body{padding:18px 18px 0;}
+  .rule-h{font-size:20px;max-width:none;}
+  .rule-grid{grid-template-columns:1fr;gap:26px;margin-top:30px;}
+  .rule-p{max-width:none;}
   .sig{grid-template-columns:1fr;}
   .sig-ph .ph{min-height:78vw;}
   .sig-txt{padding:28px 18px 26px;}
@@ -291,6 +313,30 @@ a{color:inherit;text-decoration:none;}
       <div class="ph tilt">
         <img src="joayo-photos/room-tables.jpg" width="270" height="170" loading="lazy"
            alt="Salle : tables dressées, suspensions et branches dans un vase.">
+      </div>
+    </div>
+  </section>
+
+  <section class="rule">
+    <div class="rule-lbl"><span class="lbl" data-i18n="ru_lbl">Riz, soupe, banchan</span></div>
+    <div class="rule-body">
+      <p class="rule-h" data-i18n="ru_h" data-rise>Une table coréenne se construit toujours de la même façon.</p>
+      <div class="rule-grid">
+        <div class="rule-i" data-rise>
+          <p class="rule-k">밥</p>
+          <p class="rule-r">Bap</p>
+          <p class="rule-p" data-i18n="ru_1">On ne commande pas de plat principal. Le bol de riz l'est déjà, et le reste vient s'y accorder.</p>
+        </div>
+        <div class="rule-i d1" data-rise>
+          <p class="rule-k">국</p>
+          <p class="rule-r">Guk</p>
+          <p class="rule-p" data-i18n="ru_2">La soupe n'est pas une entrée. Elle arrive avec le riz et reste jusqu'à la fin du repas.</p>
+        </div>
+        <div class="rule-i d2" data-rise>
+          <p class="rule-k">반찬</p>
+          <p class="rule-r">Banchan</p>
+          <p class="rule-p" data-i18n="ru_3">Les banchan ne se commandent pas. Ils arrivent avec le repas, se partagent et se resservent.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -427,6 +473,11 @@ fr: {
   ab_h:"Nous cuisinons la nourriture avec laquelle nous avons grandi.",
   ab_p:"Riz, soupe, banchan, viande grillée et plats à partager.",
   ab_link:"About Joayo",
+  ru_lbl:"Riz, soupe, banchan",
+  ru_h:"Une table coréenne se construit toujours de la même façon.",
+  ru_1:"On ne commande pas de plat principal. Le bol de riz l'est déjà, et le reste vient s'y accorder.",
+  ru_2:"La soupe n'est pas une entrée. Elle arrive avec le riz et reste jusqu'à la fin du repas.",
+  ru_3:"Les banchan ne se commandent pas. Ils arrivent avec le repas, se partagent et se resservent.",
   sig_lbl:"Signature", menu_lbl:"Menu",
   c_rice:"Riz", c_soup:"Soupe", c_grill:"Grill", c_share:"À partager",
   d1:"Yukhoe Bibimbap", d2:"Bibimbap", d3:"Kimchi Bokkeumbap",
@@ -447,6 +498,11 @@ en: {
   ab_h:"We cook the food we grew up eating.",
   ab_p:"Rice, soup, banchan, grilled meat and dishes made to share.",
   ab_link:"About Joayo",
+  ru_lbl:"Rice, soup, banchan",
+  ru_h:"A Korean table is built the same way every time.",
+  ru_1:"You do not order a main course. The bowl of rice is already the main course, and the rest is arranged around it.",
+  ru_2:"The soup is not a starter. It comes with the rice and stays to the end of the meal.",
+  ru_3:"Banchan are not ordered. They arrive with the meal, they are shared, and they are refilled.",
   sig_lbl:"Signature", menu_lbl:"Menu",
   c_rice:"Rice", c_soup:"Soup", c_grill:"Grill", c_share:"To share",
   d1:"Yukhoe Bibimbap", d2:"Bibimbap", d3:"Kimchi Bokkeumbap",
@@ -467,6 +523,11 @@ ko: {
   ab_h:"우리가 먹고 자란 음식을 그대로 만듭니다.",
   ab_p:"밥, 국, 반찬, 구이, 그리고 나눠 먹는 것들.",
   ab_link:"좋아요 소개",
+  ru_lbl:"밥 · 국 · 반찬",
+  ru_h:"한국 밥상은 언제나 같은 방식으로 차려집니다.",
+  ru_1:"메인 요리를 따로 시키지 않는다. 밥 한 그릇이 이미 메인이고, 나머지가 거기에 맞춘다.",
+  ru_2:"국은 전채가 아니다. 밥과 같이 나와서 끝까지 옆에 있는다.",
+  ru_3:"반찬은 주문하는 게 아니다. 상과 함께 나오고, 같이 먹고, 모자라면 더 낸다.",
   sig_lbl:"대표 메뉴", menu_lbl:"메뉴",
   c_rice:"한 그릇", c_soup:"끓인 것", c_grill:"구운 것", c_share:"나눠 먹는 것",
   d1:"육회, 나물, 참기름", d2:"나물과 고추장", d3:"묵은지, 계란",
