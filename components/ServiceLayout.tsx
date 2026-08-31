@@ -4,7 +4,6 @@ import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
-import PitchSlot from '@/components/PitchSlot'
 import StrategySheet from '@/components/StrategySheet'
 import { Term } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
@@ -115,7 +114,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
   return (
     <div className="bg-ink pb-2 md:pb-5">
-      {/* ============ HERO — the pitch, with the shop it is addressed to changing in the braces ============ */}
+      {/* ============ HERO — the Why, then the two questions under it ============ */}
       <section className="relative flex min-h-[70vh] items-center px-6 py-20 md:px-10 md:py-24">
         <div className="mx-auto w-full max-w-[1180px]">
           <Reveal>
@@ -124,26 +123,29 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             </p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <p
-              className={`mt-14 ${bk} text-[clamp(19px,2.5vw,32px)] font-bold leading-[1.5] tracking-tight text-white/75`}
+          <Reveal delay={90}>
+            <h1
+              className={`mt-14 ${bk} text-[clamp(28px,4vw,54px)] font-extrabold leading-[1.16] tracking-tightest text-white`}
             >
-              {x.heroLine.pre} <PitchSlot words={x.heroLine.slots} /> {x.heroLine.post}
+              {x.heroLine.lead} <span className="text-pen">{x.heroLine.why}</span>
+              {lang === 'ko' ? '입니다.' : lang === 'ja' ? 'です。' : '.'}
+            </h1>
+            <p
+              className={`mt-7 max-w-[26ch] ${bk} text-[clamp(18px,2.1vw,27px)] font-bold leading-[1.5] text-white/70`}
+            >
+              {x.heroLine.q1}
+              <br />
+              {x.heroLine.q2}
             </p>
           </Reveal>
 
-          <Reveal delay={140}>
-            <p
-              className={`mt-8 max-w-[24ch] ${bk} text-[clamp(27px,3.9vw,52px)] font-extrabold leading-[1.14] tracking-tightest text-white`}
-            >
-              {x.heroLine.payoff}
-            </p>
-            <p className="mt-6 max-w-[36ch] text-[clamp(14.5px,1.2vw,17px)] leading-[1.7] text-white/55">
-              {x.heroLine.sub}
+          <Reveal delay={160}>
+            <p className="mt-12 max-w-[38ch] text-[clamp(14.5px,1.2vw,17px)] leading-[1.7] text-white/55">
+              {x.heroLine.close}
             </p>
           </Reveal>
 
-          <Reveal delay={200}>
+          <Reveal delay={210}>
             <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-white/10 pt-9">
               <Button href={contact}>{x.offer.cta}</Button>
               <p className="font-mono text-[11px] tracking-[0.08em] text-white/45">{x.offer.facts[0]}</p>

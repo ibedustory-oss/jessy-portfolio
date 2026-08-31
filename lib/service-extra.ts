@@ -98,11 +98,11 @@ export interface Extra {
   offer: { badge: string; cta: string; facts: string[] }
   sheetLead: string
   heroLine: {
-    pre: string
-    slots: string[]
-    post: string
-    payoff: string
-    sub: string
+    lead: string
+    why: string
+    q1: string
+    q2: string
+    close: string
   }
   tools: {
     eyebrow: string
@@ -130,16 +130,16 @@ export interface Extra {
 export const EXTRA: Record<Lang, Extra> = {
   ja: {
     offer: {
-      badge: 'パリ · 小さな店のための戦略とWebサイト',
+      badge: 'ブランド戦略とウェブサイト',
       cta: '無料診断を受ける',
       facts: ['無料 · 30分 · 準備は不要'],
     },
     heroLine: {
-      pre: 'パリで',
-      slots: ['韓国料理店', 'ピラティススタジオ', '花屋', '本屋', 'カフェ'],
-      post: 'をやっている方へ。',
-      payoff: 'なぜ選ばれるのかを先に決めて、それをサイトにします。',
-      sub: '決まっていないまま作ったものは、全部飾りになります。',
+      lead: 'まず考えるのは',
+      why: 'Why',
+      q1: '誰に必要なサービスなのか、',
+      q2: 'その人をどう変えたいのか。',
+      close: 'ウェブサイトは、その答えを見せる場所です。',
     },
     sheetLead: '30分の診断のあと、こういう一枚をお渡しします。',
     tools: {
@@ -365,16 +365,16 @@ export const EXTRA: Record<Lang, Extra> = {
 
   ko: {
     offer: {
-      badge: '파리 · 작은 가게를 위한 전략과 웹사이트',
+      badge: '브랜드 전략과 웹사이트',
       cta: '무료 진단 받기',
       facts: ['무료 · 30분 · 준비물 없음'],
     },
     heroLine: {
-      pre: '파리에서',
-      slots: ['한식당', '필라테스 스튜디오', '꽃집', '서점', '카페'],
-      post: '하시는 사장님께.',
-      payoff: '왜 선택받는지를 먼저 정하고, 그걸 사이트로 만듭니다.',
-      sub: '정해지지 않은 채로 만든 건, 전부 장식이 됩니다.',
+      lead: '먼저 생각하는 건',
+      why: 'Why',
+      q1: '누구에게 필요한 서비스인지,',
+      q2: '그 사람을 어떻게 바꾸고 싶은지.',
+      close: '웹사이트는 그 답을 보여주는 공간입니다.',
     },
     sheetLead: '30분 진단이 끝나면, 이런 한 장을 드립니다.',
     tools: {
@@ -600,16 +600,16 @@ export const EXTRA: Record<Lang, Extra> = {
 
   en: {
     offer: {
-      badge: 'Paris · Strategy and websites for small businesses',
+      badge: 'Brand strategy and websites',
       cta: 'Book a free diagnosis',
       facts: ['Free · 30 minutes · nothing to prepare'],
     },
     heroLine: {
-      pre: 'For the',
-      slots: ['Korean restaurant', 'pilates studio', 'florist', 'bookshop', 'café'],
-      post: 'in Paris.',
-      payoff: 'We settle why you get chosen, then build the site from it.',
-      sub: 'Anything built before that is decoration.',
+      lead: 'What comes first is the',
+      why: 'Why',
+      q1: 'Who needs this service,',
+      q2: 'and how it should change them.',
+      close: 'The website is where that answer is shown.',
     },
     sheetLead: 'Thirty minutes in, you leave with a page like this.',
     tools: {
