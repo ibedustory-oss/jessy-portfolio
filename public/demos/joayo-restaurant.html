@@ -36,15 +36,15 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
 a{color:inherit;text-decoration:none;}
 :focus-visible{outline:1.5px solid var(--ink);outline-offset:3px;}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;}
-  .ph:before{display:none;} .ph img,[data-rise]{opacity:1!important;transform:none!important;}}
+  .ph:before{display:none;} .ph img,.ph video,[data-rise]{opacity:1!important;transform:none!important;}}
 
 /* photographs arrive: the frame opens and the image settles out of a slow push-in */
 .ph:before{content:'';position:absolute;inset:0;z-index:3;background:var(--paper);
   transform-origin:50% 100%;transform:scaleY(1);
   transition:transform 1.05s cubic-bezier(.22,.85,.24,1);}
 .ph.seen:before{transform:scaleY(0);}
-.ph img{transform:scale(1.08);transition:transform 1.7s cubic-bezier(.22,.85,.24,1);will-change:transform;}
-.ph.seen img{transform:scale(1);}
+.ph img,.ph video{transform:scale(1.08);transition:transform 1.7s cubic-bezier(.22,.85,.24,1);will-change:transform;}
+.ph.seen img,.ph.seen video{transform:scale(1);}
 
 /* words rise once, a beat behind their picture */
 [data-rise]{opacity:0;transform:translateY(12px);
@@ -53,7 +53,7 @@ a{color:inherit;text-decoration:none;}
 [data-rise].d1{transition-delay:.08s;} [data-rise].d2{transition-delay:.16s;} [data-rise].d3{transition-delay:.24s;}
 
 /* the hero drifts slower than the page */
-.hero .ph img{will-change:transform;}
+.hero .ph video{will-change:transform;}
 
 /* pointer moves the picture inside its frame, a few pixels only */
 .tilt img{transition:transform 1.6s cubic-bezier(.22,.85,.24,1),translate .6s cubic-bezier(.22,.85,.24,1);}
@@ -77,10 +77,36 @@ a{color:inherit;text-decoration:none;}
 .mob a{transition:opacity .3s ease;}
 .mob a:active{opacity:.8;}
 
+/* a dish lifts its own photograph to the fingertip */
+.peek{position:fixed;top:0;left:0;z-index:80;width:190px;height:142px;pointer-events:none;
+  opacity:0;transform:translate(-50%,-50%) scale(.94);
+  transition:opacity .32s ease,transform .45s cubic-bezier(.22,.85,.24,1);
+  overflow:hidden;background:var(--paper-2);}
+.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1);}
+.peek img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.dish[data-photo]{cursor:default;}
+
+/* the four lines are set down one after another */
+.band-txt .set{display:block;opacity:0;transform:translateY(9px);
+  transition:opacity .7s cubic-bezier(.22,.85,.24,1),transform .7s cubic-bezier(.22,.85,.24,1);}
+.band-txt.seen .set{opacity:1;transform:none;}
+.band-txt.seen .set:nth-child(1){transition-delay:.10s;}
+.band-txt.seen .set:nth-child(2){transition-delay:.42s;}
+.band-txt.seen .set:nth-child(3){transition-delay:.74s;}
+.band-txt.seen .set:nth-child(4){transition-delay:1.06s;}
+
+/* whether the room is open, right now */
+.status{display:flex;align-items:baseline;gap:8px;margin-top:16px;font-size:12.5px;}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--ink-40);display:block;flex:none;
+  transform:translateY(-1px);}
+.status.open i{background:#5C7A52;}
+.status b{font-weight:500;}
+.status span{color:var(--ink-60);}
+
 .lbl{font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);}
 .kr{font-family:var(--kr);}
 .ph{position:relative;overflow:hidden;background:var(--paper-2);}
-.ph img{position:absolute;inset:0;}
+.ph img,.ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .arrow{display:inline-block;margin-left:.5em;}
 
 /* ---------- header ---------- */
@@ -244,8 +270,9 @@ a{color:inherit;text-decoration:none;}
 
   <section class="hero">
     <div class="ph">
-      <img src="joayo-photos/table-hero.jpg" width="478" height="434" fetchpriority="high"
-           alt="Table dressée au soleil : riz, soupes, banchan et viande sur le gril.">
+      <video src="joayo-video/table.mp4" poster="joayo-video/table-poster.jpg"
+             width="1920" height="1218" autoplay muted loop playsinline preload="auto"
+             aria-label="Une table dressée au soleil : riz et soupe en bols de laiton, banchan tout autour."></video>
     </div>
     <div class="hero-cap" data-rise>
       <p data-i18n="hero_cap">Korean table, Paris.</p>
@@ -288,29 +315,29 @@ a{color:inherit;text-decoration:none;}
         <div>
           <div class="course">
             <p class="course-h"><span class="k">밥</span><span data-i18n="c_rice">Rice</span></p>
-            <p class="dish"><span class="k">육회비빔밥</span><span class="r" data-i18n="d1">Yukhoe Bibimbap</span><span class="p">16,5</span></p>
-            <p class="dish"><span class="k">비빔밥</span><span class="r" data-i18n="d2">Bibimbap</span><span class="p">14,5</span></p>
-            <p class="dish"><span class="k">김치볶음밥</span><span class="r" data-i18n="d3">Kimchi Bokkeumbap</span><span class="p">14</span></p>
+            <p class="dish" data-photo="joayo-photos/bibimbap.jpg"><span class="k">육회비빔밥</span><span class="r" data-i18n="d1">Yukhoe Bibimbap</span><span class="p">16,5</span></p>
+            <p class="dish" data-photo="joayo-photos/d-rice.jpg"><span class="k">비빔밥</span><span class="r" data-i18n="d2">Bibimbap</span><span class="p">14,5</span></p>
+            <p class="dish" data-photo="joayo-photos/d-kimchi.jpg"><span class="k">김치볶음밥</span><span class="r" data-i18n="d3">Kimchi Bokkeumbap</span><span class="p">14</span></p>
           </div>
           <div class="course">
             <p class="course-h"><span class="k">국</span><span data-i18n="c_soup">Soup</span></p>
-            <p class="dish"><span class="k">김치찌개</span><span class="r" data-i18n="d4">Kimchi Jjigae</span><span class="p">15</span></p>
-            <p class="dish"><span class="k">된장찌개</span><span class="r" data-i18n="d5">Doenjang Jjigae</span><span class="p">14,5</span></p>
-            <p class="dish"><span class="k">설렁탕</span><span class="r" data-i18n="d6">Seolleongtang</span><span class="p">16</span></p>
+            <p class="dish" data-photo="joayo-photos/d-kimchi.jpg"><span class="k">김치찌개</span><span class="r" data-i18n="d4">Kimchi Jjigae</span><span class="p">15</span></p>
+            <p class="dish" data-photo="joayo-photos/d-braised.jpg"><span class="k">된장찌개</span><span class="r" data-i18n="d5">Doenjang Jjigae</span><span class="p">14,5</span></p>
+            <p class="dish" data-photo="joayo-photos/d-rice.jpg"><span class="k">설렁탕</span><span class="r" data-i18n="d6">Seolleongtang</span><span class="p">16</span></p>
           </div>
         </div>
         <div>
           <div class="course">
             <p class="course-h"><span class="k">불</span><span data-i18n="c_grill">Grill</span></p>
-            <p class="dish"><span class="k">제육볶음</span><span class="r" data-i18n="d7">Jeyuk Bokkeum</span><span class="p">17</span></p>
-            <p class="dish"><span class="k">불고기</span><span class="r" data-i18n="d8">Bulgogi</span><span class="p">18,5</span></p>
-            <p class="dish"><span class="k">삼겹살</span><span class="r" data-i18n="d9">Samgyeopsal</span><span class="p">19</span></p>
+            <p class="dish" data-photo="joayo-photos/d-braised.jpg"><span class="k">제육볶음</span><span class="r" data-i18n="d7">Jeyuk Bokkeum</span><span class="p">17</span></p>
+            <p class="dish" data-photo="joayo-photos/d-grill.jpg"><span class="k">불고기</span><span class="r" data-i18n="d8">Bulgogi</span><span class="p">18,5</span></p>
+            <p class="dish" data-photo="joayo-photos/d-grill.jpg"><span class="k">삼겹살</span><span class="r" data-i18n="d9">Samgyeopsal</span><span class="p">19</span></p>
           </div>
           <div class="course">
             <p class="course-h"><span class="k">같이</span><span data-i18n="c_share">À partager</span></p>
-            <p class="dish"><span class="k">해물파전</span><span class="r" data-i18n="d10">Haemul Pajeon</span><span class="p">16</span></p>
-            <p class="dish"><span class="k">잡채</span><span class="r" data-i18n="d11">Japchae</span><span class="p">13</span></p>
-            <p class="dish"><span class="k">만두</span><span class="r" data-i18n="d12">Mandu</span><span class="p">12</span></p>
+            <p class="dish" data-photo="joayo-photos/d-greens.jpg"><span class="k">해물파전</span><span class="r" data-i18n="d10">Haemul Pajeon</span><span class="p">16</span></p>
+            <p class="dish" data-photo="joayo-photos/d-japchae.jpg"><span class="k">잡채</span><span class="r" data-i18n="d11">Japchae</span><span class="p">13</span></p>
+            <p class="dish" data-photo="joayo-photos/d-greens.jpg"><span class="k">만두</span><span class="r" data-i18n="d12">Mandu</span><span class="p">12</span></p>
           </div>
         </div>
       </div>
@@ -320,7 +347,7 @@ a{color:inherit;text-decoration:none;}
   <section class="band" id="table">
     <div class="band-txt" data-rise>
       <span class="lbl" data-i18n="tb_lbl">The table</span>
-      <p data-i18n-html="tb_p">Le riz d'abord.<br>La soupe à côté.<br>Les banchan au milieu.<br>Le reste se partage.</p>
+      <p class="setlines" data-i18n-html="tb_p">Le riz d'abord.<br>La soupe à côté.<br>Les banchan au milieu.<br>Le reste se partage.</p>
     </div>
     <div class="ph tilt">
       <img src="joayo-photos/korean-table.jpg" width="474" height="278" loading="lazy"
@@ -357,6 +384,7 @@ a{color:inherit;text-decoration:none;}
       <span class="lbl" data-i18n="f_dinner">Dinner</span>
       <p class="foot-h">18:30 — 22:00</p>
       <p class="foot-note" data-i18n="f_closed">Closed Monday lunch</p>
+      <p class="status" id="status" aria-live="polite"><i aria-hidden="true"></i><b></b> <span></span></p>
     </div>
 
     <div class="foot-b foot-links">
@@ -387,6 +415,7 @@ a{color:inherit;text-decoration:none;}
   </div>
 </main>
 
+<figure class="peek" id="peek" aria-hidden="true"><img alt=""></figure>
 <div class="mob"><a href="tel:+33123456789" data-i18n="nav_book">Reservation</a></div>
 
 <script>
@@ -486,6 +515,10 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
   if(reduce){
     frames.forEach(function(f){f.classList.add('seen')});
     risers.forEach(function(r){r.classList.add('seen')});
+    /* the poster frame stands in for the loop */
+    document.querySelectorAll('video').forEach(function(v){
+      v.autoplay = false; v.removeAttribute('autoplay'); v.pause();
+    });
     return;
   }
 
@@ -499,7 +532,7 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
   frames.concat(risers).forEach(function(el){ io.observe(el); });
 
   /* the hero photograph moves at four fifths of the page */
-  var heroImg = document.querySelector('.hero .ph img');
+  var heroImg = document.querySelector('.hero .ph video');
   var hero = document.querySelector('.hero');
   var ticking = false;
   function drift(){
@@ -516,7 +549,7 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
   /* a framed picture leans a few pixels toward the pointer */
   if(window.matchMedia('(hover:hover)').matches){
     document.querySelectorAll('.tilt').forEach(function(box){
-      var img = box.querySelector('img');
+      var img = box.querySelector('img, video');
       if(!img) return;
       box.addEventListener('pointermove', function(ev){
         var r = box.getBoundingClientRect();
@@ -527,6 +560,103 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
       box.addEventListener('pointerleave', function(){ img.style.translate = '0px 0px'; });
     });
   }
+})();
+
+/* ---- a dish shows itself when the hand rests on it ---- */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var peek = document.getElementById('peek'); if(!peek) return;
+  var img = peek.querySelector('img');
+  var tx=0, ty=0, cx=0, cy=0, live=false, raf=null;
+
+  function follow(){
+    cx += (tx-cx)*0.18; cy += (ty-cy)*0.18;
+    peek.style.left = cx+'px'; peek.style.top = cy+'px';
+    raf = (live || Math.abs(tx-cx)>0.5) ? requestAnimationFrame(follow) : null;
+  }
+
+  document.querySelectorAll('.dish[data-photo]').forEach(function(row){
+    row.addEventListener('pointerenter', function(e){
+      var src = row.getAttribute('data-photo');
+      if(img.getAttribute('src') !== src) img.setAttribute('src', src);
+      tx = e.clientX + 120; ty = e.clientY;
+      if(!live){ cx = tx; cy = ty; }
+      live = true; peek.classList.add('on');
+      if(!raf) raf = requestAnimationFrame(follow);
+    });
+    row.addEventListener('pointermove', function(e){
+      tx = e.clientX + 120; ty = e.clientY;
+      if(!raf) raf = requestAnimationFrame(follow);
+    });
+    row.addEventListener('pointerleave', function(){
+      live = false; peek.classList.remove('on');
+    });
+  });
+})();
+
+/* ---- the four lines are set down one at a time ---- */
+(function(){
+  var p = document.querySelector('.setlines'); if(!p) return;
+  function split(){
+    var html = p.innerHTML;
+    if(html.indexOf('class="set"') > -1) return;
+    p.innerHTML = html.split(/<br\s*\/?>/i).map(function(t){
+      return '<span class="set">' + t.trim() + '</span>';
+    }).join('');
+  }
+  split();
+  /* the language switch rewrites the line, so re-split after it runs */
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setTimeout(split, 0); });
+  });
+})();
+
+/* ---- open or closed, on Paris time ---- */
+(function(){
+  var el = document.getElementById('status'); if(!el) return;
+  var COPY = {
+    fr:{open:'Ouvert',closed:'Fermé',until:'ferme à',next:'ouvre à',tomorrow:'ouvre demain'},
+    en:{open:'Open',closed:'Closed',until:'until',next:'opens at',tomorrow:'opens tomorrow'},
+    ko:{open:'영업 중',closed:'영업 종료',until:'까지',next:'부터 영업',tomorrow:'내일 영업'}
+  };
+  /* lunch 11:30–15:00, dinner 18:30–22:00, no lunch on Monday */
+  function windows(day){
+    var w = [];
+    if(day !== 1) w.push([690, 900]);
+    w.push([1110, 1320]);
+    return w;
+  }
+  function hhmm(m){ return String(Math.floor(m/60)).padStart(2,'0') + ':' + String(m%60).padStart(2,'0'); }
+  function paint(){
+    var parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+    var get = function(t){ return (parts.find(function(p){return p.type===t;})||{}).value; };
+    var days = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+    var day = days[get('weekday')];
+    var now = parseInt(get('hour'),10)*60 + parseInt(get('minute'),10);
+    var lang = document.documentElement.getAttribute('lang') || 'fr';
+    var c = COPY[lang] || COPY.fr;
+    var w = windows(day), open = null, next = null;
+    w.forEach(function(s){
+      if(now >= s[0] && now < s[1]) open = s;
+      else if(now < s[0] && next === null) next = s[0];
+    });
+    el.classList.toggle('open', !!open);
+    var b = el.querySelector('b'), sp = el.querySelector('span');
+    if(open){
+      b.textContent = c.open;
+      sp.textContent = lang === 'ko' ? (hhmm(open[1]) + c.until) : (c.until + ' ' + hhmm(open[1]));
+    } else {
+      b.textContent = c.closed;
+      if(next !== null) sp.textContent = lang === 'ko' ? (hhmm(next) + c.next) : (c.next + ' ' + hhmm(next));
+      else sp.textContent = c.tomorrow;
+    }
+  }
+  paint();
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setTimeout(paint, 0); });
+  });
+  setInterval(paint, 60000);
 })();
 </script>
 </body>

@@ -313,12 +313,6 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                   <p className={`mt-2.5 ${bk} text-[15.5px] font-bold leading-[1.7] text-ink`}>
                     {r.strong}
                   </p>
-                  <p className={`mt-4 flex gap-2.5 ${bk} text-[13px] leading-[1.7] text-warmgray`}>
-                    <span className="shrink-0 font-mono text-[9.5px] uppercase tracking-[0.14em] text-warmgray/70">
-                      {x.selfcheck.testLabel}
-                    </span>
-                    <span>{r.test}</span>
-                  </p>
                 </div>
               </div>
             </Reveal>
