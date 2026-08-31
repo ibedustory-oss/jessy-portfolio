@@ -35,7 +35,47 @@ html[lang="ko"] body{font-family:var(--kr);}
 img{display:block;width:100%;height:100%;object-fit:cover;}
 a{color:inherit;text-decoration:none;}
 :focus-visible{outline:1.5px solid var(--ink);outline-offset:3px;}
-@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;}
+  .ph:before{display:none;} .ph img,[data-rise]{opacity:1!important;transform:none!important;}}
+
+/* photographs arrive: the frame opens and the image settles out of a slow push-in */
+.ph:before{content:'';position:absolute;inset:0;z-index:3;background:var(--paper);
+  transform-origin:50% 100%;transform:scaleY(1);
+  transition:transform 1.05s cubic-bezier(.22,.85,.24,1);}
+.ph.seen:before{transform:scaleY(0);}
+.ph img{transform:scale(1.08);transition:transform 1.7s cubic-bezier(.22,.85,.24,1);will-change:transform;}
+.ph.seen img{transform:scale(1);}
+
+/* words rise once, a beat behind their picture */
+[data-rise]{opacity:0;transform:translateY(12px);
+  transition:opacity .9s cubic-bezier(.22,.85,.24,1),transform .9s cubic-bezier(.22,.85,.24,1);}
+[data-rise].seen{opacity:1;transform:none;}
+[data-rise].d1{transition-delay:.08s;} [data-rise].d2{transition-delay:.16s;} [data-rise].d3{transition-delay:.24s;}
+
+/* the hero drifts slower than the page */
+.hero .ph img{will-change:transform;}
+
+/* pointer moves the picture inside its frame, a few pixels only */
+.tilt img{transition:transform 1.6s cubic-bezier(.22,.85,.24,1),translate .6s cubic-bezier(.22,.85,.24,1);}
+
+/* menu rows answer the hand */
+.dish{transition:background .35s ease;padding-left:0;}
+.dish > *{transition:transform .45s cubic-bezier(.22,.85,.24,1),color .35s ease;}
+.dish:hover{background:rgba(28,28,26,.035);}
+.dish:hover > *{transform:translateX(4px);}
+.dish:hover .p{color:var(--ink);}
+
+/* links draw their own underline */
+.about-link,.foot-links a{position:relative;}
+.about-link{border-bottom-color:transparent;}
+.about-link:after,.foot-links a:after{content:'';position:absolute;left:0;bottom:2px;height:1px;width:100%;
+  background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,.85,.24,1);}
+.about-link:hover:after,.foot-links a:hover:after{transform:scaleX(1);}
+.arrow{transition:transform .45s cubic-bezier(.22,.85,.24,1);}
+.about-link:hover .arrow,.foot-links a:hover .arrow,.hd-nav a:hover .arrow{transform:translateX(5px);}
+.hd-nav a,.lang button{transition:opacity .3s ease,color .3s ease;}
+.mob a{transition:opacity .3s ease;}
+.mob a:active{opacity:.8;}
 
 .lbl{font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);}
 .kr{font-family:var(--kr);}
@@ -207,7 +247,7 @@ a{color:inherit;text-decoration:none;}
       <img src="joayo-photos/table-hero.jpg" width="478" height="434" fetchpriority="high"
            alt="Table dressée au soleil : riz, soupes, banchan et viande sur le gril.">
     </div>
-    <div class="hero-cap">
+    <div class="hero-cap" data-rise>
       <p data-i18n="hero_cap">Korean table, Paris.</p>
       <span aria-hidden="true"></span>
     </div>
@@ -216,12 +256,12 @@ a{color:inherit;text-decoration:none;}
   <section class="about" id="about">
     <div class="about-lbl"><span class="lbl">JOAYO</span></div>
     <div class="about-txt">
-      <h1 data-i18n="ab_h">Nous cuisinons la nourriture avec laquelle nous avons grandi.</h1>
-      <p data-i18n="ab_p">Riz, soupe, banchan, viande grillée et plats à partager.</p>
-      <a class="about-link" href="#table"><span data-i18n="ab_link">About Joayo</span><span class="arrow" aria-hidden="true">→</span></a>
+      <h1 data-i18n="ab_h" data-rise>Nous cuisinons la nourriture avec laquelle nous avons grandi.</h1>
+      <p data-i18n="ab_p" data-rise class="d1">Riz, soupe, banchan, viande grillée et plats à partager.</p>
+      <a class="about-link" data-rise class="d2" href="#table"><span data-i18n="ab_link">About Joayo</span><span class="arrow" aria-hidden="true">→</span></a>
     </div>
     <div class="about-ph">
-      <div class="ph">
+      <div class="ph tilt">
         <img src="joayo-photos/room-tables.jpg" width="270" height="170" loading="lazy"
            alt="Salle : tables dressées, suspensions et branches dans un vase.">
       </div>
@@ -230,19 +270,19 @@ a{color:inherit;text-decoration:none;}
 
   <section class="sig" id="menu">
     <div class="sig-ph">
-      <div class="ph">
+      <div class="ph tilt">
         <img src="joayo-photos/bibimbap.jpg" width="290" height="212" loading="lazy"
            alt="Yukhoe bibimbap : bœuf cru, jaune d'œuf, légumes.">
       </div>
     </div>
-    <div class="sig-txt">
+    <div class="sig-txt" data-rise>
       <span class="lbl" data-i18n="sig_lbl">Signature</span>
       <p class="sig-name">육회비빔밥</p>
       <p class="sig-lat">Yukhoe Bibimbap</p>
       <p class="sig-price">16,5</p>
     </div>
 
-    <div class="menu">
+    <div class="menu" data-rise class="d1">
       <span class="lbl" data-i18n="menu_lbl">Menu</span>
       <div class="menu-cols">
         <div>
@@ -278,29 +318,29 @@ a{color:inherit;text-decoration:none;}
   </section>
 
   <section class="band" id="table">
-    <div class="band-txt">
+    <div class="band-txt" data-rise>
       <span class="lbl" data-i18n="tb_lbl">The table</span>
       <p data-i18n-html="tb_p">Le riz d'abord.<br>La soupe à côté.<br>Les banchan au milieu.<br>Le reste se partage.</p>
     </div>
-    <div class="ph">
+    <div class="ph tilt">
       <img src="joayo-photos/korean-table.jpg" width="474" height="278" loading="lazy"
            alt="La table vue de haut : riz, soupes et banchan.">
     </div>
     <div class="band-people">
-      <div class="ph">
+      <div class="ph tilt">
         <img src="joayo-photos/hands-serve.jpg" width="244" height="120" loading="lazy"
            alt="Deux mains posent les bols sur la table.">
       </div>
       <p data-i18n-html="tb_people">People behind<br>the table.</p>
     </div>
-    <div class="ph">
+    <div class="ph tilt">
       <img src="joayo-photos/branches.jpg" width="198" height="170" loading="lazy"
            alt="Branches dans un vase près de la fenêtre.">
     </div>
   </section>
 
   <section class="foot" id="infos">
-    <div class="ph">
+    <div class="ph tilt">
       <img src="joayo-photos/shelf.jpg" width="270" height="146" loading="lazy"
            alt="Étagère : piles d'assiettes et bouteilles.">
     </div>
@@ -436,6 +476,58 @@ document.querySelectorAll('.lang button').forEach(function(b){
 var saved = null;
 try{ saved = localStorage.getItem('joayo-lang'); }catch(e){}
 applyLang(saved && I18N[saved] ? saved : 'fr');
+
+/* ---- motion: pictures settle in, lines rise, the hero drifts ---- */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frames = [].slice.call(document.querySelectorAll('.ph'));
+  var risers = [].slice.call(document.querySelectorAll('[data-rise]'));
+
+  if(reduce){
+    frames.forEach(function(f){f.classList.add('seen')});
+    risers.forEach(function(r){r.classList.add('seen')});
+    return;
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('seen');
+      io.unobserve(e.target);
+    });
+  }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+  frames.concat(risers).forEach(function(el){ io.observe(el); });
+
+  /* the hero photograph moves at four fifths of the page */
+  var heroImg = document.querySelector('.hero .ph img');
+  var hero = document.querySelector('.hero');
+  var ticking = false;
+  function drift(){
+    ticking = false;
+    if(!heroImg || !hero) return;
+    var y = window.pageYOffset;
+    if(y > hero.offsetHeight) return;
+    heroImg.style.transform = 'scale(1.08) translate3d(0,' + (y * 0.12) + 'px,0)';
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; requestAnimationFrame(drift); }
+  }, {passive:true});
+
+  /* a framed picture leans a few pixels toward the pointer */
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.tilt').forEach(function(box){
+      var img = box.querySelector('img');
+      if(!img) return;
+      box.addEventListener('pointermove', function(ev){
+        var r = box.getBoundingClientRect();
+        var dx = ((ev.clientX - r.left) / r.width - .5) * 10;
+        var dy = ((ev.clientY - r.top) / r.height - .5) * 10;
+        img.style.translate = (-dx).toFixed(1) + 'px ' + (-dy).toFixed(1) + 'px';
+      });
+      box.addEventListener('pointerleave', function(){ img.style.translate = '0px 0px'; });
+    });
+  }
+})();
 </script>
 </body>
 </html>
