@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOAYO 좋아요 — Épicerie & Restaurant coréens à Paris</title>
+<meta name="description" content="Joayo : une maison coréenne, deux adresses à Paris. L'épicerie dans le 15e, le restaurant dans le 1er. Site de démonstration.">
+<meta property="og:title" content="JOAYO — Épicerie & Restaurant coréens à Paris (démo)">
+<meta property="og:description" content="Une maison coréenne, deux adresses à Paris. Site de démonstration par Jessy Jung.">
+<meta property="og:image" content="https://ibedustory-oss.github.io/jessy-portfolio/images/demo-joayo.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#F7F4EF;
+  --ink:#16130F;
+  --ink-60:rgba(22,19,15,.6);
+  --line:rgba(22,19,15,.13);
+  --red:#BE3418;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Archivo',system-ui,sans-serif;
+  background:var(--paper);color:var(--ink);
+  overflow-x:hidden;line-height:1.6;font-size:16px;
+}
+::selection{background:var(--red);color:var(--paper);}
+img{display:block;max-width:100%;}
+body:after{
+  content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*:before,*:after{animation:none!important;transition:none!important;}
+}
+
+/* ============ TICKER (scroll-reactive) ============ */
+.ticker{
+  background:var(--ink);color:var(--paper);
+  overflow:hidden;white-space:nowrap;padding:10px 0;
+  font-weight:600;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+}
+.ticker-inner{display:inline-block;will-change:transform;}
+.ticker-inner span{margin:0 24px;}
+.ticker-inner span:nth-child(even){color:var(--red);}
+
+/* ============ NAV ============ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:120;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 40px;gap:14px;
+  transition:background .5s ease,color .5s ease,padding .5s ease;
+  color:var(--paper);
+}
+nav.solid{background:rgba(247,244,239,.92);backdrop-filter:blur(12px);color:var(--ink);padding:14px 40px;border-bottom:1px solid var(--line);}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit;}
+.logo .latin{font-family:'Fraunces',serif;font-weight:560;font-size:25px;}
+.logo .hangul{font-size:13px;font-weight:600;color:var(--red);letter-spacing:.14em;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{
+  text-decoration:none;color:inherit;font-weight:500;font-size:12.5px;
+  letter-spacing:.16em;text-transform:uppercase;position:relative;
+}
+.nav-links a:not(.btn):after{content:'';position:absolute;left:0;bottom:-5px;height:1px;width:0;background:currentColor;transition:width .35s cubic-bezier(.23,1,.32,1);}
+.nav-links a:not(.btn):hover:after{width:100%;}
+.btn{
+  display:inline-block;text-decoration:none;border:1px solid currentColor;border-radius:999px;
+  padding:11px 24px;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  transition:background .3s,color .3s;
+}
+nav.solid .btn:hover{background:var(--ink);color:var(--paper);}
+nav:not(.solid) .btn:hover{background:var(--paper);color:var(--ink);}
+.lang-switch{display:flex;gap:13px;}
+.lang-switch button{
+  border:none;background:transparent;font-family:'Archivo';font-weight:600;
+  font-size:11px;letter-spacing:.12em;cursor:pointer;color:inherit;opacity:.55;
+  padding:2px 0;border-bottom:1px solid transparent;
+}
+.lang-switch button.active{opacity:1;border-bottom-color:currentColor;}
+.lang-switch button:hover{opacity:1;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:4px;}
+
+/* ============ THE DOORS — interactive split hero ============ */
+.gate{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;overflow:hidden;background:var(--ink);
+}
+.leaf{
+  position:relative;flex:1 1 50%;overflow:hidden;
+  text-decoration:none;color:var(--paper);
+  transition:flex-basis 1s cubic-bezier(.23,1,.32,1);
+  will-change:flex-basis;
+}
+.gate:hover .leaf{flex-basis:38%;}
+.gate:hover .leaf:hover{flex-basis:62%;}
+.leaf .lph{position:absolute;inset:0;}
+.leaf .lph img{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(1.08);filter:brightness(.42) saturate(.8);
+  transition:transform 1.4s cubic-bezier(.23,1,.32,1),filter 1s ease;
+}
+.leaf:hover .lph img{transform:scale(1);filter:brightness(.96) saturate(1.06);}
+/* the jangdokdae is a daylight scene; hold it to the same weight as the shop
+   so the wordmark keeps its contrast across the seam */
+#leafR .lph img{object-position:50% 74%;filter:brightness(.3) saturate(.78);}
+#leafR:hover .lph img{filter:brightness(.94) saturate(1.06);}
+.leaf:after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(190deg,rgba(22,19,15,.06) 40%,rgba(22,19,15,.9) 95%);
+  transition:opacity .8s ease;
+}
+.leaf:hover:after{opacity:.96;}
+.leaf-body{
+  position:absolute;inset:auto 0 0 0;z-index:2;
+  padding:0 clamp(24px,3.4vw,52px) clamp(36px,4.6vw,64px);
+}
+.leaf .lnum{
+  font-family:'Fraunces',serif;font-style:italic;font-size:14px;
+  color:rgba(247,244,239,.7);margin-bottom:12px;display:block;
+}
+.leaf h2{
+  font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(30px,3.4vw,58px);line-height:1;letter-spacing:-.01em;
+}
+.leaf .lkr{
+  font-size:12px;font-weight:600;letter-spacing:.26em;color:rgba(247,244,239,.72);
+  margin-top:10px;display:block;
+}
+.leaf .lreveal{
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .9s cubic-bezier(.23,1,.32,1),opacity .6s ease;
+}
+.leaf:hover .lreveal{max-height:260px;opacity:1;}
+.leaf .lreveal p{font-size:15px;color:rgba(247,244,239,.9);max-width:38ch;margin-top:18px;line-height:1.7;}
+.leaf .lreveal .lmeta{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(247,244,239,.62);margin-top:14px;line-height:1.9;
+}
+.leaf .lgo{
+  display:inline-flex;align-items:center;gap:12px;margin-top:22px;
+  background:var(--paper);color:var(--ink);border-radius:999px;
+  padding:8px 9px 8px 22px;
+  font-weight:600;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+}
+.leaf .lgo .ar{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:31px;height:31px;border-radius:50%;background:var(--ink);color:var(--paper);
+  transition:transform .4s cubic-bezier(.2,1.4,.4,1);
+}
+.leaf:hover .lgo .ar{transform:translateX(3px);}
+.leaf .seam{position:absolute;top:0;bottom:0;right:0;width:1px;background:rgba(247,244,239,.22);z-index:3;}
+
+/* centred wordmark that reacts to which door you lean toward */
+/* the doors brighten on hover — the nav needs its own ground to stay legible */
+.gate-scrim{position:absolute;left:0;right:0;top:0;height:190px;pointer-events:none;z-index:3;
+  background:linear-gradient(180deg,rgba(18,15,11,.72) 0%,rgba(18,15,11,.34) 52%,rgba(18,15,11,0) 100%);}
+.gate-mark{
+  position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:5;
+  text-align:center;pointer-events:none;color:var(--paper);width:min(92vw,900px);
+  transition:transform 1s cubic-bezier(.23,1,.32,1),opacity .6s ease;
+}
+.gate-mark .kick{
+  font-size:11px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(247,244,239,.8);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;
+}
+.gate-mark .kick .dot{width:5px;height:5px;border-radius:50%;background:var(--red);}
+.gate-mark h1{
+  font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(62px,9.4vw,150px);line-height:.94;letter-spacing:-.02em;
+  display:flex;align-items:baseline;justify-content:center;gap:.16em;flex-wrap:wrap;
+}
+.gate-mark h1 .kr{font-size:.17em;font-family:'Archivo';font-weight:600;letter-spacing:.3em;opacity:.85;}
+.gate-mark .say{
+  margin-top:14px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
+  font-size:clamp(16px,1.7vw,23px);color:rgba(247,244,239,.9);
+}
+.gate.leaning-l .gate-mark{transform:translate(-50%,-50%) translateX(7vw) translateY(-13vh) scale(.82);opacity:0;}
+.gate.leaning-r .gate-mark{transform:translate(-50%,-50%) translateX(-7vw) translateY(-13vh) scale(.82);opacity:0;}
+.gate-hint{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:5;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,244,239,.55);
+  pointer-events:none;transition:opacity .5s;
+}
+.gate:hover .gate-hint{opacity:0;}
+
+/* cursor bubble that follows you across the gate */
+.bub{
+  position:fixed;left:0;top:0;z-index:200;pointer-events:none;
+  transform:translate(-50%,-50%) scale(0);opacity:0;
+  transition:opacity .35s ease,transform .45s cubic-bezier(.2,1.4,.4,1);
+  background:var(--paper);color:var(--ink);
+  border-radius:999px;padding:11px 20px;
+  font-family:'Fraunces',serif;font-weight:560;font-size:16px;white-space:nowrap;
+  box-shadow:0 12px 30px -10px rgba(0,0,0,.5);
+}
+.bub.on{opacity:1;}
+.bub em{font-style:normal;color:var(--red);}
+@media(hover:none){.bub{display:none!important;}}
+
+/* ============ INTRO — split, not a lone paragraph ============ */
+.intro{max-width:1320px;margin:0 auto;padding:120px 40px 100px;}
+.intro .lead{
+  font-family:'Fraunces',serif;font-weight:420;max-width:20ch;
+  font-size:clamp(25px,3vw,42px);line-height:1.34;letter-spacing:-.005em;
+}
+/* two uses, deliberately not the same size */
+.two-uses{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  gap:clamp(30px,5vw,80px);margin-top:clamp(48px,6vw,86px);align-items:start;
+}
+.use-k{
+  display:block;font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(21px,2.3vw,30px);margin-bottom:14px;
+}
+.use p{font-size:15.5px;line-height:1.82;color:var(--ink-60);max-width:34ch;}
+.use-a{border-top:1px solid var(--ink);padding-top:22px;}
+.use-a p{font-size:17px;color:var(--ink);}
+.use-b{border-top:1px solid var(--line);padding-top:22px;margin-top:clamp(0px,3vw,42px);}
+@media(max-width:860px){
+  .two-uses{grid-template-columns:1fr;gap:34px;}
+  .use-b{margin-top:0;}
+}
+.intro .lead strong{font-weight:560;color:var(--red);font-style:italic;}
+.intro .aside{border-top:1px solid var(--ink);padding-top:20px;}
+.intro .aside dl{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;}
+.intro .aside dt{color:var(--ink-60);}
+.intro .aside dd{font-weight:600;}
+.intro .mark{margin-top:26px;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-60);font-weight:600;}
+.infos-practical{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 26px;
+  margin-top:46px;padding-top:24px;border-top:1px solid var(--line);
+  font-size:13px;line-height:1.7;
+}
+.infos-practical dt{color:var(--ink-60);letter-spacing:.1em;text-transform:uppercase;font-size:11px;padding-top:2px;}
+.infos-practical dd{color:var(--ink);}
+@media(max-width:640px){.infos-practical{grid-template-columns:1fr;gap:4px 0;}
+  .infos-practical dd{margin:0 0 14px;}}
+
+/* ============ BANCHAN RAIL — drag / scroll horizontally ============ */
+.rail-sec{padding:20px 0 130px;overflow:hidden;}
+.rail-head{
+  max-width:1320px;margin:0 auto 30px;padding:0 40px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+}
+.rail-head h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(28px,3.2vw,44px);letter-spacing:-.01em;}
+.rail-head .hint{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-60);}
+.dragrail{
+  display:flex;gap:16px;padding:0 40px;cursor:grab;
+  overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;
+}
+.dragrail::-webkit-scrollbar{display:none;}
+.dragrail.grabbing{cursor:grabbing;}
+.card{
+  position:relative;flex:0 0 auto;width:clamp(230px,25vw,330px);
+  scroll-snap-align:center;user-select:none;
+}
+.card .cimg{overflow:hidden;border-radius:18px;aspect-ratio:3/4;background:#ddd;}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.23,1,.32,1);pointer-events:none;}
+.card:hover img{transform:scale(1.06);}
+.card .cname{margin-top:14px;font-family:'Fraunces',serif;font-weight:560;font-size:19px;}
+.card .ckr{font-size:11.5px;letter-spacing:.2em;color:var(--red);margin-top:3px;}
+.card .cdoor{margin-top:7px;font-size:11.5px;line-height:1.5;color:var(--ink-60);}
+.card:nth-child(3n+1) .cimg{aspect-ratio:3/4;}
+.card:nth-child(3n+2) .cimg{aspect-ratio:1/1;}
+.card:nth-child(3n+3) .cimg{aspect-ratio:4/5;}
+.card:nth-child(even){margin-top:26px;}
+
+/* ============ STORY ============ */
+#histoire{
+  max-width:820px;margin:0 auto;padding:120px 40px;min-height:70vh;
+  display:flex;align-items:center;text-align:center;position:relative;
+}
+#histoire:before{content:'';position:absolute;top:56px;left:40px;right:40px;height:1px;background:var(--line);}
+.story-text h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(32px,4.2vw,56px);line-height:1.14;margin-bottom:36px;letter-spacing:-.01em;}
+.story-text h2 .accent{font-style:italic;color:var(--red);}
+.story-text p{font-size:17px;margin-bottom:20px;line-height:1.85;}
+.story-text p strong{font-weight:600;}
+.hand-note{font-family:'Fraunces',serif;font-style:italic;font-size:21px;color:var(--red);display:inline-block;margin-top:20px;}
+.story-visual{display:none;}
+
+/* ============ INFOS ============ */
+#infos{max-width:1320px;margin:0 auto;padding:0 40px 140px;}
+.section-head{margin-bottom:56px;border-top:1px solid var(--ink);padding-top:26px;}
+.section-head .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.3em;font-size:11.5px;margin-bottom:16px;}
+.section-head h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(34px,4.4vw,60px);line-height:1.03;letter-spacing:-.01em;}
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;}
+.info-card{display:flex;flex-direction:column;}
+.info-card .corner{font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-60);margin-bottom:18px;}
+.info-card h3{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(22px,2.3vw,32px);margin-bottom:6px;line-height:1.18;}
+.info-card .addr{font-family:'Fraunces',serif;font-style:italic;font-size:19px;color:var(--red);margin-bottom:20px;}
+.info-card .meta{font-size:12px;line-height:2.1;color:var(--ink-60);letter-spacing:.06em;text-transform:uppercase;border-top:1px solid var(--line);padding-top:18px;margin-bottom:24px;}
+.info-card a.page-link{
+  color:var(--ink);font-weight:600;text-transform:uppercase;font-size:12px;letter-spacing:.22em;
+  text-decoration:none;border-bottom:1px solid var(--ink);align-self:flex-start;padding-bottom:6px;
+  transition:color .3s,border-color .3s;
+}
+.info-card a.page-link:hover{color:var(--red);border-color:var(--red);}
+
+/* ============ FOOTER ============ */
+.demo-credit{
+  margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--ink-60);
+}
+.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;transition:border-color .3s ease;}
+.demo-credit a:hover{border-color:var(--ink);}
+.demo-credit i{font-style:normal;}
+footer{background:var(--ink);color:var(--paper);padding:100px 40px 40px;text-align:center;}
+footer .foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(60px,11vw,150px);line-height:1;letter-spacing:-.015em;}
+footer .foot-logo span{font-style:italic;color:var(--red);}
+footer .foot-hangul{color:rgba(247,244,239,.55);font-weight:600;letter-spacing:.5em;margin-top:14px;font-size:13px;}
+footer .foot-links{margin:42px 0 28px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;}
+footer .foot-links a{color:var(--paper);text-decoration:none;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;}
+footer .foot-links a:hover{color:var(--red);}
+footer .legal{font-size:11.5px;color:rgba(247,244,239,.38);}
+
+/* ============ REVEAL ============ */
+body.js-anim .reveal{opacity:0;transform:translateY(26px);filter:blur(6px);transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1),filter .9s cubic-bezier(.23,1,.32,1);}
+body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
+
+/* ============ RAIL (progress) ============ */
+.rail{position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:9px;mix-blend-mode:difference;}
+.rail span{height:2px;width:13px;border-radius:99px;background:rgba(255,255,255,.4);transition:all .5s cubic-bezier(.23,1,.32,1);}
+.rail span.on{width:26px;background:#fff;}
+@media(max-width:1100px){.rail{display:none;}}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:700px){
+  nav{padding:12px 16px;gap:8px;}
+  nav.solid{padding:10px 16px;}
+  .logo .latin{font-size:19px;}
+  .logo .hangul{display:none;}
+  .nav-links{gap:12px;}
+  .lang-switch{gap:9px;}
+  .lang-switch button{font-size:10px;letter-spacing:.06em;}
+  .btn{padding:8px 14px;font-size:10px;letter-spacing:.1em;}
+  .gate-mark{padding:96px 22px 36px;}
+  .leaf-body{padding:0 22px 34px;}
+}
+@media(max-width:960px){
+  nav{padding:14px 22px;}
+  nav.solid{padding:12px 22px;}
+  .nav-links a:not(.btn){display:none;}
+  .gate{flex-direction:column;height:auto;}
+  .leaf{flex:none;min-height:60vh;}
+  .gate:hover .leaf,.gate:hover .leaf:hover{flex-basis:auto;}
+  .leaf .lreveal{max-height:none;opacity:1;}
+  .leaf .lph img{filter:brightness(.62) saturate(.95);transform:scale(1);}
+  .leaf .seam{display:none;}
+  .gate-mark{position:relative;left:auto;top:auto;transform:none!important;padding:110px 22px 40px;background:var(--ink);width:auto;}
+  .gate-hint{display:none;}
+  .intro{grid-template-columns:1fr;gap:44px;padding:80px 22px;}
+  .rail-head,.dragrail{padding-left:22px;padding-right:22px;}
+  #histoire{padding:90px 22px;}
+  #infos{padding:0 22px 100px;}
+  .infos-grid{grid-template-columns:1fr;gap:56px;}
+}
+
+/* ================= Korean typography ================= */
+/* Fraunces / Bodoni carry no Hangul — give Korean its own faces and metrics. */
+html[lang="ko"] body{font-family:'Noto Sans KR','Archivo',system-ui,sans-serif;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
+html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
+html[lang="ko"] .price,html[lang="ko"] .dish .p,
+html[lang="ko"] .review p,
+html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
+html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
+html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
+html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
+  font-family:'Noto Serif KR',serif;font-style:normal;font-weight:600;
+}
+/* Latin tracking is wrong for Hangul — it breaks words apart */
+html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .btn,
+html[lang="ko"] .addr-pill,html[lang="ko"] .ticker,html[lang="ko"] .ticker-inner span,
+html[lang="ko"] .foot-links a,html[lang="ko"] .nav-links a,html[lang="ko"] .review .who,
+html[lang="ko"] .service-chips span,html[lang="ko"] .a-note a,html[lang="ko"] .info-card .meta,
+html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,html[lang="ko"] .suite .s-t,
+html[lang="ko"] .tag,html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .corner,
+html[lang="ko"] .sel-pane .fmt,html[lang="ko"] .sel-pane .dur,html[lang="ko"] .pl-top,
+html[lang="ko"] .cov-top,html[lang="ko"] .edge-cap,html[lang="ko"] .mag-hint,
+html[lang="ko"] .spread-hint,html[lang="ko"] .som-head,html[lang="ko"] .sommaire a,
+html[lang="ko"] .breath-count,html[lang="ko"] .rail-head .hint,html[lang="ko"] .cname,
+html[lang="ko"] .ckr,html[lang="ko"] .lnum,html[lang="ko"] .card .cname{
+  letter-spacing:.01em;
+}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:-.01em;line-height:1.28;}
+/* the wordmark keeps its own face and metrics in every language */
+html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,html[lang="ko"] .foot-logo,
+html[lang="ko"] .logo .latin,html[lang="ko"] .wordmark{
+  font-family:var(--display,'Fraunces',serif);line-height:.9;letter-spacing:-.018em;
+}
+/* the Hangul gloss is redundant once the page is already Korean */
+html[lang="ko"] .kr,html[lang="ko"] .dish .n small,html[lang="ko"] .hangul-big,
+html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{display:none;}
+html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .romaja,
+html[lang="ko"] .bubble .romaja,html[lang="ko"] .cov-top,html[lang="ko"] .lnum{}
+html[lang="ko"] .lkr,html[lang="ko"] .kr-sub{display:none;}
+/* Hangul has no true italic — stop the browser from skewing it */
+html[lang="ko"]{font-synthesis-style:none;font-synthesis:weight small-caps;}
+html[lang="ko"] .hand-note,html[lang="ko"] .review p,html[lang="ko"] .addr,
+html[lang="ko"] .a-head,html[lang="ko"] .pl-h,html[lang="ko"] .cov-dek,
+html[lang="ko"] .pgf.verso blockquote,html[lang="ko"] .sel-pane .fmt,
+html[lang="ko"] .breath-label,html[lang="ko"] .story-text h2 .accent,
+html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
+  font-style:normal;
+}
+</style>
+</head>
+<body>
+
+<div class="rail" aria-hidden="true"></div>
+<div class="bub" aria-hidden="true">좋아<em>요!</em></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="joayo-homepage.html">
+    <span class="latin">JOAYO</span>
+    <span class="hangul">좋아요</span>
+  </a>
+  <div class="nav-links">
+    <a href="joayo-market.html" data-i18n="nav_market">L'Épicerie</a>
+    <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
+    <a href="#histoire" data-i18n="nav_esprit">L'Esprit</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ko">한국어</button>
+    </div>
+    <a class="btn" href="#infos" data-i18n="nav_find">Nous trouver</a>
+  </div>
+</nav>
+
+<!-- GATE : two doors you actually choose -->
+<div class="gate" id="gate" data-rail>
+  <div class="gate-scrim"></div>
+  <a class="leaf" id="leafL" href="joayo-market.html">
+    <div class="lph"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div>
+    <span class="seam" aria-hidden="true"></span>
+    <div class="leaf-body">
+      <span class="lnum">N°1</span>
+      <h2 data-i18n="d1_h2">L'Épicerie</h2>
+      <span class="lkr">좋아요 마켓</span>
+      <div class="lreveal">
+        <p data-i18n="d1_p">Kimchi et banchan faits maison, ramyeon, sauces, snacks — le garde-manger de Séoul, dans le 15e.</p>
+        <div class="lmeta" data-i18n-html="d1_meta">Paris 15e · à emporter<br>Ouvert dès 11h30</div>
+        <span class="lgo"><span data-i18n="d1_go2">Entrer dans l'épicerie</span> <span class="ar">→</span></span>
+      </div>
+    </div>
+  </a>
+
+  <a class="leaf" id="leafR" href="joayo-restaurant.html">
+    <div class="lph"><img src="https://images.pexels.com/photos/34416819/pexels-photo-34416819.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div>
+    <div class="leaf-body">
+      <span class="lnum">N°2</span>
+      <h2 data-i18n="d2_h2">Le Restaurant</h2>
+      <span class="lkr">좋아요 레스토랑</span>
+      <div class="lreveal">
+        <p data-i18n="d2_p">Bibimbap au tartare de bœuf, bulgogi, poulet frit — l'institution coréenne en plein cœur de Paris.</p>
+        <div class="lmeta" data-i18n-html="d2_meta">Paris 1er · sur place<br>11h30 — 15h00 · 18h30 — 22h00</div>
+        <span class="lgo"><span data-i18n="d2_go2">Voir la carte</span> <span class="ar">→</span></span>
+      </div>
+    </div>
+  </a>
+
+  <div class="gate-mark" id="gateMark">
+    <div class="kick"><span class="dot"></span> <span data-i18n="kicker">Une maison coréenne, deux adresses à Paris</span></div>
+    <h1>Joayo <span class="kr">좋아요</span></h1>
+  </div>
+  <div class="gate-hint" data-i18n="hint">Choisissez votre porte</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner" id="tick">
+    <span data-i18n="tick1">Épicerie coréenne</span><span>✦</span><span data-i18n="tick2">Restaurant</span><span>✦</span><span>좋아요</span><span>✦</span><span data-i18n="tick3">Paris 15e &amp; 1er</span><span>✦</span><span data-i18n="tick4">Kimchi maison</span><span>✦</span><span data-i18n="tick5">Banchan</span><span>✦</span>
+    <span data-i18n="tick1">Épicerie coréenne</span><span>✦</span><span data-i18n="tick2">Restaurant</span><span>✦</span><span>좋아요</span><span>✦</span><span data-i18n="tick3">Paris 15e &amp; 1er</span><span>✦</span><span data-i18n="tick4">Kimchi maison</span><span>✦</span><span data-i18n="tick5">Banchan</span><span>✦</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" data-rail>
+  <p class="lead reveal" data-i18n="hero_sub">Nous avons deux adresses à Paris. Une épicerie dans le 15e, un restaurant dans le 1er.</p>
+  <div class="two-uses">
+    <div class="use use-a reveal">
+      <span class="use-k">L'Épicerie</span>
+      <p data-i18n="use1">On y fait ses courses. Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.</p>
+    </div>
+    <div class="use use-b reveal">
+      <span class="use-k">Le Restaurant</span>
+      <p data-i18n="use2">On y mange sur place. Bibimbap, bulgogi, poulet frit. Midi et soir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BANCHAN RAIL -->
+<section class="rail-sec" data-rail>
+  <div class="rail-head">
+    <h2 class="reveal" data-i18n="r_h2">Ce qu'on vend, ce qu'on sert</h2>
+    <span class="hint reveal" data-i18n="r_hint">← Faites glisser →</span>
+  </div>
+  <div class="dragrail" id="dragrail">
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Kimchi</div><div class="cdoor" data-i18n="c1">L'épicerie · fait maison</div><div class="ckr">김치</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Banchan</div><div class="cdoor" data-i18n="c2">L'épicerie · selon le jour</div><div class="ckr">반찬</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Bibimbap</div><div class="cdoor" data-i18n="c3">Le restaurant</div><div class="ckr">비빔밥</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Jeon</div><div class="cdoor" data-i18n="c4">Le restaurant</div><div class="ckr">전</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Bulgogi</div><div class="cdoor" data-i18n="c5">Le restaurant</div><div class="ckr">불고기</div></div>
+    <div class="card"><div class="cimg"><img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div><div class="cname">Ramyeon</div><div class="cdoor" data-i18n="c6">L'épicerie</div><div class="ckr">라면</div></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="histoire" data-rail>
+  <div class="story-text reveal">
+      <h2 data-i18n-html="st_h2">Pourquoi « <span class="accent">Joayo</span> » ?</h2>
+      <p data-i18n-html="st_p1">En coréen, <strong>joayo (좋아요)</strong> est le mot qui échappe quand tout va bien — « c'est bon ! », « j'aime ! ». C'est le mot qu'on entend autour d'une table coréenne, au moment où les plats arrivent.</p>
+      <p data-i18n="st_p2">C'est le mot qu'on entend le plus dans nos deux adresses.</p>
+    </div>
+    </div>
+</section>
+
+<!-- INFOS -->
+<section id="infos" data-rail>
+  <div class="section-head reveal">
+    <div class="over" data-i18n="in_over">Infos pratiques · 오시는 길</div>
+    <h2 data-i18n="in_h2">Deux portes, un joayo</h2>
+  </div>
+  <div class="infos-grid">
+    <div class="info-card market-c reveal">
+      <span class="corner" aria-hidden="true">MAISON 1</span>
+      <h3 data-i18n="ic1_h3">L'Épicerie — Paris 15e</h3>
+      <div class="meta" data-i18n-html="ic1_meta">Ouvert dès 11h30<br>À emporter</div>
+      <a class="page-link" href="joayo-market.html" data-i18n="ic1_link">Page de l'épicerie</a>
+    </div>
+    <div class="info-card resto-c reveal">
+      <span class="corner" aria-hidden="true">MAISON 2</span>
+      <h3 data-i18n="ic2_h3">Le Restaurant — Paris 1er</h3>
+      <div class="meta" data-i18n-html="ic2_meta">11h30 — 15h00 · 18h30 — 22h00<br>Sur place</div>
+      <a class="page-link" href="joayo-restaurant.html" data-i18n="ic2_link">Page du restaurant</a>
+    </div>
+  </div>
+  <dl class="infos-practical reveal">
+    <dt data-i18n="a_lang">Langues</dt><dd>Français · English · 한국어</dd>
+    <dt data-i18n="a_adr">Adresses</dt><dd data-i18n="a_adr_v">Site de démonstration — adresses non communiquées</dd>
+  </dl>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">JOA<span>YO</span></div>
+  <div class="foot-hangul">좋 아 요</div>
+  <div class="foot-links">
+    <a href="joayo-market.html" data-i18n="nav_market">L'Épicerie</a>
+    <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
+    <a href="#histoire" data-i18n="nav_esprit">L'Esprit</a>
+    <a href="#infos" data-i18n="nav_find">Nous trouver</a>
+  </div>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo — Paris 15e &amp; Paris 1er</p>
+  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
+</footer>
+
+<script>
+var I18N = {
+fr: {
+  _title:"JOAYO 좋아요 — Épicerie & Restaurant coréens à Paris",
+  hint:"Choisissez votre porte",
+  a_adr:"Adresses", a_lang:"Langues",
+  r_h2:"Ce qu'on vend, ce qu'on sert", r_hint:"← Faites glisser →",
+  tick1:"Épicerie coréenne", tick2:"Restaurant", tick3:"Paris 15e & 1er", tick4:"Kimchi maison", tick5:"Banchan",
+  nav_market:"L'Épicerie", nav_resto:"Le Restaurant", nav_esprit:"L'Esprit", nav_find:"Nous trouver",
+  kicker:"Une maison coréenne, deux adresses à Paris",
+  hero_sub:"Nous avons deux adresses à Paris. Une épicerie dans le 15e, un restaurant dans le 1er.",
+  d1_tag:"Maison N°1 — Paris 15e", d1_h2:"L'Épicerie",
+  d1_p:"Kimchi et banchan faits maison, ramyeon, sauces, snacks — le garde-manger de Séoul, dans le 15e.",
+  d1_meta:"Paris 15e · à emporter<br>Ouvert dès 11h30",
+  d1_go2:"Entrer dans l'épicerie",
+  d2_tag:"Maison N°2 — Paris 1er", d2_h2:"Le Restaurant",
+  d2_p:"Bibimbap au tartare de bœuf, bulgogi, poulet frit — l'institution coréenne en plein cœur de Paris.",
+  d2_meta:"Paris 1er · sur place<br>11h30 — 15h00 · 18h30 — 22h00",
+  d2_go2:"Voir la carte",
+  st_h2:"Pourquoi « <span class=\"accent\">Joayo</span> » ?",
+  st_p1:"En coréen, <strong>joayo (좋아요)</strong> est le mot qui échappe quand tout va bien — « c'est bon ! », « j'aime ! ». C'est le mot qu'on entend autour d'une table coréenne, au moment où les plats arrivent.",
+  st_p2:"C'est le mot qu'on entend le plus dans nos deux adresses.",
+  in_over:"Infos pratiques · 오시는 길", in_h2:"Deux portes, un joayo",
+  ic1_h3:"L'Épicerie — Paris 15e",
+  ic1_meta:"Ouvert dès 11h30<br>À emporter",
+  ic1_link:"Page de l'épicerie →",
+  ic2_h3:"Le Restaurant — Paris 1er",
+  ic2_meta:"11h30 — 15h00 · 18h30 — 22h00<br>Sur place",
+  ic2_link:"Page du restaurant →",
+  legal:"Site de démonstration · © 2026 Joayo — Paris 15e & Paris 1er",
+  use1:"On y fait ses courses. Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.",
+  use2:"On y mange sur place. Bibimbap, bulgogi, poulet frit. Midi et soir.",
+  c1:"L'épicerie · fait maison",
+  c2:"L'épicerie · selon le jour",
+  c3:"Le restaurant",
+  c4:"Le restaurant",
+  c5:"Le restaurant",
+  c6:"L'épicerie",
+  a_adr_v:"Site de démonstration — adresses non communiquées",
+  credit:"Un concept conçu par Jessy Jung",
+  credit_link:"Voir le service",
+},
+en: {
+  _title:"JOAYO 좋아요 — Korean Grocery & Restaurant in Paris",
+  hint:"Choose your door",
+  a_adr:"Addresses", a_lang:"Languages",
+  r_h2:"What we sell, what we serve", r_hint:"← Drag →",
+  tick1:"Korean grocery", tick2:"Restaurant", tick3:"Paris 15th & 1st", tick4:"Homemade kimchi", tick5:"Banchan",
+  nav_market:"The Grocery", nav_resto:"The Restaurant", nav_esprit:"The Spirit", nav_find:"Find us",
+  kicker:"One Korean house, two addresses in Paris",
+  hero_sub:"We have two addresses in Paris. A grocery in the 15th, a restaurant in the 1st.",
+  d1_tag:"House N°1 — Paris 15th", d1_h2:"The Grocery",
+  d1_p:"Homemade kimchi and banchan, ramyeon, sauces, snacks — Seoul's pantry, in the 15th.",
+  d1_meta:"Paris 15e · takeaway<br>Opens 11:30 am",
+  d1_go2:"Enter the grocery",
+  d2_tag:"House N°2 — Paris 1st", d2_h2:"The Restaurant",
+  d2_p:"Beef tartare bibimbap, bulgogi, fried chicken — the Korean institution in the heart of Paris.",
+  d2_meta:"Paris 1er · eat in<br>11:30 am–3 pm · 6:30–10 pm",
+  d2_go2:"See the menu",
+  st_h2:"Why “<span class=\"accent\">Joayo</span>”?",
+  st_p1:"In Korean, <strong>joayo (좋아요)</strong> is the word that slips out when things are good — “it's good!”, “I like it!”. It is what you hear around a Korean table the moment the dishes arrive.",
+  st_p2:"It is the word we hear most in both of our addresses.",
+  in_over:"Practical info · 오시는 길", in_h2:"Two doors, one joayo",
+  ic1_h3:"The Grocery — Paris 15th",
+  ic1_meta:"Opens 11:30 am<br>Takeaway",
+  ic1_link:"Grocery page →",
+  ic2_h3:"The Restaurant — Paris 1st",
+  ic2_meta:"11:30 am–3:00 pm · 6:30–10:00 pm<br>Eat in",
+  ic2_link:"Restaurant page →",
+  legal:"Demo site · © 2026 Joayo — Paris 15e & Paris 1er",
+  use1:"You come here to shop. House-made kimchi and banchan, ramyeon, sauces, snacks. To take away.",
+  use2:"You come here to eat. Bibimbap, bulgogi, fried chicken. Lunch and dinner.",
+  c1:"Grocery · house-made",
+  c2:"Grocery · depends on the day",
+  c3:"Restaurant",
+  c4:"Restaurant",
+  c5:"Restaurant",
+  c6:"Grocery",
+  a_adr_v:"Demo site — addresses not published",
+  credit:"A concept by Jessy Jung",
+  credit_link:"See the service",
+},
+ko: {
+  _title:"좋아요 JOAYO — 파리 한국 마켓 & 레스토랑",
+  hint:"문을 골라 보세요",
+  a_adr:"주소", a_lang:"언어",
+  r_h2:"파는 것과 내는 것", r_hint:"← 드래그 →",
+  tick1:"한국 마켓", tick2:"레스토랑", tick3:"파리 15구 & 1구", tick4:"직접 담근 김치", tick5:"반찬",
+  nav_market:"마켓", nav_resto:"레스토랑", nav_esprit:"좋아요 이야기", nav_find:"오시는 길",
+  kicker:"하나의 좋아요, 파리의 두 매장",
+  hero_sub:"파리에 두 곳이 있습니다. 15구의 마켓, 1구의 레스토랑.",
+  d1_tag:"1호점 — 파리 15구", d1_h2:"Joayo Market",
+  d1_p:"직접 담근 김치와 반찬, 라면, 장류, 과자까지 — 파리 15구의 한국 마켓.",
+  d1_meta:"파리 15구 · 포장<br>11:30 오픈",
+  d1_go2:"마켓 들어가기",
+  d2_tag:"2호점 — 파리 1구", d2_h2:"Joayo Restaurant",
+  d2_p:"육회비빔밥, 불고기, 치킨 — 파리에서 오래 사랑받아 온 한식 레스토랑.",
+  d2_meta:"파리 1구 · 매장 식사<br>11:30–15:00 · 18:30–22:00",
+  d2_go2:"메뉴 보기",
+  st_h2:"왜 \"<span class=\"accent\">좋아요</span>\"냐고요?",
+  st_p1:"<strong>좋아요</strong> — 맛있을 때, 마음에 들 때 저절로 나오는 말이죠. 한국의 밥상에서 음식이 나오는 순간, 가장 많이 들리는 말이기도 합니다.",
+  st_p2:"두 곳에서 가장 자주 듣는 말입니다.",
+  in_over:"오시는 길 · Infos", in_h2:"두 개의 문, 하나의 좋아요",
+  ic1_h3:"마켓 — 파리 15구",
+  ic1_meta:"11:30 오픈<br>포장",
+  ic1_link:"마켓 페이지 →",
+  ic2_h3:"레스토랑 — 파리 1구",
+  ic2_meta:"11:30–15:00 · 18:30–22:00<br>매장 식사",
+  ic2_link:"레스토랑 페이지 →",
+  legal:"데모 사이트 · © 2026 좋아요 Joayo — 파리 15구 & 1구",
+  use1:"장을 보는 곳입니다. 직접 담근 김치와 반찬, 라면, 소스, 과자. 포장해 갑니다.",
+  use2:"앉아서 먹는 곳입니다. 비빔밥, 불고기, 치킨. 점심과 저녁.",
+  c1:"마켓 · 직접 담근",
+  c2:"마켓 · 그날그날",
+  c3:"레스토랑",
+  c4:"레스토랑",
+  c5:"레스토랑",
+  c6:"마켓",
+  a_adr_v:"데모 사이트 — 주소는 공개하지 않습니다",
+  credit:"Jessy Jung의 콘셉트 작업",
+  credit_link:"서비스 보기",
+}
+};
+
+function applyLang(lang){
+  var dict = I18N[lang] || I18N.fr;
+  document.documentElement.setAttribute('lang', lang);
+  document.title = dict._title;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('joayo-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang-switch button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+var saved = null;
+try{ saved = localStorage.getItem('joayo-lang'); }catch(e){}
+applyLang(saved && I18N[saved] ? saved : 'fr');
+
+(function(){
+  var rail=document.querySelector('.rail');
+  var secs=Array.prototype.slice.call(document.querySelectorAll('[data-rail]'));
+  if(!rail||!secs.length||!('IntersectionObserver' in window))return;
+  secs.forEach(function(){var t=document.createElement('span');rail.appendChild(t);});
+  var ticks=rail.children;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var i=secs.indexOf(en.target);
+        for(var j=0;j<ticks.length;j++)ticks[j].classList.toggle('on',j===i);
+      }
+    });
+  },{rootMargin:'-45% 0px -45% 0px'});
+  secs.forEach(function(x){io.observe(x);});
+})();
+
+/* ---------- nav turns solid past the gate ---------- */
+(function(){
+  var nav=document.getElementById('nav'), gate=document.getElementById('gate');
+  if(!nav||!gate)return;
+  function upd(){ nav.classList.toggle('solid', window.scrollY > gate.offsetHeight - 90); }
+  upd(); window.addEventListener('scroll',upd,{passive:true});
+})();
+
+/* ---------- the gate: leaning wordmark + cursor bubble ---------- */
+(function(){
+  var gate=document.getElementById('gate');
+  var L=document.getElementById('leafL'), R=document.getElementById('leafR');
+  var bub=document.querySelector('.bub');
+  if(!gate||!L||!R)return;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  L.addEventListener('mouseenter',function(){gate.classList.add('leaning-r');gate.classList.remove('leaning-l');});
+  R.addEventListener('mouseenter',function(){gate.classList.add('leaning-l');gate.classList.remove('leaning-r');});
+  gate.addEventListener('mouseleave',function(){gate.classList.remove('leaning-l','leaning-r');});
+
+  if(!fine||!bub||reduce)return;
+  var tx=0,ty=0,cx=0,cy=0,on=false,raf=null;
+  gate.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;
+    if(!on){on=true;bub.classList.add('on');cx=tx;cy=ty;bub.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%) scale(1)';loop();}});
+  gate.addEventListener('mouseleave',function(){on=false;bub.classList.remove('on');
+    bub.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%) scale(0)';
+    if(raf)cancelAnimationFrame(raf);});
+  function loop(){
+    cx+=(tx-cx)*0.14; cy+=(ty-cy)*0.14;
+    bub.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%) scale(1)';
+    if(on)raf=requestAnimationFrame(loop);
+  }
+})();
+
+/* ---------- ticker driven by scroll velocity ---------- */
+(function(){
+  var t=document.getElementById('tick');
+  if(!t)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var x=0,last=window.scrollY,vel=0,half=0;
+  function measure(){ half=t.scrollWidth/2; }
+  measure(); window.addEventListener('resize',measure);
+  window.addEventListener('scroll',function(){var y=window.scrollY;vel=y-last;last=y;},{passive:true});
+  (function step(){
+    vel*=0.9;
+    x -= 0.55 + Math.min(Math.abs(vel)*0.22, 14);
+    if(half && -x >= half) x += half;
+    t.style.transform='translateX('+x+'px)';
+    requestAnimationFrame(step);
+  })();
+})();
+
+/* ---------- drag-to-explore rail ---------- */
+(function(){
+  var r=document.getElementById('dragrail');
+  if(!r)return;
+  var down=false,sx=0,sl=0;
+  r.addEventListener('pointerdown',function(e){
+    down=true;sx=e.clientX;sl=r.scrollLeft;r.classList.add('grabbing');r.setPointerCapture(e.pointerId);});
+  r.addEventListener('pointermove',function(e){
+    if(!down)return;e.preventDefault();r.scrollLeft=sl-(e.clientX-sx);});
+  function up(e){down=false;r.classList.remove('grabbing');try{r.releasePointerCapture(e.pointerId);}catch(err){}}
+  r.addEventListener('pointerup',up);r.addEventListener('pointercancel',up);
+  r.addEventListener('dragstart',function(e){e.preventDefault();});
+})();
+
+/* ---------- progress rail ---------- */
+(function(){
+  var rail=document.querySelector('.rail');
+  var secs=Array.prototype.slice.call(document.querySelectorAll('[data-rail]'));
+  if(!rail||!secs.length||!('IntersectionObserver' in window))return;
+  secs.forEach(function(){rail.appendChild(document.createElement('span'));});
+  var ticks=rail.children;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var i=secs.indexOf(en.target);
+        for(var j=0;j<ticks.length;j++)ticks[j].classList.toggle('on',j===i);
+      }
+    });
+  },{rootMargin:'-45% 0px -45% 0px'});
+  secs.forEach(function(x){io.observe(x);});
+})();
+
+(function(){
+  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
+  document.body.classList.add('js-anim');
+  setTimeout(function(){ document.body.classList.add('loaded'); }, 80);
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+</body>
+</html>

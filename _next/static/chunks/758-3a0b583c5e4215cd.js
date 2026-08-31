@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[758],{8758:function(n,e,u){u.d(e,{RI:function(){return t},be:function(){return o},jd:function(){return c},oh:function(){return r}});let t=["ja","ko","en"],r={ja:"JP",ko:"KR",en:"EN"};function c(n){return t.includes(n)}let o="ibedu.story@gmail.com"}}]);

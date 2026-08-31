@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOAYO Market 좋아요 마켓 — Épicerie coréenne, Paris 15e</title>
+<meta name="description" content="Joayo Market : épicerie coréenne à Paris 15e. Kimchi et banchan faits maison, ramyeon, sauces, snacks. Site de démonstration.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#F7F4EF; --paper-2:#EFEBE4;
+  --ink:#16130F; --ink-60:rgba(22,19,15,.6);
+  --line:rgba(22,19,15,.13);
+  --red:#BE3418;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Archivo',system-ui,sans-serif;background:var(--paper);color:var(--ink);
+  overflow-x:hidden;line-height:1.6;font-size:16px;}
+::selection{background:var(--red);color:var(--paper);}
+img{display:block;max-width:100%;}
+body:after{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*,*:before,*:after{animation:none!important;transition:none!important;}}
+
+/* ticker */
+.ticker{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;padding:10px 0;
+  font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;}
+.ticker-inner{display:inline-block;animation:scroll 34s linear infinite;}
+.ticker-inner span{margin:0 24px;}
+.ticker-inner span:nth-child(even){color:var(--red);}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(247,244,239,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  padding:16px 40px;gap:14px;}
+.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);}
+.logo .latin{font-family:'Fraunces',serif;font-weight:560;font-size:24px;}
+.logo .hangul{font-size:13px;font-weight:600;color:var(--red);letter-spacing:.14em;white-space:nowrap;}
+.sub-brand{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--ink-60);}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{text-decoration:none;color:var(--ink);font-weight:500;font-size:12.5px;
+  letter-spacing:.16em;text-transform:uppercase;position:relative;}
+.nav-links a:not(.btn):after{content:'';position:absolute;left:0;bottom:-5px;height:1px;width:0;
+  background:var(--ink);transition:width .35s cubic-bezier(.23,1,.32,1);}
+.nav-links a:not(.btn):hover:after{width:100%;}
+.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;
+  border:1px solid var(--ink);border-radius:999px;color:var(--ink);background:transparent;
+  padding:8px 8px 8px 22px;font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  transition:background .3s,color .3s,transform .3s cubic-bezier(.23,1,.32,1);}
+.btn:after{content:'\2192';display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);
+  font-size:14px;letter-spacing:0;flex-shrink:0;
+  transition:transform .4s cubic-bezier(.2,1.4,.4,1),background .3s,color .3s;}
+.btn:hover{transform:translateY(-2px);}
+.btn:hover:after{transform:translateX(3px);}
+.btn:active{transform:scale(.97);}
+.lang-switch{display:flex;gap:13px;}
+.lang-switch button{border:none;background:transparent;font-family:'Archivo';font-weight:600;
+  font-size:11px;letter-spacing:.12em;cursor:pointer;color:var(--ink);opacity:.55;
+  padding:2px 0;border-bottom:1px solid transparent;}
+.lang-switch button.active{opacity:1;border-bottom-color:var(--ink);}
+.lang-switch button:hover{opacity:1;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:4px;}
+
+/* hero */
+.hero{max-width:1320px;margin:0 auto;padding:96px 40px 80px;position:relative;}
+.hero:has(.ardoise){display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
+  gap:5vw;align-items:start;}
+.hero:has(.ardoise) .rating-sticker{display:none;}
+.kicker{display:flex;align-items:center;gap:11px;font-size:11.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:26px;}
+.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+.hero h1{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(54px,8.6vw,132px);
+  line-height:.96;letter-spacing:-.018em;}
+.hero h1 .accent{color:var(--red);font-style:italic;}
+.hangul-big{font-size:13px;font-weight:600;letter-spacing:.22em;color:var(--ink-60);margin-top:18px;}
+.hero .sub{margin-top:24px;font-size:clamp(16px,1.7vw,19px);max-width:52ch;color:var(--ink);}
+.hero .sub strong{font-weight:600;}
+.addr-pill{display:inline-block;margin-top:26px;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-60);border-bottom:1px solid var(--line);padding-bottom:6px;}
+.cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.cta-row .btn{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.cta-row .btn:after{background:var(--paper);color:var(--ink);}
+.cta-row .btn:hover{background:var(--red);border-color:var(--red);}
+
+/* google rating — a quiet seal, not a sticker */
+.rating-sticker{position:absolute;top:96px;right:40px;text-align:right;}
+.rating-sticker .score{font-family:'Fraunces',serif;font-weight:560;font-size:38px;line-height:1;}
+.rating-sticker .stars{color:var(--red);font-size:12px;letter-spacing:.2em;margin-top:4px;}
+.rating-sticker .count{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-60);margin-top:6px;}
+
+/* section scaffold */
+section{max-width:1320px;margin:0 auto;padding:90px 40px;}
+.section-head{margin-bottom:52px;border-top:1px solid var(--ink);padding-top:26px;max-width:64ch;}
+.section-head .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.2em;
+  font-size:11.5px;margin-bottom:16px;}
+.section-head h2{font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(32px,4.2vw,58px);line-height:1.04;letter-spacing:-.01em;}
+.section-head p{margin-top:18px;color:var(--ink-60);font-size:15.5px;max-width:56ch;}
+
+/* rayons — a numbered index, not emoji cards */
+.grid-rayons{display:grid;grid-template-columns:repeat(2,1fr);gap:0 6vw;}
+.rayon{position:relative;padding:30px 0 30px 0;border-top:1px solid var(--line);
+  transition:padding-left .45s cubic-bezier(.23,1,.32,1);}
+.rayon:hover{padding-left:10px;}
+.rayon .icon{position:absolute;left:0;top:32px;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:420;
+  font-size:16px;color:var(--red);}
+.rayon h3{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(20px,2.2vw,27px);line-height:1.15;}
+.rayon .kr{font-size:11.5px;letter-spacing:.14em;color:var(--ink-60);margin-top:6px;}
+.rayon p{margin-top:12px;font-size:14.5px;color:var(--ink-60);max-width:40ch;}
+.rayon.lead{grid-column:1/-1;padding-top:38px;padding-bottom:38px;border-top-color:var(--ink);}
+.rayon.lead h3{font-size:clamp(28px,3.4vw,44px);}
+.rayon.lead p{font-size:16px;max-width:52ch;color:var(--ink);}
+.rayon.small{padding-top:22px;padding-bottom:22px;}
+.rayon.small h3{font-size:clamp(17px,1.8vw,21px);}
+.ray-when{margin-top:10px;font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--red);}
+.rayon .badge{position:absolute;top:30px;right:0;font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--red);font-weight:600;}
+.rayon.highlight h3{color:var(--red);}
+
+/* photo band replacing the emoji banner */
+.kimchi-banner{position:relative;overflow:hidden;max-width:1320px;margin:20px auto 0;
+  min-height:52vh;display:flex;align-items:flex-end;color:var(--paper);}
+.kimchi-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.kimchi-banner:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(195deg,rgba(22,19,15,.12) 40%,rgba(22,19,15,.82) 94%);}
+.kimchi-banner>div{position:relative;z-index:2;padding:0 clamp(26px,4vw,54px) clamp(30px,4vw,52px);}
+.kimchi-banner h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(28px,3.6vw,50px);
+  line-height:1.06;max-width:20ch;}
+.kimchi-banner p{margin-top:14px;font-size:15px;color:rgba(247,244,239,.85);max-width:46ch;}
+
+/* menu (restaurant) */
+.menu-wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:5vw;align-items:start;}
+.menu-list{border-top:1px solid var(--ink);}
+.menu-item{display:flex;justify-content:space-between;align-items:baseline;gap:24px;
+  padding:22px 2px;border-bottom:1px solid var(--line);
+  transition:padding-left .4s cubic-bezier(.23,1,.32,1);}
+.menu-item:hover{padding-left:10px;}
+.menu-item .name{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(17px,1.9vw,22px);}
+.menu-item .kr{font-size:11.5px;letter-spacing:.12em;color:var(--ink-60);margin-left:12px;}
+.menu-item .desc{margin-top:8px;font-size:14px;color:var(--ink-60);max-width:46ch;}
+.menu-item .price{font-family:'Fraunces',serif;font-weight:560;font-size:17px;white-space:nowrap;}
+.menu-note{margin-top:22px;font-size:13px;color:var(--ink-60);}
+.lunch-box,.resto-side,.ambiance{background:var(--paper-2);padding:30px;margin-bottom:18px;}
+.lunch-box h3,.ambiance h3{font-family:'Fraunces',serif;font-weight:560;font-size:21px;margin-bottom:10px;}
+.lunch-box p,.ambiance p{font-size:14.5px;color:var(--ink-60);}
+.service-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.service-chips span{border:1px solid var(--line);border-radius:999px;padding:7px 15px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);}
+
+/* ardoise — the evening board */
+.ardoise{background:var(--ink);color:var(--paper);padding:34px 32px;position:relative;}
+.ardoise .rating-sticker{position:absolute;top:26px;right:28px;text-align:right;}
+.ardoise .rating-sticker .score{color:var(--paper);font-size:30px;}
+.ardoise .rating-sticker .count{color:rgba(247,244,239,.6);}
+.a-head{font-family:'Fraunces',serif;font-style:italic;font-size:21px;margin-bottom:22px;
+  padding-bottom:16px;border-bottom:1px solid rgba(247,244,239,.24);max-width:16ch;}
+.dish{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:13px 0;
+  border-bottom:1px solid rgba(247,244,239,.14);}
+.dish .n{font-size:14.5px;}
+.dish .n small{display:block;font-size:10.5px;letter-spacing:.18em;color:rgba(247,244,239,.55);margin-top:4px;}
+.dish .p{font-family:'Fraunces',serif;font-weight:560;font-size:15px;}
+.a-note{margin-top:20px;}
+.a-note a{color:var(--paper);text-decoration:none;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;border-bottom:1px solid rgba(247,244,239,.5);padding-bottom:5px;}
+
+  font-size:18px;line-height:1.5;}
+.review .who{margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);}
+
+/* infos */
+.infos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:5vw;}
+.info-card{border-top:1px solid var(--line);padding-top:22px;}
+.info-card h3{font-family:'Fraunces',serif;font-weight:560;font-size:22px;margin-bottom:12px;}
+.info-card p,.info-card .addr,.info-card .hours{font-size:14px;color:var(--ink-60);line-height:1.9;}
+.info-card .addr{color:var(--ink);font-family:'Fraunces',serif;font-style:italic;font-size:18px;margin-bottom:10px;}
+
+/* footer */
+.demo-credit{
+  margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--ink-60);
+}
+.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;transition:border-color .3s ease;}
+.demo-credit a:hover{border-color:var(--ink);}
+.demo-credit i{font-style:normal;}
+footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-align:center;}
+.foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,9vw,124px);line-height:1;letter-spacing:-.015em;}
+.foot-logo span{font-style:italic;color:var(--red);}
+.foot-links{margin:38px 0 26px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap;}
+.foot-links a{color:var(--paper);text-decoration:none;font-weight:500;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;}
+.foot-links a:hover{color:var(--red);}
+.legal{font-size:11.5px;color:rgba(247,244,239,.4);}
+
+/* reveal */
+body.js-anim .reveal{opacity:0;transform:translateY(24px);filter:blur(5px);
+  transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1),filter .9s cubic-bezier(.23,1,.32,1);}
+body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links a:not(.btn){display:none;}
+  .hero{padding:56px 20px 60px;}
+  .rating-sticker{position:relative;top:auto;right:auto;text-align:left;margin-bottom:26px;}
+  section{padding:64px 20px;}
+  .grid-rayons{grid-template-columns:1fr;gap:0;}
+  .menu-wrap{grid-template-columns:1fr;gap:36px;}
+  .infos-grid{grid-template-columns:1fr;gap:34px;}
+  .kimchi-banner{margin:0 20px;min-height:44vh;}
+}
+@media(max-width:640px){
+  nav{padding:12px 16px;gap:8px;}
+  .logo .latin{font-size:19px;} .logo .hangul{display:none;} .sub-brand{display:none;}
+  .btn{padding:9px 15px;font-size:10.5px;letter-spacing:.1em;}
+  .lang-switch{gap:9px;} .lang-switch button{font-size:10px;}
+}
+
+/* ---- hero photo ---- */
+.hero.has-ph{display:grid;grid-template-columns:minmax(0,.92fr) minmax(320px,1.08fr);
+  gap:5vw;align-items:center;}
+.hero-copy{display:flex;flex-direction:column;align-items:flex-start;}
+.hero-copy .rating-sticker{position:static;text-align:left;margin:0 0 24px;}
+.hero.has-ph .rating-sticker{position:static;text-align:left;}
+
+.hero-ph{position:relative;overflow:hidden;aspect-ratio:4/5.1;}
+.hero-ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);
+  transition:transform 1.4s cubic-bezier(.23,1,.32,1);}
+.hero-ph:hover img{transform:scale(1);}
+.hero:has(.ardoise).has-ph{grid-template-columns:minmax(0,1fr) minmax(0,.62fr) minmax(280px,.72fr);}
+
+/* ---- hover-swap photo stages ---- */
+.ray-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:5vw;align-items:start;}
+.ray-wrap .grid-rayons{display:block;}
+.ray-stage,.menu-stage{position:sticky;top:110px;overflow:hidden;aspect-ratio:4/4.6;background:var(--paper-2);}
+.menu-stage{aspect-ratio:4/3.4;margin-bottom:18px;top:100px;}
+.ray-stage img,.menu-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.06);
+  transition:opacity .9s cubic-bezier(.23,1,.32,1),transform 1.3s cubic-bezier(.23,1,.32,1);}
+.ray-stage img.on,.menu-stage img.on{opacity:1;transform:scale(1);}
+.rayon{cursor:default;}
+.rayon.on h3,.menu-item.on .name{color:var(--red);}
+
+/* ---- progress rail ---- */
+.rail{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:90;
+  display:flex;flex-direction:column;gap:9px;mix-blend-mode:difference;}
+.rail span{height:2px;width:13px;border-radius:99px;background:rgba(255,255,255,.4);
+  transition:all .5s cubic-bezier(.23,1,.32,1);}
+.rail span.on{width:26px;background:#fff;}
+@media(max-width:1100px){.rail{display:none;}}
+
+@media(max-width:900px){
+  .hero.has-ph,.hero:has(.ardoise).has-ph{grid-template-columns:1fr;gap:34px;}
+  .ray-wrap{grid-template-columns:1fr;gap:30px;}
+  .ray-stage{position:relative;top:auto;order:-1;aspect-ratio:4/3;}
+  .menu-stage{position:relative;top:auto;}
+}
+
+/* ================= Korean typography ================= */
+/* Fraunces / Bodoni carry no Hangul — give Korean its own faces and metrics. */
+html[lang="ko"] body{font-family:'Noto Sans KR','Archivo',system-ui,sans-serif;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
+html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
+html[lang="ko"] .price,html[lang="ko"] .dish .p,
+html[lang="ko"] .review p,
+html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
+html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
+html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
+html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
+  font-family:'Noto Serif KR',serif;font-style:normal;font-weight:600;
+}
+/* Latin tracking is wrong for Hangul — it breaks words apart */
+html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .btn,
+html[lang="ko"] .addr-pill,html[lang="ko"] .ticker,html[lang="ko"] .ticker-inner span,
+html[lang="ko"] .foot-links a,html[lang="ko"] .nav-links a,html[lang="ko"] .review .who,
+html[lang="ko"] .service-chips span,html[lang="ko"] .a-note a,html[lang="ko"] .info-card .meta,
+html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,html[lang="ko"] .suite .s-t,
+html[lang="ko"] .tag,html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .corner,
+html[lang="ko"] .sel-pane .fmt,html[lang="ko"] .sel-pane .dur,html[lang="ko"] .pl-top,
+html[lang="ko"] .cov-top,html[lang="ko"] .edge-cap,html[lang="ko"] .mag-hint,
+html[lang="ko"] .spread-hint,html[lang="ko"] .som-head,html[lang="ko"] .sommaire a,
+html[lang="ko"] .breath-count,html[lang="ko"] .rail-head .hint,html[lang="ko"] .cname,
+html[lang="ko"] .ckr,html[lang="ko"] .lnum,html[lang="ko"] .card .cname{
+  letter-spacing:.01em;
+}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:-.01em;line-height:1.28;}
+/* the wordmark keeps its own face and metrics in every language */
+html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,html[lang="ko"] .foot-logo,
+html[lang="ko"] .logo .latin,html[lang="ko"] .wordmark{
+  font-family:var(--display,'Fraunces',serif);line-height:.9;letter-spacing:-.018em;
+}
+/* the Hangul gloss is redundant once the page is already Korean */
+html[lang="ko"] .kr,html[lang="ko"] .dish .n small,html[lang="ko"] .hangul-big,
+html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{display:none;}
+html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .romaja,
+html[lang="ko"] .bubble .romaja,html[lang="ko"] .cov-top,html[lang="ko"] .lnum{}
+html[lang="ko"] .lkr,html[lang="ko"] .kr-sub{display:none;}
+/* Hangul has no true italic — stop the browser from skewing it */
+html[lang="ko"]{font-synthesis-style:none;font-synthesis:weight small-caps;}
+html[lang="ko"] .hand-note,html[lang="ko"] .review p,html[lang="ko"] .addr,
+html[lang="ko"] .a-head,html[lang="ko"] .pl-h,html[lang="ko"] .cov-dek,
+html[lang="ko"] .pgf.verso blockquote,html[lang="ko"] .sel-pane .fmt,
+html[lang="ko"] .breath-label,html[lang="ko"] .story-text h2 .accent,
+html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
+  font-style:normal;
+}
+/* ---- cross-sell band ---- */
+.cross{
+  max-width:1320px;margin:0 auto;padding:76px 40px 96px;
+  border-top:1px solid var(--ink);
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:4vw;align-items:end;
+}
+.cross>*:first-child{grid-column:1;}
+.cross .btn{grid-column:1;justify-self:start;margin-top:28px;}
+.cross p{grid-column:2;grid-row:1;align-self:end;margin-top:0;}
+.cross h2{font-family:'Fraunces',serif;font-weight:560;
+  font-size:clamp(27px,3vw,42px);line-height:1.1;letter-spacing:-.01em;max-width:22ch;}
+.cross p{margin-top:16px;color:var(--ink-60);font-size:15.5px;max-width:52ch;}
+.cross .btn{white-space:nowrap;}
+@media(max-width:900px){
+  .cross{grid-template-columns:1fr;gap:18px;padding:60px 20px 76px;align-items:start;}
+  .cross p{grid-column:1;grid-row:auto;}
+  .cross .btn{margin-top:8px;}
+}
+/* ================= pantry hero — the bright twin of the jangdokdae ================= */
+.hero.pantry{
+  position:relative;max-width:none;margin:0;padding:0;
+  min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;background:var(--paper);
+}
+.pt-ph{position:absolute;inset:0;}
+.pt-ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);filter:saturate(1.04);}
+.pt-veil{position:absolute;inset:0;
+  background:
+    linear-gradient(94deg,rgba(247,244,239,.98) 0%,rgba(247,244,239,.94) 38%,rgba(247,244,239,.45) 66%,rgba(247,244,239,.08) 100%),
+    linear-gradient(180deg,rgba(247,244,239,.7) 0%,transparent 26%);}
+.pt-vert{
+  position:absolute;right:26px;top:0;bottom:96px;z-index:3;
+  writing-mode:vertical-rl;display:flex;align-items:center;
+  font-size:11px;letter-spacing:.3em;color:var(--ink-60);
+}
+.pt-inner{
+  position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;
+  padding:0 40px clamp(52px,5vw,84px);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4vw;align-items:end;
+}
+.hero.pantry h1{
+  font-family:'Fraunces',serif;font-weight:560;color:var(--ink);
+  font-size:clamp(48px,6.8vw,112px);line-height:.98;letter-spacing:-.02em;
+}
+.hero.pantry h1 .accent{color:var(--red);font-style:italic;}
+.pt-line{
+  margin-top:22px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
+  font-size:clamp(17px,1.9vw,26px);line-height:1.45;max-width:24ch;color:var(--ink);
+}
+.hero.pantry .sub{margin-top:12px;font-size:15px;color:var(--ink-60);max-width:44ch;}
+.hero.pantry .cta-row{margin-top:28px;align-items:center;}
+.hero.pantry .cta-row .btn{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.hero.pantry .cta-row .btn:after{background:var(--paper);color:var(--ink);}
+.hero.pantry .cta-row .btn:hover{background:var(--red);border-color:var(--red);}
+.hero.pantry .addr-pill{margin-top:0;}
+.receipt{position:relative;z-index:3;background:var(--ink);color:var(--paper);
+  overflow:hidden;white-space:nowrap;padding:13px 0;}
+.receipt-track{display:inline-block;will-change:transform;}
+.receipt-track span{margin:0 22px;font-size:13px;font-weight:500;letter-spacing:.04em;}
+.receipt-track span:nth-child(3n){color:var(--red);}
+@media(max-width:900px){
+  .hero.pantry{min-height:auto;padding-top:92px;}
+  .pt-inner{grid-template-columns:1fr;gap:26px;padding:0 20px 44px;}
+  .pt-vert{display:none;}
+  .pt-veil{background:linear-gradient(180deg,rgba(247,244,239,.94) 0%,rgba(247,244,239,.86) 48%,rgba(247,244,239,.5) 100%);}
+}
+</style>
+</head>
+<body>
+<div class="rail" aria-hidden="true"></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span data-i18n="tick1">Joayo Market</span><span>✦</span><span data-i18n="tick2">Kimchi maison</span><span>✦</span><span data-i18n="tick3">Banchan</span><span>✦</span><span data-i18n="tick4">Ramyeon</span><span>✦</span><span data-i18n="tick5">Paris 15e</span><span>✦</span><span>좋아요 마켓</span><span>✦</span>
+    <span data-i18n="tick1">Joayo Market</span><span>✦</span><span data-i18n="tick2">Kimchi maison</span><span>✦</span><span data-i18n="tick3">Banchan</span><span>✦</span><span data-i18n="tick4">Ramyeon</span><span>✦</span><span data-i18n="tick5">Paris 15e</span><span>✦</span><span>좋아요 마켓</span><span>✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="joayo-homepage.html">
+    <span class="latin">JOAYO</span>
+    <span class="sub-brand" data-i18n="brand_sub">Market · 마켓</span>
+  </a>
+  <div class="nav-links">
+    <a href="joayo-homepage.html" data-i18n="nav_home">Accueil</a>
+    <a href="#rayons" data-i18n="nav_rayons">Les Rayons</a>
+    <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ko">한국어</button>
+    </div>
+    <a class="btn" href="#infos" data-i18n="nav_find">Nous trouver</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero pantry" data-rail>
+  <div class="pt-ph" aria-hidden="true">
+    <img src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=2200" alt="">
+  </div>
+  <div class="pt-veil" aria-hidden="true"></div>
+  <span class="pt-vert" data-i18n="pt_vert">서울의 찬장 — 파리 15구</span>
+
+  <div class="pt-inner">
+    <div class="pt-copy">
+      <div class="kicker"><span class="dot"></span> <span data-i18n="kicker">Ouvert dès 11h30 — Paris 15e</span></div>
+      <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Market</span></h1>
+      <p class="pt-line" data-i18n="pt_line">On a déménagé une épicerie de Séoul, rayon par rayon.</p>
+      <p class="sub" data-i18n-html="hero_sub">Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.</p>
+      <div class="cta-row">
+        <a class="btn" href="#rayons" data-i18n="pt_cta">Voir les rayons</a>
+        <span class="addr-pill" data-i18n="addr_pill">Paris 15e · adresse de démonstration</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="receipt" aria-hidden="true">
+    <div class="receipt-track" id="receipt">
+      <span>김치</span><span>라면</span><span>고추장</span><span>된장</span><span>반찬</span><span>만두</span><span>떡</span><span>소주</span><span>막걸리</span><span>참기름</span><span>김</span><span>과자</span>
+      <span>김치</span><span>라면</span><span>고추장</span><span>된장</span><span>반찬</span><span>만두</span><span>떡</span><span>소주</span><span>막걸리</span><span>참기름</span><span>김</span><span>과자</span>
+    </div>
+  </div>
+</header>
+
+<!-- RAYONS -->
+<section id="rayons" data-rail>
+  <div class="section-head reveal">
+    <div class="over" data-i18n="ry_over">Les rayons · 매대</div>
+    <h2 data-i18n="ry_h2">Pour le dîner de ce soir</h2>
+    <p data-i18n="ry_p">Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.</p>
+  </div>
+  <div class="ray-wrap">
+  <div class="grid-rayons">
+    <div class="rayon highlight lead reveal" data-ray="0">
+      <div class="badge" data-i18n="r1_badge">Fait maison</div>
+      <h3 data-i18n="r1_h3">Kimchi & Banchan</h3>
+      <div class="kr">김치 · 반찬</div>
+      <p data-i18n="r1_p">Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats prêts à emporter.</p>
+      <p class="ray-when" data-i18n="r1_when">Pour prendre du kimchi en rentrant.</p>
+    </div>
+    <div class="rayon reveal" data-ray="1">
+      <h3 data-i18n="r2_h3">Ramyeon & Nouilles</h3>
+      <div class="kr">라면 · 면</div>
+      <p data-i18n="r2_p">Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.</p>
+    </div>
+    <div class="rayon reveal" data-ray="2">
+      <h3 data-i18n="r3_h3">Sauces & Condiments</h3>
+      <div class="kr">장 · 소스</div>
+      <p data-i18n="r3_p">Gochujang, doenjang, huile de sésame, sauce soja coréenne.</p>
+      <p class="ray-when" data-i18n="r3_when">Pour refaire un jjigae à la maison.</p>
+    </div>
+    <div class="rayon small reveal" data-ray="3">
+      <h3 data-i18n="r4_h3">Surgelés</h3>
+      <div class="kr">냉동식품</div>
+    </div>
+    <div class="rayon small reveal" data-ray="4">
+      <h3 data-i18n="r5_h3">Snacks & Douceurs</h3>
+      <div class="kr">과자</div>
+    </div>
+    <div class="rayon small reveal" data-ray="5">
+      <h3 data-i18n="r6_h3">Boissons & Soju</h3>
+      <div class="kr">음료 · 주류</div>
+    </div>
+  </div>
+    <div class="ray-stage" aria-hidden="true">
+      <img class="on" data-rp="0" src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="1" src="https://images.pexels.com/photos/32418799/pexels-photo-32418799.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="2" src="https://images.pexels.com/photos/34357798/pexels-photo-34357798.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="3" src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="4" src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+      <img data-rp="5" src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- KIMCHI BANNER -->
+<div class="kimchi-banner reveal">
+  <img src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="">
+  <div>
+    <h2 data-i18n="kb_h2">Le kimchi, on le fait nous-mêmes.</h2>
+    <p data-i18n="kb_p">Chaque semaine, sur place. En grande quantité pour vos fêtes ? Demandez au comptoir.</p>
+  </div>
+</div>
+
+<!-- AVIS -->
+
+<!-- INFOS -->
+<section id="infos" data-rail>
+  <div class="section-head reveal">
+    <div class="over" data-i18n="in_over">Infos pratiques · 오시는 길</div>
+    <h2 data-i18n="in_h2">Passer au marché</h2>
+  </div>
+  <div class="infos-grid">
+    <div class="info-card reveal">
+      <h3 data-i18n="ic1_h3">Adresse</h3>
+      <p data-i18n-html="ic_addr">Paris 15e<br>Adresse de démonstration</p>
+      <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic2_h3">Horaires</h3>
+      <p data-i18n-html="ic2_p">Ouverture dès 11h30</p>
+      <small data-i18n="ic2_small">Horaires du jour sur Google Maps.</small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic3_h3">Y aller</h3>
+      <p data-i18n-html="ic3_p">Métro à 3 minutes<br>Bus à proximité</p>
+      <small data-i18n="ic3_small">Au cœur d'un quartier vivant.</small>
+    </div>
+    <div class="info-card reveal">
+      <h3 data-i18n="ic4_h3">Contact</h3>
+      <p data-i18n-html="ic4_p">Sur place, tout simplement</p>
+      <small data-i18n="ic4_small">Kimchi en grande quantité : demandez au comptoir.</small>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-SELL -->
+<div class="cross reveal">
+  <h2 data-i18n="cr_h2">Pas envie de cuisiner ce soir ?</h2>
+  <p data-i18n="cr_p">Le joayo a aussi une table : bibimbap au tartare de bœuf, bulgogi et poulet frit, en plein cœur de Paris.</p>
+  <a class="btn" href="joayo-restaurant.html" data-i18n="cr_btn">Découvrir le restaurant</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">JOAYO <span data-i18n="foot_sub">MARKET</span></div>
+  <div class="foot-links">
+    <a href="joayo-homepage.html" data-i18n="nav_home">Accueil</a>
+    <a href="#rayons" data-i18n="nav_rayons">Les Rayons</a>
+    <a href="joayo-restaurant.html" data-i18n="nav_resto">Le Restaurant</a>
+    <a href="#infos" data-i18n="nav_find">Nous trouver</a>
+  </div>
+  <p class="legal" data-i18n="legal">Site de démonstration · © 2026 Joayo Market — Paris 15e</p>
+  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
+</footer>
+
+<script>
+var I18N = {
+fr: {
+  _title:"JOAYO Market 좋아요 마켓 — Épicerie coréenne, Paris 15e",
+  pt_vert:"서울의 찬장 — 파리 15구", pt_line:"On a déménagé une épicerie de Séoul, rayon par rayon.", pt_cta:"Voir les rayons",
+  tick1:"Joayo Market", tick2:"Kimchi maison", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15e",
+  brand_sub:"Market · 마켓",
+  nav_home:"Accueil", nav_rayons:"Les Rayons", nav_resto:"Le Restaurant", nav_find:"Nous trouver",
+  kicker:"Ouvert dès 11h30 — Paris 15e",
+  hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"좋아요 마켓",
+  hero_sub:"Kimchi et banchan faits maison, ramyeon, sauces, snacks. À emporter.",
+  ry_over:"Les rayons · 매대", ry_h2:"Pour le dîner de ce soir",
+  ry_p:"Tout ce qu'il faut pour cuisiner coréen à la maison — et ce qu'on ne trouve nulle part ailleurs dans le quartier.",
+  r1_badge:"Fait maison", r1_h3:"Kimchi & Banchan", r1_p:"Préparés sur place chaque semaine. Kimchi de chou, radis, concombre, et petits plats prêts à emporter.",
+  r2_h3:"Ramyeon & Nouilles", r2_p:"Le mur de ramyeon : classiques, éditions limitées et niveaux de piment pour tous les courages.",
+  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, huile de sésame, sauce soja coréenne.",
+  r4_h3:"Surgelés", r4_p:"Mandu, tteok pour tteokbokki, poissons et fruits de mer — le congélateur qui dépanne les soirs de flemme.",
+  r5_h3:"Snacks & Douceurs", r5_p:"Choco pie, chips au miel, bonbons — le rayon préféré des enfants (et des adultes qui assument).",
+  r6_h3:"Boissons & Soju", r6_p:"Soju, makgeolli, thés et boissons pétillantes coréennes bien fraîches.",
+  kb_h2:"Le kimchi, on le fait nous-mêmes.", kb_p:"Chaque semaine, sur place. En grande quantité pour vos fêtes ? Demandez au comptoir.", 
+  in_over:"Infos pratiques · 오시는 길", in_h2:"Passer au marché",
+  ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
+  ic2_h3:"Horaires", ic2_p:"Ouverture dès 11h30", ic2_small:"Horaires du jour sur Google Maps.",
+  ic3_h3:"Y aller", ic3_p:"Métro à 3 minutes<br>Bus à proximité", ic3_small:"Au cœur d'un quartier vivant.",
+  ic4_h3:"Contact", ic4_p:"Sur place, tout simplement", ic4_small:"Kimchi en grande quantité : demandez au comptoir.",
+  cr_h2:"Pas envie de cuisiner ce soir ?",
+  cr_p:"Le joayo a aussi une table : bibimbap au tartare de bœuf, bulgogi et poulet frit, en plein cœur de Paris.",
+  cr_btn:"Découvrir le restaurant",
+  foot_sub:"MARKET",
+  legal:"Site de démonstration · © 2026 Joayo Market — Paris 15e",
+  addr_pill:"Paris 15e · adresse de démonstration",
+  ic_addr:"Paris 15e<br>Adresse de démonstration",
+  r1_when:"Pour prendre du kimchi en rentrant.",
+  r3_when:"Pour refaire un jjigae à la maison.",
+  credit:"Un concept conçu par Jessy Jung",
+  credit_link:"Voir le service",
+},
+en: {
+  _title:"JOAYO Market 좋아요 마켓 — Korean Grocery, Paris 15th",
+  pt_vert:"서울의 찬장 — 파리 15구", pt_line:"We moved a Seoul grocery over here, shelf by shelf.", pt_cta:"See the aisles",
+  tick1:"Joayo Market", tick2:"Homemade kimchi", tick3:"Banchan", tick4:"Ramyeon", tick5:"Paris 15th",
+  brand_sub:"Market · 마켓",
+  nav_home:"Home", nav_rayons:"The Aisles", nav_resto:"The Restaurant", nav_find:"Find us",
+  kicker:"Opens 11:30 am — Paris 15th",
+  hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"좋아요 마켓",
+  hero_sub:"House-made kimchi and banchan, ramyeon, sauces, snacks. To take away.",
+  ry_over:"The aisles · 매대", ry_h2:"For tonight's dinner",
+  ry_p:"Everything you need to cook Korean at home — and things you won't find anywhere else in the neighborhood.",
+  r1_badge:"Homemade", r1_h3:"Kimchi & Banchan", r1_p:"Made on site every week. Cabbage, radish and cucumber kimchi, and small dishes ready to take away.",
+  r2_h3:"Ramyeon & Noodles", r2_p:"The ramyeon wall: classics, limited editions, and spice levels for every kind of brave.",
+  r3_h3:"Sauces & Condiments", r3_p:"Gochujang, doenjang, sesame oil, Korean soy sauce.",
+  r4_h3:"Frozen", r4_p:"Mandu, tteok for tteokbokki, fish and seafood — the freezer that saves lazy weeknights.",
+  r5_h3:"Snacks & Sweets", r5_p:"Choco pie, honey butter chips, candy — the kids' favorite aisle (and the adults who own it).",
+  r6_h3:"Drinks & Soju", r6_p:"Soju, makgeolli, teas and Korean sodas, always cold.",
+  kb_h2:"The kimchi? We make it ourselves.", kb_p:"Every week, in-house. Need a party-sized batch? Ask at the counter.", 
+  in_over:"Practical info · 오시는 길", in_h2:"Stop by the market",
+  ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
+  ic2_h3:"Hours", ic2_p:"Opens at 11:30 am", ic2_small:"Today's hours on Google Maps.",
+  ic3_h3:"Getting there", ic3_p:"Metro 3 minutes away<br>Buses nearby", ic3_small:"In a lively neighborhood.",
+  ic4_h3:"Contact", ic4_p:"Just drop by", ic4_small:"Bulk kimchi orders: ask at the counter.",
+  cr_h2:"No time to cook tonight?",
+  cr_p:"The joayo also sets a table: beef tartare bibimbap, bulgogi and fried chicken, in the heart of Paris.",
+  cr_btn:"Discover the restaurant",
+  foot_sub:"MARKET",
+  legal:"Demo site · © 2026 Joayo Market — Paris 15e",
+  addr_pill:"Paris 15e · demo address",
+  ic_addr:"Paris 15e<br>Demo address",
+  r1_when:"For picking up kimchi on the way home.",
+  r3_when:"For making jjigae again at home.",
+  credit:"A concept by Jessy Jung",
+  credit_link:"See the service",
+},
+ko: {
+  _title:"좋아요 마켓 JOAYO Market — 파리 15구 한국 마켓",
+  pt_vert:"서울의 찬장 — 파리 15구", pt_line:"서울의 마트를 매대 하나까지 그대로 옮겨 왔습니다.", pt_cta:"매대 둘러보기",
+  tick1:"좋아요 마켓", tick2:"직접 담근 김치", tick3:"반찬", tick4:"라면", tick5:"파리 15구",
+  brand_sub:"마켓 · Market",
+  nav_home:"홈", nav_rayons:"매대 안내", nav_resto:"레스토랑", nav_find:"오시는 길",
+  kicker:"11:30 오픈 — 파리 15구",
+  hero_h1a:"Joayo", hero_h1b:"Market", hero_hb:"JOAYO MARKET",
+  hero_sub:"직접 담근 김치와 반찬, 라면, 소스, 과자. 포장해 갑니다.",
+  ry_over:"매대 안내 · Rayons", ry_h2:"오늘 저녁을 위해",
+  ry_p:"집에서 한식을 만들 때 필요한 모든 것 — 파리에서 구하기 힘든 것까지 다 있습니다.",
+  r1_badge:"직접 만듦", r1_h3:"김치 & 반찬", r1_p:"매주 매장에서 담급니다. 배추·무·오이김치와 바로 가져갈 수 있는 반찬.",
+  r2_h3:"라면 & 면류", r2_p:"클래식부터 신상, 한정판까지 — 취향대로, 맵기별로 골라 가세요.",
+  r3_h3:"장류 & 소스", r3_p:"고추장, 된장, 참기름, 한국 간장.",
+  r4_h3:"냉동식품", r4_p:"만두, 떡볶이 떡, 해산물까지 — 바쁜 날 저녁을 책임지는 냉동 코너.",
+  r5_h3:"과자 & 간식", r5_p:"초코파이, 허니버터칩, 젤리 — 아이도 어른도 그냥 지나치기 힘든 코너.",
+  r6_h3:"음료 & 주류", r6_p:"소주, 막걸리, 식혜, 탄산음료까지 시원하게 준비되어 있습니다.",
+  kb_h2:"김치는 저희가 직접 담급니다.", kb_p:"매주 매장에서 담가요. 명절이나 모임용 대량 주문은 카운터에 문의해 주세요.", 
+  in_over:"오시는 길 · Infos", in_h2:"마켓에 들러 보세요",
+  ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
+  ic2_h3:"영업시간", ic2_p:"11:30 오픈", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
+  ic3_h3:"오시는 길", ic3_p:"메트로 3분<br>버스 정류장 인근", ic3_small:"활기찬 동네 한가운데입니다.",
+  ic4_h3:"문의", ic4_p:"매장에서 편하게 문의해 주세요", ic4_small:"김치 대량 주문은 카운터로.",
+  cr_h2:"오늘 저녁, 요리하기 귀찮다면?",
+  cr_p:"좋아요 레스토랑이 있습니다 — 육회비빔밥, 불고기, 치킨. 파리 시내 한복판.",
+  cr_btn:"레스토랑 보러 가기",
+  foot_sub:"마켓",
+  legal:"데모 사이트 · © 2026 좋아요 마켓 — 파리 15구",
+  addr_pill:"파리 15구 · 데모 주소",
+  ic_addr:"파리 15구<br>데모 주소",
+  r1_when:"퇴근길에 김치 한 통.",
+  r3_when:"집에서 찌개 한 번 더.",
+  credit:"Jessy Jung의 콘셉트 작업",
+  credit_link:"서비스 보기",
+}
+};
+
+function applyLang(lang){
+  var dict = I18N[lang] || I18N.fr;
+  document.documentElement.setAttribute('lang', lang);
+  document.title = dict._title;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('joayo-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang-switch button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+var saved = null;
+try{ saved = localStorage.getItem('joayo-lang'); }catch(e){}
+applyLang(saved && I18N[saved] ? saved : 'fr');
+
+(function(){
+  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
+  document.body.classList.add('js-anim');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+
+<script>
+/* receipt strip — runs against the top ticker */
+(function(){
+  var t=document.getElementById('receipt');
+  if(!t)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var x=-1,last=window.scrollY,vel=0,half=0;
+  function m(){half=t.scrollWidth/2;x=-half;} m(); window.addEventListener('resize',m);
+  window.addEventListener('scroll',function(){var y=window.scrollY;vel=y-last;last=y;},{passive:true});
+  (function step(){vel*=0.9;
+    x+=0.45+Math.min(Math.abs(vel)*0.18,11);
+    if(half&&x>=0)x-=half;
+    t.style.transform='translateX('+x+'px)';
+    requestAnimationFrame(step);})();
+})();
+
+/* progress rail */
+(function(){
+  var rail=document.querySelector('.rail');
+  var secs=[].slice.call(document.querySelectorAll('[data-rail]'));
+  if(!rail||!secs.length||!('IntersectionObserver' in window))return;
+  secs.forEach(function(){rail.appendChild(document.createElement('span'));});
+  var t=rail.children;
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){var i=secs.indexOf(e.target);
+      for(var j=0;j<t.length;j++)t[j].classList.toggle('on',j===i);}});
+  },{rootMargin:'-45% 0px -45% 0px'}).observe&&secs.forEach(function(x){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){var i=secs.indexOf(e.target);
+        for(var j=0;j<t.length;j++)t[j].classList.toggle('on',j===i);}});
+    },{rootMargin:'-45% 0px -45% 0px'}).observe(x);});
+})();
+
+/* ticker driven by scroll velocity */
+(function(){
+  var t=document.querySelector('.ticker-inner');
+  if(!t)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  t.style.animation='none';
+  var x=0,last=window.scrollY,vel=0,half=0;
+  function m(){half=t.scrollWidth/2;} m(); window.addEventListener('resize',m);
+  window.addEventListener('scroll',function(){var y=window.scrollY;vel=y-last;last=y;},{passive:true});
+  (function step(){vel*=0.9;x-=0.55+Math.min(Math.abs(vel)*0.22,14);
+    if(half&&-x>=half)x+=half; t.style.transform='translateX('+x+'px)';
+    requestAnimationFrame(step);})();
+})();
+
+/* hover swaps the photo */
+function bindStage(itemSel,attr,stageSel,phAttr){
+  var items=[].slice.call(document.querySelectorAll(itemSel));
+  var imgs=document.querySelectorAll(stageSel+' img');
+  if(!items.length||!imgs.length)return;
+  function pick(n){
+    items.forEach(function(el,k){el.classList.toggle('on',k===n);});
+    imgs.forEach(function(im,k){im.classList.toggle('on',k===n);});
+  }
+  items.forEach(function(el,k){
+    el.addEventListener('mouseenter',function(){pick(k);});
+    el.addEventListener('focusin',function(){pick(k);});
+  });
+}
+bindStage('.rayon[data-ray]','data-ray','.ray-stage','data-rp');
+bindStage('.menu-item[data-mi]','data-mi','.menu-stage','data-mp');
+</script>
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeong Paris</title>
+<meta name="description" content="Jeong — cuisine coréenne de saison à Paris (site de démonstration). Quinze couverts, un menu unique. Sur réservation.">
+<meta property="og:title" content="JEONG — Fine dining coréen à Paris (démo)">
+<meta property="og:description" content="Quinze couverts, un menu unique. Site de démonstration par Jessy Jung.">
+<meta property="og:image" content="https://ibedustory-oss.github.io/jessy-portfolio/images/demo-jeong.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Nanum+Myeongjo:wght@400;700&family=Manrope:wght@300;400;500;600&display=swap');
+
+:root{
+  --encre:#161413;
+  --encre-2:#1E1B1A;
+  --os:#EDEAE3;
+  --os-soft:rgba(237,234,227,.62);
+  --os-faint:rgba(237,234,227,.38);
+  --laque:#8A3A40;
+  --line:rgba(237,234,227,.16);
+  --display:'Cormorant Garamond',serif;
+  --kr:'Nanum Myeongjo',serif;
+  --sans:'Manrope',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*:before,*:after{animation:none!important;transition:none!important;}
+}
+body{
+  font-family:var(--sans);
+  background:var(--encre);
+  color:var(--os);
+  line-height:1.9;
+  font-size:15px;
+  font-weight:300;
+  letter-spacing:.02em;
+  overflow-x:hidden;
+}
+::selection{background:var(--laque);color:var(--os);}
+a{color:inherit;}
+button{font-family:inherit;}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] p,html[lang="ko"] span,html[lang="ko"] dd{word-break:keep-all;}
+
+/* ============ FAINT PHOTOGRAPHY ============ */
+.bgph{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-size:cover;background-position:center;
+  opacity:.14;
+  filter:grayscale(30%) brightness(.6) contrast(1.05);
+  -webkit-mask-image:radial-gradient(110% 85% at 50% 42%, #000 25%, transparent 80%);
+  mask-image:radial-gradient(110% 85% at 50% 42%, #000 25%, transparent 80%);
+}
+section{position:relative;}
+section > *:not(.bgph){position:relative;z-index:1;}
+.hero{position:relative;}
+.hero > *:not(.bgph){position:relative;z-index:1;}
+.bgph-hero{opacity:.11;}
+#gate .bgph{
+  z-index:1;opacity:.16;
+  transition:opacity .9s ease;
+  -webkit-mask-image:radial-gradient(90% 75% at 50% 50%, #000 20%, transparent 75%);
+  mask-image:radial-gradient(90% 75% at 50% 50%, #000 20%, transparent 75%);
+}
+#gate.open .bgph{opacity:0;}
+
+/* ============ GATE ============ */
+#gate{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+}
+#gate .half{
+  position:absolute;top:0;bottom:0;background:#111010;
+  transition:transform 1.35s cubic-bezier(.8,0,.16,1) .75s;
+}
+#gate .half-l{left:0;right:50%;border-right:1px solid rgba(237,234,227,.08);}
+#gate .half-r{left:50%;right:0;border-left:1px solid rgba(237,234,227,.08);}
+#gate.open .half-l{transform:translateX(-101%);}
+#gate.open .half-r{transform:translateX(101%);}
+#gate .g-line{
+  position:absolute;left:8%;right:8%;top:50%;height:1px;background:var(--laque);
+  transform:scaleX(0);transform-origin:center;z-index:3;
+}
+#gate.open .g-line{animation:linesweep 1.1s cubic-bezier(.8,0,.16,1) .1s forwards;}
+@keyframes linesweep{0%{transform:scaleX(0);opacity:1}55%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+#gate .g-center{
+  position:relative;z-index:2;text-align:center;padding:0 24px;
+  transition:opacity .55s ease,transform .9s ease;
+}
+#gate.open .g-center{opacity:0;transform:scale(1.24);filter:blur(4px);}
+#gate .g-glyph{
+  font-family:var(--kr);
+  font-size:clamp(150px,30vh,300px);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(237,234,227,.5);
+  animation:breathe 5s ease-in-out infinite;
+  user-select:none;
+}
+@keyframes breathe{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.025)}}
+#gate .g-mark{
+  margin-top:22px;
+  font-family:var(--display);font-weight:300;font-size:16px;
+  letter-spacing:.6em;text-transform:uppercase;color:var(--os-soft);
+}
+#gate .g-sub{
+  margin-top:10px;font-size:9.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--os-faint);
+}
+#gate .g-btn{
+  margin-top:56px;
+  background:none;cursor:pointer;
+  border:1px solid var(--os-faint);color:var(--os);
+  padding:17px 56px;font-size:11px;letter-spacing:.44em;text-transform:uppercase;
+  transition:background .4s,color .4s,border-color .4s,letter-spacing .4s;
+}
+#gate .g-btn:hover{background:var(--os);color:var(--encre);border-color:var(--os);letter-spacing:.52em;}
+#gate .g-langs{margin-top:36px;display:flex;gap:22px;justify-content:center;}
+#gate .g-langs button{
+  background:none;border:none;cursor:pointer;color:var(--os-faint);
+  font-family:var(--sans);font-size:10px;letter-spacing:.24em;
+  padding:2px 0;border-bottom:1px solid transparent;
+}
+#gate .g-langs button.active{color:var(--os);border-bottom-color:var(--laque);}
+
+/* staged hero entrance (after the gate opens) */
+.st{opacity:0;transform:translateY(26px);transition:opacity 1.1s ease,transform 1.1s ease;}
+body.inside .st{opacity:1;transform:none;}
+body.inside .st1{transition-delay:1.15s;}
+body.inside .st2{transition-delay:1.3s;}
+body.inside .st3{transition-delay:1.5s;}
+body.inside .st4{transition-delay:1.7s;}
+.hero-glyph{opacity:0;filter:blur(8px);transform:scale(1.08);transition:opacity 1.8s ease,filter 1.8s ease,transform 1.8s ease;}
+body.inside .hero-glyph{opacity:1;filter:blur(0);transform:scale(1);transition-delay:1.4s;}
+
+/* ============ NAV ============ */
+nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:22px 44px;
+  background:rgba(22,20,19,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.wordmark{
+  display:flex;align-items:baseline;gap:14px;text-decoration:none;
+}
+.wordmark .latin{
+  font-family:var(--display);font-weight:400;font-size:21px;letter-spacing:.42em;text-transform:uppercase;
+}
+.wordmark .kr-s{font-family:var(--kr);font-size:15px;color:var(--laque);}
+.nav-links{display:flex;gap:34px;align-items:center;}
+.nav-links a{
+  text-decoration:none;font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;
+  color:var(--os-soft);transition:color .3s;
+}
+.nav-links a:not(.rsv):hover{color:var(--os);}
+.rsv{
+  border:1px solid var(--os-faint);padding:12px 28px;color:var(--os) !important;
+  transition:border-color .3s,background .3s;
+}
+.rsv:hover{border-color:var(--os);background:rgba(237,234,227,.06);}
+a:focus-visible,button:focus-visible{outline:1px solid var(--laque);outline-offset:4px;}
+.lang-switch{display:flex;gap:18px;}
+.lang-switch button{
+  border:none;background:none;cursor:pointer;
+  font-family:var(--sans);font-size:10.5px;letter-spacing:.22em;color:var(--os-faint);
+  padding:2px 0;border-bottom:1px solid transparent;
+}
+.lang-switch button.active{color:var(--os);border-bottom-color:var(--laque);}
+.lang-switch button:not(.active):hover{color:var(--os-soft);}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  min-height:calc(100vh - 70px);
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;
+  max-width:1200px;margin:0 auto;
+  padding:60px 44px 90px;
+  gap:4vw;
+}
+.hero-copy{position:relative;z-index:2;}
+.hero .over{
+  font-size:10.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--os-faint);
+  margin-bottom:44px;
+}
+.hero h1{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(34px,4.2vw,58px);
+  line-height:1.32;letter-spacing:.02em;
+}
+html[lang="ko"] .hero h1{font-family:var(--kr);font-weight:400;line-height:1.6;font-size:clamp(27px,3.4vw,44px);}
+.hero h1 i{font-style:italic;color:var(--os);}
+.hero .file{
+  margin-top:40px;
+  display:flex;flex-direction:column;gap:0;
+  border-top:1px solid var(--line);
+  max-width:430px;
+}
+.hero .file .row{
+  display:flex;justify-content:space-between;gap:20px;align-items:baseline;
+  padding:13px 2px;border-bottom:1px solid var(--line);
+  font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--os-soft);
+}
+.hero .file .row b{font-weight:500;color:var(--os);letter-spacing:.18em;}
+.hero .cta-row{margin-top:46px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;}
+.btn{
+  display:inline-block;text-decoration:none;
+  border:1px solid var(--os-soft);
+  padding:17px 44px;
+  font-size:11px;letter-spacing:.34em;text-transform:uppercase;font-weight:500;
+  transition:background .35s,color .35s,border-color .35s;
+}
+.btn:hover{background:var(--os);color:var(--encre);border-color:var(--os);}
+.hero .tel{
+  font-family:var(--display);font-size:17px;letter-spacing:.12em;color:var(--os-soft);text-decoration:none;
+  font-variant-numeric:tabular-nums;
+}
+.hero .tel:hover{color:var(--os);}
+
+.hero-glyph{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:26px;
+  padding-right:2vw;
+}
+.hero-glyph .glyph{
+  font-family:var(--kr);font-weight:400;
+  font-size:clamp(160px,26vw,360px);
+  line-height:.95;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(237,234,227,.5);
+  user-select:none;
+}
+.hero-glyph .glyph-cap{
+  font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--os-faint);
+  text-align:center;line-height:2.2;
+}
+.hero-glyph .glyph-cap b{display:block;color:var(--laque);font-weight:500;letter-spacing:.5em;}
+
+/* ============ SECTIONS ============ */
+section{padding:120px 44px;scroll-margin-top:90px;}
+.rail{max-width:760px;margin:0 auto;}
+.rail-wide{max-width:1080px;margin:0 auto;}
+.sec-mark{
+  text-align:center;margin-bottom:60px;
+}
+.sec-mark .kr-m{font-family:var(--kr);font-size:22px;color:var(--laque);display:block;margin-bottom:14px;}
+.sec-mark h2{
+  font-family:var(--display);font-weight:300;font-size:clamp(26px,3vw,38px);letter-spacing:.06em;
+}
+html[lang="ko"] .sec-mark h2{font-family:var(--kr);font-weight:400;}
+
+/* ============ PHILOSOPHIE ============ */
+#philosophie{border-top:1px solid var(--line);}
+.philo{
+  font-family:var(--display);font-weight:300;font-style:italic;
+  font-size:clamp(21px,2.4vw,30px);line-height:2;
+  text-align:center;color:var(--os);
+}
+html[lang="ko"] .philo{font-family:var(--kr);font-style:normal;font-size:clamp(17px,2vw,24px);}
+.philo em{font-style:inherit;color:var(--laque);}
+.philo-note{
+  margin-top:46px;text-align:center;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--os-faint);
+}
+
+/* ============ MENU ============ */
+#menu{border-top:1px solid var(--line);}
+.menu-frame{
+  border:1px solid var(--line);
+  padding:70px clamp(24px,6vw,90px) 60px;
+  position:relative;
+}
+.menu-frame:before{
+  content:'';position:absolute;inset:8px;border:1px solid rgba(237,234,227,.07);pointer-events:none;
+}
+.course{
+  text-align:center;padding:26px 0;
+  border-bottom:1px solid rgba(237,234,227,.09);
+}
+.course:last-of-type{border-bottom:none;}
+.course .c-name{
+  font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.1em;
+}
+html[lang="ko"] .course .c-name{font-family:var(--kr);font-size:19px;}
+.course .c-desc{
+  margin-top:6px;font-size:12.5px;letter-spacing:.14em;color:var(--os-soft);font-weight:300;
+}
+.menu-tarif{
+  margin-top:54px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;
+  text-align:center;
+}
+.menu-tarif .t .v{
+  font-family:var(--display);font-weight:300;font-size:34px;letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+}
+.menu-tarif .t .l{margin-top:4px;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--os-faint);}
+.menu-note{
+  margin-top:44px;text-align:center;font-size:11px;letter-spacing:.24em;color:var(--os-faint);text-transform:uppercase;line-height:2.4;
+}
+
+/* ============ LIEU ============ */
+#lieu{border-top:1px solid var(--line);}
+.lieu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.lieu-cell{background:var(--encre);padding:44px 36px;text-align:center;}
+.lieu-cell .v{
+  font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+}
+.lieu-cell .l{margin-top:8px;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--os-faint);line-height:2;}
+
+/* ============ CHEF ============ */
+#chef{border-top:1px solid var(--line);}
+.chef-grid{display:grid;grid-template-columns:auto 1fr;gap:6vw;align-items:center;max-width:900px;margin:0 auto;}
+.chef-glyph{
+  font-family:var(--kr);font-size:clamp(80px,10vw,130px);color:transparent;
+  -webkit-text-stroke:1px rgba(237,234,227,.4);
+  writing-mode:vertical-rl;letter-spacing:.3em;user-select:none;
+}
+.chef-text h3{
+  font-family:var(--display);font-weight:400;font-size:clamp(22px,2.4vw,30px);letter-spacing:.06em;
+  margin-bottom:6px;
+}
+html[lang="ko"] .chef-text h3{font-family:var(--kr);}
+.chef-text .role{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--laque);margin-bottom:26px;}
+.chef-text p{color:var(--os-soft);font-size:14.5px;max-width:56ch;margin-bottom:14px;}
+
+/* ============ RÉSERVATION ============ */
+#reservation{border-top:1px solid var(--line);text-align:center;}
+#reservation .kr-m{font-family:var(--kr);font-size:22px;color:var(--laque);display:block;margin-bottom:16px;}
+#reservation h2{
+  font-family:var(--display);font-weight:300;font-size:clamp(26px,3.2vw,40px);letter-spacing:.05em;
+  max-width:24ch;margin:0 auto;line-height:1.6;
+}
+html[lang="ko"] #reservation h2{font-family:var(--kr);font-weight:400;}
+.rsv-details{
+  margin:50px auto 0;max-width:520px;
+  border-top:1px solid var(--line);
+}
+.rsv-details .row{
+  display:flex;justify-content:space-between;gap:20px;
+  padding:15px 2px;border-bottom:1px solid var(--line);
+  font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--os-soft);
+}
+.rsv-details .row b{color:var(--os);font-weight:500;}
+#reservation .btn{margin-top:52px;}
+#reservation .rsv-sub{margin-top:22px;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--os-faint);}
+
+/* ============ FOOTER ============ */
+footer{
+  border-top:1px solid var(--line);
+  padding:60px 44px 44px;text-align:center;
+}
+footer .f-glyph{font-family:var(--kr);font-size:26px;color:var(--laque);}
+footer .f-mark{
+  margin-top:14px;font-family:var(--display);font-size:15px;letter-spacing:.5em;text-transform:uppercase;
+}
+footer .f-demo{margin-top:20px;font-size:10.5px;letter-spacing:.14em;color:var(--os-faint);line-height:2.2;}
+
+/* ============ REVEAL ============ */
+body.js-anim .reveal{opacity:0;transform:translateY(18px);transition:opacity 1.1s ease,transform 1.1s ease;}
+body.js-anim .reveal.in{opacity:1;transform:none;}
+/* courses served one by one */
+body.js-anim .menu-frame .course,
+body.js-anim .menu-frame .menu-tarif{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease;}
+body.js-anim .menu-frame.in .course{opacity:1;transform:none;}
+body.js-anim .menu-frame.in .menu-tarif{opacity:1;transform:none;transition-delay:1.15s;}
+body.js-anim .menu-frame.in .course:nth-child(1){transition-delay:.1s;}
+body.js-anim .menu-frame.in .course:nth-child(2){transition-delay:.25s;}
+body.js-anim .menu-frame.in .course:nth-child(3){transition-delay:.4s;}
+body.js-anim .menu-frame.in .course:nth-child(4){transition-delay:.55s;}
+body.js-anim .menu-frame.in .course:nth-child(5){transition-delay:.7s;}
+body.js-anim .menu-frame.in .course:nth-child(6){transition-delay:.85s;}
+body.js-anim .menu-frame.in .course:nth-child(7){transition-delay:1s;}
+body.js-anim .lieu-grid .lieu-cell{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease;}
+body.js-anim .lieu-grid.in .lieu-cell{opacity:1;transform:none;}
+body.js-anim .lieu-grid.in .lieu-cell:nth-child(2){transition-delay:.18s;}
+body.js-anim .lieu-grid.in .lieu-cell:nth-child(3){transition-delay:.36s;}
+body.js-anim .rsv-details .row{opacity:0;transition:opacity .7s ease;}
+body.js-anim .rsv-details.in .row{opacity:1;}
+body.js-anim .rsv-details.in .row:nth-child(2){transition-delay:.15s;}
+body.js-anim .rsv-details.in .row:nth-child(3){transition-delay:.3s;}
+body.js-anim .rsv-details.in .row:nth-child(4){transition-delay:.45s;}
+.sec-mark h2{transition:letter-spacing 1.2s ease,opacity 1.2s ease,filter 1.2s ease;}
+body.js-anim .sec-mark.reveal h2{letter-spacing:.22em;opacity:0;filter:blur(4px);}
+body.js-anim .sec-mark.reveal.in h2{letter-spacing:.06em;opacity:1;filter:blur(0);}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:960px){
+  nav{padding:16px 20px;}
+  .nav-links{gap:18px;}
+  .nav-links a:not(.rsv){display:none;}
+  .lang-switch{gap:12px;}
+  section{padding:84px 22px;}
+  .hero{grid-template-columns:1fr;padding:48px 22px 70px;gap:60px;min-height:auto;}
+  .hero-glyph{order:-1;padding-right:0;}
+  .hero-glyph .glyph{font-size:clamp(140px,40vw,220px);}
+  .lieu-grid{grid-template-columns:1fr;}
+  .chef-grid{grid-template-columns:1fr;gap:40px;}
+  .chef-glyph{writing-mode:horizontal-tb;text-align:center;}
+  .menu-frame{padding:50px 20px 44px;}
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="half half-l"></div>
+  <div class="half half-r"></div>
+  <div class="bgph" style="background-image:url(jeong-photos/table.jpg)"></div>
+  <div class="g-line"></div>
+  <div class="g-center">
+    <div class="g-glyph">정</div>
+    <div class="g-mark">Jeong — Paris</div>
+    <div class="g-sub" data-i18n="g_sub">Cuisine coréenne de saison · Site de démonstration</div>
+    <button class="g-btn" id="gateBtn" data-i18n="g_btn">Entrer</button>
+    <div class="g-langs">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ko">한국어</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="wordmark" href="#top">
+    <span class="latin">Jeong</span>
+    <span class="kr-s">정</span>
+  </a>
+  <div class="nav-links">
+    <a href="#philosophie" data-i18n="nav_philo">La maison</a>
+    <a href="#menu" data-i18n="nav_menu">Le menu</a>
+    <a href="#chef" data-i18n="nav_chef">Le chef</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ko">한국어</button>
+    </div>
+    <a class="rsv" href="#reservation" data-i18n="nav_rsv">Réserver</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="bgph bgph-hero" style="background-image:url(jeong-photos/table.jpg)"></div>
+  <div class="hero-copy">
+    <div class="over st st1" data-i18n="over">Cuisine coréenne de saison — Paris · Site de démonstration</div>
+    <h1 class="st st2" data-i18n-html="h1">Quinze couverts.<br>Un menu unique.<br><i>Et le temps de bien faire.</i></h1>
+    <div class="file st st3">
+      <div class="row"><span data-i18n="f1_l">Menu unique</span><b data-i18n="f1_v">7 services — 145 €</b></div>
+      <div class="row"><span data-i18n="f2_l">Services</span><b>19 h — 21 h 30</b></div>
+      <div class="row"><span data-i18n="f3_l">Ouvert</span><b data-i18n="f3_v">Mardi — Samedi</b></div>
+    </div>
+    <div class="cta-row st st4">
+      <a class="btn" href="#reservation" data-i18n="cta">Réserver une table</a>
+      <a class="tel" href="tel:+33123456789">+33 1 23 45 67 89</a>
+    </div>
+  </div>
+
+  <div class="hero-glyph" aria-hidden="true">
+    <div class="glyph">정</div>
+    <div class="glyph-cap"><b>jeong</b><span data-i18n="glyph_cap">l'affection que l'on met dans ce que l'on donne</span></div>
+  </div>
+</header>
+
+<!-- PHILOSOPHIE -->
+<section id="philosophie">
+  <div class="rail">
+    <div class="sec-mark reveal">
+      <span class="kr-m">마음</span>
+      <h2 data-i18n="ph_h2">La maison</h2>
+    </div>
+    <p class="philo reveal" data-i18n-html="ph_p">Le jeong ne se traduit pas. C'est l'attachement qui grandit lentement — pour un lieu, une personne, un geste répété mille fois. Ici, il entre dans un bouillon qui mijote depuis l'aube, dans un kimchi que l'on attend un an, dans <em>quinze couverts que l'on sert comme des invités.</em></p>
+    <div class="philo-note reveal" data-i18n="ph_note">Produits d'Île-de-France — techniques et ferments de Corée</div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="bgph" style="background-image:url(jeong-photos/plate.jpg)"></div>
+  <div class="rail">
+    <div class="sec-mark reveal">
+      <span class="kr-m">상차림</span>
+      <h2 data-i18n="me_h2">Le menu — cet automne</h2>
+    </div>
+    <div class="menu-frame reveal">
+      <div class="course">
+        <div class="c-name" data-i18n="c1_n">Tofu soyeux</div>
+        <div class="c-desc" data-i18n="c1_d">caviar d'Aquitaine, huile de perilla</div>
+      </div>
+      <div class="course">
+        <div class="c-name" data-i18n="c2_n">Huître de Normandie</div>
+        <div class="c-desc" data-i18n="c2_d">poire de Corée, piment fermenté blanc</div>
+      </div>
+      <div class="course">
+        <div class="c-name" data-i18n="c3_n">Bansang</div>
+        <div class="c-desc" data-i18n="c3_d">sept banchan de légumes de saison</div>
+      </div>
+      <div class="course">
+        <div class="c-name" data-i18n="c4_n">Poisson de petit bateau</div>
+        <div class="c-desc" data-i18n="c4_d">bouillon d'anchois vieilli, chou de Pontoise</div>
+      </div>
+      <div class="course">
+        <div class="c-name" data-i18n="c5_n">Bœuf de Normandie</div>
+        <div class="c-desc" data-i18n="c5_d">braisé au soja de trois ans, racine de lotus</div>
+      </div>
+      <div class="course">
+        <div class="c-name" data-i18n="c6_n">Riz au gamasot</div>
+        <div class="c-desc" data-i18n="c6_d">cuit à la commande, jus des sucs</div>
+      </div>
+      <div class="course">
+        <div class="c-name" data-i18n="c7_n">Omija</div>
+        <div class="c-desc" data-i18n="c7_d">meringue de riz soufflé, yakgwa, thé d'orge grillé</div>
+      </div>
+      <div class="menu-tarif">
+        <div class="t"><div class="v">145 €</div><div class="l" data-i18n="t1">Menu unique — 7 services</div></div>
+        <div class="t"><div class="v">+ 85 €</div><div class="l" data-i18n="t2">Accords vins & vins de riz</div></div>
+      </div>
+    </div>
+    <p class="menu-note reveal" data-i18n-html="me_note">Le menu suit les saisons et change chaque mois.<br>Régimes et allergies : signalez-les à la réservation.</p>
+  </div>
+</section>
+
+<!-- LIEU -->
+<section id="lieu">
+  <div class="rail-wide">
+    <div class="sec-mark reveal">
+      <span class="kr-m">자리</span>
+      <h2 data-i18n="li_h2">Le lieu</h2>
+    </div>
+    <div class="lieu-grid reveal">
+      <div class="lieu-cell"><div class="v">15</div><div class="l" data-i18n="li1">couverts, autour d'un comptoir de chêne</div></div>
+      <div class="lieu-cell"><div class="v">1</div><div class="l" data-i18n="li2">service du soir, mené par le chef</div></div>
+      <div class="lieu-cell"><div class="v">120</div><div class="l" data-i18n="li3">ferments & jangs vieillis à la cave</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF -->
+<section id="chef">
+  <div class="chef-grid">
+    <div class="chef-glyph reveal" aria-hidden="true">손맛</div>
+    <div class="chef-text reveal">
+      <h3 data-i18n="ch_h3">Le goût de la main</h3>
+      <div class="role" data-i18n="ch_role">Chef — personnage fictif</div>
+      <p data-i18n="ch_p1">Formée à Séoul puis passée par des maisons étoilées parisiennes, la chef cuisine ce que les Coréens appellent sonmat — « le goût de la main » : ce qui échappe à la recette et n'appartient qu'à celle qui la fait.</p>
+      <p data-i18n="ch_p2">Chaque soir, elle sert elle-même les quinze couverts, raconte les ferments, nomme les producteurs. Un dîner chez Jeong ressemble moins à un restaurant qu'à une table où l'on a été attendu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RÉSERVATION -->
+<section id="reservation">
+  <div class="bgph" style="background-image:url(jeong-photos/setting.jpg)"></div>
+  <span class="kr-m">예약</span>
+  <h2 data-i18n="rs_h2">Les réservations ouvrent le premier jour de chaque mois.</h2>
+  <div class="rsv-details reveal">
+    <div class="row"><span data-i18n="r1_l">Adresse</span><b data-i18n="r1_v">4 rue Exemple, Paris 2e (fictive)</b></div>
+    <div class="row"><span data-i18n="r2_l">Services</span><b>19 h 00 · 21 h 30</b></div>
+    <div class="row"><span data-i18n="r3_l">Téléphone</span><b>+33 1 23 45 67 89</b></div>
+    <div class="row"><span data-i18n="r4_l">Vestiaire</span><b data-i18n="r4_v">Tenue libre — venez comme vous êtes</b></div>
+  </div>
+  <a class="btn" href="#" onclick="return false;" data-i18n="rs_btn">Réserver en ligne</a>
+  <div class="rsv-sub" data-i18n="rs_sub">Table complète ? La liste d'attente ouvre chaque jour à midi.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-glyph">정</div>
+  <div class="f-mark">Jeong — Paris</div>
+  <div class="f-demo" data-i18n-html="foot">Site de démonstration — restaurant, chef, adresse et menu fictifs.<br>© 2026 Jeong (démo)</div>
+</footer>
+
+<script>
+/* ============ I18N ============ */
+var I18N = {
+fr: {
+  _title:"Jeong Paris",
+  nav_philo:"La maison", nav_menu:"Le menu", nav_chef:"Le chef", nav_rsv:"Réserver",
+  g_sub:"Cuisine coréenne de saison · Site de démonstration", g_btn:"Entrer",
+  over:"Cuisine coréenne de saison — Paris · Site de démonstration",
+  h1:"Quinze couverts.<br>Un menu unique.<br><i>Et le temps de bien faire.</i>",
+  f1_l:"Menu unique", f1_v:"7 services — 145 €",
+  f2_l:"Services", f3_l:"Ouvert", f3_v:"Mardi — Samedi",
+  cta:"Réserver une table",
+  glyph_cap:"l'affection que l'on met dans ce que l'on donne",
+  ph_h2:"La maison",
+  ph_p:"Le jeong ne se traduit pas. C'est l'attachement qui grandit lentement — pour un lieu, une personne, un geste répété mille fois. Ici, il entre dans un bouillon qui mijote depuis l'aube, dans un kimchi que l'on attend un an, dans <em>quinze couverts que l'on sert comme des invités.</em>",
+  ph_note:"Produits d'Île-de-France — techniques et ferments de Corée",
+  me_h2:"Le menu — cet automne",
+  c1_n:"Tofu soyeux", c1_d:"caviar d'Aquitaine, huile de perilla",
+  c2_n:"Huître de Normandie", c2_d:"poire de Corée, piment fermenté blanc",
+  c3_n:"Bansang", c3_d:"sept banchan de légumes de saison",
+  c4_n:"Poisson de petit bateau", c4_d:"bouillon d'anchois vieilli, chou de Pontoise",
+  c5_n:"Bœuf de Normandie", c5_d:"braisé au soja de trois ans, racine de lotus",
+  c6_n:"Riz au gamasot", c6_d:"cuit à la commande, jus des sucs",
+  c7_n:"Omija", c7_d:"meringue de riz soufflé, yakgwa, thé d'orge grillé",
+  t1:"Menu unique — 7 services", t2:"Accords vins & vins de riz",
+  me_note:"Le menu suit les saisons et change chaque mois.<br>Régimes et allergies : signalez-les à la réservation.",
+  li_h2:"Le lieu",
+  li1:"couverts, autour d'un comptoir de chêne",
+  li2:"service du soir, mené par le chef",
+  li3:"ferments & jangs vieillis à la cave",
+  ch_h3:"Le goût de la main",
+  ch_role:"Chef — personnage fictif",
+  ch_p1:"Formée à Séoul puis passée par des maisons étoilées parisiennes, la chef cuisine ce que les Coréens appellent sonmat — « le goût de la main » : ce qui échappe à la recette et n'appartient qu'à celle qui la fait.",
+  ch_p2:"Chaque soir, elle sert elle-même les quinze couverts, raconte les ferments, nomme les producteurs. Un dîner chez Jeong ressemble moins à un restaurant qu'à une table où l'on a été attendu.",
+  rs_h2:"Les réservations ouvrent le premier jour de chaque mois.",
+  r1_l:"Adresse", r1_v:"4 rue Exemple, Paris 2e (fictive)",
+  r2_l:"Services", r3_l:"Téléphone",
+  r4_l:"Vestiaire", r4_v:"Tenue libre — venez comme vous êtes",
+  rs_btn:"Réserver en ligne",
+  rs_sub:"Table complète ? La liste d'attente ouvre chaque jour à midi.",
+  foot:"Site de démonstration — restaurant, chef, adresse et menu fictifs.<br>© 2026 Jeong (démo)"
+},
+en: {
+  _title:"Jeong Paris",
+  nav_philo:"The house", nav_menu:"The menu", nav_chef:"The chef", nav_rsv:"Reserve",
+  g_sub:"Seasonal Korean cuisine · Demonstration site", g_btn:"Enter",
+  over:"Seasonal Korean cuisine — Paris · Demonstration site",
+  h1:"Fifteen seats.<br>One menu.<br><i>And the time to do things well.</i>",
+  f1_l:"Single menu", f1_v:"7 courses — €145",
+  f2_l:"Seatings", f3_l:"Open", f3_v:"Tuesday — Saturday",
+  cta:"Reserve a table",
+  glyph_cap:"the affection you put into what you give",
+  ph_h2:"The house",
+  ph_p:"Jeong does not translate. It is the attachment that grows slowly — for a place, a person, a gesture repeated a thousand times. Here it goes into a broth that has simmered since dawn, into a kimchi worth waiting a year for, into <em>fifteen seats served like guests of the house.</em>",
+  ph_note:"Île-de-France produce — Korean technique and ferments",
+  me_h2:"The menu — this autumn",
+  c1_n:"Silken tofu", c1_d:"Aquitaine caviar, perilla oil",
+  c2_n:"Normandy oyster", c2_d:"Korean pear, white fermented chilli",
+  c3_n:"Bansang", c3_d:"seven banchan of seasonal vegetables",
+  c4_n:"Day-boat fish", c4_d:"aged anchovy broth, Pontoise cabbage",
+  c5_n:"Normandy beef", c5_d:"braised in three-year soy, lotus root",
+  c6_n:"Gamasot rice", c6_d:"cooked to order, pan juices",
+  c7_n:"Omija", c7_d:"puffed-rice meringue, yakgwa, roasted barley tea",
+  t1:"Single menu — 7 courses", t2:"Wine & rice-wine pairing",
+  me_note:"The menu follows the seasons and changes monthly.<br>Diets and allergies: please tell us when you book.",
+  li_h2:"The room",
+  li1:"seats around an oak counter",
+  li2:"evening seating, led by the chef",
+  li3:"ferments & aged jangs in the cellar",
+  ch_h3:"The taste of the hand",
+  ch_role:"Chef — fictional character",
+  ch_p1:"Trained in Seoul, then through starred Paris kitchens, the chef cooks what Koreans call sonmat — “the taste of the hand”: what escapes the recipe and belongs only to the one who makes it.",
+  ch_p2:"Each evening she serves the fifteen seats herself, tells the story of the ferments, names the growers. Dinner at Jeong feels less like a restaurant than a table where you were expected.",
+  rs_h2:"Reservations open on the first day of each month.",
+  r1_l:"Address", r1_v:"4 rue Exemple, Paris 2e (fictional)",
+  r2_l:"Seatings", r3_l:"Telephone",
+  r4_l:"Dress", r4_v:"No dress code — come as you are",
+  rs_btn:"Reserve online",
+  rs_sub:"Fully booked? The waiting list opens daily at noon.",
+  foot:"Demonstration site — restaurant, chef, address and menu are fictional.<br>© 2026 Jeong (demo)"
+},
+ko: {
+  _title:"정 Jeong Paris",
+  nav_philo:"철학", nav_menu:"메뉴", nav_chef:"셰프", nav_rsv:"예약",
+  g_sub:"계절 한식 다이닝 · 데모 사이트", g_btn:"입장하기",
+  over:"계절 한식 다이닝 — 파리 · 데모 사이트",
+  h1:"열다섯 자리.<br>단 하나의 메뉴.<br>그리고 제대로 할 시간.",
+  f1_l:"단일 코스", f1_v:"7코스 — 145€",
+  f2_l:"입장 시간", f3_l:"영업", f3_v:"화요일 — 토요일",
+  cta:"예약하기",
+  glyph_cap:"주는 것에 담는 마음",
+  ph_h2:"철학",
+  ph_p:"정(情)은 번역되지 않습니다. 장소에, 사람에, 천 번 반복한 손짓에 천천히 쌓이는 마음이죠. 이곳에서 정은 새벽부터 끓인 육수에, 일 년을 기다린 김치에, <em>손님으로 모시는 열다섯 자리에</em> 담깁니다.",
+  ph_note:"일드프랑스의 재료 — 한국의 기술과 발효",
+  me_h2:"이번 가을의 메뉴",
+  c1_n:"순두부", c1_d:"아키텐 캐비아, 들기름",
+  c2_n:"노르망디 굴", c2_d:"배, 흰 고추 발효장",
+  c3_n:"반상", c3_d:"제철 채소 일곱 가지 반찬",
+  c4_n:"당일 조업 생선", c4_d:"숙성 멸치 육수, 퐁투아즈 배추",
+  c5_n:"노르망디 소고기", c5_d:"3년 간장 조림, 연근",
+  c6_n:"가마솥 밥", c6_d:"주문 후 짓는 밥, 누룽지 소스",
+  c7_n:"오미자", c7_d:"튀밥 머랭, 약과, 보리차",
+  t1:"단일 코스 — 7가지", t2:"와인 & 전통주 페어링",
+  me_note:"메뉴는 계절을 따라 매달 바뀝니다.<br>식이 제한과 알레르기는 예약 시 알려 주세요.",
+  li_h2:"공간",
+  li1:"오크 카운터를 둘러싼 좌석",
+  li2:"셰프가 직접 이끄는 저녁 한 타임",
+  li3:"저장고에서 숙성 중인 발효와 장",
+  ch_h3:"손맛",
+  ch_role:"셰프 — 가상의 인물",
+  ch_p1:"서울에서 요리를 배우고 파리의 스타 레스토랑을 거친 셰프는, 레시피 바깥에 있는 것 — 만드는 사람에게만 속한 맛, 손맛을 요리합니다.",
+  ch_p2:"매일 저녁 열다섯 자리를 직접 서빙하며 발효 이야기를 들려주고 생산자의 이름을 불러 줍니다. 정에서의 저녁은 레스토랑이라기보다, 나를 기다려 준 밥상에 가깝습니다.",
+  rs_h2:"예약은 매달 1일에 열립니다.",
+  r1_l:"주소", r1_v:"4 rue Exemple, Paris 2e (가상)",
+  r2_l:"입장 시간", r3_l:"전화",
+  r4_l:"드레스 코드", r4_v:"자유 — 편하게 오세요",
+  rs_btn:"온라인 예약",
+  rs_sub:"만석이라면? 대기 명단은 매일 정오에 열립니다.",
+  foot:"데모 사이트 — 레스토랑, 셰프, 주소, 메뉴는 모두 가상입니다.<br>© 2026 Jeong (demo)"
+}
+};
+
+function applyLang(lang){
+  var dict = I18N[lang] || I18N.fr;
+  document.documentElement.setAttribute('lang', lang);
+  document.title = dict._title;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button, .g-langs button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('jeong-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang-switch button, .g-langs button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+var saved = null;
+try{ saved = localStorage.getItem('jeong-lang'); }catch(e){}
+applyLang(saved && I18N[saved] ? saved : 'fr');
+
+/* ============ GATE ============ */
+var gate = document.getElementById('gate');
+var reducedG = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var staticG = location.search.indexOf('static') > -1 || !window.innerHeight;
+function enterJeong(){
+  gate.classList.add('open');
+  document.body.classList.add('inside');
+  document.documentElement.style.overflow='';
+  setTimeout(function(){ gate.style.display='none'; }, 2300);
+}
+document.getElementById('gateBtn').addEventListener('click', enterJeong);
+if(staticG || reducedG){
+  gate.style.display='none';
+  document.body.classList.add('inside');
+}else{
+  document.documentElement.style.overflow='hidden';
+}
+
+/* ============ SCROLL REVEAL ============ */
+(function(){
+  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
+  if(location.search.indexOf('static') > -1){ return; }
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+  document.body.classList.add('js-anim');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+</body>
+</html>

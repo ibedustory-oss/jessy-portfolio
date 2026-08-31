@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matsu Seitai Paris</title>
+<meta name="description" content="Matsu Seitai — cabinet de seitai japonais à Paris (site de démonstration). Thérapie manuelle japonaise pour douleurs chroniques, posture et tension. Sur rendez-vous.">
+<meta property="og:title" content="Matsu Seitai — Cabinet japonais à Paris (démo)">
+<meta property="og:description" content="Thérapie manuelle japonaise, Rive Gauche. Site de démonstration par Jessy Jung.">
+<meta property="og:image" content="https://ibedustory-oss.github.io/jessy-portfolio/images/demo-seitai.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Zen+Old+Mincho:wght@400;500;600&display=swap');
+
+:root{
+  --washi:#F6F4EE;
+  --washi-2:#EFEDE4;
+  --sumi:#1D211E;
+  --sumi-soft:rgba(29,33,30,.64);
+  --matsuba:#3E5A47;
+  --matsuba-deep:#31483A;
+  --shu:#BF3F2C;
+  --haze:#E8EAE2;
+  --line:rgba(29,33,30,.16);
+  --garamond:'EB Garamond',serif;
+  --sans:'Instrument Sans',sans-serif;
+  --mincho:'Zen Old Mincho',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*:before,*:after{animation:none!important;transition:none!important;}
+}
+body{
+  font-family:var(--sans);
+  background:var(--washi);
+  color:var(--sumi);
+  line-height:1.8;
+  font-size:16px;
+  overflow-x:hidden;
+}
+/* washi grain — one fixed film over everything, barely there */
+body:after{
+  content:'';position:fixed;inset:0;z-index:90;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.13 0 0 0 0 0.12 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--matsuba);color:var(--washi);}
+a{color:inherit;}
+button{font-family:inherit;}
+img{display:block;max-width:100%;}
+html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] h3,html[lang="ja"] p,html[lang="ja"] dd,html[lang="ja"] span{word-break:keep-all;}
+html[lang="ja"] .g-display{font-family:var(--mincho);}
+
+.g-display{font-family:var(--garamond);font-weight:500;}
+h2.g-display{letter-spacing:.01em;text-wrap:balance;}
+
+/* ============ DEMO RIBBON ============ */
+.demo-ribbon{
+  background:var(--sumi);color:var(--washi);text-align:center;
+  font-size:11px;letter-spacing:.24em;padding:7px 12px;text-transform:uppercase;
+}
+
+/* ============ NAV ============ */
+nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(246,244,238,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 40px;
+}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.brand .seal{
+  width:38px;height:38px;background:var(--shu);color:var(--washi);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mincho);font-size:22px;font-weight:600;
+  border-radius:4px;
+  box-shadow:inset 0 0 0 2px rgba(246,244,238,.35);
+}
+.brand .t{line-height:1.25;}
+.brand .n{font-family:var(--garamond);font-size:19px;font-weight:600;letter-spacing:.12em;}
+.brand .s{font-size:10.5px;letter-spacing:.22em;color:var(--sumi-soft);text-transform:uppercase;}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{
+  text-decoration:none;font-size:13px;letter-spacing:.1em;font-weight:500;
+}
+.nav-links a:not(.btn){border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .25s;}
+.nav-links a:not(.btn):hover{border-color:var(--matsuba);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  text-decoration:none;font-weight:600;letter-spacing:.08em;font-size:13.5px;
+  padding:13px 28px;border-radius:2px;
+  transition:background .25s,color .25s,transform .2s;
+  border:1px solid transparent;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-matsu{background:var(--matsuba);color:var(--washi);}
+.btn-matsu:hover{background:var(--matsuba-deep);}
+.btn-line{border-color:var(--sumi);color:var(--sumi);background:transparent;}
+.btn-line:hover{background:var(--sumi);color:var(--washi);}
+a:focus-visible,button:focus-visible{outline:2px solid var(--matsuba);outline-offset:3px;}
+.lang-switch{
+  display:flex;gap:2px;border:1px solid var(--sumi);border-radius:999px;
+  padding:3px;background:var(--washi-2);flex-shrink:0;
+}
+.lang-switch button{
+  border:none;background:transparent;font-weight:600;
+  font-size:11px;padding:5px 11px;border-radius:999px;cursor:pointer;
+  color:var(--sumi);letter-spacing:.08em;
+}
+.lang-switch button.active{background:var(--sumi);color:var(--washi);}
+.lang-switch button:not(.active):hover{background:var(--haze);}
+
+/* ============ HERO ============ */
+.hero{
+  max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(300px,.94fr);
+  gap:0;align-items:center;
+  padding:76px 40px 90px;
+}
+.hero-copy{
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
+  padding-right:6vw;margin-right:-9vw;
+}
+.hero .over{
+  font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--matsuba);font-weight:600;
+  display:flex;align-items:center;gap:14px;margin-bottom:30px;
+}
+.hero .over:before{content:'';width:38px;height:1px;background:var(--matsuba);}
+.hero h1{
+  font-family:var(--garamond);font-weight:500;
+  font-size:clamp(40px,5.4vw,70px);
+  line-height:1.24;letter-spacing:.005em;
+}
+.brush{display:block;margin-top:22px;width:min(340px,62%);height:auto;}
+html[lang="ja"] .hero h1{font-family:var(--mincho);line-height:1.5;font-size:clamp(30px,4.2vw,50px);}
+.hero h1 em{font-style:italic;color:var(--matsuba);}
+html[lang="ja"] .hero h1 em{font-style:normal;}
+.hero .sub{margin-top:28px;color:var(--sumi-soft);max-width:46ch;font-size:16px;}
+.hero .cta-row{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;}
+.hero .cta-row .btn{padding:16px 32px;font-size:14px;}
+.trust-row{
+  margin-top:42px;display:flex;gap:0;border-top:1px solid var(--line);
+}
+.trust{
+  flex:1;padding:18px 20px 0 0;margin-right:20px;
+  border-top:2px solid transparent;position:relative;top:-1px;
+}
+.trust:first-child{border-top-color:var(--matsuba);}
+.trust .v{font-family:var(--garamond);font-size:19px;font-weight:600;}
+html[lang="ja"] .trust .v{font-family:var(--mincho);font-size:17px;}
+.trust .t{font-size:11.5px;letter-spacing:.1em;color:var(--sumi-soft);margin-top:2px;}
+
+/* hero art panel — washi board with ink wash, double frame, grounded shadow */
+.hero-art{
+  position:relative;z-index:1;
+  background:
+    radial-gradient(120% 95% at 88% 104%, rgba(62,90,71,.16), transparent 62%),
+    radial-gradient(85% 60% at 6% -4%, rgba(29,33,30,.055), transparent 55%),
+    var(--haze);
+  border:1px solid var(--line);
+  box-shadow:0 36px 70px -46px rgba(29,33,30,.45);
+  min-height:560px;
+  overflow:visible;
+}
+.hero-art:after{
+  content:'';position:absolute;inset:12px;pointer-events:none;
+  border:1px solid rgba(29,33,30,.10);
+}
+.hero-art .grass{position:absolute;left:30px;bottom:26px;opacity:.85;}
+.hero-art .enso{
+  position:absolute;left:44%;top:47%;transform:translate(-50%,-50%);
+  width:clamp(190px,52%,264px);height:auto;
+  filter:drop-shadow(0 2px 1px rgba(29,33,30,.12));
+}
+body.js-anim .hero-art .enso-main{stroke-dasharray:780;stroke-dashoffset:780;}
+body.js-anim .hero-art.in .enso-main{animation:ensoDraw 1.9s cubic-bezier(.55,.1,.3,1) .45s forwards;}
+body.js-anim .hero-art .enso-ghost{opacity:0;transition:opacity .8s ease 2s;}
+body.js-anim .hero-art.in .enso-ghost{opacity:.5;}
+@keyframes ensoDraw{to{stroke-dashoffset:0;}}
+.hero-art .kanji-rail{
+  position:absolute;right:26px;top:34px;z-index:2;
+  background:rgba(232,234,226,.82);padding:14px 4px;
+  writing-mode:vertical-rl;
+  font-family:var(--mincho);font-weight:600;
+  font-size:clamp(40px,4.6vw,58px);letter-spacing:.34em;color:var(--sumi);
+}
+.hero-art .kanji-sub{
+  position:absolute;right:96px;bottom:40px;
+  writing-mode:vertical-rl;
+  font-size:11px;letter-spacing:.4em;color:var(--sumi-soft);text-transform:uppercase;
+}
+.hero-art .seal-big{
+  position:absolute;left:-22px;bottom:-22px;
+  width:56px;height:56px;background:var(--shu);color:var(--washi);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mincho);font-size:32px;font-weight:600;border-radius:5px;
+  box-shadow:inset 0 0 0 2.5px rgba(246,244,238,.35), 4px 5px 0 rgba(29,33,30,.18);
+  transform:rotate(-3deg);
+}
+.hero-art .pine{position:absolute;left:26px;top:26px;opacity:.9;}
+
+/* ============ SECTION SCAFFOLD ============ */
+section{padding:100px 40px;scroll-margin-top:84px;}
+.rail{max-width:1180px;margin:0 auto;}
+.sec-head{margin-bottom:56px;max-width:860px;}
+.sec-head .en{
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--matsuba);font-weight:600;
+  margin-bottom:16px;display:flex;align-items:center;gap:14px;
+}
+.sec-head .en:after{content:'';flex:1;height:1px;background:var(--line);}
+.sec-head h2{font-size:clamp(27px,3.4vw,40px);line-height:1.4;}
+html[lang="ja"] .sec-head h2{line-height:1.7;}
+.sec-head p{margin-top:16px;color:var(--sumi-soft);max-width:62ch;font-size:15.5px;}
+
+/* ============ SEITAI (definition) ============ */
+#seitai{background:var(--washi-2);}
+.def-quote{
+  font-family:var(--garamond);font-style:italic;font-weight:400;
+  font-size:clamp(21px,2.6vw,30px);line-height:1.7;
+  max-width:30ch;color:var(--sumi);
+  border-left:2px solid var(--matsuba);padding-left:28px;
+}
+html[lang="ja"] .def-quote{font-family:var(--mincho);font-style:normal;font-size:clamp(18px,2.2vw,25px);}
+.def-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:5vw;align-items:start;}
+.principles{border-top:1px solid var(--line);}
+.principle{
+  display:grid;grid-template-columns:96px 1fr;gap:28px;align-items:center;
+  padding:30px 4px;border-bottom:1px solid var(--line);
+}
+.principle .kanji{
+  font-family:var(--mincho);font-size:44px;font-weight:600;color:var(--matsuba);
+  line-height:1;text-align:center;
+}
+.principle h3{font-family:var(--garamond);font-size:21px;font-weight:600;letter-spacing:.02em;}
+html[lang="ja"] .principle h3{font-family:var(--mincho);font-size:18px;}
+.principle p{font-size:14px;color:var(--sumi-soft);margin-top:4px;}
+
+/* ============ POUR QUI ============ */
+.douleurs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);background:#fff;}
+.douleur{
+  padding:22px 28px;border-bottom:1px solid var(--line);
+  display:flex;gap:16px;align-items:baseline;font-size:15px;font-weight:500;
+}
+.douleur:nth-child(odd){border-right:1px solid var(--line);}
+.douleur:nth-last-child(-n+2){border-bottom:none;}
+.douleur:before{content:'—';color:var(--shu);font-weight:600;flex-shrink:0;}
+.douleurs-close{
+  margin-top:30px;font-family:var(--garamond);font-style:italic;
+  font-size:clamp(18px,2.2vw,24px);line-height:1.7;max-width:44ch;
+}
+html[lang="ja"] .douleurs-close{font-family:var(--mincho);font-style:normal;font-size:clamp(16px,2vw,21px);}
+.douleurs-close em{font-style:inherit;color:var(--matsuba);}
+
+/* ============ SÉANCE ============ */
+#seance{background:var(--sumi);color:var(--washi);}
+#seance .sec-head .en{color:var(--haze);}
+#seance .sec-head .en:after{background:rgba(246,244,238,.2);}
+#seance .sec-head p{color:rgba(246,244,238,.62);}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(246,244,238,.16);border:1px solid rgba(246,244,238,.16);}
+.step{background:var(--sumi);padding:32px 26px 36px;}
+.step .no{
+  font-family:var(--garamond);font-style:italic;font-size:15px;color:var(--haze);
+  display:block;margin-bottom:14px;letter-spacing:.06em;
+}
+.step h3{font-family:var(--garamond);font-weight:600;font-size:19px;color:var(--washi);margin-bottom:10px;letter-spacing:.02em;}
+html[lang="ja"] .step h3{font-family:var(--mincho);font-size:17px;}
+.step p{font-size:13px;color:rgba(246,244,238,.6);line-height:1.9;}
+.flow-note{margin-top:24px;font-size:12.5px;color:rgba(246,244,238,.48);}
+
+/* ============ TARIFS ============ */
+.tarifs{max-width:760px;}
+.tarif-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  padding:26px 4px;border-bottom:1px solid var(--line);
+}
+.tarif-row .n{font-family:var(--garamond);font-size:21px;font-weight:600;letter-spacing:.02em;}
+html[lang="ja"] .tarif-row .n{font-family:var(--mincho);font-size:18px;}
+.tarif-row .d{font-size:12.5px;color:var(--sumi-soft);letter-spacing:.04em;margin-top:2px;}
+.tarif-row .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-6px);}
+.tarif-row .p{font-family:var(--garamond);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.tarif-policy{
+  margin-top:30px;max-width:760px;
+  background:var(--haze);border-left:3px solid var(--matsuba);
+  padding:20px 26px;font-size:14px;line-height:1.9;
+}
+.tarif-policy b{color:var(--matsuba-deep);}
+
+/* ============ PRATICIEN ============ */
+#praticien{background:var(--washi-2);}
+.prat-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:5vw;align-items:center;}
+/* kakejiku — a hanging calligraphy scroll instead of a stock portrait */
+.prat-visual{
+  position:relative;aspect-ratio:3/4;
+  display:flex;align-items:stretch;justify-content:center;
+  padding:6% 0;
+}
+.kake{
+  width:min(66%,240px);display:flex;flex-direction:column;
+  filter:drop-shadow(0 24px 34px rgba(29,33,30,.22));
+}
+.kake-top,.kake-bottom{
+  background:linear-gradient(180deg,var(--matsuba-deep),var(--matsuba));
+  height:34px;flex-shrink:0;
+}
+.kake-bottom{height:26px;background:linear-gradient(0deg,var(--matsuba-deep),var(--matsuba));}
+.kake-body{
+  flex:1;background:#FBFAF5;border-left:1px solid var(--line);border-right:1px solid var(--line);
+  position:relative;display:flex;align-items:flex-start;justify-content:center;
+  padding:26px 0 20px;
+}
+.kake-kanji{
+  font-family:var(--mincho);font-weight:600;font-size:clamp(74px,9vw,108px);
+  line-height:1;color:var(--sumi);
+}
+.kake-line{
+  position:absolute;right:16%;top:24px;bottom:auto;
+  writing-mode:vertical-rl;
+  font-family:var(--mincho);font-size:13px;letter-spacing:.42em;color:var(--sumi-soft);
+}
+.kake-seal{
+  position:absolute;left:18%;bottom:18px;
+  width:26px;height:26px;background:var(--shu);color:var(--washi);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mincho);font-size:15px;
+  box-shadow:inset 0 0 0 1.5px rgba(246,244,238,.35);
+  transform:rotate(-2deg);
+}
+.kake-rod{
+  height:9px;background:var(--sumi);border-radius:999px;
+  margin:0 -14px;flex-shrink:0;
+}
+.prat-text h3{font-family:var(--garamond);font-weight:600;font-size:clamp(22px,2.6vw,30px);line-height:1.45;margin-bottom:8px;}
+html[lang="ja"] .prat-text h3{font-family:var(--mincho);}
+.prat-text .cred{font-size:12.5px;color:var(--matsuba);font-weight:600;letter-spacing:.12em;margin-bottom:24px;text-transform:uppercase;}
+.prat-text p{color:var(--sumi-soft);font-size:15px;margin-bottom:16px;max-width:58ch;}
+.prat-text .sig{
+  font-family:var(--mincho);font-size:20px;letter-spacing:.3em;margin-top:24px;
+  display:flex;align-items:center;gap:16px;
+}
+.prat-text .sig .mini-seal{
+  width:30px;height:30px;background:var(--shu);color:var(--washi);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  box-shadow:inset 0 0 0 1.5px rgba(246,244,238,.35);
+}
+.creds{margin-top:26px;display:flex;flex-direction:column;gap:9px;max-width:520px;}
+.creds div{
+  font-size:13px;color:var(--sumi-soft);display:flex;gap:12px;align-items:baseline;
+  border-bottom:1px solid var(--line);padding-bottom:9px;
+}
+.creds div:before{content:'—';color:var(--matsuba);}
+
+/* ============ VOIX ============ */
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;}
+.voice{border-top:2px solid var(--sumi);padding-top:24px;}
+.voice p{
+  font-family:var(--garamond);font-style:italic;font-size:17.5px;line-height:1.8;color:var(--sumi);
+}
+html[lang="ja"] .voice p{font-family:var(--mincho);font-style:normal;font-size:15px;}
+.voice .who{margin-top:16px;font-size:12px;letter-spacing:.14em;color:var(--sumi-soft);text-transform:uppercase;}
+.voice-note{margin-top:20px;font-size:11.5px;color:var(--sumi-soft);letter-spacing:.04em;}
+
+/* ============ FAQ ============ */
+#faq{background:var(--washi-2);}
+.faq-list{max-width:840px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  width:100%;background:none;border:none;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 4px;text-align:left;
+  font-size:15.5px;font-weight:600;color:var(--sumi);letter-spacing:.02em;
+}
+.faq-q .toggle{
+  font-family:var(--garamond);font-weight:400;font-size:24px;color:var(--matsuba);
+  transition:transform .3s;flex-shrink:0;line-height:1;
+}
+.faq-item.open .toggle{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-a p{padding:0 4px 24px;font-size:14px;color:var(--sumi-soft);max-width:64ch;}
+
+/* ============ ACCÈS ============ */
+.access-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:5vw;align-items:start;}
+.access-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);}
+.access-table th,.access-table td{
+  padding:16px 22px;border-bottom:1px solid var(--line);font-size:14px;text-align:left;
+}
+.access-table tr:last-child th,.access-table tr:last-child td{border-bottom:none;}
+.access-table th{
+  width:140px;font-weight:600;letter-spacing:.12em;color:var(--matsuba-deep);
+  background:var(--haze);font-size:11.5px;text-transform:uppercase;
+}
+.hours-note{margin-top:16px;font-size:12.5px;color:var(--sumi-soft);}
+/* hand-drawn quartier plan */
+.map-art{
+  background:#FBFAF5;border:1px solid var(--line);aspect-ratio:4/3;
+  position:relative;overflow:hidden;
+  box-shadow:0 24px 50px -38px rgba(29,33,30,.4);
+}
+.map-art svg{position:absolute;inset:0;width:100%;height:100%;}
+.map-art .map-cap{
+  position:absolute;left:16px;bottom:12px;
+  font-size:10.5px;letter-spacing:.22em;color:var(--sumi-soft);text-transform:uppercase;
+}
+.map-pin{transform-origin:236px 176px;}
+body.js-anim .reveal.in .map-pin{animation:pinDrop .5s cubic-bezier(.2,1.5,.4,1) .6s backwards;}
+@keyframes pinDrop{from{transform:translateY(-14px) scale(.6);opacity:0;}}
+
+/* ============ CTA BAND ============ */
+.cta-band{background:var(--matsuba);color:var(--washi);padding:80px 40px;}
+.cta-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:5vw;align-items:center;}
+.cta-inner h2{
+  font-family:var(--garamond);font-weight:500;font-size:clamp(26px,3.4vw,40px);line-height:1.4;
+}
+html[lang="ja"] .cta-inner h2{font-family:var(--mincho);line-height:1.7;}
+.cta-inner h2 em{font-style:italic;}
+html[lang="ja"] .cta-inner h2 em{font-style:normal;}
+.cta-inner .note{margin-top:16px;font-size:13.5px;color:rgba(246,244,238,.7);}
+.cta-actions{display:flex;flex-direction:column;gap:14px;}
+.cta-actions .btn{width:100%;padding:17px 30px;font-size:14.5px;}
+.cta-actions .btn-white{background:var(--washi);color:var(--matsuba-deep);}
+.cta-actions .btn-outline{border:1px solid rgba(246,244,238,.6);color:var(--washi);}
+.cta-actions .btn-outline:hover{background:rgba(246,244,238,.12);}
+.cta-actions .tel{
+  text-align:center;font-family:var(--garamond);font-size:22px;letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;text-decoration:none;
+}
+
+/* ============ FOOTER ============ */
+footer{padding:46px 40px;text-align:center;border-top:1px solid var(--line);}
+footer .f-brand{display:flex;align-items:center;justify-content:center;gap:12px;}
+footer .f-seal{
+  width:28px;height:28px;background:var(--shu);color:var(--washi);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-size:16px;
+}
+footer .f-name{font-family:var(--garamond);font-size:16px;letter-spacing:.2em;font-weight:600;}
+footer .f-demo{margin-top:14px;font-size:11.5px;color:var(--sumi-soft);letter-spacing:.08em;line-height:2;}
+
+/* ============ REVEAL ============ */
+body.js-anim .reveal{
+  opacity:0;transform:translateY(22px);filter:blur(6px);
+  transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1),filter .9s cubic-bezier(.23,1,.32,1);
+}
+body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:980px){
+  nav{padding:12px 18px;}
+  .nav-links{gap:14px;}
+  .nav-links a:not(.btn){display:none;}
+  section{padding:72px 22px;}
+  .hero{grid-template-columns:1fr;padding:52px 22px 64px;gap:44px;}
+  .hero-copy{margin-right:0;padding-right:0;}
+  .hero-art{min-height:420px;}
+  .trust-row{flex-direction:column;border-top:none;gap:0;}
+  .trust{border-top:1px solid var(--line);margin-right:0;padding:14px 0;}
+  .trust:first-child{border-top:2px solid var(--matsuba);}
+  .def-grid{grid-template-columns:1fr;gap:44px;}
+  .douleurs{grid-template-columns:1fr;}
+  .douleur:nth-child(odd){border-right:none;}
+  .douleur:nth-last-child(-n+2){border-bottom:1px solid var(--line);}
+  .douleur:last-child{border-bottom:none;}
+  .flow{grid-template-columns:1fr 1fr;}
+  .prat-grid{grid-template-columns:1fr;gap:40px;}
+  .prat-visual{max-width:360px;margin:0 auto;}
+  .voices{grid-template-columns:1fr;}
+  .access-grid{grid-template-columns:1fr;gap:40px;}
+  .cta-inner{grid-template-columns:1fr;gap:40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon" data-i18n="ribbon">Site de démonstration — cabinet fictif</div>
+
+<!-- NAV -->
+<nav>
+  <a class="brand" href="#top">
+    <span class="seal" aria-hidden="true">松</span>
+    <span class="t">
+      <span class="n">MATSU SEITAI</span><br>
+      <span class="s" data-i18n="brand_s">Cabinet japonais — Paris</span>
+    </span>
+  </a>
+  <div class="nav-links">
+    <a href="#seitai" data-i18n="nav_seitai">Le seitai</a>
+    <a href="#seance" data-i18n="nav_seance">La séance</a>
+    <a href="#tarifs" data-i18n="nav_tarifs">Tarifs</a>
+    <a href="#acces" data-i18n="nav_acces">Accès</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ja">日本語</button>
+    </div>
+    <a class="btn btn-matsu" href="#rdv" data-i18n="nav_rdv">Prendre rendez-vous</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <div class="over" data-i18n="over">Thérapie manuelle japonaise — Rive Gauche</div>
+    <h1 data-i18n-html="h1">Le corps sait se redresser.<br><em>Encore faut-il l'écouter.</em></h1>
+    <svg class="brush" viewBox="0 0 340 16" aria-hidden="true">
+      <path d="M4 10 Q60 4 130 8 Q210 12 262 7 Q300 4 336 8" fill="none" stroke="#3E5A47" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+      <path d="M4 10 Q60 4 130 8" fill="none" stroke="#3E5A47" stroke-width="2.4" stroke-linecap="round" opacity=".4"/>
+    </svg>
+    <p class="sub" data-i18n="sub">Le seitai est l'art japonais de rééquilibrer le corps par des ajustements manuels précis et doux. Au cabinet Matsu, chaque séance commence par une lecture attentive de votre posture — jamais par un protocole tout fait.</p>
+    <div class="cta-row">
+      <a class="btn btn-matsu" href="#rdv" data-i18n="cta1">Réserver une première séance</a>
+      <a class="btn btn-line" href="#seitai" data-i18n="cta2">Qu'est-ce que le seitai ?</a>
+    </div>
+    <div class="trust-row reveal">
+      <div class="trust"><div class="v" data-i18n="t1v">Formé à Tokyo</div><div class="t" data-i18n="t1t">certification japonaise</div></div>
+      <div class="trust"><div class="v" data-i18n="t2v">12 ans</div><div class="t" data-i18n="t2t">de pratique</div></div>
+      <div class="trust"><div class="v" data-i18n="t3v">Sur rendez-vous</div><div class="t" data-i18n="t3t">du mardi au samedi</div></div>
+    </div>
+  </div>
+
+  <div class="hero-art reveal" aria-hidden="true">
+    <svg class="pine" width="92" height="84" viewBox="0 0 120 110">
+      <g fill="none" stroke="#3E5A47" stroke-linecap="round">
+        <path d="M12 96 Q40 84 62 62 Q84 40 96 16" stroke-width="3.2"/>
+        <path d="M52 70 Q66 66 80 70" stroke-width="2"/>
+        <path d="M66 52 Q80 48 92 52" stroke-width="2"/>
+        <path d="M40 84 Q52 80 64 84" stroke-width="2"/>
+        <g stroke-width="1.4" opacity=".85">
+          <path d="M80 70 L74 58 M80 70 L82 56 M80 70 L90 60"/>
+          <path d="M92 52 L86 40 M92 52 L96 38 M92 52 L102 42"/>
+          <path d="M64 84 L58 72 M64 84 L68 70 M64 84 L74 74"/>
+        </g>
+      </g>
+    </svg>
+    <svg class="enso" viewBox="0 0 290 290">
+      <path class="enso-main" d="M198 42 Q262 74 258 148 Q254 226 168 248 Q86 268 48 196 Q14 128 68 74 Q106 38 158 36"
+        fill="none" stroke="#1D211E" stroke-width="13" stroke-linecap="round" opacity=".88"/>
+      <path class="enso-ghost" d="M198 42 Q252 78 250 148 Q246 218 168 240"
+        fill="none" stroke="#1D211E" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+    </svg>
+    <div class="kanji-rail">整体</div>
+    <div class="kanji-sub">seï-taï — corps ordonné</div>
+    <svg class="grass" width="74" height="44" viewBox="0 0 74 44" aria-hidden="true">
+      <g fill="none" stroke="#3E5A47" stroke-width="1.6" stroke-linecap="round">
+        <path d="M8 42 Q10 24 6 10"/><path d="M16 42 Q16 20 22 6"/><path d="M24 42 Q28 26 26 14"/>
+        <path d="M36 42 Q34 28 40 16"/><path d="M46 42 Q50 30 48 22"/><path d="M58 42 Q56 26 64 12"/>
+      </g>
+    </svg>
+    <div class="seal-big">松</div>
+  </div>
+</header>
+
+<!-- LE SEITAI -->
+<section id="seitai">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Le seitai</div>
+      <h2 class="g-display" data-i18n="se_h2">Une tradition japonaise, méconnue à Paris.</h2>
+    </div>
+    <div class="def-grid">
+      <div class="reveal">
+        <p class="def-quote" data-i18n="se_quote">« Seitai (整体) signifie littéralement corps ordonné. Ni massage, ni ostéopathie : une discipline à part, née au Japon. »</p>
+      </div>
+      <div class="principles reveal">
+        <div class="principle">
+          <div class="kanji">調</div>
+          <div>
+            <h3 data-i18n="p1_h3">Régler</h3>
+            <p data-i18n="p1_p">Des ajustements manuels doux — sans craquements — pour rendre aux articulations et aux muscles leur juste tension.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="kanji">姿</div>
+          <div>
+            <h3 data-i18n="p2_h3">Tenir</h3>
+            <p data-i18n="p2_p">La posture est le fil conducteur : c'est souvent elle, et non l'endroit qui fait mal, qui explique la douleur.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="kanji">息</div>
+          <div>
+            <h3 data-i18n="p3_h3">Respirer</h3>
+            <p data-i18n="p3_p">Un corps ordonné respire mieux. La séance travaille aussi le souffle, pour que l'effet dure au-delà du cabinet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section id="pourqui">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Pour qui</div>
+      <h2 class="g-display" data-i18n="pq_h2">Ces douleurs que l'on finit par accepter.</h2>
+    </div>
+    <div class="douleurs reveal">
+      <div class="douleur" data-i18n="d1">Lombaires douloureuses au réveil</div>
+      <div class="douleur" data-i18n="d2">Nuque et épaules verrouillées par l'écran</div>
+      <div class="douleur" data-i18n="d3">Maux de tête récurrents</div>
+      <div class="douleur" data-i18n="d4">Tensions qui reviennent après chaque massage</div>
+      <div class="douleur" data-i18n="d5">Fatigue posturale en fin de journée</div>
+      <div class="douleur" data-i18n="d6">« Rien aux examens », mais la douleur est là</div>
+    </div>
+    <p class="douleurs-close reveal" data-i18n-html="pq_close">La douleur chronique n'est pas une fatalité — <em>c'est une posture qui demande à changer.</em></p>
+  </div>
+</section>
+
+<!-- LA SÉANCE -->
+<section id="seance">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">La séance</div>
+      <h2 class="g-display" data-i18n="fl_h2">Première séance — 75 minutes.</h2>
+      <p data-i18n="fl_p">Rien n'est ajusté avant d'être compris. La première séance consacre un vrai temps à l'entretien et à la lecture du corps.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="step">
+        <span class="no">I.</span>
+        <h3 data-i18n="f1_h3">Entretien</h3>
+        <p data-i18n="f1_p">Votre histoire, vos douleurs, votre quotidien — au calme, sans montre.</p>
+      </div>
+      <div class="step">
+        <span class="no">II.</span>
+        <h3 data-i18n="f2_h3">Lecture du corps</h3>
+        <p data-i18n="f2_p">Observation de la posture, des appuis et des mobilités, debout puis allongé.</p>
+      </div>
+      <div class="step">
+        <span class="no">III.</span>
+        <h3 data-i18n="f3_h3">Ajustements</h3>
+        <p data-i18n="f3_p">Pressions et mobilisations précises, habillé, sur futon — jamais forcées.</p>
+      </div>
+      <div class="step">
+        <span class="no">IV.</span>
+        <h3 data-i18n="f4_h3">Conseils</h3>
+        <p data-i18n="f4_p">Deux ou trois gestes simples à refaire chez vous — pas une liste impossible.</p>
+      </div>
+    </div>
+    <p class="flow-note" data-i18n="fl_note">Les séances de suivi durent 60 minutes. Tenue souple conseillée — le seitai se pratique habillé.</p>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section id="tarifs">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Tarifs</div>
+      <h2 class="g-display" data-i18n="ta_h2">Des tarifs simples, annoncés avant.</h2>
+    </div>
+    <div class="tarifs reveal">
+      <div class="tarif-row">
+        <div><div class="n" data-i18n="ta1_n">Première séance</div><div class="d" data-i18n="ta1_d">entretien + lecture du corps + ajustements · 75 min</div></div>
+        <div class="dots"></div>
+        <div class="p">90 €</div>
+      </div>
+      <div class="tarif-row">
+        <div><div class="n" data-i18n="ta2_n">Séance de suivi</div><div class="d" data-i18n="ta2_d">60 min</div></div>
+        <div class="dots"></div>
+        <div class="p">75 €</div>
+      </div>
+      <div class="tarif-row">
+        <div><div class="n" data-i18n="ta3_n">Étudiants</div><div class="d" data-i18n="ta3_d">60 min · sur justificatif</div></div>
+        <div class="dots"></div>
+        <div class="p">60 €</div>
+      </div>
+    </div>
+    <div class="tarif-policy reveal" data-i18n-html="ta_policy"><b>Pas de forfaits, pas d'abonnements.</b> Un rythme de séances vous est proposé après la première rencontre — mais chaque rendez-vous reste votre décision. Règlement par carte, espèces ou virement.</div>
+  </div>
+</section>
+
+<!-- PRATICIEN -->
+<section id="praticien">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Le praticien</div>
+      <h2 class="g-display" data-i18n="pr_h2">Un artisan du geste, installé à Paris.</h2>
+    </div>
+    <div class="prat-grid">
+      <div class="prat-visual reveal" aria-hidden="true">
+        <div class="kake">
+          <div class="kake-top"></div>
+          <div class="kake-body">
+            <span class="kake-kanji">松</span>
+            <span class="kake-line" data-i18n="kake_line">聴いてから、触れる</span>
+            <span class="kake-seal">松</span>
+          </div>
+          <div class="kake-bottom"></div>
+          <div class="kake-rod"></div>
+        </div>
+      </div>
+      <div class="prat-text reveal">
+        <h3 data-i18n="pr_h3">« À Tokyo, on m'a appris à écouter avant de toucher. »</h3>
+        <div class="cred" data-i18n="pr_cred">Praticien seitai — formé au Japon</div>
+        <p data-i18n="pr_p1">Formé auprès de maîtres seitai à Tokyo, installé à Paris depuis douze ans. Entre les deux villes, une même conviction : la plupart des douleurs chroniques ne demandent pas plus de force, mais plus d'attention.</p>
+        <p data-i18n="pr_p2">Chaque personne est reçue seule, au calme, dans un cabinet pensé comme une parenthèse — tatami, bois clair, silence. On en ressort souvent plus droit, toujours plus léger.</p>
+        <div class="creds">
+          <div data-i18n="cr1">Certification seitai — Tokyo</div>
+          <div data-i18n="cr2">Pratique en cabinet à Paris depuis 2014</div>
+          <div data-i18n="cr3">Séances en français, anglais et japonais</div>
+        </div>
+        <div class="sig"><span class="mini-seal">松</span><span data-i18n="pr_sig">まつ — Matsu</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOIX -->
+<section id="voix">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Ils en parlent</div>
+      <h2 class="g-display" data-i18n="vx_h2">Paroles de patients (exemples).</h2>
+    </div>
+    <div class="voices">
+      <div class="voice reveal">
+        <p data-i18n="vx1_p">« Des années de séances diverses, et c'est la première fois qu'on m'explique d'où vient réellement ma douleur. Trois mois plus tard, mes lombaires ne me réveillent plus. »</p>
+        <div class="who" data-i18n="vx1_who">Claire — 41 ans, lombalgie chronique</div>
+      </div>
+      <div class="voice reveal">
+        <p data-i18n="vx2_p">« Je pensais que le seitai serait un massage de plus. C'est tout autre chose : précis, calme, presque silencieux. Mes migraines se sont espacées dès la troisième séance. »</p>
+        <div class="who" data-i18n="vx2_who">Julien — 35 ans, céphalées de tension</div>
+      </div>
+    </div>
+    <p class="voice-note" data-i18n="vx_note">※ Site de démonstration : témoignages rédigés à titre d'exemple.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Questions</div>
+      <h2 class="g-display" data-i18n="fq_h2">Avant de venir.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="q1">Est-ce que ça craque, comme chez l'ostéopathe ?</span><span class="toggle">+</span></button>
+        <div class="faq-a"><p data-i18n="a1">Non. Le seitai travaille par pressions et mobilisations douces, sans manipulation forcée ni craquement. La plupart des patients décrivent la séance comme profondément relaxante.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="q2">Combien de séances faut-il prévoir ?</span><span class="toggle">+</span></button>
+        <div class="faq-a"><p data-i18n="a2">Cela dépend de l'ancienneté du trouble. Après la première séance, un rythme vous est proposé avec ses raisons — souvent 3 à 5 séances espacées, puis un entretien ponctuel. Sans forfait : vous restez libre à chaque étape.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="q3">Est-ce remboursé ?</span><span class="toggle">+</span></button>
+        <div class="faq-a"><p data-i18n="a3">Le seitai n'est pas conventionné. Certaines mutuelles prennent en charge les médecines douces — une facture vous est remise à chaque séance. En cas de pathologie aiguë, nous vous orientons d'abord vers votre médecin.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span data-i18n="q4">Comment dois-je m'habiller ?</span><span class="toggle">+</span></button>
+        <div class="faq-a"><p data-i18n="a4">Le seitai se pratique habillé, sur futon. Venez simplement en tenue souple — un vestiaire est à votre disposition si vous arrivez du bureau.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCÈS -->
+<section id="acces">
+  <div class="rail">
+    <div class="sec-head reveal">
+      <div class="en">Accès</div>
+      <h2 class="g-display" data-i18n="ac_h2">Le cabinet.</h2>
+    </div>
+    <div class="access-grid">
+      <div class="reveal">
+        <table class="access-table">
+          <tbody>
+            <tr><th data-i18n="ac1_t">Adresse</th><td data-i18n-html="ac1_d">12 rue Exemple, 75005 Paris<br><small style="color:var(--sumi-soft);font-size:12px;">(adresse fictive — site de démonstration)</small></td></tr>
+            <tr><th data-i18n="ac2_t">Métro</th><td data-i18n="ac2_d">Station à 3 minutes à pied</td></tr>
+            <tr><th data-i18n="ac3_t">Horaires</th><td data-i18n-html="ac3_d">Mardi — Samedi : 9h00 – 19h30<br>Sur rendez-vous uniquement</td></tr>
+            <tr><th data-i18n="ac4_t">Langues</th><td data-i18n="ac4_d">Français · English · 日本語</td></tr>
+          </tbody>
+        </table>
+        <p class="hours-note" data-i18n="ac_note">Le cabinet reçoit une personne à la fois : merci de prévenir la veille en cas d'empêchement.</p>
+      </div>
+      <div class="map-art reveal" aria-hidden="true">
+        <svg viewBox="0 0 480 360" fill="none">
+          <!-- Seine -->
+          <path d="M-10 64 Q120 30 250 58 Q380 86 490 52" stroke="#C9D6D9" stroke-width="30" stroke-linecap="round"/>
+          <path d="M-10 64 Q120 30 250 58 Q380 86 490 52" stroke="#B7C8CC" stroke-width="1.5" stroke-dasharray="3 7" opacity=".8"/>
+          <!-- street grid -->
+          <g stroke="#DDDACF" stroke-width="10" stroke-linecap="round">
+            <path d="M60 -10 L110 370"/><path d="M180 -10 L200 370"/><path d="M300 -10 L280 370"/><path d="M420 -10 L430 370"/>
+            <path d="M-10 150 L490 130"/><path d="M-10 250 L490 240"/>
+          </g>
+          <g stroke="#E8E5DA" stroke-width="5" stroke-linecap="round">
+            <path d="M130 90 L360 320"/><path d="M30 320 L250 90"/>
+          </g>
+          <!-- blocks -->
+          <g fill="#F1EEE5" stroke="#E2DFD4" stroke-width="1">
+            <rect x="120" y="150" width="52" height="66" rx="3" transform="rotate(-2 146 183)"/>
+            <rect x="214" y="146" width="52" height="72" rx="3" transform="rotate(1 240 182)"/>
+            <rect x="306" y="150" width="72" height="60" rx="3" transform="rotate(-1 342 180)"/>
+            <rect x="122" y="262" width="60" height="58" rx="3"/>
+            <rect x="298" y="256" width="66" height="64" rx="3" transform="rotate(2 331 288)"/>
+          </g>
+          <!-- garden -->
+          <circle cx="410" cy="300" r="26" fill="#E2E8DC"/>
+          <circle cx="410" cy="300" r="26" stroke="#CBD6C6" stroke-width="1.5" stroke-dasharray="2 6"/>
+          <!-- metro -->
+          <circle cx="150" cy="243" r="13" fill="#FBFAF5" stroke="#1D211E" stroke-width="1.6"/>
+          <text x="150" y="248" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#1D211E">M</text>
+          <!-- cabinet pin -->
+          <g class="map-pin">
+            <line x1="236" y1="176" x2="236" y2="152" stroke="#BF3F2C" stroke-width="2"/>
+            <rect x="222" y="128" width="28" height="28" rx="4" fill="#BF3F2C" transform="rotate(-3 236 142)"/>
+            <text x="236" y="151" text-anchor="middle" font-family="'Zen Old Mincho',serif" font-size="17" fill="#F6F4EE" transform="rotate(-3 236 142)">松</text>
+          </g>
+        </svg>
+        <span class="map-cap">Rive gauche — Paris 5e</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band" id="rdv">
+  <div class="cta-inner reveal">
+    <div>
+      <h2 data-i18n-html="cta_h2">Votre dos vous le rappellera demain matin.<br><em>Autant l'écouter aujourd'hui.</em></h2>
+      <p class="note" data-i18n="cta_note">Réponse sous 24 h. Première séance : 75 minutes, 90 €.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-white" href="#" onclick="return false;" data-i18n="cta_btn1">Réserver en ligne</a>
+      <a class="btn btn-outline" href="mailto:contact@matsu-seitai.example" data-i18n="cta_btn2">Écrire au cabinet</a>
+      <a class="tel" href="tel:+33123456789">+33 1 23 45 67 89</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">
+    <span class="f-seal">松</span>
+    <span class="f-name">MATSU SEITAI — PARIS</span>
+  </div>
+  <div class="f-demo" data-i18n-html="foot">Site de démonstration — cabinet, praticien, adresse et témoignages fictifs.<br>© 2026 Matsu Seitai (démo)</div>
+</footer>
+
+<script>
+/* ============ I18N ============ */
+var I18N = {
+fr: {
+  _title:"Matsu Seitai Paris",
+  ribbon:"Site de démonstration — cabinet fictif",
+  brand_s:"Cabinet japonais — Paris",
+  nav_seitai:"Le seitai", nav_seance:"La séance", nav_tarifs:"Tarifs", nav_acces:"Accès", nav_rdv:"Prendre rendez-vous",
+  over:"Thérapie manuelle japonaise — Rive Gauche",
+  h1:"Le corps sait se redresser.<br><em>Encore faut-il l'écouter.</em>",
+  sub:"Le seitai est l'art japonais de rééquilibrer le corps par des ajustements manuels précis et doux. Au cabinet Matsu, chaque séance commence par une lecture attentive de votre posture — jamais par un protocole tout fait.",
+  cta1:"Réserver une première séance", cta2:"Qu'est-ce que le seitai ?",
+  t1v:"Formé à Tokyo", t1t:"certification japonaise",
+  t2v:"12 ans", t2t:"de pratique",
+  t3v:"Sur rendez-vous", t3t:"du mardi au samedi",
+  se_h2:"Une tradition japonaise, méconnue à Paris.",
+  se_quote:"« Seitai (整体) signifie littéralement corps ordonné. Ni massage, ni ostéopathie : une discipline à part, née au Japon. »",
+  p1_h3:"Régler", p1_p:"Des ajustements manuels doux — sans craquements — pour rendre aux articulations et aux muscles leur juste tension.",
+  p2_h3:"Tenir", p2_p:"La posture est le fil conducteur : c'est souvent elle, et non l'endroit qui fait mal, qui explique la douleur.",
+  p3_h3:"Respirer", p3_p:"Un corps ordonné respire mieux. La séance travaille aussi le souffle, pour que l'effet dure au-delà du cabinet.",
+  pq_h2:"Ces douleurs que l'on finit par accepter.",
+  d1:"Lombaires douloureuses au réveil",
+  d2:"Nuque et épaules verrouillées par l'écran",
+  d3:"Maux de tête récurrents",
+  d4:"Tensions qui reviennent après chaque massage",
+  d5:"Fatigue posturale en fin de journée",
+  d6:"« Rien aux examens », mais la douleur est là",
+  pq_close:"La douleur chronique n'est pas une fatalité — <em>c'est une posture qui demande à changer.</em>",
+  fl_h2:"Première séance — 75 minutes.",
+  fl_p:"Rien n'est ajusté avant d'être compris. La première séance consacre un vrai temps à l'entretien et à la lecture du corps.",
+  f1_h3:"Entretien", f1_p:"Votre histoire, vos douleurs, votre quotidien — au calme, sans montre.",
+  f2_h3:"Lecture du corps", f2_p:"Observation de la posture, des appuis et des mobilités, debout puis allongé.",
+  f3_h3:"Ajustements", f3_p:"Pressions et mobilisations précises, habillé, sur futon — jamais forcées.",
+  f4_h3:"Conseils", f4_p:"Deux ou trois gestes simples à refaire chez vous — pas une liste impossible.",
+  fl_note:"Les séances de suivi durent 60 minutes. Tenue souple conseillée — le seitai se pratique habillé.",
+  ta_h2:"Des tarifs simples, annoncés avant.",
+  ta1_n:"Première séance", ta1_d:"entretien + lecture du corps + ajustements · 75 min",
+  ta2_n:"Séance de suivi", ta2_d:"60 min",
+  ta3_n:"Étudiants", ta3_d:"60 min · sur justificatif",
+  ta_policy:"<b>Pas de forfaits, pas d'abonnements.</b> Un rythme de séances vous est proposé après la première rencontre — mais chaque rendez-vous reste votre décision. Règlement par carte, espèces ou virement.",
+  pr_h2:"Un artisan du geste, installé à Paris.",
+  pr_h3:"« À Tokyo, on m'a appris à écouter avant de toucher. »",
+  pr_cred:"Praticien seitai — formé au Japon",
+  pr_p1:"Formé auprès de maîtres seitai à Tokyo, installé à Paris depuis douze ans. Entre les deux villes, une même conviction : la plupart des douleurs chroniques ne demandent pas plus de force, mais plus d'attention.",
+  pr_p2:"Chaque personne est reçue seule, au calme, dans un cabinet pensé comme une parenthèse — tatami, bois clair, silence. On en ressort souvent plus droit, toujours plus léger.",
+  cr1:"Certification seitai — Tokyo",
+  cr2:"Pratique en cabinet à Paris depuis 2014",
+  cr3:"Séances en français, anglais et japonais",
+  pr_sig:"まつ — Matsu",
+  kake_line:"聴いてから、触れる",
+  vx_h2:"Paroles de patients (exemples).",
+  vx1_p:"« Des années de séances diverses, et c'est la première fois qu'on m'explique d'où vient réellement ma douleur. Trois mois plus tard, mes lombaires ne me réveillent plus. »",
+  vx1_who:"Claire — 41 ans, lombalgie chronique",
+  vx2_p:"« Je pensais que le seitai serait un massage de plus. C'est tout autre chose : précis, calme, presque silencieux. Mes migraines se sont espacées dès la troisième séance. »",
+  vx2_who:"Julien — 35 ans, céphalées de tension",
+  vx_note:"※ Site de démonstration : témoignages rédigés à titre d'exemple.",
+  fq_h2:"Avant de venir.",
+  q1:"Est-ce que ça craque, comme chez l'ostéopathe ?",
+  a1:"Non. Le seitai travaille par pressions et mobilisations douces, sans manipulation forcée ni craquement. La plupart des patients décrivent la séance comme profondément relaxante.",
+  q2:"Combien de séances faut-il prévoir ?",
+  a2:"Cela dépend de l'ancienneté du trouble. Après la première séance, un rythme vous est proposé avec ses raisons — souvent 3 à 5 séances espacées, puis un entretien ponctuel. Sans forfait : vous restez libre à chaque étape.",
+  q3:"Est-ce remboursé ?",
+  a3:"Le seitai n'est pas conventionné. Certaines mutuelles prennent en charge les médecines douces — une facture vous est remise à chaque séance. En cas de pathologie aiguë, nous vous orientons d'abord vers votre médecin.",
+  q4:"Comment dois-je m'habiller ?",
+  a4:"Le seitai se pratique habillé, sur futon. Venez simplement en tenue souple — un vestiaire est à votre disposition si vous arrivez du bureau.",
+  ac_h2:"Le cabinet.",
+  ac1_t:"Adresse", ac1_d:"12 rue Exemple, 75005 Paris<br><small style=\"color:var(--sumi-soft);font-size:12px;\">(adresse fictive — site de démonstration)</small>",
+  ac2_t:"Métro", ac2_d:"Station à 3 minutes à pied",
+  ac3_t:"Horaires", ac3_d:"Mardi — Samedi : 9h00 – 19h30<br>Sur rendez-vous uniquement",
+  ac4_t:"Langues", ac4_d:"Français · English · 日本語",
+  ac_note:"Le cabinet reçoit une personne à la fois : merci de prévenir la veille en cas d'empêchement.",
+  cta_h2:"Votre dos vous le rappellera demain matin.<br><em>Autant l'écouter aujourd'hui.</em>",
+  cta_note:"Réponse sous 24 h. Première séance : 75 minutes, 90 €.",
+  cta_btn1:"Réserver en ligne", cta_btn2:"Écrire au cabinet",
+  foot:"Site de démonstration — cabinet, praticien, adresse et témoignages fictifs.<br>© 2026 Matsu Seitai (démo)"
+},
+en: {
+  _title:"Matsu Seitai Paris",
+  ribbon:"Demo site — fictional practice",
+  brand_s:"Japanese practice — Paris",
+  nav_seitai:"About seitai", nav_seance:"The session", nav_tarifs:"Fees", nav_acces:"Access", nav_rdv:"Book a session",
+  over:"Japanese manual therapy — Left Bank, Paris",
+  h1:"The body knows how to right itself.<br><em>It just needs to be heard.</em>",
+  sub:"Seitai is the Japanese art of rebalancing the body through precise, gentle manual adjustments. At Matsu, every session begins with a careful reading of your posture — never with a one-size-fits-all protocol.",
+  cta1:"Book a first session", cta2:"What is seitai?",
+  t1v:"Trained in Tokyo", t1t:"Japanese certification",
+  t2v:"12 years", t2t:"in practice",
+  t3v:"By appointment", t3t:"Tuesday to Saturday",
+  se_h2:"A Japanese tradition, little known in Paris.",
+  se_quote:"“Seitai (整体) literally means ordered body. Neither massage nor osteopathy: a discipline of its own, born in Japan.”",
+  p1_h3:"Adjust", p1_p:"Gentle manual adjustments — no cracking — restoring the right tension to joints and muscles.",
+  p2_h3:"Hold", p2_p:"Posture is the common thread: it is often the posture, not the painful spot, that explains the pain.",
+  p3_h3:"Breathe", p3_p:"An ordered body breathes better. Each session also works on the breath, so the effect lasts beyond the room.",
+  pq_h2:"The aches we end up living with.",
+  d1:"Lower back pain on waking",
+  d2:"Neck and shoulders locked by screen work",
+  d3:"Recurring headaches",
+  d4:"Tension that returns after every massage",
+  d5:"Postural fatigue by the end of the day",
+  d6:"“Nothing on the scans” — yet the pain is real",
+  pq_close:"Chronic pain is not a life sentence — <em>it is a posture asking to change.</em>",
+  fl_h2:"First session — 75 minutes.",
+  fl_p:"Nothing is adjusted before it is understood. The first session gives real time to conversation and to reading the body.",
+  f1_h3:"Conversation", f1_p:"Your history, your pain, your daily life — unhurried, without a clock.",
+  f2_h3:"Body reading", f2_p:"Posture, weight-bearing and mobility, observed standing and lying down.",
+  f3_h3:"Adjustments", f3_p:"Precise pressure and mobilisation, clothed, on a futon — never forced.",
+  f4_h3:"Guidance", f4_p:"Two or three simple movements to repeat at home — not an impossible list.",
+  fl_note:"Follow-up sessions last 60 minutes. Soft clothing recommended — seitai is practised fully clothed.",
+  ta_h2:"Simple fees, stated up front.",
+  ta1_n:"First session", ta1_d:"conversation + body reading + adjustments · 75 min",
+  ta2_n:"Follow-up session", ta2_d:"60 min",
+  ta3_n:"Students", ta3_d:"60 min · with ID",
+  ta_policy:"<b>No packages, no subscriptions.</b> A rhythm of sessions is suggested after the first visit — but every appointment remains your decision. Card, cash or transfer.",
+  pr_h2:"A craftsman of the hands, based in Paris.",
+  pr_h3:"“In Tokyo I was taught to listen before touching.”",
+  pr_cred:"Seitai practitioner — trained in Japan",
+  pr_p1:"Trained under seitai masters in Tokyo, based in Paris for twelve years. Between the two cities, one conviction: most chronic pain calls not for more force, but for more attention.",
+  pr_p2:"Each person is received alone, in a room designed as a pause — tatami, pale wood, silence. People tend to leave straighter, and always lighter.",
+  cr1:"Seitai certification — Tokyo",
+  cr2:"In practice in Paris since 2014",
+  cr3:"Sessions in French, English and Japanese",
+  pr_sig:"まつ — Matsu",
+  kake_line:"聴いてから、触れる",
+  vx_h2:"What patients say (samples).",
+  vx1_p:"“Years of every kind of therapy, and this is the first time someone explained where my pain actually comes from. Three months on, my lower back no longer wakes me.”",
+  vx1_who:"Claire — 41, chronic low-back pain",
+  vx2_p:"“I expected seitai to be one more massage. It is something else entirely: precise, calm, almost silent. My migraines started spacing out by the third session.”",
+  vx2_who:"Julien — 35, tension headaches",
+  vx_note:"※ Demo site: sample testimonials written as examples.",
+  fq_h2:"Before you come.",
+  q1:"Does it crack, like at the osteopath?",
+  a1:"No. Seitai works through gentle pressure and mobilisation, with no forced manipulation and no cracking. Most patients describe the session as deeply relaxing.",
+  q2:"How many sessions will I need?",
+  a2:"It depends how long the trouble has been there. After the first session you are offered a rhythm, with the reasons — often 3 to 5 spaced sessions, then occasional maintenance. No packages: you stay free at every step.",
+  q3:"Is it reimbursed?",
+  a3:"Seitai is not covered by French social security. Some mutuelles reimburse complementary care — you receive an invoice after each session. For acute conditions we will first refer you to your doctor.",
+  q4:"What should I wear?",
+  a4:"Seitai is practised fully clothed, on a futon. Just come in soft clothing — a changing space is available if you arrive from the office.",
+  ac_h2:"The practice.",
+  ac1_t:"Address", ac1_d:"12 rue Exemple, 75005 Paris<br><small style=\"color:var(--sumi-soft);font-size:12px;\">(fictional address — demo site)</small>",
+  ac2_t:"Metro", ac2_d:"Station 3 minutes on foot",
+  ac3_t:"Hours", ac3_d:"Tuesday — Saturday: 9:00 – 19:30<br>By appointment only",
+  ac4_t:"Languages", ac4_d:"Français · English · 日本語",
+  ac_note:"The practice receives one person at a time: please give a day's notice if you cannot come.",
+  cta_h2:"Your back will remind you tomorrow morning.<br><em>Better to listen today.</em>",
+  cta_note:"Reply within 24 h. First session: 75 minutes, €90.",
+  cta_btn1:"Book online", cta_btn2:"Write to the practice",
+  foot:"Demo site — practice, practitioner, address and testimonials are fictional.<br>© 2026 Matsu Seitai (demo)"
+},
+ja: {
+  _title:"Matsu Seitai Paris — 松 整体院(デモ)",
+  ribbon:"デモサイト — 架空の施術院です",
+  brand_s:"パリの日本式整体院",
+  nav_seitai:"整体とは", nav_seance:"施術の流れ", nav_tarifs:"料金", nav_acces:"アクセス", nav_rdv:"予約する",
+  over:"日本式手技療法 — パリ左岸",
+  h1:"身体は、自ら整う力を<br>持っています。",
+  sub:"整体は、精緻でやさしい手技によって身体のバランスを取り戻す日本の技法です。MATSUでは、決まりきったプロトコルではなく、あなたの姿勢を丁寧に読むことから毎回の施術を始めます。",
+  cta1:"初回セッションを予約", cta2:"整体とは?",
+  t1v:"東京で修業", t1t:"日本での認定",
+  t2v:"12年", t2t:"の臨床経験",
+  t3v:"完全予約制", t3t:"火曜〜土曜",
+  se_h2:"パリではまだ知られていない、日本の伝統。",
+  se_quote:"「整体とは、文字どおり『整った身体』。マッサージでもオステオパシーでもない、日本生まれの独立した技法です。」",
+  p1_h3:"調える", p1_p:"ボキボキしない、やさしい手技。関節と筋肉に、本来の適切な張りを取り戻します。",
+  p2_h3:"姿勢", p2_p:"鍵になるのはいつも姿勢。痛む場所ではなく、姿勢こそが痛みの理由であることが多いのです。",
+  p3_h3:"呼吸", p3_p:"整った身体は、よく呼吸します。効果が施術室の外でも続くよう、呼吸にも働きかけます。",
+  pq_h2:"「仕方ない」と諦めていた、その痛みへ。",
+  d1:"朝起きた時の腰の痛み",
+  d2:"画面仕事で固まった首と肩",
+  d3:"繰り返す頭痛",
+  d4:"マッサージのたびに戻ってくる緊張",
+  d5:"夕方になると崩れる姿勢と疲れ",
+  d6:"検査では「異常なし」、でも痛い",
+  pq_close:"慢性の痛みは宿命ではありません — <em>変わりたがっている姿勢のサインです。</em>",
+  fl_h2:"初回セッション — 75分。",
+  fl_p:"理解する前に、調整はしません。初回は問診と身体を読む時間をたっぷり取ります。",
+  f1_h3:"問診", f1_p:"これまでの経緯、痛み、毎日の過ごし方。時計を気にせず、落ち着いて伺います。",
+  f2_h3:"身体を読む", f2_p:"立位と臥位で、姿勢・重心・可動域を観察します。",
+  f3_h3:"調整", f3_p:"服を着たまま、布団の上で。精緻な圧と運動法 — 決して力ずくにはしません。",
+  f4_h3:"アドバイス", f4_p:"家でできる2〜3の簡単な動きだけ。続かないリストは渡しません。",
+  fl_note:"2回目以降は60分です。動きやすい服装で — 整体は着衣のまま行います。",
+  ta_h2:"シンプルな料金。施術の前にお伝えします。",
+  ta1_n:"初回セッション", ta1_d:"問診+身体を読む+調整 · 75分",
+  ta2_n:"2回目以降", ta2_d:"60分",
+  ta3_n:"学生", ta3_d:"60分 · 学生証提示",
+  ta_policy:"<b>回数券・サブスクリプションはありません。</b>初回の後に通院ペースをご提案しますが、続けるかどうかは毎回あなたの決断です。カード・現金・振込に対応。",
+  pr_h2:"手の仕事の職人として、パリに。",
+  pr_h3:"「東京で教わったのは、触れる前に聴くことでした。」",
+  pr_cred:"整体師 — 日本で修業",
+  pr_p1:"東京の整体の師のもとで修業し、パリで開業して12年。ふたつの都市で変わらない確信がひとつ — 慢性の痛みに必要なのは、より強い力ではなく、より深い注意です。",
+  pr_p2:"施術はおひとりずつ。畳と明るい木、静けさ — 「余白」として設計した施術室でお迎えします。帰り道は、少し背が伸びて、確実に軽くなっているはずです。",
+  cr1:"整体認定 — 東京",
+  cr2:"2014年からパリで開業",
+  cr3:"施術はフランス語・英語・日本語で",
+  pr_sig:"まつ — Matsu",
+  kake_line:"聴いてから、触れる",
+  vx_h2:"患者さまの声(サンプル)。",
+  vx1_p:"「いろいろな施術を何年も受けてきて、痛みの本当の原因を説明してもらえたのは初めてでした。3ヶ月経って、腰の痛みで目が覚めることがなくなりました。」",
+  vx1_who:"クレール — 41歳・慢性腰痛",
+  vx2_p:"「整体もマッサージの一種だと思っていました。まったく別物です。精緻で、静かで、ほとんど無言。3回目から偏頭痛の間隔があきはじめました。」",
+  vx2_who:"ジュリアン — 35歳・緊張型頭痛",
+  vx_note:"※ デモサイトのため、上記はサンプルの文面です。",
+  fq_h2:"ご来院の前に。",
+  q1:"オステオパシーのようにボキボキしますか?",
+  a1:"いいえ。整体はやさしい圧と運動法で行い、強制的な矯正や音を鳴らす手技はありません。多くの方が「深くリラックスした」と話されます。",
+  q2:"何回くらい通えばいいですか?",
+  a2:"症状の長さによります。初回の後、理由とともに通院ペースをご提案します — 多くは間隔をあけて3〜5回、その後は必要に応じて。回数券はなく、毎回自由に選べます。",
+  q3:"保険は使えますか?",
+  a3:"整体はフランスの社会保険の対象外です。ミューチュエル(共済)によっては代替医療の補助があり、毎回領収書をお渡しします。急性の症状はまず主治医の受診をご案内します。",
+  q4:"服装はどうすればいいですか?",
+  a4:"整体は着衣のまま、布団の上で行います。動きやすい服装でお越しください。お仕事帰りの方にはお着替えスペースがあります。",
+  ac_h2:"施術院について。",
+  ac1_t:"住所", ac1_d:"12 rue Exemple, 75005 Paris<br><small style=\"color:var(--sumi-soft);font-size:12px;\">(架空の住所 — デモサイト)</small>",
+  ac2_t:"メトロ", ac2_d:"駅から徒歩3分",
+  ac3_t:"受付時間", ac3_d:"火曜 — 土曜:9:00 – 19:30<br>完全予約制",
+  ac4_t:"対応言語", ac4_d:"Français · English · 日本語",
+  ac_note:"おひとりずつお迎えするため、ご都合が悪くなった場合は前日までにご連絡ください。",
+  cta_h2:"その腰は、明日の朝もあなたに<br>思い出させるでしょう。",
+  cta_note:"24時間以内に返信します。初回:75分・90€。",
+  cta_btn1:"オンラインで予約", cta_btn2:"メールで問い合わせ",
+  foot:"デモサイト — 施術院・施術者・住所・声はすべて架空です。<br>© 2026 Matsu Seitai (démo)"
+}
+};
+
+function applyLang(lang){
+  var dict = I18N[lang] || I18N.fr;
+  document.documentElement.setAttribute('lang', lang);
+  document.title = dict._title;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang-switch button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try{ localStorage.setItem('matsu-lang', lang); }catch(e){}
+}
+document.querySelectorAll('.lang-switch button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
+});
+var saved = null;
+try{ saved = localStorage.getItem('matsu-lang'); }catch(e){}
+applyLang(saved && I18N[saved] ? saved : 'fr');
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var item = btn.parentElement;
+    var answer = item.querySelector('.faq-a');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(o){
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+/* Scroll reveal — progressive enhancement */
+(function(){
+  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
+  if(location.search.indexOf('static') > -1){ return; }
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+  document.body.classList.add('js-anim');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+})();
+</script>
+</body>
+</html>
