@@ -142,12 +142,12 @@ const dictionaries: Record<Lang, Dict> = {
         {
           title: '実装がわかる',
           body: 'エンジニアとして8年、実際にコードを書いてきました。だからスコープを切るとき、どこが重くてどこが軽いかが読めます。エンジニアと同じ言葉で話せます。',
-          proof: 'Ateamでプロジェクトエンジニア8年。日本・インドネシアで新規サービス開発をリード。',
+          proof: 'プロジェクトエンジニアとして8年。日本・インドネシアで新規サービス開発をリード。',
         },
         {
           title: '数字を持てる',
           body: '米国公認会計士です。ユニットエコノミクスと価格から逆算して、事業として成立するかを先に確かめます。新規事業のP&Lを持った経験があります。',
-          proof: 'nonpiで新規事業のP&Lを主導。2,500社以上が使う採用SaaSのGTM・機能企画を担当。',
+          proof: '新規事業のP&Lを主導。2,500社以上が使う採用SaaSのGTM・機能企画を担当。',
         },
         {
           title: 'AIで運用まで作る',
@@ -362,25 +362,25 @@ const dictionaries: Record<Lang, Dict> = {
         {
           period: '2024 – 2026',
           role: 'Product Manager',
-          org: 'Thinkings株式会社',
-          desc: '2,500社以上が利用する採用SaaS「sonar ATS」のGTM・機能企画を担当。',
+          org: '採用SaaS企業（日本）',
+          desc: '2,500社以上が利用する採用SaaSのGTM・機能企画を担当。',
         },
         {
           period: '2021 – 2023',
           role: 'Product Manager / Division Manager',
-          org: 'nonpi',
+          org: 'フードテック企業（日本）',
           desc: '新規事業の立ち上げとP&L、組織開発・人事制度設計を主導。',
         },
         {
           period: '2018 – 2019',
           role: 'Tax Associate',
-          org: 'BDO USA',
+          org: '国際会計事務所（米国）',
           desc: '米国ミシガン州にて、法人・個人の税務申告と日系駐在員の税務に従事。',
         },
         {
           period: '2008 – 2016',
           role: 'Project Engineer',
-          org: 'Ateam Inc.',
+          org: 'Web・モバイル事業会社（日本）',
           desc: 'Web・モバイルサービスの開発と、日本・インドネシアでの新規サービス立ち上げをリード。',
         },
       ],
@@ -449,12 +449,12 @@ const dictionaries: Record<Lang, Dict> = {
         {
           title: '구현을 아는 PM',
           body: '엔지니어로 8년, 직접 코드를 짰습니다. 그래서 스코프를 자를 때 어디가 무겁고 어디가 가벼운지 보입니다. 엔지니어와 같은 언어로 이야기할 수 있습니다.',
-          proof: 'Ateam에서 프로젝트 엔지니어 8년. 일본·인도네시아에서 신규 서비스 개발 리드.',
+          proof: '프로젝트 엔지니어로 8년. 일본·인도네시아에서 신규 서비스 개발 리드.',
         },
         {
           title: '숫자로 판단하는 PM',
           body: '미국 공인회계사입니다. 유닛 이코노믹스와 가격에서 역산해, 사업이 되는지부터 먼저 확인합니다. 신규 사업의 P&L을 직접 맡아 본 경험이 있습니다.',
-          proof: 'nonpi에서 신규 사업 P&L 주도. 2,500개사 이상이 쓰는 채용 SaaS의 GTM·기능 기획 담당.',
+          proof: '신규 사업 P&L 주도. 2,500개사 이상이 쓰는 채용 SaaS의 GTM·기능 기획 담당.',
         },
         {
           title: 'AI로 운영까지 만드는 PM',
@@ -669,25 +669,25 @@ const dictionaries: Record<Lang, Dict> = {
         {
           period: '2024 – 2026',
           role: 'Product Manager',
-          org: 'Thinkings (Japan)',
-          desc: '2,500개사 이상이 쓰는 채용 SaaS "sonar ATS"의 GTM과 기능 기획 담당.',
+          org: '채용 SaaS 기업 (일본)',
+          desc: '2,500개사 이상이 쓰는 채용 SaaS의 GTM과 기능 기획 담당.',
         },
         {
           period: '2021 – 2023',
           role: 'Product Manager / Division Manager',
-          org: 'nonpi',
+          org: '푸드테크 기업 (일본)',
           desc: '신규 사업 론칭과 P&L, 조직 개발·인사 제도 설계를 주도.',
         },
         {
           period: '2018 – 2019',
           role: 'Tax Associate',
-          org: 'BDO USA',
+          org: '국제 회계법인 (미국)',
           desc: '미국 미시간주에서 법인·개인 세무 신고와 일본 주재원 세무 담당.',
         },
         {
           period: '2008 – 2016',
           role: 'Project Engineer',
-          org: 'Ateam Inc.',
+          org: '웹·모바일 서비스 기업 (일본)',
           desc: '웹·모바일 서비스 개발과 일본·인도네시아 신규 서비스 론칭 리드.',
         },
       ],
@@ -756,12 +756,12 @@ const dictionaries: Record<Lang, Dict> = {
         {
           title: 'Speaks implementation',
           body: 'Eight years writing code before I ever wrote a spec. When I cut scope I can tell what is expensive and what is cheap, and I can say it in the same language the engineers use.',
-          proof: 'Project engineer at Ateam for 8 years; led new service development in Japan and Indonesia.',
+          proof: 'Eight years as a project engineer, leading new service development in Japan and Indonesia.',
         },
         {
           title: 'Owns the numbers',
           body: 'I am a U.S. CPA. I work backwards from unit economics and pricing to check whether something holds up as a business first. I have owned a new-business P&L.',
-          proof: 'Led new-business P&L at nonpi; GTM and feature planning for a recruiting SaaS used by 2,500+ companies.',
+          proof: 'Led new-business P&L, then GTM and feature planning for a recruiting SaaS used by 2,500+ companies.',
         },
         {
           title: 'Builds AI operations',
@@ -976,25 +976,25 @@ const dictionaries: Record<Lang, Dict> = {
         {
           period: '2024 – 2026',
           role: 'Product Manager',
-          org: 'Thinkings (Japan)',
-          desc: 'GTM and feature planning for sonar ATS, a recruitment SaaS used by 2,500+ organizations.',
+          org: 'Recruiting SaaS company (Japan)',
+          desc: 'GTM and feature planning for a recruitment SaaS used by 2,500+ organizations.',
         },
         {
           period: '2021 – 2023',
           role: 'Product Manager / Division Manager',
-          org: 'nonpi',
+          org: 'Food-tech company (Japan)',
           desc: 'Led new business launches with P&L ownership, plus org development and HR design.',
         },
         {
           period: '2018 – 2019',
           role: 'Tax Associate',
-          org: 'BDO USA',
+          org: 'International accounting firm (US)',
           desc: 'Corporate, individual and expatriate tax in Troy, Michigan.',
         },
         {
           period: '2008 – 2016',
           role: 'Project Engineer',
-          org: 'Ateam Inc.',
+          org: 'Web and mobile services company (Japan)',
           desc: 'Built web and mobile services; led new service launches in Japan and Indonesia.',
         },
       ],
