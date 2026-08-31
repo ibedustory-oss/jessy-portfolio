@@ -120,6 +120,16 @@ export interface Extra {
   map: MapBlock
   pain: PainBlock
   finder: FinderBlock
+  selfcheck: {
+    eyebrow: string
+    title: string
+    lead: string
+    weakLabel: string
+    strongLabel: string
+    testLabel: string
+    rows: { k: string; q: string; weak: string; strong: string; test: string }[]
+    note: string
+  }
   planExtra: PlanExtra
   nav: NavBlock
   eyebrows: { work: string; included: string; steps: string; price: string; compare: string; faq: string }
@@ -276,6 +286,45 @@ export const EXTRA: Record<Lang, Extra> = {
         'AIで全部できると言われて触ってみたが、あれこれ時間とお金を使っただけで完成しなかった。',
       ],
       close: 'どれも、デザインの問題ではありません。',
+    },
+    selfcheck: {
+      eyebrow: '自分でやってみる',
+      title: '答えが書けるかどうかで、\n手をつける順番が決まります。',
+      lead: 'シートの八行のうち、順番を決めてしまう四行です。よくある答えと、使える答えを並べました。',
+      weakLabel: 'よくある答え',
+      strongLabel: '使える答え',
+      testLabel: '見分け方',
+      rows: [
+        {
+          k: '診断',
+          q: '何が止めているのか',
+          weak: '宣伝が足りない',
+          strong: '価格で比べられている。比べられる理由を、こちらが作ってしまった',
+          test: '原因が自分の側にあるか。外にあると、手の打ちようがない。',
+        },
+        {
+          k: '勝ち筋',
+          q: 'なぜ、うちなのか',
+          weak: '心を込めた品質',
+          strong: '三年寝かせた醤で炊く',
+          test: '競合が同じ文を言ったら嘘になるか。ならないなら、まだ弱い。',
+        },
+        {
+          k: '危うい仮説',
+          q: '外れたら、全部やり直しになる前提は',
+          weak: '（書いていない）',
+          strong: '待つことを、価値だと読んでくれる',
+          test: '一行で書けて、外れたと分かる日が来るか。',
+        },
+        {
+          k: '初手',
+          q: '今月、何をするのか',
+          weak: 'サイトを作り直す',
+          strong: '第一画面を甕の写真に。メニューの説明は一品だけ残す',
+          test: '今週始められて、結果が見える大きさか。',
+        },
+      ],
+      note: '四行が埋まらないうちは、色も写真も決められません。逆に埋まれば、あとは作るだけです。',
     },
     finder: {
       eyebrow: '進め方を決める',
@@ -514,6 +563,45 @@ export const EXTRA: Record<Lang, Extra> = {
       ],
       close: '전부 디자인의 문제가 아닙니다.',
     },
+    selfcheck: {
+      eyebrow: '직접 해보기',
+      title: '답이 써지는지 아닌지로,\n손댈 순서가 정해집니다.',
+      lead: '시트 여덟 줄 가운데, 순서를 정해버리는 네 줄입니다. 흔한 답과 쓸 수 있는 답을 나란히 놓았습니다.',
+      weakLabel: '흔한 답',
+      strongLabel: '쓸 수 있는 답',
+      testLabel: '가려내는 법',
+      rows: [
+        {
+          k: '진단',
+          q: '무엇이 막고 있는가',
+          weak: '홍보가 부족하다',
+          strong: '가격으로 비교당한다. 비교당할 이유를 우리가 만들었다',
+          test: '원인이 우리 안에 있는가. 밖에 있으면 손을 못 댑니다.',
+        },
+        {
+          k: '이기는 법',
+          q: '왜 하필 우리인가',
+          weak: '정성과 품질',
+          strong: '3년 묵힌 장으로 끓입니다',
+          test: '경쟁 가게가 그대로 말하면 거짓말이 되는가. 아니면 아직 약합니다.',
+        },
+        {
+          k: '위험한 가설',
+          q: '틀리면 전부 다시 해야 하는 전제는',
+          weak: '(안 적혀 있음)',
+          strong: '기다림을 가치로 읽어줄 것이다',
+          test: '한 줄로 써지고, 틀렸다는 걸 알게 되는 날이 오는가.',
+        },
+        {
+          k: '첫 수',
+          q: '이번 달에 무엇을 하는가',
+          weak: '사이트를 새로 만든다',
+          strong: '첫 화면을 장독대 사진으로. 메뉴 설명은 한 가지만 남긴다',
+          test: '이번 주에 시작할 수 있고, 결과가 보이는 크기인가.',
+        },
+      ],
+      note: '네 줄이 비어 있는 동안에는 색도 사진도 정할 수 없습니다. 반대로 채워지면, 남은 건 만드는 일뿐입니다.',
+    },
     finder: {
       eyebrow: '진행 방식 정하기',
       sheetLabel: 'Strategy sheet',
@@ -750,6 +838,45 @@ export const EXTRA: Record<Lang, Extra> = {
         'They said AI could do all of it. I spent the time and the money on bits and pieces and never finished.',
       ],
       close: 'None of these is a design problem.',
+    },
+    selfcheck: {
+      eyebrow: 'Try it yourself',
+      title: 'Whether the answer can be written\ndecides what you touch first.',
+      lead: 'Four of the eight lines settle the order. Here is the common answer next to the one you can work with.',
+      weakLabel: 'Common answer',
+      strongLabel: 'Answer you can use',
+      testLabel: 'How to tell',
+      rows: [
+        {
+          k: 'Diagnosis',
+          q: 'What is stopping this',
+          weak: 'Not enough marketing',
+          strong: 'We get compared on price, and we gave them the reason to',
+          test: 'Is the cause on your side? If it sits outside, you cannot act on it.',
+        },
+        {
+          k: 'How we win',
+          q: 'Why you, of all places',
+          weak: 'Care and quality',
+          strong: 'We cook with jang that has aged three years',
+          test: 'Would it be a lie in a competitor\u2019s mouth? If not, it is still too weak.',
+        },
+        {
+          k: 'Riskiest bet',
+          q: 'What assumption breaks everything if wrong',
+          weak: '(left blank)',
+          strong: 'That waiting will be read as worth it',
+          test: 'Can it be written in one line, and could a day come when you know it was wrong?',
+        },
+        {
+          k: 'First move',
+          q: 'What you do this month',
+          weak: 'Rebuild the website',
+          strong: 'Put the jars on the first screen; keep one dish description, drop the rest',
+          test: 'Can it start this week, and is it small enough to see the result?',
+        },
+      ],
+      note: 'While those four are blank, no colour or photograph can be chosen. Once they are filled, the rest is only building.',
     },
     finder: {
       eyebrow: 'Setting the plan',

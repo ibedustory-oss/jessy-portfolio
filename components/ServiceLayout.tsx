@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Faq from '@/components/Faq'
-import Finder from '@/components/Finder'
-import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
 import RollingLine from '@/components/RollingLine'
 import StrategySheet from '@/components/StrategySheet'
@@ -268,40 +266,76 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
         </div>
       </Paper>
 
-      {/* ============ SHEET 2 · the method, worked live ============ */}
+      {/* ============ SHEET 2 · the test, handed over ============ */}
       <Paper id="sheet" className="mt-2 md:mt-5">
-        <div className="grid gap-y-14 md:grid-cols-12 md:gap-x-10">
-          <div className="md:col-span-4">
+        <div className="grid gap-y-12 md:grid-cols-12 md:gap-x-10">
+          <div className="md:col-span-3">
             <Reveal>
-              <Label n="02">
-                {x.finder.eyebrow}
-              </Label>
-            </Reveal>
-            <Reveal delay={60}>
-              <div className="mt-12 max-w-[24rem] md:sticky md:top-24 md:mt-14">
-                <PositionMap map={x.map} />
-              </div>
+              <Label n="02">{x.selfcheck.eyebrow}</Label>
             </Reveal>
           </div>
-
-          <div className="md:col-span-7 md:col-start-6">
+          <div className="md:col-span-8 md:col-start-5">
             <Reveal>
-              <h2 className={`max-w-[30ch] ${bk} text-[27px] font-extrabold leading-[1.24] tracking-tightest md:text-[31px] lg:text-[44px]`}>
-                {x.finder.title}
-                <br />
-                {x.finder.titleAccent}
+              <h2 className={`max-w-[26ch] ${bk} whitespace-pre-line text-[27px] font-extrabold leading-[1.26] tracking-tightest md:text-[38px]`}>
+                {x.selfcheck.title}
               </h2>
-              <p className="mt-6 max-w-[40ch] text-[14.5px] leading-[1.85] text-warmgray">
-                {x.finder.lead}
+              <p className="mt-6 max-w-[46ch] text-[14.5px] leading-[1.85] text-warmgray">
+                {x.selfcheck.lead}
               </p>
             </Reveal>
+          </div>
+        </div>
 
-            <Reveal delay={80}>
-              <div className="mt-12 border-t border-ink/10 pt-10">
-                <Finder block={x.finder} contact={contact} />
+        <div className="mt-16 md:mt-20">
+          {x.selfcheck.rows.map((r, i) => (
+            <Reveal key={r.k} delay={i * 60}>
+              <div className="grid gap-y-6 border-t border-ink/15 py-9 md:grid-cols-12 md:gap-x-10 md:py-11">
+                <div className="md:col-span-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-pen">{r.k}</p>
+                  <p className={`mt-3 max-w-[16ch] ${bk} text-[17px] font-extrabold leading-[1.35] tracking-tight text-ink md:text-[19px]`}>
+                    {r.q}
+                  </p>
+                </div>
+
+                <div className="md:col-span-4">
+                  <p className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-ink/35">
+                    {x.selfcheck.weakLabel}
+                  </p>
+                  <p className={`mt-2.5 ${bk} text-[15px] leading-[1.7] text-ink/40 line-through decoration-pen/50 decoration-[1.5px]`}>
+                    {r.weak}
+                  </p>
+                </div>
+
+                <div className="md:col-span-5">
+                  <p className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-accent">
+                    {x.selfcheck.strongLabel}
+                  </p>
+                  <p className={`mt-2.5 ${bk} text-[15.5px] font-bold leading-[1.7] text-ink`}>
+                    {r.strong}
+                  </p>
+                  <p className={`mt-4 flex gap-2.5 ${bk} text-[13px] leading-[1.7] text-warmgray`}>
+                    <span className="shrink-0 font-mono text-[9.5px] uppercase tracking-[0.14em] text-warmgray/70">
+                      {x.selfcheck.testLabel}
+                    </span>
+                    <span>{r.test}</span>
+                  </p>
+                </div>
               </div>
             </Reveal>
-          </div>
+          ))}
+
+          <Reveal>
+            <div className="grid gap-y-8 border-t-2 border-ink pt-10 md:grid-cols-12 md:gap-x-10">
+              <div className="md:col-span-8 md:col-start-5">
+                <p className={`max-w-[44ch] ${bk} text-[15.5px] font-bold leading-[1.8] text-ink`}>
+                  {x.selfcheck.note}
+                </p>
+                <div className="mt-8">
+                  <Button href={contact}>{x.offer.cta}</Button>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Paper>
 
