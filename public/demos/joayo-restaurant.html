@@ -146,7 +146,7 @@ a{color:inherit;text-decoration:none;}
 
 /* ---------- how a Korean table is built ---------- */
 .rule{display:grid;grid-template-columns:12% 1fr;align-items:start;
-  border-top:1px solid var(--line);padding:60px 0 70px;}
+  border-top:1px solid var(--line);padding:74px 0 86px;}
 .rule-lbl{padding:2px 0 0 34px;}
 .rule-body{padding:0 6% 0 2%;}
 .rule-h{font-size:clamp(20px,1.9vw,25px);font-weight:400;line-height:1.42;letter-spacing:-.005em;max-width:26ch;}
@@ -159,34 +159,34 @@ a{color:inherit;text-decoration:none;}
 /* ---------- signature + menu ---------- */
 .sig{display:grid;grid-template-columns:24% 22% 1fr;align-items:stretch;border-top:1px solid var(--line);}
 .sig-ph .ph{height:100%;min-height:clamp(300px,34vw,430px);}
-.sig-txt{padding:44px 5% 40px 34px;display:flex;flex-direction:column;justify-content:center;}
+.sig-txt{padding:56px 5% 52px 34px;display:flex;flex-direction:column;justify-content:center;}
 .sig-name{margin-top:16px;font-family:var(--kr);font-size:clamp(24px,2.4vw,32px);font-weight:500;letter-spacing:-.01em;line-height:1.2;}
 .sig-lat{margin-top:9px;font-size:13px;color:var(--ink-60);}
 .sig-price{margin-top:30px;font-size:13px;color:var(--ink-60);}
-.menu{padding:44px 34px 40px 5%;border-left:1px solid var(--line);}
-.menu > .lbl{display:block;margin-bottom:26px;color:var(--ink);}
+.menu{padding:56px 34px 52px 5%;border-left:1px solid var(--line);}
+.menu > .lbl{display:block;margin-bottom:32px;color:var(--ink);}
 .menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:34px 6%;}
-.course + .course{margin-top:26px;}
+.course + .course{margin-top:34px;}
 .course-h{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);margin-bottom:9px;}
 .course-h .k{font-family:var(--kr);margin-right:9px;color:var(--ink);letter-spacing:0;}
-.dish{display:grid;grid-template-columns:5.2rem 1fr auto;align-items:baseline;gap:10px;padding:4.5px 0;font-size:12.5px;}
+.dish{display:grid;grid-template-columns:5.2rem 1fr auto;align-items:baseline;gap:10px;padding:6px 0;font-size:12.5px;}
 .dish .k{font-family:var(--kr);font-weight:400;}
 .dish .r{color:var(--ink-60);}
 .dish .p{color:var(--ink-60);font-variant-numeric:tabular-nums;}
 
 /* ---------- the table (four cells) ---------- */
 .band{display:grid;grid-template-columns:20% 26% 26% 28%;border-top:1px solid var(--line);}
-.band-txt{padding:44px 5% 40px 34px;}
+.band-txt{padding:64px 5% 60px 34px;}
 .band-txt p{margin-top:18px;font-size:14.5px;line-height:1.85;}
-.band .ph{height:clamp(230px,23vw,300px);}
+.band .ph{height:clamp(258px,25vw,336px);}
 .band-people{position:relative;}
 .band-people p{position:absolute;left:22px;bottom:20px;color:#F6F4F0;font-size:15px;line-height:1.4;max-width:12ch;}
 .band-people .ph:after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(20,19,17,.5),transparent 55%);}
 
 /* ---------- footer band ---------- */
 .foot{display:grid;grid-template-columns:24% 1fr 1fr 1fr 22%;align-items:stretch;border-top:1px solid var(--line);}
-.foot .ph{height:clamp(210px,18vw,264px);}
-.foot-b{padding:36px 4% 34px;border-left:1px solid var(--line);}
+.foot .ph{height:clamp(250px,21vw,306px);}
+.foot-b{padding:52px 4% 50px;border-left:1px solid var(--line);}
 .foot-b:first-of-type{border-left:0;padding-left:34px;}
 .foot-mark{margin-top:12px;font-size:22px;font-weight:400;letter-spacing:.09em;line-height:1;}
 .foot-mark .k{display:block;margin-top:5px;font-family:var(--kr);font-size:12px;letter-spacing:.06em;color:var(--ink-60);}
@@ -201,7 +201,7 @@ a{color:inherit;text-decoration:none;}
 .foot-map div{position:relative;font-size:12px;line-height:1.5;}
 .foot-map b{display:block;font-weight:500;}
 .foot-map span{color:var(--ink-60);}
-.legal{display:flex;justify-content:space-between;gap:20px;padding:16px 34px 26px;
+.legal{display:flex;justify-content:space-between;gap:20px;padding:32px 34px 42px;
   font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);border-top:1px solid var(--line);}
 
 /* ---------- tablet ---------- */
@@ -221,13 +221,13 @@ a{color:inherit;text-decoration:none;}
   .sig-txt{padding:36px 24px 34px;}
   .menu{grid-column:1/3;border-left:0;border-top:1px solid var(--line);padding:36px 24px 34px;}
   .band{grid-template-columns:1fr 1fr;}
-  .band-txt{grid-column:1/3;padding:34px 24px 30px;}
+  .band-txt{grid-column:1/3;padding:46px 24px 42px;}
   .foot{grid-template-columns:1fr 1fr;}
   .foot .ph{grid-column:1/3;min-height:220px;}
   .foot-b:first-of-type{padding-left:24px;border-top:1px solid var(--line);}
   .foot-b{border-top:1px solid var(--line);}
   .foot-map{grid-column:1/3;min-height:150px;}
-  .legal{padding:14px 24px 22px;}
+  .legal{padding:26px 24px 34px;}
 }
 
 .mob{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--paper);
@@ -260,14 +260,14 @@ a{color:inherit;text-decoration:none;}
   .menu-cols{grid-template-columns:1fr;gap:26px;}
   .dish{grid-template-columns:4.6rem 1fr auto;font-size:13px;}
   .band{grid-template-columns:1fr;}
-  .band-txt{grid-column:auto;padding:30px 18px 26px;}
+  .band-txt{grid-column:auto;padding:38px 18px 34px;}
   .band .ph{height:62vw;}
   .band-people p{font-size:16px;}
   .foot{grid-template-columns:1fr;}
   .foot .ph{grid-column:auto;min-height:200px;}
-  .foot-b,.foot-b:first-of-type{padding:26px 18px 24px;border-left:0;border-top:1px solid var(--line);}
-  .foot-map{grid-column:auto;min-height:130px;}
-  .legal{padding:14px 18px 90px;flex-direction:column;gap:6px;}
+  .foot-b,.foot-b:first-of-type{padding:38px 18px 36px;border-left:0;border-top:1px solid var(--line);}
+  .foot-map{grid-column:auto;min-height:162px;}
+  .legal{padding:28px 18px 104px;flex-direction:column;gap:8px;}
   .mob{display:block;}
 }
 </style>
@@ -316,8 +316,8 @@ a{color:inherit;text-decoration:none;}
     </div>
     <div class="about-ph">
       <div class="ph tilt">
-        <img src="joayo-photos/room-tables.jpg" width="270" height="170" loading="lazy"
-           alt="Salle : tables dressées, suspensions et branches dans un vase.">
+        <img src="joayo-photos/setting-table.jpg" width="1600" height="800" loading="lazy"
+           alt="Deux mains posent un plat d'épinards assaisonnés parmi les banchan, à côté des bols de riz et de soupe en laiton.">
       </div>
     </div>
   </section>
