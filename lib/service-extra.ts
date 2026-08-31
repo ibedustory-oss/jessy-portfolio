@@ -17,10 +17,11 @@ export interface SheetBlock {
 }
 
 export interface CaseBlock {
-  problemLabel: string
-  decisionLabel: string
-  outputLabel: string
-  items: { meta: string; problem: string; decision: string; output: string }[]
+  audienceLabel: string
+  painLabel: string
+  marketLabel: string
+  rivalLabel: string
+  items: { meta: string; audience: string; pain: string; market: string; rival: string }[]
 }
 
 export interface MapBlock {
@@ -242,21 +243,24 @@ export const EXTRA: Record<Lang, Extra> = {
       page: '1 / 12',
     },
     cases: {
-      problemLabel: '問題',
-      decisionLabel: '決めたこと',
-      outputLabel: 'かたち',
+      audienceLabel: 'ターゲット',
+      painLabel: 'ペイン・ゲイン',
+      marketLabel: '市場',
+      rivalLabel: '競合',
       items: [
         {
           meta: 'Restaurant coréen / Paris 1er',
-          problem: 'パリの中心で韓国料理を出すと、観光客向けの一軒として流される。',
-          decision: '速さではなく、時間のかかり方を看板にした。醤も漬けものも待ってできる、という店の性格を先に見せる。',
-          output: '甕の並ぶ庭を墨で描き、開くたびに一つずつ立ち上がる。メニューは説明を1品だけに絞り、残りは名前と価格で通す。',
+          audience: 'パリで働く人が、平日の夜に一人でも入って、ごはんと汁ものを食べて帰れる。',
+          pain: '家で毎日食べていた献立をそのまま出せる。特別な日の料理ではなく、日常のほうを知っている。',
+          market: '1区の韓国料理店は観光客向けの焼肉が中心で、平日夜の一人客は数に入っていない。',
+          rival: '近隣は焼肉と鍋。ごはんと汁ものを軸に置いた店がない。',
         },
         {
           meta: 'Pilates / Paris',
-          problem: 'スタジオは料金と設備で比べられ、教える人の考え方が見えない。',
-          decision: '設備ではなく人を主役にした。読み物として設計し、指導者の判断を誌面で見せる。',
-          output: '表紙は動画のまま止まらない。めくると中面が始まる、号数と目次を持つ一冊として組んだ。',
+          audience: '運動が続かなかった人が、自分の体で何が起きているかを言葉にできるようになる。',
+          pain: '指導者が理学療法から来ている。なぜその動きなのかを、毎回説明できる。',
+          market: 'パリのピラティスはマシンの数と料金で比べられ、説明を求める層に受け皿がない。',
+          rival: '近隣はグループ中心で、教える人の考え方が表に出ない。',
         },
       ],
     },
@@ -513,21 +517,24 @@ export const EXTRA: Record<Lang, Extra> = {
       page: '1 / 12',
     },
     cases: {
-      problemLabel: '문제',
-      decisionLabel: '정한 것',
-      outputLabel: '형태',
+      audienceLabel: '타깃',
+      painLabel: '페인·게인',
+      marketLabel: '시장',
+      rivalLabel: '경쟁',
       items: [
         {
           meta: 'Restaurant coréen / Paris 1er',
-          problem: '파리 한복판에서 한식을 내면 관광객용 한 곳으로 흘러간다.',
-          decision: '빠름이 아니라 시간이 드는 방식을 간판으로 삼았다. 장도 김치도 기다려야 된다는 성격을 먼저 보여준다.',
-          output: '장독대를 먹으로 그려 첫 화면에 두고, 열 때마다 항아리가 하나씩 올라온다. 메뉴는 설명을 한 가지에만 붙이고 나머지는 이름과 가격으로 간다.',
+          audience: '파리에서 일하는 사람이 평일 저녁에 혼자 들어와 밥과 국을 먹고 나갈 수 있다.',
+          pain: '집에서 매일 먹던 상을 그대로 낼 수 있다. 특별한 날 음식이 아니라 일상 쪽을 안다.',
+          market: '1구의 한식당은 관광객용 고기구이가 중심이라, 평일 저녁 혼자 오는 손님은 세지 않는다.',
+          rival: '근처는 고기와 전골이다. 밥과 국을 축으로 놓은 집이 없다.',
         },
         {
           meta: 'Pilates / Paris',
-          problem: '스튜디오는 가격과 시설로 비교되고, 가르치는 사람의 생각은 보이지 않는다.',
-          decision: '시설이 아니라 사람을 주인공으로 세웠다. 읽을거리로 설계해 지도자의 판단을 지면에 담는다.',
-          output: '표지는 영상으로 움직이고, 넘기면 본문이 시작된다. 호수와 목차를 가진 한 권으로 짰다.',
+          audience: '운동이 늘 중간에 끊기던 사람이, 자기 몸에서 무슨 일이 일어나는지 말로 설명하게 된다.',
+          pain: '가르치는 사람이 물리치료에서 왔다. 왜 그 동작인지를 매번 설명할 수 있다.',
+          market: '파리의 필라테스는 기구 수와 가격으로 비교되고, 설명을 원하는 사람은 갈 데가 없다.',
+          rival: '근처는 그룹 수업 위주라 가르치는 사람의 생각이 밖으로 안 나온다.',
         },
       ],
     },
@@ -784,21 +791,24 @@ export const EXTRA: Record<Lang, Extra> = {
       page: '1 / 12',
     },
     cases: {
-      problemLabel: 'Problem',
-      decisionLabel: 'Decision',
-      outputLabel: 'Form',
+      audienceLabel: 'Audience',
+      painLabel: 'Pain and gain',
+      marketLabel: 'Market',
+      rivalLabel: 'Competition',
       items: [
         {
           meta: 'Korean restaurant / Paris 1er',
-          problem: 'Korean food in the centre of Paris gets read as one more option for tourists.',
-          decision: 'Lead with how long things take rather than how fast they arrive. The jang and the kimchi have to wait, and that is the character of the place.',
-          output: 'A yard of fermentation jars is drawn in ink on the first screen, one jar rising at a time. Only one dish on the menu carries a description; the rest run as a name and a price.',
+          audience: 'Someone working in Paris can come in alone on a weeknight, eat rice and soup, and leave.',
+          pain: 'We can serve the meal we ate at home every day. We know the ordinary side of this food, not the occasion side.',
+          market: 'Korean places in the 1st arrondissement run on tourist barbecue, and the weeknight table for one is not counted.',
+          rival: 'Everything nearby is grilled meat and hotpot. Nobody builds around rice and soup.',
         },
         {
           meta: 'Pilates / Paris',
-          problem: 'Studios get compared on price and equipment, and the teacher behind them stays invisible.',
-          decision: 'Put the person ahead of the room. Build it as something to read, where her judgement is the content.',
-          output: 'The cover runs as film, then turns into a spread — an issue number and a contents page.',
+          audience: 'Someone whose exercise never lasted can put into words what is happening in their own body.',
+          pain: 'The teacher comes out of physiotherapy and can explain, every time, why this movement and not another.',
+          market: 'Pilates in Paris is compared on machine count and price, and there is nowhere for people who want the reasoning.',
+          rival: 'The studios nearby run group classes, and the teacher\'s thinking never reaches the surface.',
         },
       ],
     },

@@ -320,8 +320,8 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
 
           <Reveal>
             <div className="grid gap-y-8 border-t-2 border-ink pt-10 md:grid-cols-12 md:gap-x-10">
-              <div className="md:col-span-8 md:col-start-5">
-                <p className={`max-w-[44ch] ${bk} text-[15.5px] font-bold leading-[1.8] text-ink`}>
+              <div className="md:col-span-7">
+                <p className={`max-w-[40ch] ${bk} text-[15.5px] font-bold leading-[1.8] text-ink`}>
                   {x.selfcheck.note}
                 </p>
                 <div className="mt-8">
@@ -394,11 +394,12 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
                           {d.label}
                         </a>
                       </h3>
-                      <dl className="mt-8 space-y-6">
+                      <dl className="mt-8 space-y-5">
                         {[
-                          [x.cases.problemLabel, c.problem],
-                          [x.cases.decisionLabel, c.decision],
-                          [x.cases.outputLabel, c.output],
+                          [x.cases.audienceLabel, c.audience],
+                          [x.cases.painLabel, c.pain],
+                          [x.cases.marketLabel, c.market],
+                          [x.cases.rivalLabel, c.rival],
                         ].map(([k, v], n) => (
                           <div key={k}>
                             <dt
