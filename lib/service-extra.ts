@@ -99,7 +99,7 @@ export interface Extra {
   sheetLead: string
   heroLine: {
     lead: string
-    rolls: { mark?: string; text: string }[]
+    rolls: { pre?: string; mark: string; post?: string }[]
     close: string
   }
   tools: {
@@ -135,9 +135,9 @@ export const EXTRA: Record<Lang, Extra> = {
     heroLine: {
       lead: 'まず考えるのは',
       rolls: [
-        { mark: 'Why', text: 'です。' },
-        { text: '誰に必要なサービスなのか。' },
-        { text: 'その人を、どう変えたいのか。' },
+        { mark: 'Why', post: 'です。' },
+        { mark: '誰に', post: '必要なサービスなのか。' },
+        { pre: 'その人を、', mark: 'どう', post: '変えたいのか。' },
       ],
       close: 'ウェブサイトは、その答えを見せる場所です。',
     },
@@ -372,9 +372,9 @@ export const EXTRA: Record<Lang, Extra> = {
     heroLine: {
       lead: '먼저 생각하는 건',
       rolls: [
-        { mark: 'Why', text: '입니다.' },
-        { text: '누구에게 필요한 서비스인지.' },
-        { text: '그 사람을 어떻게 바꾸고 싶은지.' },
+        { mark: 'Why', post: '입니다.' },
+        { mark: '누구', post: '에게 필요한 서비스인지.' },
+        { pre: '그 사람을 ', mark: '어떻게', post: ' 바꾸고 싶은지.' },
       ],
       close: '웹사이트는 그 답을 보여주는 공간입니다.',
     },
@@ -609,9 +609,9 @@ export const EXTRA: Record<Lang, Extra> = {
     heroLine: {
       lead: 'What comes first is',
       rolls: [
-        { mark: 'the Why', text: '.' },
-        { text: 'who needs this service.' },
-        { text: 'how it should change them.' },
+        { pre: 'the ', mark: 'Why', post: '.' },
+        { mark: 'who', post: ' needs this service.' },
+        { mark: 'how', post: ' it should change them.' },
       ],
       close: 'The website is where that answer is shown.',
     },

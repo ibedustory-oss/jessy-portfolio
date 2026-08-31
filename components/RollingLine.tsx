@@ -9,9 +9,9 @@ import { useEffect, useState } from 'react'
 export default function RollingLine({
   lines,
   className = '',
-  hold = 2600,
+  hold = 1500,
 }: {
-  lines: { mark?: string; text: string }[]
+  lines: { pre?: string; mark: string; post?: string }[]
   className?: string
   hold?: number
 }) {
@@ -32,7 +32,7 @@ export default function RollingLine({
           setI((n) => (n + 1) % lines.length)
           setPhase('in')
           timers.push(setTimeout(run, hold))
-        }, 430)
+        }, 300)
       )
     }
     timers.push(setTimeout(run, hold))
@@ -47,9 +47,10 @@ export default function RollingLine({
       {/* every line in the same cell, invisible, to hold the height open */}
       <span aria-hidden="true" className="grid">
         {lines.map((l) => (
-          <span key={l.mark ?? l.text} className="invisible col-start-1 row-start-1 block">
+          <span key={l.mark + (l.post ?? '')} className="invisible col-start-1 row-start-1 block">
+            {l.pre}
             {l.mark}
-            {l.text}
+            {l.post}
           </span>
         ))}
       </span>
@@ -57,8 +58,9 @@ export default function RollingLine({
         key={i}
         className={`absolute inset-0 block ${phase === 'out' ? 'roll-out' : 'roll-in'}`}
       >
-        {lines[i].mark && <span className="text-pen">{lines[i].mark}</span>}
-        {lines[i].text}
+        {lines[i].pre}
+        <span className="text-pen">{lines[i].mark}</span>
+        {lines[i].post}
       </span>
     </span>
   )
