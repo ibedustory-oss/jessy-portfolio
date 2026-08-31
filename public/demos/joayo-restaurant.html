@@ -26,11 +26,6 @@ body:after{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*,*:before,*:after{animation:none!important;transition:none!important;}}
 
 /* ticker */
-.ticker{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;padding:10px 0;
-  font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;}
-.ticker-inner{display:inline-block;animation:scroll 34s linear infinite;}
-.ticker-inner span{margin:0 24px;}
-.ticker-inner span:nth-child(even){color:var(--red);}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* nav */
@@ -128,18 +123,27 @@ section{max-width:1320px;margin:0 auto;padding:90px 40px;}
   line-height:1.06;max-width:20ch;}
 .kimchi-banner p{margin-top:14px;font-size:15px;color:rgba(247,244,239,.85);max-width:46ch;}
 
-/* menu (restaurant) */
-.menu-wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:5vw;align-items:start;}
-.menu-list{border-top:1px solid var(--ink);}
-.menu-item{display:flex;justify-content:space-between;align-items:baseline;gap:24px;
-  padding:22px 2px;border-bottom:1px solid var(--line);
-  transition:padding-left .4s cubic-bezier(.23,1,.32,1);}
-.menu-item:hover{padding-left:10px;}
-.menu-item .name{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(17px,1.9vw,22px);}
-.menu-item .kr{font-size:11.5px;letter-spacing:.12em;color:var(--ink-60);margin-left:12px;}
-.menu-item .desc{margin-top:8px;font-size:14px;color:var(--ink-60);max-width:46ch;}
-.menu-item .price{font-family:'Fraunces',serif;font-weight:560;font-size:17px;white-space:nowrap;}
-.menu-note{margin-top:22px;font-size:13px;color:var(--ink-60);}
+/* menu (restaurant) — set like a printed carte */
+.menu-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:5vw;align-items:start;}
+.menu-list{max-width:36rem;min-width:0;}
+.course{margin-bottom:52px;}
+.course:last-of-type{margin-bottom:34px;}
+.course-h{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);
+  padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:6px;}
+.menu-item{padding:16px 0;}
+.mi-head{display:grid;grid-template-columns:minmax(0,max-content) minmax(12px,1fr) max-content;align-items:baseline;}
+.menu-item .name{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(16px,1.85vw,21px);line-height:1.25;min-width:0;}
+.mi-head .name{grid-column:1;}
+.mi-head:after{content:'';grid-column:2;border-bottom:1px dotted rgba(22,19,15,.3);
+  margin:0 14px;transform:translateY(-5px);}
+.mi-head .price{grid-column:3;}
+.menu-item .price{font-family:'Fraunces',serif;font-weight:560;font-size:16.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums;}
+.menu-item .kr{display:block;margin-top:5px;font-size:11.5px;letter-spacing:.14em;color:var(--ink-60);}
+.menu-item .desc{margin-top:9px;font-size:14px;line-height:1.7;color:var(--ink-60);max-width:44ch;}
+.menu-item.signature .name{font-size:clamp(21px,2.5vw,29px);}
+.menu-item.signature{padding-top:6px;}
+.menu-note{margin-top:26px;font-size:13px;color:var(--ink-60);}
 .service-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
 .service-chips span{border:1px solid var(--line);border-radius:999px;padding:7px 15px;
   font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);}
@@ -193,15 +197,18 @@ footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-alig
 .foot-links a:hover{color:var(--red);}
 .legal{font-size:11.5px;color:rgba(247,244,239,.4);}
 
-/* la salle */
-.salle{padding:110px 40px;background:var(--paper-2);}
-.salle-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:5vw;align-items:center;}
-.salle-ph{border-radius:6px;overflow:hidden;box-shadow:0 44px 80px -34px rgba(22,19,15,.5);}
-.salle-ph img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+/* la salle — the photograph runs off the page, the words sit in its margin */
+.salle{max-width:none;margin:0;padding:0;background:var(--paper);}
+.salle-inner{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
+  align-items:stretch;gap:0;}
+.salle-ph{position:relative;margin:0;overflow:hidden;min-height:clamp(360px,52vw,620px);}
+.salle-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.salle-ph:after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(22,19,15,.18),transparent 42%);}
+.salle-copy{display:flex;flex-direction:column;justify-content:center;padding:6vw 6vw 6vw 4vw;background:var(--paper);}
 .salle-copy .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:11px;margin-bottom:16px;}
 .salle-copy h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(30px,3.4vw,44px);line-height:1.1;}
-.salle-copy p{margin-top:18px;color:var(--ink-60);font-size:15.5px;max-width:38ch;}
-.salle-note{font-family:'Fraunces',serif;font-style:italic;color:var(--ink)!important;font-size:17px!important;}
+.salle-copy p{margin-top:18px;color:var(--ink-60);font-size:15.5px;max-width:30ch;}
 
 @media (max-width:900px){
   .salle-inner{grid-template-columns:1fr;gap:44px;}
@@ -244,8 +251,7 @@ html[lang="ko"] .section-head h2{font-size:clamp(25px,3vw,38px);}
 html[lang="ko"] .salle-copy h2{font-size:clamp(24px,2.9vw,36px);}
 html[lang="ko"] .g-line{font-style:normal;font-family:'Noto Serif KR',serif;font-weight:500;
   font-size:clamp(15px,1.6vw,18px);line-height:1.8;}
-html[lang="ko"] .salle-note{font-style:normal;font-family:'Noto Serif KR',serif;}
-html[lang="ko"] .g-ghost{letter-spacing:.1em;}
+html[lang="ko"] html[lang="ko"] .g-ghost{letter-spacing:.1em;}
 
 /* reveal */
 body.js-anim .reveal{opacity:0;transform:translateY(24px);filter:blur(5px);
@@ -295,6 +301,7 @@ body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
 .ray-stage img.on,.menu-stage img.on{opacity:1;transform:scale(1);}
 .rayon{cursor:default;}
 .rayon.on h3,.menu-item.on .name{color:var(--red);}
+.menu-item{cursor:default;}
 
 /* ---- progress rail ---- */
 .rail{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:90;
@@ -509,12 +516,6 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
 <div class="rail" aria-hidden="true"></div>
 
 <!-- TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-inner">
-    <span data-i18n="tick1">Joayo Restaurant</span><span>✦</span><span data-i18n="tick2">Bibimbap au tartare de bœuf</span><span>✦</span><span data-i18n="tick3">Bulgogi</span><span>✦</span><span data-i18n="tick4">Poulet frit</span><span>✦</span><span data-i18n="tick5">Paris 1er</span><span>✦</span><span>좋아요 레스토랑</span><span>✦</span>
-    <span data-i18n="tick1">Joayo Restaurant</span><span>✦</span><span data-i18n="tick2">Bibimbap au tartare de bœuf</span><span>✦</span><span data-i18n="tick3">Bulgogi</span><span>✦</span><span data-i18n="tick4">Poulet frit</span><span>✦</span><span data-i18n="tick5">Paris 1er</span><span>✦</span><span>좋아요 레스토랑</span><span>✦</span>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -559,61 +560,80 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
   </div>
   <div class="menu-wrap">
     <div class="menu-list reveal">
-      <div class="menu-item" data-mi="0">
-        <div>
-          <span class="name" data-i18n="m1_name">Bibimbap au tartare de bœuf</span><span class="kr">육회비빔밥</span>
-          <div class="desc" data-i18n="m1_desc">La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf</div>
+      <div class="course">
+        <p class="course-h" data-i18n="cat1">Riz</p>
+        <div class="menu-item signature" data-mi="0">
+          <div class="mi-head">
+            <span class="name" data-i18n="m1_name">Bibimbap au tartare de bœuf</span>
+            <span class="price">16,50 €</span>
+          </div>
+          <span class="kr">육회비빔밥</span>
+          <p class="desc" data-i18n="m1_desc">La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf</p>
         </div>
-        <span class="price">16,50 €</span>
-      </div>
-      <div class="menu-item" data-mi="1">
-        <div>
-          <span class="name" data-i18n="m2_name">Dolsot Bibimbap</span><span class="kr">돌솥비빔밥</span>
+        <div class="menu-item" data-mi="1">
+          <div class="mi-head">
+            <span class="name" data-i18n="m2_name">Dolsot Bibimbap</span>
+            <span class="price">14,50 €</span>
+          </div>
+          <span class="kr">돌솥비빔밥</span>
         </div>
-        <span class="price">14,50 €</span>
       </div>
-      <div class="menu-item" data-mi="2">
-        <div>
-          <span class="name" data-i18n="m3_name">Bulgogi de porc</span><span class="kr">제육불고기</span>
+
+      <div class="course">
+        <p class="course-h" data-i18n="cat2">Grillades</p>
+        <div class="menu-item" data-mi="2">
+          <div class="mi-head">
+            <span class="name" data-i18n="m3_name">Bulgogi de porc</span>
+            <span class="price">15,00 €</span>
+          </div>
+          <span class="kr">제육불고기</span>
         </div>
-        <span class="price">15,00 €</span>
-      </div>
-      <div class="menu-item" data-mi="3">
-        <div>
-          <span class="name" data-i18n="m4_name">Japchae</span><span class="kr">잡채</span>
+        <div class="menu-item" data-mi="5">
+          <div class="mi-head">
+            <span class="name" data-i18n="m6_name">BBQ coréen</span>
+            <span class="price">19,50 €</span>
+          </div>
+          <span class="kr">바비큐</span>
         </div>
-        <span class="price">14,00 €</span>
-      </div>
-      <div class="menu-item" data-mi="4">
-        <div>
-          <span class="name" data-i18n="m5_name">Poulet frit coréen</span><span class="kr">치킨</span>
+        <div class="menu-item" data-mi="4">
+          <div class="mi-head">
+            <span class="name" data-i18n="m5_name">Poulet frit coréen</span>
+            <span class="price">16,00 €</span>
+          </div>
+          <span class="kr">치킨</span>
         </div>
-        <span class="price">16,00 €</span>
       </div>
-      <div class="menu-item" data-mi="5">
-        <div>
-          <span class="name" data-i18n="m6_name">BBQ coréen</span><span class="kr">바비큐</span>
+
+      <div class="course">
+        <p class="course-h" data-i18n="cat3">Nouilles &amp; ragoûts</p>
+        <div class="menu-item" data-mi="3">
+          <div class="mi-head">
+            <span class="name" data-i18n="m4_name">Japchae</span>
+            <span class="price">14,00 €</span>
+          </div>
+          <span class="kr">잡채</span>
         </div>
-        <span class="price">19,50 €</span>
-      </div>
-      <div class="menu-item" data-mi="6">
-        <div>
-          <span class="name" data-i18n="m7_name">Kimchi Jjigae</span><span class="kr">김치찌개</span>
+        <div class="menu-item" data-mi="6">
+          <div class="mi-head">
+            <span class="name" data-i18n="m7_name">Kimchi Jjigae</span>
+            <span class="price">13,50 €</span>
+          </div>
+          <span class="kr">김치찌개</span>
         </div>
-        <span class="price">13,50 €</span>
-      </div>
-      <div class="menu-item" data-mi="7">
-        <div>
-          <span class="name" data-i18n="m8_name">Mandu</span><span class="kr">만두</span>
+        <div class="menu-item" data-mi="7">
+          <div class="mi-head">
+            <span class="name" data-i18n="m8_name">Mandu</span>
+            <span class="price">8,50 €</span>
+          </div>
+          <span class="kr">만두</span>
         </div>
-        <span class="price">8,50 €</span>
       </div>
+
       <p class="menu-note" data-i18n="menu_note">Carte indicative — retrouvez la carte complète au restaurant.</p>
       <div class="service-chips">
         <span data-i18n="sv1">Menu végétarien</span>
         <span data-i18n="sv2">Réservation conseillée</span>
         <span data-i18n="sv3">20 — 30 € / personne</span>
-        <span data-i18n="sv4">Cœur de Paris</span>
         <span data-i18n="sv5">Déjeuner jusqu'à 15h00</span>
       </div>
     </div>
@@ -647,13 +667,12 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
 <section class="salle" data-rail>
   <div class="salle-inner">
     <figure class="salle-ph reveal">
-      <img src="https://images.pexels.com/photos/31735995/pexels-photo-31735995/free-photo-of-cozy-korean-restaurant-interior-in-seoul.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="lazy">
+      <img src="https://images.pexels.com/photos/19300595/pexels-photo-19300595/free-photo-of-waiter-talking-to-a-customer-in-a-restaurant.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="lazy">
     </figure>
     <div class="salle-copy reveal">
       <div class="over" data-i18n="am_over">La salle · 홀</div>
       <h2 data-i18n="am_h2">La salle</h2>
       <p data-i18n="am_p">Boiseries, tables rapprochées, lumière chaude. Une salle faite pour rester, pas pour tourner.</p>
-      <p class="salle-note" data-i18n="am_note">Le soir, la table près de la fenêtre part en premier.</p>
     </div>
   </div>
 </section>
@@ -880,6 +899,7 @@ fr: {
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
   ar_head:"Les signatures", ar_note:"Toute la carte ↓",
+  cat1:"Riz", cat2:"Grillades", cat3:"Nouilles & ragoûts",
   kicker:"Midi & soir — Paris 1er",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
@@ -900,8 +920,7 @@ fr: {
   h_lunch:"Midi", h_dinner:"Soir", h_note:"Horaires du jour sur Google Maps",
   rc_btn:"Réserver", 
   am_over:"La salle · 홀", am_h2:"La salle",
-  am_p:"Boiseries, tables rapprochées, lumière chaude.",
-  am_note:"Le soir, la table près de la fenêtre part en premier.", 
+  am_p:"Boiseries, tables rapprochées, lumière chaude.", 
   in_over:"Infos pratiques · 오시는 길", in_h2:"Venir dîner chez le Joayo",
   ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
   ic2_h3:"Horaires", ic2_p:"Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00", ic2_small:"Horaires du jour sur Google Maps.",
@@ -926,6 +945,7 @@ en: {
   brand_sub:"Restaurant · 레스토랑",
   nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
   ar_head:"The signatures", ar_note:"See the full menu ↓",
+  cat1:"Rice", cat2:"Grills", cat3:"Noodles & stews",
   kicker:"Lunch & dinner — Paris 1er",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
@@ -946,8 +966,7 @@ en: {
   h_lunch:"Lunch", h_dinner:"Dinner", h_note:"Today's hours on Google Maps",
   rc_btn:"Book a table", 
   am_over:"The room · 홀", am_h2:"The room",
-  am_p:"Woodwork, close-set tables, warm light.",
-  am_note:"In the evening, the window table goes first.", 
+  am_p:"Woodwork, close-set tables, warm light.", 
   in_over:"Practical info · 오시는 길", in_h2:"Come dine at the Joayo",
   ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
   ic2_h3:"Hours", ic2_p:"Lunch: 11:30 am — 3:00 pm<br>Dinner: 6:30 — 10:00 pm", ic2_small:"Today's hours on Google Maps.",
@@ -972,6 +991,7 @@ ko: {
   brand_sub:"레스토랑 · Restaurant",
   nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
   ar_head:"대표 메뉴", ar_note:"전체 메뉴 보기 ↓",
+  cat1:"밥", cat2:"구이", cat3:"면·찌개",
   kicker:"점심 & 저녁 — 파리 1구",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
   hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
@@ -992,8 +1012,7 @@ ko: {
   h_lunch:"점심", h_dinner:"저녁", h_note:"당일 영업시간은 구글 지도 참고",
   rc_btn:"예약하기", 
   am_over:"홀 · La salle", am_h2:"홀",
-  am_p:"우드 인테리어, 가까운 테이블, 따뜻한 조명.",
-  am_note:"저녁엔 창가 자리가 먼저 나갑니다.", 
+  am_p:"우드 인테리어, 가까운 테이블, 따뜻한 조명.", 
   in_over:"오시는 길 · Infos", in_h2:"좋아요 레스토랑으로 오세요",
   ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
   ic2_h3:"영업시간", ic2_p:"점심: 11:30 — 15:00<br>저녁: 18:30 — 22:00", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",

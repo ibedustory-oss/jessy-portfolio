@@ -151,7 +151,7 @@ export const EXTRA: Record<Lang, Extra> = {
       p2a: '次に、仮説を一枚にします。誰の何を、どうやって、どこで稼ぐのか。',
       p2b: 'に書き出して、危ういところに印をつけます。オープン後は',
       p2c: 'のどこで人が落ちているかを見て、直す場所を決めます。',
-      close: 'ここが決まってから、はじめて手を動かします。',
+      close: 'この四つが決まると、何を先にやるかが決まります。',
       items: [
         {
           key: 'map' as const,
@@ -388,7 +388,7 @@ export const EXTRA: Record<Lang, Extra> = {
       p2a: '그다음 가설을 한 장으로 만듭니다. 누구의 무엇을, 어떻게, 어디서 버는지 ',
       p2b: '에 적고 위험한 칸에 표시합니다. 오픈한 뒤에는 ',
       p2c: '의 어디에서 사람이 빠지는지 보고 고칠 곳을 정합니다.',
-      close: '여기까지 정하고 나서야 손을 움직입니다.',
+      close: '이 네 가지가 정해지면, 무엇부터 할지가 정해집니다.',
       items: [
         {
           key: 'map' as const,
@@ -625,7 +625,7 @@ export const EXTRA: Record<Lang, Extra> = {
       p2a: 'Then the bet goes on one page: whose problem, solved how, earning where. It is written on a ',
       p2b: ' and the risky square is marked. After opening, the ',
       p2c: ' shows where people drop, and that decides what gets fixed.',
-      close: 'Only once this is settled does anything get built.',
+      close: 'Once these four are settled, what comes first is settled too.',
       items: [
         {
           key: 'map' as const,

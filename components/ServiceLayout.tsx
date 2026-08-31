@@ -262,7 +262,7 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
           </Reveal>
           <Reveal delay={190}>
             <p className="mx-auto mt-12 max-w-[30ch] border-t border-ink/15 pt-7 text-[15.5px] font-bold leading-relaxed text-ink">
-              <span className="hl">{x.tools.close}</span>
+              {x.tools.close}
             </p>
           </Reveal>
         </div>
