@@ -281,3 +281,39 @@ summary:focus-visible {
     transition: none;
   }
 }
+
+/* rolling line — out through the top, in from below, with the blur of movement */
+.roll-out {
+  animation: roll-out 0.43s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+.roll-in {
+  animation: roll-in 0.52s cubic-bezier(0.16, 0.9, 0.28, 1) both;
+}
+@keyframes roll-out {
+  to {
+    transform: translateY(-88%);
+    filter: blur(7px);
+    opacity: 0;
+  }
+}
+@keyframes roll-in {
+  from {
+    transform: translateY(92%);
+    filter: blur(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .roll-out,
+  .roll-in {
+    animation: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}

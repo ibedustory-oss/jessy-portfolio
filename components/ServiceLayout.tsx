@@ -4,6 +4,7 @@ import Faq from '@/components/Faq'
 import Finder from '@/components/Finder'
 import PositionMap from '@/components/PositionMap'
 import Reveal from '@/components/Reveal'
+import RollingLine from '@/components/RollingLine'
 import StrategySheet from '@/components/StrategySheet'
 import { Term } from '@/components/ToolPreview'
 import type { Lang } from '@/lib/content'
@@ -127,16 +128,9 @@ export default function ServiceLayout({ lang }: { lang: Lang }) {
             <h1
               className={`mt-14 ${bk} text-[clamp(28px,4vw,54px)] font-extrabold leading-[1.16] tracking-tightest text-white`}
             >
-              {x.heroLine.lead} <span className="text-pen">{x.heroLine.why}</span>
-              {lang === 'ko' ? '입니다.' : lang === 'ja' ? 'です。' : '.'}
+              {x.heroLine.lead}
+              <RollingLine lines={x.heroLine.rolls} className="mt-1" />
             </h1>
-            <p
-              className={`mt-7 max-w-[26ch] ${bk} text-[clamp(18px,2.1vw,27px)] font-bold leading-[1.5] text-white/70`}
-            >
-              {x.heroLine.q1}
-              <br />
-              {x.heroLine.q2}
-            </p>
           </Reveal>
 
           <Reveal delay={160}>
