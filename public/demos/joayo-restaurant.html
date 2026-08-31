@@ -196,12 +196,23 @@ footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-alig
 .foot-links a:hover{color:var(--red);}
 .legal{font-size:11.5px;color:rgba(247,244,239,.4);}
 
-/* la salle — the photograph runs off the page, the words sit in its margin */
+/* le temps — three numbers, set like a date stone */
+.temps{padding-bottom:20px;}
+.temps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5vw;}
+.temps-item{border-top:1px solid var(--ink);padding-top:22px;}
+.tp-n{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,7vw,96px);line-height:.9;letter-spacing:-.02em;}
+.tp-u{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(17px,1.9vw,23px);color:var(--red);margin-left:10px;}
+.tp-l{margin-top:18px;font-size:14.5px;line-height:1.75;color:var(--ink-60);max-width:26ch;}
+@media(max-width:760px){
+  .temps-grid{grid-template-columns:1fr;gap:34px;}
+}
+
+/* la salle — the film runs off the page, the words sit in its margin */
 .salle{max-width:none;margin:0;padding:0;background:var(--paper);}
 .salle-inner{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
   align-items:stretch;gap:0;}
 .salle-ph{position:relative;margin:0;overflow:hidden;min-height:clamp(360px,52vw,620px);}
-.salle-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.salle-ph img,.salle-ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .salle-ph:after{content:'';position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(90deg,rgba(22,19,15,.18),transparent 42%);}
 .salle-copy{display:flex;flex-direction:column;justify-content:center;padding:6vw 6vw 6vw 4vw;background:var(--paper);}
@@ -662,16 +673,40 @@ html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
   </div>
 </section>
 
+<!-- LE TEMPS — the claim in the hero, proven in numbers -->
+<section class="temps" data-rail>
+  <div class="section-head reveal">
+    <div class="over" data-i18n="tp_over">Le temps · 시간</div>
+    <h2 data-i18n="tp_h2">Ce qui prend du temps, chez nous</h2>
+  </div>
+  <div class="temps-grid">
+    <div class="temps-item reveal">
+      <span class="tp-n">3</span><span class="tp-u" data-i18n="tp_u1">ans</span>
+      <p class="tp-l" data-i18n="tp_l1">Le jang, fermenté avant d'entrer en cuisine</p>
+    </div>
+    <div class="temps-item reveal">
+      <span class="tp-n">6</span><span class="tp-u" data-i18n="tp_u2">mois</span>
+      <p class="tp-l" data-i18n="tp_l2">Le kimchi d'hiver, mis en jarre chaque automne</p>
+    </div>
+    <div class="temps-item reveal">
+      <span class="tp-n">12</span><span class="tp-u" data-i18n="tp_u3">heures</span>
+      <p class="tp-l" data-i18n="tp_l3">Le bouillon, lancé la veille pour le service du midi</p>
+    </div>
+  </div>
+</section>
+
 <!-- LA SALLE -->
 <section class="salle" data-rail>
   <div class="salle-inner">
     <figure class="salle-ph reveal">
-      <img src="https://images.pexels.com/photos/19300595/pexels-photo-19300595/free-photo-of-waiter-talking-to-a-customer-in-a-restaurant.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="lazy">
+      <video autoplay muted loop playsinline preload="metadata" poster="joayo-video/salle-poster.jpg" aria-label="">
+        <source src="joayo-video/salle.mp4" type="video/mp4">
+      </video>
     </figure>
     <div class="salle-copy reveal">
       <div class="over" data-i18n="am_over">La salle · 홀</div>
       <h2 data-i18n="am_h2">La salle</h2>
-      <p data-i18n="am_p">Boiseries, tables rapprochées, lumière chaude. Une salle faite pour rester, pas pour tourner.</p>
+      <p data-i18n="am_p">Le gril au milieu, les banchan autour, l'odeur du feu dans la salle.</p>
     </div>
   </div>
 </section>
@@ -899,6 +934,10 @@ fr: {
   nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
   ar_head:"Les signatures", ar_note:"Toute la carte ↓",
   cat1:"Riz", cat2:"Grillades", cat3:"Nouilles & ragoûts",
+  tp_over:"Le temps · 시간", tp_h2:"Ce qui prend du temps, chez nous",
+  tp_u1:"ans", tp_l1:"Le jang, fermenté avant d'entrer en cuisine",
+  tp_u2:"mois", tp_l2:"Le kimchi d'hiver, mis en jarre chaque automne",
+  tp_u3:"heures", tp_l3:"Le bouillon, lancé la veille pour le service du midi",
   kicker:"Midi & soir — Paris 1er",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
@@ -918,8 +957,8 @@ fr: {
   rc_p:"La salle est petite — réservez.",
   h_lunch:"Midi", h_dinner:"Soir", h_note:"Horaires du jour sur Google Maps",
   rc_btn:"Réserver", 
-  am_over:"La salle · 홀", am_h2:"La salle",
-  am_p:"Boiseries, tables rapprochées, lumière chaude.", 
+  am_over:"À table · 식탁", am_h2:"À table",
+  am_p:"Le gril au milieu, les banchan autour, l'odeur du feu dans la salle.", 
   in_over:"Infos pratiques · 오시는 길", in_h2:"Venir dîner chez le Joayo",
   ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
   ic2_h3:"Horaires", ic2_p:"Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00", ic2_small:"Horaires du jour sur Google Maps.",
@@ -945,6 +984,10 @@ en: {
   nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
   ar_head:"The signatures", ar_note:"See the full menu ↓",
   cat1:"Rice", cat2:"Grills", cat3:"Noodles & stews",
+  tp_over:"Time · 시간", tp_h2:"What takes time here",
+  tp_u1:"years", tp_l1:"The jang, fermented before it reaches the kitchen",
+  tp_u2:"months", tp_l2:"Winter kimchi, put into jars every autumn",
+  tp_u3:"hours", tp_l3:"The broth, started the night before lunch service",
   kicker:"Lunch & dinner — Paris 1er",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
   hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
@@ -964,8 +1007,8 @@ en: {
   rc_p:"The room is small — book ahead.",
   h_lunch:"Lunch", h_dinner:"Dinner", h_note:"Today's hours on Google Maps",
   rc_btn:"Book a table", 
-  am_over:"The room · 홀", am_h2:"The room",
-  am_p:"Woodwork, close-set tables, warm light.", 
+  am_over:"At the table · 식탁", am_h2:"At the table",
+  am_p:"The grill in the middle, banchan around it, the smell of fire in the room.", 
   in_over:"Practical info · 오시는 길", in_h2:"Come dine at the Joayo",
   ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
   ic2_h3:"Hours", ic2_p:"Lunch: 11:30 am — 3:00 pm<br>Dinner: 6:30 — 10:00 pm", ic2_small:"Today's hours on Google Maps.",
@@ -991,6 +1034,10 @@ ko: {
   nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
   ar_head:"대표 메뉴", ar_note:"전체 메뉴 보기 ↓",
   cat1:"밥", cat2:"구이", cat3:"면·찌개",
+  tp_over:"시간 · Le temps", tp_h2:"이 집에서 시간이 걸리는 것들",
+  tp_u1:"년", tp_l1:"주방에 들어오기 전, 그만큼 익힌 장",
+  tp_u2:"개월", tp_l2:"가을에 담가 겨우내 두는 김치",
+  tp_u3:"시간", tp_l3:"점심 장사를 위해 전날 밤부터 끓이는 육수",
   kicker:"점심 & 저녁 — 파리 1구",
   hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
   hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
@@ -1010,8 +1057,8 @@ ko: {
   rc_p:"자리가 많지 않습니다 — 예약하고 오세요.",
   h_lunch:"점심", h_dinner:"저녁", h_note:"당일 영업시간은 구글 지도 참고",
   rc_btn:"예약하기", 
-  am_over:"홀 · La salle", am_h2:"홀",
-  am_p:"우드 인테리어, 가까운 테이블, 따뜻한 조명.", 
+  am_over:"식탁 · À table", am_h2:"식탁",
+  am_p:"가운데 불판, 둘레에 반찬. 홀에 불 냄새가 돕니다.", 
   in_over:"오시는 길 · Infos", in_h2:"좋아요 레스토랑으로 오세요",
   ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
   ic2_h3:"영업시간", ic2_p:"점심: 11:30 — 15:00<br>저녁: 18:30 — 22:00", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
