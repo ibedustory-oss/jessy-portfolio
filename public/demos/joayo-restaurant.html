@@ -25,7 +25,6 @@ body:after{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*,*:before,*:after{animation:none!important;transition:none!important;}}
 
-/* ticker */
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* nav */
@@ -333,7 +332,7 @@ html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
 }
 /* Latin tracking is wrong for Hangul — it breaks words apart */
 html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .btn,
-html[lang="ko"] .addr-pill,html[lang="ko"] .ticker,html[lang="ko"] .ticker-inner span,
+html[lang="ko"] .addr-pill,
 html[lang="ko"] .foot-links a,html[lang="ko"] .nav-links a,html[lang="ko"] .review .who,
 html[lang="ko"] .service-chips span,html[lang="ko"] .a-note a,html[lang="ko"] .info-card .meta,
 html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,html[lang="ko"] .suite .s-t,
@@ -1101,19 +1100,6 @@ applyLang(saved && I18N[saved] ? saved : 'fr');
     },{rootMargin:'-45% 0px -45% 0px'}).observe(x);});
 })();
 
-/* ticker driven by scroll velocity */
-(function(){
-  var t=document.querySelector('.ticker-inner');
-  if(!t)return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  t.style.animation='none';
-  var x=0,last=window.scrollY,vel=0,half=0;
-  function m(){half=t.scrollWidth/2;} m(); window.addEventListener('resize',m);
-  window.addEventListener('scroll',function(){var y=window.scrollY;vel=y-last;last=y;},{passive:true});
-  (function step(){vel*=0.9;x-=0.55+Math.min(Math.abs(vel)*0.22,14);
-    if(half&&-x>=half)x+=half; t.style.transform='translateX('+x+'px)';
-    requestAnimationFrame(step);})();
-})();
 
 /* hover swaps the photo */
 function bindStage(itemSel,attr,stageSel,phAttr){
