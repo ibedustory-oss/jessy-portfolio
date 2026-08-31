@@ -147,7 +147,7 @@ function Funnel({ t }: { t: Tool }) {
 export function Term({ tool }: { tool: Tool }) {
   return (
     <span className="group relative inline-block align-baseline" tabIndex={0}>
-      <span className="cursor-help border-b border-dashed border-ink/40 font-bold text-ink transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
+      <span className="cursor-help border-b border-dashed border-accent/45 font-bold text-accent transition-colors duration-300 group-hover:border-accent">
         {tool.label}
       </span>
       <span
