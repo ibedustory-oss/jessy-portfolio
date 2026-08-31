@@ -3,1078 +3,582 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er</title>
-<meta name="description" content="Joayo Restaurant : cuisine coréenne à Paris 1er. Bibimbap au tartare de bœuf, bulgogi, poulet frit.">
+<title>JOAYO — Restaurant coréen, Paris 1er</title>
+<meta name="description" content="Restaurant coréen rue du Jour, Paris 1er. Bibimbap, jjigae, porc grillé, poulet frit. Midi et soir, réservation par téléphone.">
+<meta property="og:title" content="JOAYO — Restaurant coréen, Paris 1er">
+<meta property="og:description" content="Bibimbap, jjigae, porc grillé, poulet frit. 12 rue du Jour, Paris 1er.">
+<meta property="og:type" content="restaurant.restaurant">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"JOAYO","servesCuisine":"Korean","priceRange":"€€",
+"address":{"@type":"PostalAddress","streetAddress":"12 rue du Jour","addressLocality":"Paris","postalCode":"75001","addressCountry":"FR"},
+"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","opens":"11:30","closes":"15:00"},{"@type":"OpeningHoursSpecification","opens":"18:30","closes":"22:00"}]}
+</script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,420;0,9..144,560;1,9..144,420&family=Archivo:wght@400;500;600;700&display=swap');
-
 :root{
-  --paper:#F7F4EF; --paper-2:#EFEBE4;
-  --ink:#16130F; --ink-60:rgba(22,19,15,.6);
-  --line:rgba(22,19,15,.13);
-  --red:#BE3418;
+  --paper:#F3F0E8;
+  --ink:#171715;
+  --ink-70:rgba(23,23,21,.7);
+  --ink-50:rgba(23,23,21,.5);
+  --line:rgba(23,23,21,.15);
+  --accent:#9B3327;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  --kr:'Noto Sans KR','Archivo',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Archivo',system-ui,sans-serif;background:var(--paper);color:var(--ink);
-  overflow-x:hidden;line-height:1.6;font-size:16px;}
-::selection{background:var(--red);color:var(--paper);}
-img{display:block;max-width:100%;}
-body:after{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*,*:before,*:after{animation:none!important;transition:none!important;}}
-
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* nav */
-nav{position:sticky;top:0;z-index:100;background:rgba(247,244,239,.92);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
-  padding:16px 40px;gap:14px;}
-.logo{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);}
-.logo .latin{font-family:'Fraunces',serif;font-weight:560;font-size:24px;}
-.logo .hangul{font-size:13px;font-weight:600;color:var(--red);letter-spacing:.14em;white-space:nowrap;}
-.sub-brand{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--ink-60);}
-.nav-links{display:flex;gap:26px;align-items:center;}
-.nav-links a{text-decoration:none;color:var(--ink);font-weight:500;font-size:12.5px;
-  letter-spacing:.16em;text-transform:uppercase;position:relative;}
-.nav-links a:not(.btn):after{content:'';position:absolute;left:0;bottom:-5px;height:1px;width:0;
-  background:var(--ink);transition:width .35s cubic-bezier(.23,1,.32,1);}
-.nav-links a:not(.btn):hover:after{width:100%;}
-.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;
-  border:1px solid var(--ink);border-radius:999px;color:var(--ink);background:transparent;
-  padding:8px 8px 8px 22px;font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-  transition:background .3s,color .3s,transform .3s cubic-bezier(.23,1,.32,1);}
-.btn:after{content:'\2192';display:inline-flex;align-items:center;justify-content:center;
-  width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);
-  font-size:14px;letter-spacing:0;flex-shrink:0;
-  transition:transform .4s cubic-bezier(.2,1.4,.4,1),background .3s,color .3s;}
-.btn:hover{transform:translateY(-2px);}
-.btn:hover:after{transform:translateX(3px);}
-.btn:active{transform:scale(.97);}
-.lang-switch{display:flex;gap:13px;}
-.lang-switch button{border:none;background:transparent;font-family:'Archivo';font-weight:600;
-  font-size:11px;letter-spacing:.12em;cursor:pointer;color:var(--ink);opacity:.55;
-  padding:2px 0;border-bottom:1px solid transparent;}
-.lang-switch button.active{opacity:1;border-bottom-color:var(--ink);}
-.lang-switch button:hover{opacity:1;}
-a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:4px;}
-
-/* hero */
-.hero{max-width:1320px;margin:0 auto;padding:96px 40px 80px;position:relative;}
-.hero:has(.ardoise){display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
-  gap:5vw;align-items:start;}
-.hero:has(.ardoise) .rating-sticker{display:none;}
-.kicker{display:flex;align-items:center;gap:11px;font-size:11.5px;font-weight:600;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:26px;}
-.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
-.hero h1{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,8vw,124px);
-  line-height:.96;letter-spacing:-.018em;}
-.hero h1 .accent{color:var(--red);font-style:italic;}
-.hangul-big{font-size:13px;font-weight:600;letter-spacing:.22em;color:var(--ink-60);margin-top:18px;}
-.hero .sub{margin-top:24px;font-size:clamp(16px,1.7vw,19px);max-width:52ch;color:var(--ink);}
-.hero .sub strong{font-weight:600;}
-.addr-pill{display:inline-block;margin-top:26px;font-size:12px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-60);border-bottom:1px solid var(--line);padding-bottom:6px;}
-.cta-row{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
-.cta-row .btn{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-.cta-row .btn:after{background:var(--paper);color:var(--ink);}
-.cta-row .btn:hover{background:var(--red);border-color:var(--red);}
-
-/* google rating — a quiet seal, not a sticker */
-.rating-sticker{position:absolute;top:96px;right:40px;text-align:right;}
-.rating-sticker .score{font-family:'Fraunces',serif;font-weight:560;font-size:38px;line-height:1;}
-.rating-sticker .stars{color:var(--red);font-size:12px;letter-spacing:.2em;margin-top:4px;}
-.rating-sticker .count{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-60);margin-top:6px;}
-
-/* section scaffold */
-section{max-width:1320px;margin:0 auto;padding:90px 40px;}
-.section-head{margin-bottom:52px;border-top:1px solid var(--ink);padding-top:26px;max-width:64ch;}
-.section-head .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.2em;
-  font-size:11.5px;margin-bottom:16px;}
-.section-head h2{font-family:'Fraunces',serif;font-weight:560;
-  font-size:clamp(32px,4.2vw,58px);line-height:1.04;letter-spacing:-.01em;}
-.section-head p{margin-top:18px;color:var(--ink-60);font-size:15.5px;max-width:56ch;}
-
-/* rayons — a numbered index, not emoji cards */
-.grid-rayons{display:grid;grid-template-columns:repeat(2,1fr);gap:0 6vw;}
-.rayon{position:relative;padding:30px 0 30px 52px;border-top:1px solid var(--line);
-  transition:padding-left .45s cubic-bezier(.23,1,.32,1);}
-.rayon:hover{padding-left:62px;}
-.rayon .icon{position:absolute;left:0;top:32px;
-  font-family:'Fraunces',serif;font-style:italic;font-weight:420;
-  font-size:16px;color:var(--red);}
-.rayon h3{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(20px,2.2vw,27px);line-height:1.15;}
-.rayon .kr{font-size:11.5px;letter-spacing:.14em;color:var(--ink-60);margin-top:6px;}
-.rayon p{margin-top:12px;font-size:14.5px;color:var(--ink-60);max-width:40ch;}
-.rayon .badge{position:absolute;top:30px;right:0;font-size:10px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--red);font-weight:600;}
-.rayon.highlight h3{color:var(--red);}
-
-/* photo band replacing the emoji banner */
-.kimchi-banner{position:relative;overflow:hidden;max-width:1320px;margin:20px auto 0;
-  min-height:52vh;display:flex;align-items:flex-end;color:var(--paper);}
-.kimchi-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.kimchi-banner:after{content:'';position:absolute;inset:0;
-  background:linear-gradient(195deg,rgba(22,19,15,.12) 40%,rgba(22,19,15,.82) 94%);}
-.kimchi-banner>div{position:relative;z-index:2;padding:0 clamp(26px,4vw,54px) clamp(30px,4vw,52px);}
-.kimchi-banner h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(28px,3.6vw,50px);
-  line-height:1.06;max-width:20ch;}
-.kimchi-banner p{margin-top:14px;font-size:15px;color:rgba(247,244,239,.85);max-width:46ch;}
-
-/* menu (restaurant) — set like a printed carte */
-.menu-wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:5vw;align-items:start;}
-.menu-list{max-width:36rem;min-width:0;}
-.course{margin-bottom:52px;}
-.course:last-of-type{margin-bottom:34px;}
-.course-h{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);
-  padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:6px;}
-.menu-item{padding:16px 0;}
-.mi-head{display:grid;grid-template-columns:minmax(0,max-content) minmax(12px,1fr) max-content;align-items:baseline;}
-.menu-item .name{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(16px,1.85vw,21px);line-height:1.25;min-width:0;}
-.mi-head .name{grid-column:1;}
-.mi-head:after{content:'';grid-column:2;border-bottom:1px dotted rgba(22,19,15,.3);
-  margin:0 14px;transform:translateY(-5px);}
-.mi-head .price{grid-column:3;}
-.menu-item .price{font-family:'Fraunces',serif;font-weight:560;font-size:16.5px;white-space:nowrap;
-  font-variant-numeric:tabular-nums;}
-.menu-item .kr{display:block;margin-top:5px;font-size:11.5px;letter-spacing:.14em;color:var(--ink-60);}
-.menu-item .desc{margin-top:9px;font-size:14px;line-height:1.7;color:var(--ink-60);max-width:44ch;}
-.menu-item.signature .name{font-size:clamp(21px,2.5vw,29px);}
-.menu-item.signature{padding-top:6px;}
-.menu-note{margin-top:26px;font-size:13px;color:var(--ink-60);}
-.service-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
-.service-chips span{border:1px solid var(--line);border-radius:999px;padding:7px 15px;
-  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60);}
-
-/* ardoise — the evening board */
-.ardoise{background:var(--ink);color:var(--paper);padding:34px 32px;position:relative;}
-.ardoise .rating-sticker{position:absolute;top:26px;right:28px;text-align:right;}
-.ardoise .rating-sticker .score{color:var(--paper);font-size:30px;}
-.ardoise .rating-sticker .count{color:rgba(247,244,239,.6);}
-.a-head{font-family:'Fraunces',serif;font-style:italic;font-size:21px;margin-bottom:22px;
-  padding-bottom:16px;border-bottom:1px solid rgba(247,244,239,.24);max-width:16ch;}
-.dish{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:13px 0;
-  border-bottom:1px solid rgba(247,244,239,.14);}
-.dish .n{font-size:14.5px;}
-.dish .n small{display:block;font-size:10.5px;letter-spacing:.18em;color:rgba(247,244,239,.55);margin-top:4px;}
-.dish .p{font-family:'Fraunces',serif;font-weight:560;font-size:15px;}
-.a-note{margin-top:20px;}
-.a-note a{color:var(--paper);text-decoration:none;font-size:11.5px;letter-spacing:.2em;
-  text-transform:uppercase;border-bottom:1px solid rgba(247,244,239,.5);padding-bottom:5px;}
-
-  font-size:18px;line-height:1.5;}
-.review .who{margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);}
-
-/* infos */
-.infos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:5vw;}
-.info-card{border-top:1px solid var(--line);padding-top:22px;}
-.info-card h3{font-family:'Fraunces',serif;font-weight:560;font-size:22px;margin-bottom:12px;}
-.info-card p,.info-card .addr,.info-card .hours{font-size:14px;color:var(--ink-60);line-height:1.9;}
-.hours{margin:4px 0 2px;}
-.hours>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-  padding:8px 0;border-bottom:1px solid var(--line);line-height:1.5;}
-.hours>div:last-child{border-bottom:none;}
-.hours>div>span:first-child{color:var(--ink);font-weight:600;flex:none;}
-.hours>div>span:last-child{font-variant-numeric:tabular-nums;text-align:right;}
-.info-card .addr{color:var(--ink);font-family:'Fraunces',serif;font-style:italic;font-size:18px;margin-bottom:10px;}
-
-/* footer */
-.demo-credit{
-  margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--ink-60);
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--sans);background:var(--paper);color:var(--ink);
+  font-size:16px;line-height:1.55;font-weight:400;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
-.demo-credit a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
-  padding-bottom:1px;transition:border-color .3s ease;}
-.demo-credit a:hover{border-color:var(--ink);}
-.demo-credit i{font-style:normal;}
-footer{background:var(--ink);color:var(--paper);padding:90px 40px 36px;text-align:center;}
-.foot-logo{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,9vw,124px);line-height:1;letter-spacing:-.015em;}
-.foot-logo span{font-style:italic;color:var(--red);}
-.foot-links{margin:38px 0 26px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap;}
-.foot-links a{color:var(--paper);text-decoration:none;font-weight:500;font-size:12px;
-  letter-spacing:.2em;text-transform:uppercase;}
-.foot-links a:hover{color:var(--red);}
-.legal{font-size:11.5px;color:rgba(247,244,239,.4);}
-
-/* le temps — three numbers, set like a date stone */
-.temps{padding-bottom:20px;}
-.temps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5vw;}
-.temps-item{border-top:1px solid var(--ink);padding-top:22px;}
-.tp-n{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(52px,7vw,96px);line-height:.9;letter-spacing:-.02em;}
-.tp-u{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(17px,1.9vw,23px);color:var(--red);margin-left:10px;}
-.tp-l{margin-top:18px;font-size:14.5px;line-height:1.75;color:var(--ink-60);max-width:26ch;}
-@media(max-width:760px){
-  .temps-grid{grid-template-columns:1fr;gap:34px;}
+html[lang="ko"] body{font-family:var(--kr);}
+img,video{display:block;max-width:100%;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important;transition:none!important;}
 }
 
-/* la salle — the film runs off the page, the words sit in its margin */
-.salle{max-width:none;margin:0;padding:0;background:var(--paper);}
-.salle-inner{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
-  align-items:stretch;gap:0;}
-.salle-ph{position:relative;margin:0;overflow:hidden;min-height:clamp(360px,52vw,620px);}
-.salle-ph img,.salle-ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.salle-ph:after{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(22,19,15,.18),transparent 42%);}
-.salle-copy{display:flex;flex-direction:column;justify-content:center;padding:6vw 6vw 6vw 4vw;background:var(--paper);}
-.salle-copy .over{color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:11px;margin-bottom:16px;}
-.salle-copy h2{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(30px,3.4vw,44px);line-height:1.1;}
-.salle-copy p{margin-top:18px;color:var(--ink-60);font-size:15.5px;max-width:30ch;}
+/* ---------- shell ---------- */
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px;}
+.grid12{display:grid;grid-template-columns:repeat(12,1fr);gap:32px;}
+.rule{border:0;border-top:1px solid var(--line);}
 
-@media (max-width:900px){
-  .salle-inner{grid-template-columns:1fr;gap:44px;}
-  .salle{padding:80px 22px;}
+/* ---------- type ---------- */
+.mark{font-family:var(--serif);font-weight:400;letter-spacing:.01em;}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50);}
+.kr{font-family:var(--kr);font-weight:500;}
+h2{font-weight:500;letter-spacing:-.015em;line-height:1.1;}
+p{max-width:60ch;}
+.ph{position:relative;overflow:hidden;background:rgba(23,23,21,.06);}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+/* ---------- header ---------- */
+.hd{position:fixed;top:0;left:0;right:0;z-index:60;
+  transition:background .35s ease,border-color .35s ease,padding .35s ease;
+  border-bottom:1px solid transparent;padding:22px 0;}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.hd a{text-decoration:none;}
+.hd-logo{display:flex;align-items:baseline;gap:10px;color:#F3F0E8;}
+.hd-logo .n{font-family:var(--serif);font-size:23px;letter-spacing:.02em;}
+.hd-logo .k{font-family:var(--kr);font-size:12px;font-weight:400;opacity:.72;}
+.hd-nav{display:flex;align-items:center;gap:26px;color:#F3F0E8;font-size:13px;letter-spacing:.06em;}
+.hd-nav a{opacity:.82;padding-bottom:2px;border-bottom:1px solid transparent;transition:opacity .25s,border-color .25s;}
+.hd-nav a:hover{opacity:1;border-bottom-color:currentColor;}
+.lang{display:flex;gap:10px;font-size:11px;letter-spacing:.1em;}
+.lang button{background:none;border:0;color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer;opacity:.5;padding:2px 0;}
+.lang button.on{opacity:1;border-bottom:1px solid currentColor;}
+.hd-cta{border:1px solid currentColor;padding:9px 16px;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  transition:background .25s,color .25s;}
+.hd-cta:hover{background:#F3F0E8;color:var(--ink);}
+.hd.solid{background:var(--paper);border-bottom-color:var(--line);padding:12px 0;}
+.hd.solid .hd-logo,.hd.solid .hd-nav{color:var(--ink);}
+.hd.solid .hd-cta{border-color:var(--ink);}
+.hd.solid .hd-cta:hover{background:var(--ink);color:var(--paper);}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;}
+.hero-ph{position:absolute;inset:0;overflow:hidden;background:#111;}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
+.hero-ph:after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,9,8,.72) 0%,rgba(10,9,8,.28) 46%,rgba(10,9,8,.32) 100%);}
+.hero .wrap{position:relative;width:100%;padding-bottom:44px;padding-top:120px;color:#F6F3EC;}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(66px,12vw,168px);line-height:.86;letter-spacing:-.01em;}
+.hero h1 .kr{display:block;font-size:clamp(15px,1.5vw,20px);font-weight:400;letter-spacing:.3em;opacity:.75;margin-bottom:18px;}
+.hero-line{margin-top:26px;max-width:34ch;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:rgba(246,243,236,.9);}
+.hero-cta{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;}
+.btn{display:inline-block;text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  padding:15px 30px;border:1px solid transparent;transition:background .25s,color .25s,border-color .25s;}
+.btn-p{background:var(--accent);color:#F6F3EC;}
+.btn-p:hover{background:#7E271D;}
+.btn-s{border-color:rgba(246,243,236,.55);color:#F6F3EC;}
+.btn-s:hover{background:rgba(246,243,236,.12);}
+.hero-foot{margin-top:40px;padding-top:16px;border-top:1px solid rgba(246,243,236,.24);
+  display:flex;flex-wrap:wrap;gap:8px 34px;font-size:13px;color:rgba(246,243,236,.72);}
+
+/* ---------- signature ---------- */
+.sig{padding:112px 0 0;}
+.sig-ph{grid-column:1/7;}
+.sig-ph{aspect-ratio:4/5;}
+.sig-ph img{object-position:50% 34%;}
+.sig-txt{grid-column:8/12;align-self:end;padding-bottom:8px;}
+.sig-name{margin-top:14px;font-family:var(--kr);font-weight:500;font-size:clamp(30px,3.6vw,46px);line-height:1.15;letter-spacing:-.01em;}
+.sig-lat{margin-top:8px;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-50);}
+.sig-desc{margin-top:22px;font-size:16.5px;line-height:1.6;color:var(--ink-70);max-width:30ch;}
+.sig-price{margin-top:24px;font-size:14px;color:var(--ink-50);}
+
+/* ---------- menu ---------- */
+.menu{padding:150px 0 0;}
+.menu-head{grid-column:1/5;}
+.menu-head h2{font-size:clamp(28px,3.2vw,40px);}
+.menu-head p{margin-top:16px;font-size:15px;color:var(--ink-70);max-width:26ch;}
+.menu-body{grid-column:6/13;max-width:44rem;}
+.menu-body p{max-width:none;}
+.course{margin-bottom:46px;}
+.course:last-of-type{margin-bottom:0;}
+.course-h{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  padding-bottom:9px;border-bottom:1px solid var(--ink);}
+.dish{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:8px 20px;
+  padding:15px 0;border-bottom:1px solid var(--line);}
+.dish:last-child{border-bottom:0;}
+.dish .n{font-size:17.5px;font-weight:500;}
+.dish .k{font-family:var(--kr);font-weight:400;font-size:13px;color:var(--ink-50);margin-left:9px;}
+.dish .p{font-size:14px;color:var(--ink-50);font-variant-numeric:tabular-nums;}
+.dish .d{grid-column:1/2;font-size:14.5px;color:var(--ink-70);max-width:44ch;margin-top:5px;}
+.menu-note{margin-top:26px;font-size:13.5px;color:var(--ink-50);}
+
+/* ---------- band (film) ---------- */
+.band{margin-top:150px;position:relative;}
+.band video,.band img{width:100%;height:clamp(340px,58vh,620px);object-fit:cover;}
+.band-cap{max-width:1360px;margin:14px auto 0;padding:0 40px;font-size:14px;color:var(--ink-50);}
+
+/* ---------- time ---------- */
+.time{padding:130px 0 0;}
+.time-ph{grid-column:1/6;}
+.time-ph{aspect-ratio:3/2;}
+.time-ph img{object-position:50% 62%;}
+.time-list{grid-column:7/12;align-self:center;}
+.time-row{display:grid;grid-template-columns:5.5rem 1fr;gap:20px;align-items:baseline;
+  padding:20px 0;border-bottom:1px solid var(--line);}
+.time-row:last-child{border-bottom:0;}
+.time-row dt{font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);line-height:1;}
+.time-row dd{font-size:15.5px;color:var(--ink-70);}
+.time-row dd b{font-weight:500;color:var(--ink);}
+
+/* ---------- room ---------- */
+.room{margin-top:140px;display:grid;grid-template-columns:minmax(0,32%) minmax(0,68%);align-items:end;gap:0;}
+.room-txt{padding:0 5vw 46px 40px;max-width:34ch;}
+.room-txt h2{font-size:clamp(26px,2.8vw,36px);}
+.room-txt p{margin-top:18px;font-size:16px;color:var(--ink-70);}
+.room-ph{aspect-ratio:16/10;}
+.room-ph img{object-position:50% 34%;}
+.room-2{max-width:1360px;margin:26px auto 0;padding:0 40px;display:grid;grid-template-columns:repeat(12,1fr);gap:32px;}
+.room-2 figure{grid-column:8/13;}
+.room-2 figure{aspect-ratio:1/1;}
+.room-2 figcaption{margin-top:10px;font-size:13px;color:var(--ink-50);}
+
+/* ---------- practical ---------- */
+.info{padding:130px 0 0;}
+.info h2{grid-column:1/5;font-size:clamp(26px,2.8vw,36px);}
+.info-cols{grid-column:6/13;display:grid;grid-template-columns:repeat(2,1fr);gap:36px 40px;}
+.info-b dt{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50);
+  padding-bottom:10px;border-bottom:1px solid var(--line);}
+.info-b dd{margin-top:12px;font-size:16px;line-height:1.6;}
+.info-b dd a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;}
+.info-cta{grid-column:6/13;margin-top:14px;}
+.info-cta .btn-p{color:#F6F3EC;}
+
+/* ---------- footer ---------- */
+footer{margin-top:120px;border-top:1px solid var(--line);padding:40px 0 44px;}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px 40px;align-items:baseline;}
+.ft-mark{font-family:var(--serif);font-size:22px;}
+.ft-mark .k{font-family:var(--kr);font-size:12px;font-weight:400;color:var(--ink-50);margin-left:9px;}
+.ft-meta{font-size:13.5px;color:var(--ink-50);display:flex;flex-wrap:wrap;gap:6px 22px;}
+.ft-meta a{text-decoration:none;border-bottom:1px solid var(--line);}
+.ft-credit{margin-top:26px;font-size:12px;color:var(--ink-50);}
+.ft-credit a{color:inherit;}
+
+/* ---------- mobile reserve ---------- */
+.mob-cta{display:none;}
+
+/* ---------- hero reveal (the only motion) ---------- */
+.rise{opacity:0;transform:translateY(14px);}
+.is-in .rise{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+.is-in .rise:nth-child(2){transition-delay:.08s;}
+.is-in .rise:nth-child(3){transition-delay:.16s;}
+
+/* ---------- tablet ---------- */
+@media (max-width:1024px){
+  .wrap{padding:0 28px;}
+  .grid12{gap:24px;}
+  .sig{padding-top:88px;}
+  .sig-ph{grid-column:1/8;}
+  .sig-txt{grid-column:8/13;}
+  .menu{padding-top:104px;}
+  .menu-head{grid-column:1/13;}
+  .menu-head p{max-width:44ch;}
+  .menu-body{grid-column:1/13;margin-top:34px;}
+  .band{margin-top:104px;}
+  .band-cap{padding:0 28px;}
+  .time{padding-top:96px;}
+  .time-ph{grid-column:1/7;}
+  .time-list{grid-column:7/13;}
+  .room{margin-top:96px;grid-template-columns:1fr;}
+  .room-txt{order:2;padding:26px 28px 0;max-width:46ch;}
+  .room-ph{order:1;}
+  .room-2{padding:0 28px;margin-top:20px;}
+  .room-2 figure{grid-column:7/13;}
+  .info{padding-top:96px;}
+  .info h2{grid-column:1/13;}
+  .info-cols{grid-column:1/13;margin-top:30px;}
+  .info-cta{grid-column:1/13;}
 }
 
-/* generative hero — ink & plum */
-.ghero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 100%, #1B140A 0%, #120E08 46%, #0D0A06 100%);color:var(--paper);}
-.ghero canvas{position:absolute;inset:0;width:100%;height:100%;}
-.g-veil{position:absolute;inset:0;background:linear-gradient(to top, rgba(13,10,6,.55), transparent 46%);}
-.ghero-inner{position:relative;z-index:2;max-width:1320px;width:100%;margin:0 auto;padding:120px 40px 140px;}
-.ghero .kicker{color:rgba(247,244,239,.55);}
-.ghero .kicker .dot{background:var(--red);}
-.ghero h1{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(54px,9vw,128px);line-height:.98;letter-spacing:-.015em;margin-top:22px;}
-.ghero h1 .accent{color:#D8552F;font-style:italic;}
-.g-line{margin-top:26px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
-  font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(247,244,239,.72);max-width:44ch;}
-.ghero .cta-row{margin-top:34px;}
-.ghero .btn{background:var(--red);border-color:var(--red);color:var(--paper);}
-.ghero .btn:hover{background:#D8552F;border-color:#D8552F;}
-.g-ghost{color:rgba(247,244,239,.75);text-decoration:none;font-weight:600;font-size:12.5px;
-  letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid rgba(247,244,239,.25);
-  padding-bottom:3px;transition:color .3s,border-color .3s;}
-.g-ghost:hover{color:var(--paper);border-color:var(--paper);}
-.g-pill{display:inline-block;margin-top:30px;border-color:rgba(247,244,239,.22);color:rgba(247,244,239,.5);}
-.ghero .jd-vert{position:absolute;top:50%;right:26px;transform:translateY(-50%);z-index:2;
-  writing-mode:vertical-rl;font-size:11px;letter-spacing:.42em;color:rgba(247,244,239,.4);
-  font-family:'Noto Serif KR',serif;}
-@media (max-width:760px){
-  .ghero{min-height:86vh;}
-  .ghero-inner{padding:96px 22px 120px;}
-  .ghero .jd-vert{display:none;}
-}
-
-/* korean typography pass */
-html[lang="ko"] .kicker,html[lang="ko"] .over,
-html[lang="ko"] .salle-copy .over{letter-spacing:.12em;}
-html[lang="ko"] .section-head h2{font-size:clamp(25px,3vw,38px);}
-html[lang="ko"] .salle-copy h2{font-size:clamp(24px,2.9vw,36px);}
-html[lang="ko"] .g-line{font-style:normal;font-family:'Noto Serif KR',serif;font-weight:500;
-  font-size:clamp(15px,1.6vw,18px);line-height:1.8;}
-html[lang="ko"] html[lang="ko"] .g-ghost{letter-spacing:.1em;}
-
-/* reveal */
-body.js-anim .reveal{opacity:0;transform:translateY(24px);filter:blur(5px);
-  transition:opacity .9s cubic-bezier(.23,1,.32,1),transform .9s cubic-bezier(.23,1,.32,1),filter .9s cubic-bezier(.23,1,.32,1);}
-body.js-anim .reveal.in{opacity:1;transform:none;filter:none;}
-
-@media(max-width:900px){
-  nav{padding:14px 20px;}
-  .nav-links a:not(.btn){display:none;}
-  .hero{padding:56px 20px 60px;}
-  .rating-sticker{position:relative;top:auto;right:auto;text-align:left;margin-bottom:26px;}
-  section{padding:64px 20px;}
-  .grid-rayons{grid-template-columns:1fr;gap:0;}
-  .menu-wrap{grid-template-columns:1fr;gap:36px;}
-  .reviews{grid-template-columns:1fr;gap:34px;}
-  .infos-grid{grid-template-columns:1fr;gap:34px;}
-  .kimchi-banner{margin:0 20px;min-height:44vh;}
-}
-@media(max-width:640px){
-  nav{padding:12px 16px;gap:8px;}
-  .logo .latin{font-size:19px;} .logo .hangul{display:none;} .sub-brand{display:none;}
-  .btn{padding:9px 15px;font-size:10.5px;letter-spacing:.1em;}
-  .lang-switch{gap:9px;} .lang-switch button{font-size:10px;}
-}
-
-/* ---- hero photo ---- */
-.hero.has-ph{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);
-  gap:5vw;align-items:center;}
-.hero-copy{display:flex;flex-direction:column;align-items:flex-start;}
-.hero-copy .rating-sticker{position:static;text-align:left;margin:0 0 24px;}
-.hero.has-ph .rating-sticker{position:static;text-align:left;}
-
-.hero-ph{position:relative;overflow:hidden;aspect-ratio:4/4.4;}
-.hero-ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);
-  transition:transform 1.4s cubic-bezier(.23,1,.32,1);}
-.hero-ph:hover img{transform:scale(1);}
-.hero:has(.ardoise).has-ph{grid-template-columns:minmax(0,1fr) minmax(0,.62fr) minmax(280px,.72fr);}
-
-/* ---- hover-swap photo stages ---- */
-.ray-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:5vw;align-items:start;}
-.ray-wrap .grid-rayons{display:block;}
-.ray-stage,.menu-stage{position:sticky;top:110px;overflow:hidden;aspect-ratio:4/4.6;background:var(--paper-2);}
-.menu-stage{position:relative;top:auto;aspect-ratio:4/3.4;margin-bottom:22px;overflow:hidden;}
-.ray-stage img,.menu-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  opacity:0;transform:scale(1.06);
-  transition:opacity .9s cubic-bezier(.23,1,.32,1),transform 1.3s cubic-bezier(.23,1,.32,1);}
-.ray-stage img.on,.menu-stage img.on{opacity:1;transform:scale(1);}
-.rayon{cursor:default;}
-.rayon.on h3,.menu-item.on .name{color:var(--red);}
-.menu-item{cursor:default;}
-
-/* ---- progress rail ---- */
-.rail{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:90;
-  display:flex;flex-direction:column;gap:9px;mix-blend-mode:difference;}
-.rail span{height:2px;width:13px;border-radius:99px;background:rgba(255,255,255,.4);
-  transition:all .5s cubic-bezier(.23,1,.32,1);}
-.rail span.on{width:26px;background:#fff;}
-@media(max-width:1100px){.rail{display:none;}}
-
-@media(max-width:900px){
-  .hero.has-ph,.hero:has(.ardoise).has-ph{grid-template-columns:1fr;gap:34px;}
-  .ray-wrap{grid-template-columns:1fr;gap:30px;}
-  .ray-stage{position:relative;top:auto;order:-1;aspect-ratio:4/3;}
-  .menu-stage{position:relative;top:auto;}
-}
-
-/* ================= Korean typography ================= */
-/* Fraunces / Bodoni carry no Hangul — give Korean its own faces and metrics. */
-html[lang="ko"] body{font-family:'Noto Sans KR','Archivo',system-ui,sans-serif;}
-html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4,
-html[lang="ko"] .name,html[lang="ko"] .a-head,html[lang="ko"] .addr,
-html[lang="ko"] .price,html[lang="ko"] .dish .p,
-html[lang="ko"] .review p,
-html[lang="ko"] .cov-dek,html[lang="ko"] .pl-h,html[lang="ko"] .pgf.verso blockquote,
-html[lang="ko"] .sel-names button,html[lang="ko"] .breath-label,
-html[lang="ko"] .hand-note,html[lang="ko"] .suite .s-n,
-html[lang="ko"] .section-head h2,html[lang="ko"] .info-card h3{
-  font-family:'Noto Serif KR',serif;font-style:normal;font-weight:600;
-}
-/* Latin tracking is wrong for Hangul — it breaks words apart */
-html[lang="ko"] .kicker,html[lang="ko"] .over,html[lang="ko"] .btn,
-html[lang="ko"] .addr-pill,
-html[lang="ko"] .foot-links a,html[lang="ko"] .nav-links a,html[lang="ko"] .review .who,
-html[lang="ko"] .service-chips span,html[lang="ko"] .a-note a,html[lang="ko"] .info-card .meta,
-html[lang="ko"] .page-link,html[lang="ko"] .go,html[lang="ko"] .lgo,html[lang="ko"] .suite .s-t,
-html[lang="ko"] .tag,html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .corner,
-html[lang="ko"] .sel-pane .fmt,html[lang="ko"] .sel-pane .dur,html[lang="ko"] .pl-top,
-html[lang="ko"] .cov-top,html[lang="ko"] .edge-cap,html[lang="ko"] .mag-hint,
-html[lang="ko"] .spread-hint,html[lang="ko"] .som-head,html[lang="ko"] .sommaire a,
-html[lang="ko"] .breath-count,html[lang="ko"] .rail-head .hint,html[lang="ko"] .cname,
-html[lang="ko"] .ckr,html[lang="ko"] .lnum,html[lang="ko"] .card .cname{
-  letter-spacing:.01em;
-}
-html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3{letter-spacing:-.01em;line-height:1.28;}
-/* the wordmark keeps its own face and metrics in every language */
-html[lang="ko"] .masthead,html[lang="ko"] .cov-mast,html[lang="ko"] .foot-logo,
-html[lang="ko"] .logo .latin,html[lang="ko"] .wordmark{
-  font-family:var(--display,'Fraunces',serif);line-height:.9;letter-spacing:-.018em;
-}
-/* the Hangul gloss is redundant once the page is already Korean */
-html[lang="ko"] .kr,html[lang="ko"] .dish .n small,html[lang="ko"] .hangul-big,
-html[lang="ko"] .rayon .kr,html[lang="ko"] .menu-item .kr,html[lang="ko"] .ckr{display:none;}
-html[lang="ko"] .lkr,html[lang="ko"] .kr-sub,html[lang="ko"] .romaja,
-html[lang="ko"] .bubble .romaja,html[lang="ko"] .cov-top,html[lang="ko"] .lnum{}
-html[lang="ko"] .lkr,html[lang="ko"] .kr-sub{display:none;}
-/* Hangul has no true italic — stop the browser from skewing it */
-html[lang="ko"]{font-synthesis-style:none;font-synthesis:weight small-caps;}
-html[lang="ko"] .hand-note,html[lang="ko"] .review p,html[lang="ko"] .addr,
-html[lang="ko"] .a-head,html[lang="ko"] .pl-h,html[lang="ko"] .cov-dek,
-html[lang="ko"] .pgf.verso blockquote,html[lang="ko"] .sel-pane .fmt,
-html[lang="ko"] .breath-label,html[lang="ko"] .story-text h2 .accent,
-html[lang="ko"] .section-head h2 i,html[lang="ko"] h2 i,html[lang="ko"] h3 i{
-  font-style:normal;
-}
-/* ---- cross-sell band ---- */
-.cross{
-  max-width:1320px;margin:0 auto;padding:76px 40px 96px;
-  border-top:1px solid var(--ink);
-  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:4vw;align-items:end;
-}
-.cross>*:first-child{grid-column:1;}
-.cross .btn{grid-column:1;justify-self:start;margin-top:28px;}
-.cross p{grid-column:2;grid-row:1;align-self:end;margin-top:0;}
-.cross h2{font-family:'Fraunces',serif;font-weight:560;
-  font-size:clamp(27px,3vw,42px);line-height:1.1;letter-spacing:-.01em;max-width:22ch;}
-.cross p{margin-top:16px;color:var(--ink-60);font-size:15.5px;max-width:52ch;}
-.cross .btn{white-space:nowrap;}
-@media(max-width:900px){
-  .cross{grid-template-columns:1fr;gap:18px;padding:60px 20px 76px;align-items:start;}
-  .cross p{grid-column:1;grid-row:auto;}
-  .cross .btn{margin-top:8px;}
-}
-/* ================= jangdokdae hero ================= */
-.hero.jangdok{
-  position:relative;max-width:none;margin:0;padding:0;
-  min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--ink);
-}
-.jd-ph{position:absolute;inset:0;}
-.jd-ph img{width:100%;height:100%;object-fit:cover;
-  transform:scale(1.08);filter:saturate(.82) contrast(1.04);
-  transition:transform .9s cubic-bezier(.23,1,.32,1);}
-.jd-veil{position:absolute;inset:0;
-  background:
-    linear-gradient(100deg,rgba(22,19,15,.9) 0%,rgba(22,19,15,.68) 44%,rgba(22,19,15,.42) 100%),
-    linear-gradient(180deg,rgba(22,19,15,.66) 0%,transparent 34%,rgba(22,19,15,.86) 100%);}
-.jd-vert{
-  position:absolute;right:26px;top:0;bottom:0;z-index:3;
-  writing-mode:vertical-rl;display:flex;align-items:center;
-  font-size:11px;letter-spacing:.34em;color:rgba(247,244,239,.62);
-}
-.jd-inner{
-  position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;
-  padding:0 40px clamp(46px,5vw,78px);
-  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);
-  gap:5vw;align-items:end;color:var(--paper);
-}
-.jd-copy .kicker{color:var(--red);}
-.jd-copy .kicker .dot{background:var(--red);}
-.hero.jangdok h1{
-  font-family:'Fraunces',serif;font-weight:560;color:var(--paper);
-  font-size:clamp(46px,6.4vw,104px);line-height:.98;letter-spacing:-.02em;
-}
-.hero.jangdok h1 .accent{color:var(--red);font-style:italic;}
-.jd-line{
-  margin-top:22px;font-family:'Fraunces',serif;font-style:italic;font-weight:420;
-  font-size:clamp(17px,1.9vw,25px);line-height:1.45;max-width:26ch;color:rgba(247,244,239,.94);
-}
-.hero.jangdok .sub{margin-top:14px;font-size:15px;color:rgba(247,244,239,.7);max-width:44ch;}
-.hero.jangdok .cta-row{margin-top:30px;align-items:center;}
-.hero.jangdok .cta-row .btn{background:var(--paper);color:var(--ink);border-color:var(--paper);}
-.hero.jangdok .cta-row .btn:after{background:var(--ink);color:var(--paper);}
-.hero.jangdok .cta-row .btn:hover{background:var(--red);border-color:var(--red);color:var(--paper);}
-.hero.jangdok .cta-row .btn:hover:after{background:var(--paper);color:var(--red);}
-.hero.jangdok .addr-pill{margin-top:0;color:rgba(247,244,239,.62);border-color:rgba(247,244,239,.28);}
-/* the signatures hang from a cord, the way a jangdokdae labels its jars */
-.hero.jangdok .ardoise{
-  background:none;backdrop-filter:none;box-shadow:none;border:none;
-  padding:2px 0 0 14px;max-width:424px;justify-self:end;position:relative;
-}
-.hero.jangdok .ardoise:before{           /* the cord running down the jars */
-  content:"";position:absolute;left:39px;top:44px;bottom:54px;width:2px;
-  background:linear-gradient(180deg,rgba(226,209,178,0),rgba(226,209,178,.6) 9%,
-             rgba(226,209,178,.6) 91%,rgba(226,209,178,0));
-}
-.hero.jangdok .a-head{
-  font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;
-  color:rgba(247,244,239,.8);letter-spacing:.02em;
-  margin:0 0 5px;padding:0;border:none;max-width:none;
-}
-.hero.jangdok .a-head-kr{
-  font-family:'Noto Serif KR',serif;font-size:11px;font-weight:500;letter-spacing:.3em;
-  color:rgba(247,244,239,.46);margin:0 0 15px;
-}
-.hero.jangdok .dish{                     /* one hanji tag */
-  position:relative;display:flex;justify-content:space-between;align-items:center;gap:13px;
-  /* hanji: mulberry fibres suspended in an unevenly formed sheet, with bark flecks */
-  background-color:rgba(238,227,203,.95);
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='96'%3E%3Cg stroke='%23A07C46' fill='none' stroke-linecap='round'%3E%3Cpath d='M395 95 Q404 75 413 56' stroke-width='0.56' opacity='0.1'/%3E%3Cpath d='M71 42 Q76 39 89 40' stroke-width='0.62' opacity='0.20'/%3E%3Cpath d='M213 72 Q219 62 221 51' stroke-width='0.6' opacity='0.23'/%3E%3Cpath d='M415 34 Q433 28 450 21' stroke-width='0.49' opacity='0.1'/%3E%3Cpath d='M196 71 Q212 67 226 66' stroke-width='0.44' opacity='0.19'/%3E%3Cpath d='M347 16 Q346 9 353 4' stroke-width='0.57' opacity='0.26'/%3E%3Cpath d='M132 34 Q143 30 150 24' stroke-width='0.47' opacity='0.1'/%3E%3Cpath d='M332 70 Q348 59 363 43' stroke-width='0.58' opacity='0.28'/%3E%3Cpath d='M60 97 Q62 98 72 95' stroke-width='0.61' opacity='0.2'/%3E%3Cpath d='M342 95 Q347 108 349 123' stroke-width='0.71' opacity='0.19'/%3E%3Cpath d='M71 4 Q84 -3 90 -16' stroke-width='0.45' opacity='0.1'/%3E%3Cpath d='M220 14 Q228 24 239 36' stroke-width='0.69' opacity='0.20'/%3E%3Cpath d='M138 89 Q148 106 156 123' stroke-width='0.62' opacity='0.26'/%3E%3Cpath d='M269 21 Q281 19 289 16' stroke-width='0.57' opacity='0.26'/%3E%3Cpath d='M34 62 Q47 62 56 65' stroke-width='0.7' opacity='0.1'/%3E%3Cpath d='M234 52 Q243 54 253 55' stroke-width='0.62' opacity='0.13'/%3E%3Cpath d='M153 78 Q154 85 161 90' stroke-width='0.44' opacity='0.20'/%3E%3Cpath d='M173 5 Q192 4 208 3' stroke-width='0.57' opacity='0.22'/%3E%3Cpath d='M118 89 Q124 95 124 101' stroke-width='0.64' opacity='0.23'/%3E%3Cpath d='M253 26 Q262 25 273 18' stroke-width='0.5' opacity='0.19'/%3E%3Cpath d='M171 81 Q183 82 198 85' stroke-width='0.41' opacity='0.16'/%3E%3Cpath d='M103 85 Q109 70 116 60' stroke-width='0.57' opacity='0.20'/%3E%3Cpath d='M365 23 Q385 11 397 -3' stroke-width='0.39' opacity='0.26'/%3E%3Cpath d='M108 34 Q109 41 117 46' stroke-width='0.51' opacity='0.23'/%3E%3Cpath d='M116 4 Q132 16 155 22' stroke-width='0.69' opacity='0.16'/%3E%3Cpath d='M-6 60 Q0 65 7 68' stroke-width='0.57' opacity='0.25'/%3E%3Cpath d='M349 59 Q360 49 377 44' stroke-width='0.67' opacity='0.16'/%3E%3Cpath d='M175 29 Q194 30 207 32' stroke-width='0.5' opacity='0.23'/%3E%3Cpath d='M315 92 Q324 104 326 111' stroke-width='0.42' opacity='0.19'/%3E%3Cpath d='M328 82 Q335 82 339 79' stroke-width='0.56' opacity='0.16'/%3E%3Cpath d='M166 2 Q179 1 187 -2' stroke-width='0.52' opacity='0.17'/%3E%3Cpath d='M125 66 Q136 56 142 46' stroke-width='0.71' opacity='0.22'/%3E%3Cpath d='M261 40 Q272 56 275 69' stroke-width='0.53' opacity='0.1'/%3E%3Cpath d='M357 37 Q358 25 366 15' stroke-width='0.71' opacity='0.25'/%3E%3Cpath d='M299 66 Q306 55 312 50' stroke-width='0.58' opacity='0.22'/%3E%3Cpath d='M226 9 Q229 9 238 8' stroke-width='0.49' opacity='0.23'/%3E%3Cpath d='M318 59 Q326 51 337 38' stroke-width='0.47' opacity='0.17'/%3E%3Cpath d='M204 53 Q224 40 237 32' stroke-width='0.65' opacity='0.22'/%3E%3Cpath d='M384 12 Q392 26 396 45' stroke-width='0.69' opacity='0.2'/%3E%3Cpath d='M35 82 Q40 78 40 70' stroke-width='0.71' opacity='0.23'/%3E%3Cpath d='M212 24 Q217 41 219 54' stroke-width='0.45' opacity='0.25'/%3E%3Cpath d='M309 3 Q320 -15 335 -27' stroke-width='0.61' opacity='0.16'/%3E%3Cpath d='M417 -4 Q433 9 447 21' stroke-width='0.65' opacity='0.23'/%3E%3Cpath d='M48 79 Q59 84 70 84' stroke-width='0.52' opacity='0.26'/%3E%3Cpath d='M22 30 Q41 33 55 40' stroke-width='0.65' opacity='0.26'/%3E%3Cpath d='M49 11 Q54 25 58 40' stroke-width='0.55' opacity='0.26'/%3E%3Cpath d='M217 52 Q225 68 229 81' stroke-width='0.47' opacity='0.23'/%3E%3Cpath d='M350 71 Q356 91 369 111' stroke-width='0.5' opacity='0.16'/%3E%3Cpath d='M207 98 Q214 81 225 65' stroke-width='0.68' opacity='0.20'/%3E%3Cpath d='M57 53 Q60 47 62 35' stroke-width='0.64' opacity='0.25'/%3E%3Cpath d='M53 54 Q66 62 79 76' stroke-width='0.7' opacity='0.17'/%3E%3Cpath d='M312 44 Q326 36 347 28' stroke-width='0.54' opacity='0.26'/%3E%3Cpath d='M164 65 Q171 75 183 79' stroke-width='0.7' opacity='0.13'/%3E%3Cpath d='M365 77 Q376 63 382 46' stroke-width='0.59' opacity='0.2'/%3E%3Cpath d='M405 62 Q415 44 429 26' stroke-width='0.56' opacity='0.28'/%3E%3Cpath d='M267 61 Q272 77 278 91' stroke-width='0.58' opacity='0.19'/%3E%3Cpath d='M136 12 Q139 7 145 7' stroke-width='0.55' opacity='0.19'/%3E%3Cpath d='M395 77 Q403 89 415 105' stroke-width='0.59' opacity='0.17'/%3E%3Cpath d='M421 40 Q434 28 454 13' stroke-width='0.62' opacity='0.17'/%3E%3Cpath d='M396 97 Q404 112 405 131' stroke-width='0.63' opacity='0.25'/%3E%3Cpath d='M309 31 Q327 32 338 38' stroke-width='0.51' opacity='0.17'/%3E%3Cpath d='M336 8 Q336 2 342 -2' stroke-width='0.67' opacity='0.19'/%3E%3Cpath d='M31 66 Q43 68 52 70' stroke-width='0.63' opacity='0.23'/%3E%3Cpath d='M362 75 Q377 89 396 102' stroke-width='0.64' opacity='0.26'/%3E%3Cpath d='M309 84 Q330 83 348 88' stroke-width='0.54' opacity='0.25'/%3E%3Cpath d='M390 84 Q402 77 409 67' stroke-width='0.45' opacity='0.13'/%3E%3Cpath d='M374 56 Q376 64 377 70' stroke-width='0.65' opacity='0.17'/%3E%3Cpath d='M217 14 Q235 9 248 8' stroke-width='0.45' opacity='0.19'/%3E%3Cpath d='M-13 38 Q-4 59 11 76' stroke-width='0.46' opacity='0.17'/%3E%3Cpath d='M268 27 Q269 17 275 11' stroke-width='0.69' opacity='0.13'/%3E%3Cpath d='M225 18 Q228 2 233 -17' stroke-width='0.39' opacity='0.20'/%3E%3Cpath d='M130 46 Q140 30 144 17' stroke-width='0.64' opacity='0.1'/%3E%3Cpath d='M27 16 Q30 10 38 8' stroke-width='0.67' opacity='0.22'/%3E%3Cpath d='M205 49 Q208 31 218 12' stroke-width='0.38' opacity='0.22'/%3E%3Cpath d='M262 84 Q291 84 322 82' stroke-width='0.46' opacity='0.17'/%3E%3Cpath d='M409 53 Q471 63 528 70' stroke-width='0.62' opacity='0.12'/%3E%3Cpath d='M337 84 Q402 80 460 74' stroke-width='0.56' opacity='0.17'/%3E%3Cpath d='M85 21 Q158 7 224 -5' stroke-width='0.65' opacity='0.16'/%3E%3Cpath d='M385 19 Q417 19 453 19' stroke-width='0.49' opacity='0.12'/%3E%3Cpath d='M237 1 Q276 1 321 -3' stroke-width='0.77' opacity='0.10'/%3E%3Cpath d='M343 14 Q406 5 466 -9' stroke-width='0.54' opacity='0.12'/%3E%3Cpath d='M136 85 Q204 78 265 67' stroke-width='0.79' opacity='0.19'/%3E%3Cpath d='M56 72 Q87 66 118 64' stroke-width='0.53' opacity='0.13'/%3E%3Cellipse cx='193' cy='83' rx='1.5' ry='0.7' fill='%23917347' stroke='none' opacity='0.33'/%3E%3Cellipse cx='83' cy='73' rx='1.7' ry='0.8' fill='%23917347' stroke='none' opacity='0.28'/%3E%3Cellipse cx='227' cy='12' rx='1.4' ry='0.8' fill='%23917347' stroke='none' opacity='0.36'/%3E%3Cellipse cx='372' cy='34' rx='1.7' ry='0.8' fill='%23917347' stroke='none' opacity='0.38'/%3E%3Cellipse cx='284' cy='34' rx='1.8' ry='0.5' fill='%23917347' stroke='none' opacity='0.30'/%3E%3Cellipse cx='193' cy='80' rx='1.5' ry='0.6' fill='%23917347' stroke='none' opacity='0.23'/%3E%3Cellipse cx='21' cy='69' rx='1.7' ry='0.6' fill='%23917347' stroke='none' opacity='0.25'/%3E%3Cellipse cx='233' cy='22' rx='1.4' ry='0.6' fill='%23917347' stroke='none' opacity='0.26'/%3E%3Cellipse cx='288' cy='27' rx='1.2' ry='0.7' fill='%23917347' stroke='none' opacity='0.36'/%3E%3C/g%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='3' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='140' filter='url(%23m)' opacity='0.1'/%3E%3C/svg%3E"),
-    radial-gradient(130% 105% at 12% 16%,rgba(250,243,227,.8),rgba(233,219,190,.42) 56%,rgba(208,188,151,.76) 100%);
-  backdrop-filter:blur(3px) saturate(.86);   /* hanji lets a little of the jars through */
-  border:none;padding:13px 15px 14px 40px;margin:0 0 13px;
-  clip-path:polygon(15px 0,32% 1.6px,64% .4px,100% 2px,   /* hand-cut, so no edge is true */
-            99.3% 50%,100% 99%,64% 100%,32% 98.4%,15px 99.4%,0 50%);
-  transform-origin:26px 50%;                                    /* it swings on its hole */
-  filter:drop-shadow(0 12px 20px rgba(10,7,4,.5));
-  transition:transform .55s cubic-bezier(.23,1,.32,1),filter .55s ease;
-}
-.hero.jangdok .dish:nth-child(3){transform:rotate(-1.5deg);}
-.hero.jangdok .dish:nth-child(4){transform:rotate(1.1deg);
-  clip-path:polygon(15px 1.4px,36% 0,68% 1.8px,100% .5px,99.4% 50%,100% 98.6%,68% 100%,36% 98.8%,15px 100%,0 50%);}
-.hero.jangdok .dish:nth-child(5){transform:rotate(-.7deg);
-  clip-path:polygon(15px .5px,29% 1.8px,58% 0,100% 1.4px,99.2% 50%,100% 99.4%,58% 98.5%,29% 100%,15px 98.9%,0 50%);}
-.hero.jangdok .dish:before{              /* the hole, with the twine looped through it */
-  content:"";position:absolute;left:23px;top:50%;transform:translateY(-50%);
-  width:7px;height:7px;border-radius:50%;background:#241D14;
-  box-shadow:inset 0 1px 1px rgba(0,0,0,.6),0 0 0 2.5px rgba(226,209,178,.5);
-}
-/* the jangdok rules outrank the ko block, so restate the hide here */
-html[lang="ko"] .hero.jangdok .dish .n small{display:none;}
-.hero.jangdok .dish .seal{               /* the house mark, stamped in cinnabar */
-  flex:none;width:26px;height:26px;display:grid;place-items:center;
-  font-family:'Noto Serif KR',serif;font-style:normal;font-weight:700;font-size:13px;line-height:1;
-  color:#A93520;border:1.6px solid #A93520;border-radius:1px;letter-spacing:0;
-  transform:rotate(-6deg);opacity:.82;mix-blend-mode:multiply;
-}
-.hero.jangdok .dish:nth-child(4) .seal{transform:rotate(4deg);}
-.hero.jangdok .dish:nth-child(5) .seal{transform:rotate(-3deg);}
-.hero.jangdok .dish:hover{               /* a tag lifts and straightens when read */
-  transform:rotate(0deg);
-  filter:drop-shadow(0 20px 30px rgba(10,7,4,.58)) brightness(1.04);
-}
-.hero.jangdok .dish .n{
-  flex:1 1 auto;min-width:0;
-  font-family:'Fraunces',serif;font-weight:560;font-size:15.5px;color:var(--ink);line-height:1.22;
-}
-.hero.jangdok .dish .n small{
-  display:block;font-family:'Noto Sans KR',sans-serif;font-size:11.5px;letter-spacing:.02em;
-  color:rgba(26,22,19,.62);margin-top:4px;
-}
-.hero.jangdok .dish .p{
-  flex:none;min-width:74px;text-align:right;
-  font-family:'Fraunces',serif;font-weight:560;font-size:15px;color:var(--ink);
-  white-space:nowrap;font-variant-numeric:tabular-nums;
-}
-.hero.jangdok .a-note{margin-top:18px;}
-.hero.jangdok .ardoise .rating-sticker{
-  position:static;text-align:left;display:flex;align-items:baseline;gap:10px;margin-bottom:6px;
-}
-.hero.jangdok .ardoise .rating-sticker .score{font-size:19px;color:var(--paper);}
-.hero.jangdok .ardoise .rating-sticker .stars{margin:0;}
-.hero.jangdok .ardoise .rating-sticker .count{margin:0;color:rgba(247,244,239,.55);}
-@media(max-width:900px){
-  .hero.jangdok{min-height:auto;padding-top:96px;}
-  .jd-inner{grid-template-columns:1fr;gap:34px;padding:0 20px 56px;}
-  .jd-vert{display:none;}
+/* ---------- mobile ---------- */
+@media (max-width:640px){
+  .wrap{padding:0 20px;}
+  .hd{padding:16px 0;}
+  .hd-nav{gap:16px;font-size:12px;}
+  .hd-nav .nav-link{display:none;}
+  .hd-cta{display:none;}
+  .hero{min-height:88svh;}
+  .hero .wrap{padding-bottom:34px;}
+  .hero h1{font-size:clamp(58px,20vw,88px);}
+  .hero-line{margin-top:20px;font-size:16px;max-width:30ch;}
+  .hero-cta{margin-top:26px;gap:10px;}
+  .btn{padding:14px 22px;font-size:12px;}
+  .hero-foot{margin-top:28px;gap:4px 22px;font-size:12.5px;}
+  .sig{padding-top:64px;}
+  .sig-ph,.sig-txt{grid-column:1/13;}
+  .sig-txt{margin-top:22px;}
+  .sig-name{font-size:31px;}
+  .menu{padding-top:76px;}
+  .course{margin-bottom:36px;}
+  .dish .n{font-size:16.5px;}
+  .band{margin-top:76px;}
+  .band video,.band img{height:58vh;}
+  .band-cap{padding:0 20px;}
+  .time{padding-top:72px;}
+  .time-ph,.time-list{grid-column:1/13;}
+  .time-list{margin-top:26px;}
+  .time-row{grid-template-columns:4.4rem 1fr;gap:14px;padding:16px 0;}
+  .room{margin-top:72px;}
+  .room-txt{padding:22px 20px 0;}
+  .room-2{padding:0 20px;}
+  .room-2 figure{grid-column:1/10;}
+  .info{padding-top:72px;}
+  .info-cols{grid-template-columns:1fr;gap:26px;}
+  footer{margin-top:80px;padding-bottom:96px;}
+  .mob-cta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:var(--paper);border-top:1px solid var(--line);padding:8px 20px;
+    transform:translateY(102%);transition:transform .3s ease;}
+  .mob-cta.on{transform:none;}
+  .mob-cta a{display:block;text-align:center;background:var(--accent);color:#F6F3EC;
+    text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:11px;}
 }
 </style>
 </head>
 <body>
-<div class="rail" aria-hidden="true"></div>
 
-<!-- TICKER -->
-
-<!-- NAV -->
-<nav>
-  <a class="logo" href="#top">
-    <span class="latin">JOAYO</span>
-    <span class="sub-brand" data-i18n="brand_sub">Restaurant · 레스토랑</span>
-  </a>
-  <div class="nav-links">
-    <a href="#menu" data-i18n="nav_menu">La Carte</a>
-    <div class="lang-switch" role="group" aria-label="Language">
-      <button type="button" data-lang="fr">FR</button>
-      <button type="button" data-lang="en">EN</button>
-      <button type="button" data-lang="ko">한국어</button>
-    </div>
-    <a class="btn" href="tel:+33123456789" data-i18n="nav_book">Réserver</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header id="top" class="ghero" data-rail>
-  <canvas id="gTree" aria-hidden="true"></canvas>
-  <canvas id="gPetals" aria-hidden="true"></canvas>
-  <div class="g-veil" aria-hidden="true"></div>
-  <span class="jd-vert" data-i18n="jd_vert">장독대 — 시간이 맛이 되는 곳</span>
-  <div class="ghero-inner">
-    <div class="kicker gk"><span class="dot"></span> <span data-i18n="kicker">Midi &amp; soir — Paris 1er</span></div>
-    <h1><span data-i18n="hero_h1a">Joayo</span> <span class="accent" data-i18n="hero_h1b">Restaurant</span></h1>
-    <p class="g-line" data-i18n="jd_line">Ce que le temps a fait, on ne le presse pas. Kimchi, jang, bouillons — la patience d'abord.</p>
-    <div class="cta-row">
-      <a class="btn" href="#infos" data-i18n="cta_book">Réserver</a>
-      <a class="g-ghost" href="#menu"><span data-i18n="nav_menu">La Carte</span> ↓</a>
-    </div>
-    <span class="addr-pill g-pill" data-i18n="addr_pill">12 rue du Jour, Paris 1er</span>
+<header class="hd" id="hd">
+  <div class="wrap">
+    <a class="hd-logo" href="#top">
+      <span class="n">JOAYO</span>
+      <span class="k">좋아요</span>
+    </a>
+    <nav class="hd-nav">
+      <a class="nav-link" href="#carte" data-i18n="nav_menu">Carte</a>
+      <a class="nav-link" href="#infos" data-i18n="nav_info">Infos</a>
+      <span class="lang" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="ko">KO</button>
+      </span>
+      <a class="hd-cta" href="tel:+33123456789" data-i18n="cta_book">Réserver</a>
+    </nav>
   </div>
 </header>
 
-<!-- MENU -->
-<section id="menu" data-rail>
-  <div class="section-head reveal">
-    <div class="over" data-i18n="me_over">La carte · 메뉴</div>
-    <h2 data-i18n="me_h2">La carte</h2>
-  </div>
-  <div class="menu-wrap">
-    <div class="menu-list reveal">
-      <div class="course">
-        <p class="course-h" data-i18n="cat1">Riz</p>
-        <div class="menu-item signature" data-mi="0">
-          <div class="mi-head">
-            <span class="name" data-i18n="m1_name">Bibimbap au tartare de bœuf</span>
-            <span class="price">16,50 €</span>
-          </div>
-          <span class="kr">육회비빔밥</span>
-          <p class="desc" data-i18n="m1_desc">La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf</p>
-        </div>
-        <div class="menu-item" data-mi="1">
-          <div class="mi-head">
-            <span class="name" data-i18n="m2_name">Dolsot Bibimbap</span>
-            <span class="price">14,50 €</span>
-          </div>
-          <span class="kr">돌솥비빔밥</span>
-        </div>
-      </div>
+<main id="top">
 
-      <div class="course">
-        <p class="course-h" data-i18n="cat2">Grillades</p>
-        <div class="menu-item" data-mi="2">
-          <div class="mi-head">
-            <span class="name" data-i18n="m3_name">Bulgogi de porc</span>
-            <span class="price">15,00 €</span>
-          </div>
-          <span class="kr">제육불고기</span>
-        </div>
-        <div class="menu-item" data-mi="5">
-          <div class="mi-head">
-            <span class="name" data-i18n="m6_name">BBQ coréen</span>
-            <span class="price">19,50 €</span>
-          </div>
-          <span class="kr">바비큐</span>
-        </div>
-        <div class="menu-item" data-mi="4">
-          <div class="mi-head">
-            <span class="name" data-i18n="m5_name">Poulet frit coréen</span>
-            <span class="price">16,00 €</span>
-          </div>
-          <span class="kr">치킨</span>
-        </div>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-ph">
+      <img src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=2000"
+           srcset="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=900 900w,
+                   https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1400 1400w,
+                   https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=2000 2000w"
+           sizes="100vw" width="2000" height="1333" fetchpriority="high" decoding="async"
+           alt="Table dressée : gril au centre, viande, banchan et bols de riz.">
+    </div>
+    <div class="wrap">
+      <h1 class="rise"><span class="kr">좋아요</span>JOAYO</h1>
+      <p class="hero-line rise" data-i18n="hero_line">Bibimbap, jjigae, porc grillé, poulet frit. Du riz chaud et des banchan au milieu de la table.</p>
+      <div class="hero-cta rise">
+        <a class="btn btn-p" href="tel:+33123456789" data-i18n="cta_book">Réserver</a>
+        <a class="btn btn-s" href="#carte" data-i18n="cta_menu">La carte</a>
       </div>
-
-      <div class="course">
-        <p class="course-h" data-i18n="cat3">Nouilles &amp; ragoûts</p>
-        <div class="menu-item" data-mi="3">
-          <div class="mi-head">
-            <span class="name" data-i18n="m4_name">Japchae</span>
-            <span class="price">14,00 €</span>
-          </div>
-          <span class="kr">잡채</span>
-        </div>
-        <div class="menu-item" data-mi="6">
-          <div class="mi-head">
-            <span class="name" data-i18n="m7_name">Kimchi Jjigae</span>
-            <span class="price">13,50 €</span>
-          </div>
-          <span class="kr">김치찌개</span>
-        </div>
-        <div class="menu-item" data-mi="7">
-          <div class="mi-head">
-            <span class="name" data-i18n="m8_name">Mandu</span>
-            <span class="price">8,50 €</span>
-          </div>
-          <span class="kr">만두</span>
-        </div>
-      </div>
-
-      <p class="menu-note" data-i18n="menu_note">Carte indicative — retrouvez la carte complète au restaurant.</p>
-      <div class="service-chips">
-        <span data-i18n="sv1">Menu végétarien</span>
-        <span data-i18n="sv2">Réservation conseillée</span>
-        <span data-i18n="sv3">20 — 30 € / personne</span>
-        <span data-i18n="sv5">Déjeuner jusqu'à 15h00</span>
+      <div class="hero-foot">
+        <span data-i18n="h_addr">12 rue du Jour, Paris 1er</span>
+        <span data-i18n="h_hours">Midi 11h30–15h00 · Soir 18h30–22h00</span>
       </div>
     </div>
-    <aside class="resto-side reveal">
-      <div class="menu-stage" aria-hidden="true">
-        <img class="on" data-mp="0" src="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="1" src="https://images.pexels.com/photos/20036115/pexels-photo-20036115.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="2" src="https://images.pexels.com/photos/1109024/pexels-photo-1109024.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="3" src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="4" src="https://images.pexels.com/photos/2866306/pexels-photo-2866306.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="5" src="https://images.pexels.com/photos/5785545/pexels-photo-5785545.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="6" src="https://images.pexels.com/photos/38141845/pexels-photo-38141845.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
-        <img data-mp="7" src="https://images.pexels.com/photos/32196396/pexels-photo-32196396/free-photo-of-delicious-korean-dumplings-in-seoul-steamer.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="">
+  </section>
+
+  <!-- SIGNATURE -->
+  <section class="sig">
+    <div class="wrap grid12">
+      <figure class="sig-ph ph">
+        <img src="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=1200"
+             srcset="https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=700 700w,
+                     https://images.pexels.com/photos/7491952/pexels-photo-7491952.jpeg?auto=compress&cs=tinysrgb&w=1200 1200w"
+             sizes="(max-width:640px) 100vw, 50vw" width="1200" height="1500" loading="lazy" decoding="async"
+             alt="Bibimbap dans un bol de pierre, jaune d'œuf au centre, banchan autour.">
+      </figure>
+      <div class="sig-txt">
+        <p class="eyebrow" data-i18n="sig_lbl">Signature</p>
+        <p class="sig-name">육회비빔밥</p>
+        <p class="sig-lat">Yukhoe bibimbap</p>
+        <p class="sig-desc" data-i18n="sig_desc">Riz chaud, légumes, bœuf cru assaisonné, jaune d'œuf. On mélange tant que la pierre chauffe encore.</p>
+        <p class="sig-price">16,50 €</p>
       </div>
-      <div class="resto-card">
-        <h3 data-i18n="rc_h3">Infos & réservation</h3>
-        <p data-i18n="rc_p">La salle est petite — réservez.</p>
-        <div class="hours">
-          <div><span data-i18n="h_lunch">Midi</span><span>11h30 — 15h00</span></div>
-          <div><span data-i18n="h_dinner">Soir</span><span>18h30 — 22h00</span></div>
-          <div><span data-i18n="h_note" style="opacity:.75;">Horaires du jour sur Google Maps</span></div>
+    </div>
+  </section>
+
+  <!-- CARTE -->
+  <section class="menu" id="carte">
+    <div class="wrap grid12">
+      <div class="menu-head">
+        <h2 data-i18n="menu_h">La carte</h2>
+        <p data-i18n="menu_p">Elle change peu. Ce qui change, c'est ce que le marché donne le matin.</p>
+      </div>
+      <div class="menu-body">
+
+        <div class="course">
+          <p class="course-h" data-i18n="c_riz">Riz</p>
+          <div class="dish">
+            <p class="n"><span data-i18n="m1">Bibimbap au bœuf cru</span><span class="k">육회비빔밥</span></p>
+            <p class="p">16,50</p>
+          </div>
+          <div class="dish">
+            <p class="n"><span data-i18n="m2">Dolsot bibimbap</span><span class="k">돌솥비빔밥</span></p>
+            <p class="p">14,50</p>
+          </div>
         </div>
-        <div class="addr" data-i18n="rc_addr">12 rue du Jour, 75001 Paris</div>
-        <a class="btn" href="#infos" data-i18n="rc_btn">Réserver</a>
+
+        <div class="course">
+          <p class="course-h" data-i18n="c_grill">Grillades</p>
+          <div class="dish">
+            <p class="n"><span data-i18n="m3">Porc mariné, sauté</span><span class="k">제육불고기</span></p>
+            <p class="p">15,00</p>
+          </div>
+          <div class="dish">
+            <p class="n"><span data-i18n="m4">Bœuf et porc au gril</span><span class="k">바비큐</span></p>
+            <p class="p">19,50</p>
+          </div>
+        </div>
+
+        <div class="course">
+          <p class="course-h" data-i18n="c_soupe">Soupes</p>
+          <div class="dish">
+            <p class="n"><span data-i18n="m5">Ragoût de kimchi, porc et tofu</span><span class="k">김치찌개</span></p>
+            <p class="p">13,50</p>
+          </div>
+        </div>
+
+        <div class="course">
+          <p class="course-h" data-i18n="c_nouille">Nouilles</p>
+          <div class="dish">
+            <p class="n"><span data-i18n="m6">Nouilles de patate douce sautées</span><span class="k">잡채</span></p>
+            <p class="p">14,00</p>
+          </div>
+        </div>
+
+        <div class="course">
+          <p class="course-h" data-i18n="c_partager">À partager</p>
+          <div class="dish">
+            <p class="n"><span data-i18n="m7">Poulet frit, deux fois</span><span class="k">치킨</span></p>
+            <p class="p">16,00</p>
+          </div>
+          <div class="dish">
+            <p class="n"><span data-i18n="m8">Raviolis, vapeur ou grillés</span><span class="k">만두</span></p>
+            <p class="p">8,50</p>
+          </div>
+        </div>
+
+        <p class="menu-note" data-i18n="menu_note">Banchan compris. Menu végétarien sur demande.</p>
       </div>
-    </aside>
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- LE TEMPS — the claim in the hero, proven in numbers -->
-<section class="temps" data-rail>
-  <div class="section-head reveal">
-    <div class="over" data-i18n="tp_over">Le temps · 시간</div>
-    <h2 data-i18n="tp_h2">Ce qui prend du temps, chez nous</h2>
+  <!-- BAND -->
+  <div class="band">
+    <video autoplay muted loop playsinline preload="none" poster="joayo-video/salle-poster.jpg"
+           aria-label="Viande sur le gril au milieu de la table.">
+      <source src="joayo-video/salle.mp4" type="video/mp4">
+    </video>
+    <p class="band-cap" data-i18n="band_cap">Le gril chauffe au milieu. Le reste arrive autour.</p>
   </div>
-  <div class="temps-grid">
-    <div class="temps-item reveal">
-      <span class="tp-n">3</span><span class="tp-u" data-i18n="tp_u1">ans</span>
-      <p class="tp-l" data-i18n="tp_l1">Le jang, fermenté avant d'entrer en cuisine</p>
-    </div>
-    <div class="temps-item reveal">
-      <span class="tp-n">6</span><span class="tp-u" data-i18n="tp_u2">mois</span>
-      <p class="tp-l" data-i18n="tp_l2">Le kimchi d'hiver, mis en jarre chaque automne</p>
-    </div>
-    <div class="temps-item reveal">
-      <span class="tp-n">12</span><span class="tp-u" data-i18n="tp_u3">heures</span>
-      <p class="tp-l" data-i18n="tp_l3">Le bouillon, lancé la veille pour le service du midi</p>
-    </div>
-  </div>
-</section>
 
-<!-- LA SALLE -->
-<section class="salle" data-rail>
-  <div class="salle-inner">
-    <figure class="salle-ph reveal">
-      <video autoplay muted loop playsinline preload="metadata" poster="joayo-video/salle-poster.jpg" aria-label="">
-        <source src="joayo-video/salle.mp4" type="video/mp4">
-      </video>
+  <!-- TEMPS -->
+  <section class="time">
+    <div class="wrap grid12">
+      <figure class="time-ph ph">
+        <img src="https://images.pexels.com/photos/34416819/pexels-photo-34416819.jpeg?auto=compress&cs=tinysrgb&w=1200"
+             srcset="https://images.pexels.com/photos/34416819/pexels-photo-34416819.jpeg?auto=compress&cs=tinysrgb&w=700 700w,
+                     https://images.pexels.com/photos/34416819/pexels-photo-34416819.jpeg?auto=compress&cs=tinysrgb&w=1200 1200w"
+             sizes="(max-width:640px) 100vw, 40vw" width="1200" height="800" loading="lazy" decoding="async"
+             alt="Jarres de fermentation alignées contre un mur.">
+      </figure>
+      <dl class="time-list">
+        <div class="time-row">
+          <dt>3 <span data-i18n="t_y">ans</span></dt>
+          <dd data-i18n="t_1"><b>Jang</b> — la pâte de soja qu'on utilise en cuisine.</dd>
+        </div>
+        <div class="time-row">
+          <dt>6 <span data-i18n="t_m">mois</span></dt>
+          <dd data-i18n="t_2"><b>Kimchi d'hiver</b> — mis en jarre chaque automne.</dd>
+        </div>
+        <div class="time-row">
+          <dt>12 <span data-i18n="t_h">h</span></dt>
+          <dd data-i18n="t_3"><b>Bouillon</b> — lancé la veille pour le service du midi.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- SALLE -->
+  <section class="room">
+    <div class="room-txt">
+      <h2 data-i18n="room_h">La salle</h2>
+      <p data-i18n="room_p">Petite salle, tables serrées. Les banchan arrivent avant le plat. On repart en ayant parlé fort.</p>
+    </div>
+    <figure class="room-ph ph">
+      <img src="https://images.pexels.com/photos/31175427/pexels-photo-31175427/free-photo-of-cozy-rustic-restaurant-interior-with-warm-lighting.jpeg?auto=compress&cs=tinysrgb&w=1600"
+           srcset="https://images.pexels.com/photos/31175427/pexels-photo-31175427/free-photo-of-cozy-rustic-restaurant-interior-with-warm-lighting.jpeg?auto=compress&cs=tinysrgb&w=900 900w,
+                   https://images.pexels.com/photos/31175427/pexels-photo-31175427/free-photo-of-cozy-rustic-restaurant-interior-with-warm-lighting.jpeg?auto=compress&cs=tinysrgb&w=1600 1600w"
+           sizes="(max-width:1024px) 100vw, 68vw" width="1600" height="1067" loading="lazy" decoding="async"
+           alt="Salle : banquette, tables en bois, lumière basse.">
     </figure>
-    <div class="salle-copy reveal">
-      <div class="over" data-i18n="am_over">La salle · 홀</div>
-      <h2 data-i18n="am_h2">La salle</h2>
-      <p data-i18n="am_p">Le gril au milieu, les banchan autour, l'odeur du feu dans la salle.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- AVIS -->
-
-<!-- INFOS -->
-<section id="infos" data-rail>
-  <div class="section-head reveal">
-    <div class="over" data-i18n="in_over">Infos pratiques · 오시는 길</div>
-    <h2 data-i18n="in_h2">Venir dîner chez le Joayo</h2>
+  <div class="room-2">
+    <figure class="ph">
+      <img src="https://images.pexels.com/photos/6919802/pexels-photo-6919802.jpeg?auto=compress&cs=tinysrgb&w=900"
+           sizes="(max-width:640px) 80vw, 34vw" width="900" height="1125" loading="lazy" decoding="async"
+           alt="Petites assiettes de banchan vues du dessus.">
+      <figcaption class="kr">반찬</figcaption>
+    </figure>
   </div>
-  <div class="infos-grid">
-    <div class="info-card reveal">
-      <h3 data-i18n="ic1_h3">Adresse</h3>
-      <p data-i18n-html="ic1_p">12 rue du Jour<br>75001 Paris</p>
-      <small><a href="#" target="_blank" rel="noopener" data-i18n="maps_link">Ouvrir dans Google Maps ↗</a></small>
-    </div>
-    <div class="info-card reveal">
-      <h3 data-i18n="ic2_h3">Horaires</h3>
-      <p data-i18n-html="ic2_p">Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00</p>
-      <small data-i18n="ic2_small">Horaires du jour sur Google Maps.</small>
-    </div>
-    <div class="info-card reveal">
-      <h3 data-i18n="ic3_h3">Y aller</h3>
-      <p data-i18n-html="ic3_p">Métro Louvre — Rivoli (ligne 1)<br>Les Halles (RER A)</p>
-      <small data-i18n="ic3_small">À cinq minutes du Louvre à pied.</small>
-    </div>
-    <div class="info-card reveal">
-      <h3 data-i18n="ic4_h3">Réservation</h3>
-      <p data-i18n="ic4_p">Par téléphone ou sur place</p>
-      <small data-i18n="ic4_small">Réservation conseillée le soir et le week-end.</small>
-    </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
+  <!-- INFOS -->
+  <section class="info" id="infos">
+    <div class="wrap grid12">
+      <h2 data-i18n="info_h">Venir</h2>
+      <div class="info-cols">
+        <dl class="info-b">
+          <dt data-i18n="i_addr">Adresse</dt>
+          <dd>12 rue du Jour<br>75001 Paris<br><a href="#" data-i18n="i_map">Google Maps</a></dd>
+        </dl>
+        <dl class="info-b">
+          <dt data-i18n="i_hours">Horaires</dt>
+          <dd data-i18n-html="i_hours_v">Midi 11h30 – 15h00<br>Soir 18h30 – 22h00<br>Fermé le dimanche</dd>
+        </dl>
+        <dl class="info-b">
+          <dt data-i18n="i_metro">Métro</dt>
+          <dd data-i18n-html="i_metro_v">Louvre – Rivoli, 5 min<br>Les Halles, 6 min</dd>
+        </dl>
+        <dl class="info-b">
+          <dt data-i18n="i_book">Réservation</dt>
+          <dd data-i18n-html="i_book_v">01 23 45 67 89<br>Conseillée le soir</dd>
+        </dl>
+      </div>
+      <div class="info-cta">
+        <a class="btn btn-p" href="tel:+33123456789" data-i18n="cta_book">Réserver</a>
+      </div>
+    </div>
+  </section>
+</main>
+
 <footer>
-  <div class="foot-logo">JOAYO <span data-i18n="foot_sub">RESTAURANT</span></div>
-  <div class="foot-links">
-    <a href="#menu" data-i18n="nav_menu">La Carte</a>
-    <a href="#infos" data-i18n="nav_find">Infos</a>
+  <div class="wrap">
+    <p class="ft-mark">JOAYO <span class="k">좋아요</span></p>
+    <p class="ft-meta">
+      <span>12 rue du Jour, Paris 1er</span>
+      <a href="#" rel="noopener">Instagram</a>
+      <span>© 2026</span>
+    </p>
   </div>
-  <p class="legal" data-i18n="legal">© 2026 Joayo Restaurant — 12 rue du Jour, Paris 1er</p>
-  <p class="demo-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">Voir le service</a> <i aria-hidden="true">↗</i></p>
+  <div class="wrap">
+    <p class="ft-credit"><span data-i18n="credit">Un concept conçu par Jessy Jung</span> — <a href="../" data-i18n="credit_link">voir le service</a></p>
+  </div>
 </footer>
 
+<div class="mob-cta"><a href="tel:+33123456789" data-i18n="cta_book">Réserver</a></div>
+
 <script>
-/* generative ink — jangdokdae painted in brush strokes, plum behind, petals drift */
-(function(){
-  var host=document.querySelector('.ghero'); if(!host) return;
-  var tc=document.getElementById('gTree'), pc=document.getElementById('gPetals');
-  var tx=tc.getContext('2d'), px=pc.getContext('2d');
-  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W,H,dpr,growers=[],jars=[],petals=[],raf=null;
-  function size(){
-    dpr=Math.min(window.devicePixelRatio||1,2);
-    var r=host.getBoundingClientRect(); W=r.width; H=r.height;
-    [tc,pc].forEach(function(cv){cv.width=W*dpr; cv.height=H*dpr;
-      cv.getContext('2d').setTransform(dpr,0,0,dpr,0,0);});
-  }
-  function warm(d){
-    var t=Math.min(d/7,1);
-    var r=Math.round(104+t*86), g=Math.round(78+t*76), b=Math.round(44+t*52);
-    return 'rgba('+r+','+g+','+b+','+(0.6-0.3*t)+')';
-  }
-  function blossom(x,y){
-    var n=2+((Math.random()*3)|0);
-    for(var i=0;i<n;i++){
-      var a=Math.random()*6.283, rr=Math.random()*4;
-      tx.beginPath();
-      tx.arc(x+Math.cos(a)*rr, y+Math.sin(a)*rr, 0.8+Math.random()*1.3, 0, 6.283);
-      tx.fillStyle=Math.random()<0.7?'rgba(190,52,24,'+(0.25+Math.random()*0.28)+')'
-                                    :'rgba(233,180,168,'+(0.22+Math.random()*0.22)+')';
-      tx.fill();
-    }
-  }
-  function jarR(t,R){
-    var belly=Math.sin(Math.PI*Math.min(t*1.06,1));
-    var r=R*(0.52+0.5*Math.pow(belly,0.85));
-    if(t>0.9) r=R*(0.62-(t-0.9)*1.4);
-    return Math.max(r,R*0.34);
-  }
-  function paintSlice(j,t){
-    var y=j.base-t*j.h, r=jarR(t,j.R);
-    var jitter=(Math.random()-0.5)*1.6;
-    tx.beginPath();
-    tx.moveTo(j.x-r+jitter, y);
-    tx.lineTo(j.x+r+jitter, y);
-    tx.strokeStyle='rgba('+(58+Math.random()*18|0)+','+(40+Math.random()*14|0)+','+(26+Math.random()*10|0)+','+(0.5+Math.random()*0.25)+')';
-    tx.lineWidth=2.2;
-    tx.stroke();
-    if(Math.random()<0.5){
-      tx.beginPath();
-      tx.moveTo(j.x+r*0.45, y); tx.lineTo(j.x+r*0.8, y);
-      tx.strokeStyle='rgba(214,158,92,'+(0.05+Math.random()*0.07)+')';
-      tx.lineWidth=2.2; tx.stroke();
-    }
-    if(t>=1){
-      tx.beginPath();
-      tx.ellipse(j.x, y-2, jarR(1,j.R)+j.R*0.1, j.R*0.13, 0, Math.PI, 0);
-      tx.strokeStyle='rgba(74,52,32,0.85)'; tx.lineWidth=2.6; tx.stroke();
-      tx.beginPath();
-      tx.arc(j.x, y-j.R*0.16, 2.4, 0, 6.283);
-      tx.fillStyle='rgba(74,52,32,0.8)'; tx.fill();
-    }
-  }
-  function groundStroke(x,y,len){
-    tx.beginPath(); tx.moveTo(x,y); tx.lineTo(x+len,y+(Math.random()-0.5)*2);
-    tx.strokeStyle='rgba(96,76,52,'+(0.08+Math.random()*0.1)+')';
-    tx.lineWidth=1.6; tx.stroke();
-  }
-  function seed(){
-    tx.clearRect(0,0,W,H); growers=[]; jars=[];
-    var sides=[0.1+Math.random()*0.1, 0.86+Math.random()*0.08];
-    if(W>900) sides.push(0.62+Math.random()*0.1);
-    for(var i=0;i<sides.length;i++){
-      growers.push({x:W*sides[i], y:H+8,
-        a:-Math.PI/2+(Math.random()-0.5)*0.4,
-        rem:H*(0.14+Math.random()*0.06), w:4.2+Math.random()*1.4, d:0});
-    }
-    /* main cluster right of the text, like a real terrace; a few small far left */
-    var scale=Math.min(W/1440,1.15);
-    var cluster=[
-      {f:0.60,R:64},{f:0.70,R:88},{f:0.80,R:74},{f:0.90,R:92},{f:0.975,R:60}
-    ];
-    if(W<760) cluster=[{f:0.62,R:52},{f:0.78,R:70},{f:0.93,R:56}];
-    for(var k=0;k<cluster.length;k++){
-      var R=cluster[k].R*scale*(0.92+Math.random()*0.16);
-      jars.push({x:W*cluster[k].f+(Math.random()-0.5)*W*0.015, base:H-16-Math.random()*8, R:R,
-        h:R*(1.62+Math.random()*0.2), t:0, rate:0.008+Math.random()*0.005});
-    }
-    for(var k2=0;k2<2;k2++){
-      var R2=(22+Math.random()*14)*scale;
-      jars.push({x:W*(0.05+k2*0.075)+(Math.random()-0.5)*W*0.01, base:H-12, R:R2,
-        h:R2*1.6, t:0, rate:0.009+Math.random()*0.004});
-    }
-    for(var g2=0;g2<Math.round(W/26);g2++)
-      groundStroke(Math.random()*W, H-6-Math.random()*8, 14+Math.random()*30);
-  }
-  function step(g,speed){
-    var st=Math.min(speed,g.rem);
-    var nx=g.x+Math.cos(g.a)*st, ny=g.y+Math.sin(g.a)*st;
-    tx.beginPath(); tx.moveTo(g.x,g.y); tx.lineTo(nx,ny);
-    tx.strokeStyle=warm(g.d); tx.lineWidth=Math.max(g.w,0.4); tx.lineCap='round'; tx.stroke();
-    g.x=nx; g.y=ny; g.rem-=st;
-    g.a+=(Math.random()-0.5)*0.14;
-    if(g.rem>0) return [g];
-    if(g.d>=7){ blossom(g.x,g.y); return []; }
-    var kids=[], n2=(growers.length>360||Math.random()<0.2)?1:2;
-    for(var i=0;i<n2;i++){
-      var spread=(0.24+Math.random()*0.4)*(i===0?-1:1)*(n2===1?(Math.random()<0.5?-1:1):1);
-      kids.push({x:g.x,y:g.y,a:g.a+spread,
-        rem:(H*(0.05+Math.random()*0.05))*Math.pow(0.86,g.d),
-        w:g.w*0.62,d:g.d+1});
-    }
-    return kids;
-  }
-  function jarStep(j,mult){
-    if(j.t>=1) return false;
-    var from=j.t;
-    j.t=Math.min(1, j.t+j.rate*mult);
-    var stepT=1/Math.max(24,j.h/2);
-    for(var t=Math.ceil(from/stepT)*stepT; t<=j.t; t+=stepT) paintSlice(j,Math.min(t,1));
-    if(j.t>=1) paintSlice(j,1);
-    return true;
-  }
-  function seedPetals(){
-    petals=[];
-    for(var i=0;i<34;i++) petals.push({x:Math.random()*W, y:Math.random()*H,
-      vy:-(0.08+Math.random()*0.2), ph:Math.random()*6.283, r:0.8+Math.random()*1.5,
-      red:Math.random()<0.6});
-  }
-  function drawPetals(t){
-    px.clearRect(0,0,W,H);
-    for(var i=0;i<petals.length;i++){
-      var q=petals[i], al=0.15+0.15*Math.sin(t*0.001+q.ph);
-      q.y+=q.vy; q.x+=Math.sin(t*0.0006+q.ph)*0.25;
-      if(q.y<-6){ q.y=H+6; q.x=Math.random()*W; }
-      px.beginPath(); px.arc(q.x,q.y,q.r,0,6.283);
-      px.fillStyle=q.red?'rgba(216,85,47,'+al+')':'rgba(224,196,150,'+al+')';
-      px.fill();
-    }
-  }
-  function frame(t){
-    var next=[];
-    for(var i=0;i<growers.length;i++){
-      var out=step(growers[i],1.7);
-      for(var j2=0;j2<out.length;j2++) next.push(out[j2]);
-    }
-    growers=next;
-    for(var k=0;k<jars.length;k++) jarStep(jars[k],1);
-    drawPetals(t);
-    raf=requestAnimationFrame(frame);
-  }
-  function start(){
-    size(); seed(); seedPetals();
-    if(raf) cancelAnimationFrame(raf);
-    if(reduced){
-      var guard=0;
-      while(growers.length&&guard++<4000){
-        var next=[];
-        for(var i=0;i<growers.length;i++){
-          var out=step(growers[i],9);
-          for(var j2=0;j2<out.length;j2++) next.push(out[j2]);
-        }
-        growers=next;
-      }
-      for(var k=0;k<jars.length;k++) jarStep(jars[k],400);
-      drawPetals(0);
-      return;
-    }
-    raf=requestAnimationFrame(frame);
-  }
-  var rt=null;
-  window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(start,240); });
-  start();
-})();
 var I18N = {
 fr: {
-  _title:"JOAYO Restaurant 좋아요 레스토랑 — Cuisine coréenne, Paris 1er",
-  jd_vert:"장독대 — 시간이 맛이 되는 곳", jd_line:"Ce que le temps a fait, on ne le presse pas. Kimchi, jang, bouillons — la patience d'abord.",
-  tick1:"Joayo Restaurant", tick2:"Bibimbap au tartare de bœuf", tick3:"Bulgogi", tick4:"Poulet frit", tick5:"Paris 1er",
-  brand_sub:"Restaurant · 레스토랑",
-  nav_home:"Accueil", nav_menu:"La Carte", nav_market:"L'Épicerie", nav_book:"Réserver", nav_find:"Infos",
-  ar_head:"Les signatures", ar_note:"Toute la carte ↓",
-  cat1:"Riz", cat2:"Grillades", cat3:"Nouilles & ragoûts",
-  tp_over:"Le temps · 시간", tp_h2:"Ce qui prend du temps, chez nous",
-  tp_u1:"ans", tp_l1:"Le jang, fermenté avant d'entrer en cuisine",
-  tp_u2:"mois", tp_l2:"Le kimchi d'hiver, mis en jarre chaque automne",
-  tp_u3:"heures", tp_l3:"Le bouillon, lancé la veille pour le service du midi",
-  kicker:"Midi & soir — Paris 1er",
-  hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
-  hero_sub:"La cuisine coréenne authentique du 1er arrondissement. Bibimbap au <strong>tartare de bœuf</strong>, bulgogi, poulet frit — dans une salle chaleureuse en bois, au cœur de Paris.",
-  cta_book:"Réserver",
-  me_over:"La carte · 메뉴", me_h2:"La carte",
-  m1_name:"Bibimbap au tartare de bœuf", m1_desc:"La signature de la maison — riz, légumes, tartare de bœuf assaisonné, jaune d'œuf",
-  m2_name:"Dolsot Bibimbap", m2_desc:"Riz et légumes servis dans un bol de pierre brûlant, bœuf mariné, œuf, gochujang",
-  m3_name:"Bulgogi de porc", m3_desc:"Porc mariné sauté, légèrement pimenté, riz et banchan du jour",
-  m4_name:"Japchae", m4_desc:"Nouilles de patate douce sautées, bœuf et légumes — un classique des fêtes coréennes",
-  m5_name:"Poulet frit coréen", m5_desc:"Double friture croustillante, sauce au choix — celui dont tout le monde parle",
-  m6_name:"BBQ coréen", m6_desc:"Grillades marinées à la coréenne, servies avec riz et banchan",
-  m7_name:"Kimchi Jjigae", m7_desc:"Ragoût de kimchi mijoté, porc et tofu — le plat réconfort absolu",
-  m8_name:"Mandu", m8_desc:"Raviolis coréens vapeur ou grillés",
-  menu_note:"Carte indicative — retrouvez la carte complète au restaurant.",
-  sv1:"Menu végétarien", sv2:"Réservation conseillée", sv3:"20 — 30 € / personne", sv4:"Cœur de Paris", sv5:"Déjeuner jusqu'à 15h00",
-  rc_h3:"Infos & réservation",
-  rc_p:"La salle est petite — réservez.",
-  h_lunch:"Midi", h_dinner:"Soir", h_note:"Horaires du jour sur Google Maps",
-  rc_btn:"Réserver", 
-  am_over:"À table · 식탁", am_h2:"À table",
-  am_p:"Le gril au milieu, les banchan autour, l'odeur du feu dans la salle.", 
-  in_over:"Infos pratiques · 오시는 길", in_h2:"Venir dîner chez le Joayo",
-  ic1_h3:"Adresse", maps_link:"Ouvrir dans Google Maps ↗",
-  ic2_h3:"Horaires", ic2_p:"Midi : 11h30 — 15h00<br>Soir : 18h30 — 22h00", ic2_small:"Horaires du jour sur Google Maps.",
-  ic3_h3:"Y aller", ic3_p:"Métro Louvre — Rivoli (ligne 1)<br>Les Halles (RER A)", ic3_small:"À cinq minutes du Louvre à pied.",
-  ic4_h3:"Réservation", ic4_small:"Réservation conseillée le soir et le week-end.",
-  cr_h2:"Envie de refaire ces plats chez vous ?",
-  cr_p:"Le joayo a aussi son marché : kimchi et banchan faits maison, ramyeon, sauces et tout le garde-manger coréen, dans le 15e.",
-  cr_btn:"Découvrir l'épicerie",
-  foot_sub:"RESTAURANT",
-  legal:"© 2026 Joayo Restaurant — 12 rue du Jour, Paris 1er",
-  addr_pill:"12 rue du Jour, Paris 1er",
-  rc_addr:"12 rue du Jour, 75001 Paris",
-  ic1_p:"12 rue du Jour<br>75001 Paris",
-  ic4_p:"Par téléphone ou sur place",
-  credit:"Un concept conçu par Jessy Jung",
-  credit_link:"Voir le service",
+  _title:"JOAYO — Restaurant coréen, Paris 1er",
+  nav_menu:"Carte", nav_info:"Infos", cta_book:"Réserver", cta_menu:"La carte",
+  hero_line:"Bibimbap, jjigae, porc grillé, poulet frit. Du riz chaud et des banchan au milieu de la table.",
+  h_addr:"12 rue du Jour, Paris 1er", h_hours:"Midi 11h30–15h00 · Soir 18h30–22h00",
+  sig_lbl:"Signature",
+  sig_desc:"Riz chaud, légumes, bœuf cru assaisonné, jaune d'œuf. On mélange tant que la pierre chauffe encore.",
+  menu_h:"La carte", menu_p:"Elle change peu. Ce qui change, c'est ce que le marché donne le matin.",
+  c_riz:"Riz", c_grill:"Grillades", c_soupe:"Soupes", c_nouille:"Nouilles", c_partager:"À partager",
+  m1:"Bibimbap au bœuf cru", m2:"Dolsot bibimbap", m3:"Porc mariné, sauté", m4:"Bœuf et porc au gril",
+  m5:"Ragoût de kimchi, porc et tofu", m6:"Nouilles de patate douce sautées",
+  m7:"Poulet frit, deux fois", m8:"Raviolis, vapeur ou grillés",
+  menu_note:"Banchan compris. Menu végétarien sur demande.",
+  band_cap:"Le gril chauffe au milieu. Le reste arrive autour.",
+  t_y:"ans", t_m:"mois", t_h:"h",
+  t_1:"Jang — la pâte de soja qu'on utilise en cuisine.",
+  t_2:"Kimchi d'hiver — mis en jarre chaque automne.",
+  t_3:"Bouillon — lancé la veille pour le service du midi.",
+  room_h:"La salle",
+  room_p:"Petite salle, tables serrées. Les banchan arrivent avant le plat. On repart en ayant parlé fort.",
+  info_h:"Venir", i_addr:"Adresse", i_map:"Google Maps", i_hours:"Horaires",
+  i_hours_v:"Midi 11h30 – 15h00<br>Soir 18h30 – 22h00<br>Fermé le dimanche",
+  i_metro:"Métro", i_metro_v:"Louvre – Rivoli, 5 min<br>Les Halles, 6 min",
+  i_book:"Réservation", i_book_v:"01 23 45 67 89<br>Conseillée le soir",
+  credit:"Un concept conçu par Jessy Jung", credit_link:"voir le service",
 },
 en: {
-  _title:"JOAYO Restaurant 좋아요 레스토랑 — Korean Cuisine, Paris 1st",
-  jd_vert:"장독대 — where time becomes taste", jd_line:"What time has made, we do not rush. Kimchi, jang, broths — patience first.",
-  tick1:"Joayo Restaurant", tick2:"Beef tartare bibimbap", tick3:"Bulgogi", tick4:"Fried chicken", tick5:"Paris 1st",
-  brand_sub:"Restaurant · 레스토랑",
-  nav_home:"Home", nav_menu:"The Menu", nav_market:"The Grocery", nav_book:"Book", nav_find:"Info",
-  ar_head:"The signatures", ar_note:"See the full menu ↓",
-  cat1:"Rice", cat2:"Grills", cat3:"Noodles & stews",
-  tp_over:"Time · 시간", tp_h2:"What takes time here",
-  tp_u1:"years", tp_l1:"The jang, fermented before it reaches the kitchen",
-  tp_u2:"months", tp_l2:"Winter kimchi, put into jars every autumn",
-  tp_u3:"hours", tp_l3:"The broth, started the night before lunch service",
-  kicker:"Lunch & dinner — Paris 1er",
-  hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"좋아요 레스토랑",
-  hero_sub:"Authentic Korean cooking in the 1st arrondissement. <strong>Beef tartare</strong> bibimbap, bulgogi, fried chicken — in a warm wood-lined room in the heart of Paris.",
-  cta_book:"Book a table",
-  me_over:"The menu · 메뉴", me_h2:"The menu",
-  m1_name:"Beef tartare bibimbap", m1_desc:"The house signature — rice, vegetables, seasoned beef tartare, egg yolk",
-  m2_name:"Dolsot Bibimbap", m2_desc:"Rice and vegetables in a sizzling stone bowl, marinated beef, egg, gochujang",
-  m3_name:"Pork bulgogi", m3_desc:"Stir-fried marinated pork, gently spicy, rice and banchan of the day",
-  m4_name:"Japchae", m4_desc:"Stir-fried sweet potato noodles with beef and vegetables — a Korean feast classic",
-  m5_name:"Korean fried chicken", m5_desc:"Crispy double-fried, sauce of your choice — the one everyone talks about",
-  m6_name:"Korean BBQ", m6_desc:"Korean marinated grills, served with rice and banchan",
-  m7_name:"Kimchi Jjigae", m7_desc:"Slow-simmered kimchi stew with pork and tofu — ultimate comfort food",
-  m8_name:"Mandu", m8_desc:"Korean dumplings, steamed or grilled",
-  menu_note:"Sample menu — the full menu is at the restaurant.",
-  sv1:"Vegetarian menu", sv2:"Booking recommended", sv3:"€20–30 per person", sv4:"Heart of Paris", sv5:"Lunch until 3:00 pm",
-  rc_h3:"Info & booking",
-  rc_p:"The room is small — book ahead.",
-  h_lunch:"Lunch", h_dinner:"Dinner", h_note:"Today's hours on Google Maps",
-  rc_btn:"Book a table", 
-  am_over:"At the table · 식탁", am_h2:"At the table",
-  am_p:"The grill in the middle, banchan around it, the smell of fire in the room.", 
-  in_over:"Practical info · 오시는 길", in_h2:"Come dine at the Joayo",
-  ic1_h3:"Address", maps_link:"Open in Google Maps ↗",
-  ic2_h3:"Hours", ic2_p:"Lunch: 11:30 am — 3:00 pm<br>Dinner: 6:30 — 10:00 pm", ic2_small:"Today's hours on Google Maps.",
-  ic3_h3:"Getting there", ic3_p:"Métro Louvre — Rivoli (line 1)<br>Les Halles (RER A)", ic3_small:"A five-minute walk from the Louvre.",
-  ic4_h3:"Booking", ic4_small:"Booking recommended for dinner and weekends.",
-  cr_h2:"Want to cook these dishes at home?",
-  cr_p:"The joayo also keeps a market: homemade kimchi and banchan, ramyeon, sauces and the whole Korean pantry, in the 15th.",
-  cr_btn:"Discover the grocery",
-  foot_sub:"RESTAURANT",
-  legal:"© 2026 Joayo Restaurant — 12 rue du Jour, Paris 1er",
-  addr_pill:"12 rue du Jour, Paris 1er",
-  rc_addr:"12 rue du Jour, 75001 Paris",
-  ic1_p:"12 rue du Jour<br>75001 Paris",
-  ic4_p:"By phone or in person",
-  credit:"A concept by Jessy Jung",
-  credit_link:"See the service",
+  _title:"JOAYO — Korean restaurant, Paris 1er",
+  nav_menu:"Menu", nav_info:"Info", cta_book:"Book", cta_menu:"Menu",
+  hero_line:"Bibimbap, jjigae, grilled pork, fried chicken. Hot rice and banchan in the middle of the table.",
+  h_addr:"12 rue du Jour, Paris 1er", h_hours:"Lunch 11:30–15:00 · Dinner 18:30–22:00",
+  sig_lbl:"Signature",
+  sig_desc:"Hot rice, vegetables, seasoned raw beef, egg yolk. Mix it while the stone is still hot.",
+  menu_h:"Menu", menu_p:"It rarely changes. What changes is what the market gives that morning.",
+  c_riz:"Rice", c_grill:"Grills", c_soupe:"Stews", c_nouille:"Noodles", c_partager:"To share",
+  m1:"Bibimbap with raw beef", m2:"Dolsot bibimbap", m3:"Marinated pork, stir-fried", m4:"Beef and pork, grilled",
+  m5:"Kimchi stew, pork and tofu", m6:"Sweet potato noodles, stir-fried",
+  m7:"Fried chicken, twice", m8:"Dumplings, steamed or grilled",
+  menu_note:"Banchan included. Vegetarian on request.",
+  band_cap:"The grill heats in the middle. The rest arrives around it.",
+  t_y:"years", t_m:"months", t_h:"h",
+  t_1:"Jang — the soybean paste we cook with.",
+  t_2:"Winter kimchi — put into jars every autumn.",
+  t_3:"Broth — started the night before lunch service.",
+  room_h:"The room",
+  room_p:"Small room, tables close together. Banchan arrive before the dish. You leave having talked loudly.",
+  info_h:"Getting here", i_addr:"Address", i_map:"Google Maps", i_hours:"Hours",
+  i_hours_v:"Lunch 11:30 – 15:00<br>Dinner 18:30 – 22:00<br>Closed Sunday",
+  i_metro:"Metro", i_metro_v:"Louvre – Rivoli, 5 min<br>Les Halles, 6 min",
+  i_book:"Booking", i_book_v:"+33 1 23 45 67 89<br>Recommended for dinner",
+  credit:"A concept by Jessy Jung", credit_link:"see the service",
 },
 ko: {
-  _title:"좋아요 레스토랑 JOAYO Restaurant — 파리 1구 한식당",
-  jd_vert:"장독대 — 시간이 맛이 되는 곳", jd_line:"시간이 만든 맛은 서두르지 않습니다. 김치, 장, 육수 — 기다림이 먼저입니다.",
-  tick1:"좋아요 레스토랑", tick2:"육회비빔밥", tick3:"불고기", tick4:"치킨", tick5:"파리 1구",
-  brand_sub:"레스토랑 · Restaurant",
-  nav_home:"홈", nav_menu:"메뉴", nav_market:"마켓", nav_book:"예약", nav_find:"안내",
-  ar_head:"대표 메뉴", ar_note:"전체 메뉴 보기 ↓",
-  cat1:"밥", cat2:"구이", cat3:"면·찌개",
-  tp_over:"시간 · Le temps", tp_h2:"이 집에서 시간이 걸리는 것들",
-  tp_u1:"년", tp_l1:"주방에 들어오기 전, 그만큼 익힌 장",
-  tp_u2:"개월", tp_l2:"가을에 담가 겨우내 두는 김치",
-  tp_u3:"시간", tp_l3:"점심 장사를 위해 전날 밤부터 끓이는 육수",
-  kicker:"점심 & 저녁 — 파리 1구",
-  hero_h1a:"Joayo", hero_h1b:"Restaurant", hero_hb:"JOAYO RESTAURANT",
-  hero_sub:"파리 1구의 정통 한식. <strong>육회비빔밥</strong>, 불고기, 치킨 — 파리 시내 한복판, 나무 인테리어의 아늑한 공간에서.",
-  cta_book:"예약하기",
-  me_over:"메뉴 · La carte", me_h2:"메뉴",
-  m1_name:"육회비빔밥", m1_desc:"시그니처 메뉴 — 신선한 육회와 노른자를 얹은 비빔밥",
-  m2_name:"돌솥비빔밥", m2_desc:"뜨거운 돌솥에 나물과 불고기, 계란, 고추장",
-  m3_name:"제육불고기", m3_desc:"매콤하게 볶은 제육, 밥과 오늘의 반찬",
-  m4_name:"잡채", m4_desc:"소고기와 채소를 넣은 당면 볶음 — 잔칫상 단골 메뉴",
-  m5_name:"치킨", m5_desc:"겉은 바삭, 속은 촉촉 — 두 번 튀긴 한국식 치킨, 소스 선택 가능",
-  m6_name:"바비큐", m6_desc:"한국식 양념 고기구이, 밥과 반찬 포함",
-  m7_name:"김치찌개", m7_desc:"돼지고기와 두부를 넣고 푹 끓인 김치찌개",
-  m8_name:"만두", m8_desc:"찐만두 또는 군만두",
-  menu_note:"대표 메뉴입니다 — 전체 메뉴는 매장에서 확인해 주세요.",
-  sv1:"채식 메뉴", sv2:"예약 권장", sv3:"1인 20~30€", sv4:"시내 한복판", sv5:"점심 15시까지",
-  rc_h3:"예약 안내",
-  rc_p:"자리가 많지 않습니다 — 예약하고 오세요.",
-  h_lunch:"점심", h_dinner:"저녁", h_note:"당일 영업시간은 구글 지도 참고",
-  rc_btn:"예약하기", 
-  am_over:"식탁 · À table", am_h2:"식탁",
-  am_p:"가운데 불판, 둘레에 반찬. 홀에 불 냄새가 돕니다.", 
-  in_over:"오시는 길 · Infos", in_h2:"좋아요 레스토랑으로 오세요",
-  ic1_h3:"주소", maps_link:"구글 지도에서 보기 ↗",
-  ic2_h3:"영업시간", ic2_p:"점심: 11:30 — 15:00<br>저녁: 18:30 — 22:00", ic2_small:"당일 영업시간은 구글 지도에서 확인해 주세요.",
-  ic3_h3:"오시는 길", ic3_p:"메트로 Louvre — Rivoli (1호선)<br>Les Halles (RER A)", ic3_small:"루브르에서 걸어서 5분.",
-  ic4_h3:"예약", ic4_small:"저녁과 주말은 예약을 권장합니다.",
-  cr_h2:"이 메뉴, 집에서도 만들고 싶다면?",
-  cr_p:"좋아요 마켓이 있습니다 — 직접 담근 김치와 반찬, 라면, 장류까지. 파리 15구.",
-  cr_btn:"마켓 보러 가기",
-  foot_sub:"레스토랑",
-  legal:"© 2026 좋아요 레스토랑 — 12 rue du Jour, 파리 1구",
-  addr_pill:"12 rue du Jour, 파리 1구",
-  rc_addr:"12 rue du Jour, 75001 Paris",
-  ic1_p:"12 rue du Jour<br>75001 Paris",
-  ic4_p:"전화 또는 매장에서",
-  credit:"Jessy Jung의 콘셉트 작업",
-  credit_link:"서비스 보기",
+  _title:"좋아요 JOAYO — 파리 1구 한식당",
+  nav_menu:"메뉴", nav_info:"안내", cta_book:"예약", cta_menu:"메뉴",
+  hero_line:"비빔밥, 찌개, 제육, 치킨. 뜨거운 밥과 반찬이 상 가운데 놓입니다.",
+  h_addr:"12 rue du Jour, 파리 1구", h_hours:"점심 11:30–15:00 · 저녁 18:30–22:00",
+  sig_lbl:"대표 메뉴",
+  sig_desc:"뜨거운 밥, 나물, 양념한 육회, 노른자. 돌이 식기 전에 비벼 드세요.",
+  menu_h:"메뉴", menu_p:"메뉴는 잘 바꾸지 않습니다. 바뀌는 건 그날 아침 시장에 있는 것입니다.",
+  c_riz:"밥", c_grill:"구이", c_soupe:"찌개", c_nouille:"면", c_partager:"나눠 먹기",
+  m1:"육회비빔밥", m2:"돌솥비빔밥", m3:"제육불고기", m4:"바비큐",
+  m5:"김치찌개", m6:"잡채", m7:"치킨", m8:"만두",
+  menu_note:"반찬 포함. 채식 메뉴는 말씀해 주세요.",
+  band_cap:"가운데서 불판이 달궈지고, 나머지는 그 둘레에 놓입니다.",
+  t_y:"년", t_m:"개월", t_h:"시간",
+  t_1:"장 — 주방에서 쓰는 된장과 고추장.",
+  t_2:"김장 김치 — 가을마다 항아리에 담급니다.",
+  t_3:"육수 — 점심 장사를 위해 전날 밤부터.",
+  room_h:"홀",
+  room_p:"자리가 촘촘합니다. 반찬이 먼저 나오고, 나갈 때쯤엔 목소리가 커져 있습니다.",
+  info_h:"오시는 길", i_addr:"주소", i_map:"구글 지도", i_hours:"영업시간",
+  i_hours_v:"점심 11:30 – 15:00<br>저녁 18:30 – 22:00<br>일요일 휴무",
+  i_metro:"지하철", i_metro_v:"Louvre – Rivoli, 도보 5분<br>Les Halles, 도보 6분",
+  i_book:"예약", i_book_v:"+33 1 23 45 67 89<br>저녁은 예약을 권합니다",
+  credit:"Jessy Jung의 콘셉트 작업", credit_link:"서비스 보기",
 }
 };
 
@@ -1090,80 +594,37 @@ function applyLang(lang){
     var k = el.getAttribute('data-i18n-html');
     if(dict[k] !== undefined) el.innerHTML = dict[k];
   });
-  document.querySelectorAll('.lang-switch button').forEach(function(b){
-    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-lang') === lang);
   });
   try{ localStorage.setItem('joayo-lang', lang); }catch(e){}
 }
-document.querySelectorAll('.lang-switch button').forEach(function(b){
+document.querySelectorAll('.lang button').forEach(function(b){
   b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
 });
 var saved = null;
 try{ saved = localStorage.getItem('joayo-lang'); }catch(e){}
 applyLang(saved && I18N[saved] ? saved : 'fr');
 
+/* header turns solid once the hero is behind you */
 (function(){
-  if(!('IntersectionObserver' in window) || !window.innerHeight || window.scrollY > 50){ return; }
-  document.body.classList.add('js-anim');
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
-  setTimeout(function(){
-    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
-  }, 1500);
-})();
-</script>
-
-<script>
-/* jangdokdae parallax */
-(function(){
-  var ph=document.querySelector('.jd-ph img'), h=document.querySelector('.hero.jangdok');
-  if(!ph||!h)return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var t=false;
-  function up(){var r=h.getBoundingClientRect();
-    if(r.bottom<0||r.top>window.innerHeight){t=false;return;}
-    var p=Math.min(1,Math.max(0,-r.top/Math.max(1,r.height)));
-    ph.style.transform='scale(1.08) translate3d(0,'+(p*44).toFixed(1)+'px,0)';t=false;}
-  window.addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(up);}},{passive:true});
-  up();
-})();
-
-/* progress rail */
-(function(){
-  var rail=document.querySelector('.rail');
-  var secs=[].slice.call(document.querySelectorAll('[data-rail]'));
-  if(!rail||!secs.length||!('IntersectionObserver' in window))return;
-  secs.forEach(function(){rail.appendChild(document.createElement('span'));});
-  var t=rail.children;
-  new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){var i=secs.indexOf(e.target);
-      for(var j=0;j<t.length;j++)t[j].classList.toggle('on',j===i);}});
-  },{rootMargin:'-45% 0px -45% 0px'}).observe&&secs.forEach(function(x){
-    new IntersectionObserver(function(es){es.forEach(function(e){
-      if(e.isIntersecting){var i=secs.indexOf(e.target);
-        for(var j=0;j<t.length;j++)t[j].classList.toggle('on',j===i);}});
-    },{rootMargin:'-45% 0px -45% 0px'}).observe(x);});
-})();
-
-
-/* hover swaps the photo */
-function bindStage(itemSel,attr,stageSel,phAttr){
-  var items=[].slice.call(document.querySelectorAll(itemSel));
-  var imgs=document.querySelectorAll(stageSel+' img');
-  if(!items.length||!imgs.length)return;
-  function pick(n){
-    items.forEach(function(el,k){el.classList.toggle('on',k===n);});
-    imgs.forEach(function(im,k){im.classList.toggle('on',k===n);});
+  var hd = document.getElementById('hd'), hero = document.getElementById('hero');
+  if(!hd || !hero) return;
+  var mob = document.querySelector('.mob-cta');
+  function set(){
+    var past = window.scrollY > hero.offsetHeight - 90;
+    hd.classList.toggle('solid', past);
+    if(mob) mob.classList.toggle('on', past);
   }
-  items.forEach(function(el,k){
-    el.addEventListener('mouseenter',function(){pick(k);});
-    el.addEventListener('focusin',function(){pick(k);});
-  });
-}
-bindStage('.rayon[data-ray]','data-ray','.ray-stage','data-rp');
-bindStage('.menu-item[data-mi]','data-mi','.menu-stage','data-mp');
+  set();
+  window.addEventListener('scroll', set, {passive:true});
+})();
+
+/* the hero settles once; nothing else moves on scroll */
+requestAnimationFrame(function(){
+  var h = document.getElementById('hero');
+  if(h) h.classList.add('is-in');
+});
 </script>
 </body>
 </html>
