@@ -25,6 +25,7 @@ import {
   pct,
   pctPlain,
   people,
+  tablesText,
   weekdayName,
 } from './format'
 import {
@@ -172,6 +173,42 @@ export function mealDriverSentence(m: MealComparison): string | null {
   return `${guestPart} ${checkPart}`
 }
 
+/** ‘점심 테이블이 28.4개에서 19개로 줄었어요. 테이블당 쓴 돈은 €38.34에서 €37.05로 거의 같아요.’ */
+export function mealTableSentence(m: MealComparison): string | null {
+  if (!m.base || m.base.tables <= 0 || m.actual.tables <= 0) return null
+  const label = MEAL_LABEL[m.meal]
+  const t0 = m.base.tables
+  const t1 = m.actual.tables
+  const p0 = m.base.revenue / t0
+  const p1 = m.actual.revenue / t1
+  const tablePart =
+    Math.abs(t1 - t0) < 0.5 ? `${label} 테이블은 ${tablesText(t1)}로 같아요.` : `${label} 테이블이 ${tablesText(t0)}에서 ${tablesText(t1)}로 ${t1 < t0 ? '줄었어요' : '늘었어요'}.`
+  const spendPart =
+    Math.abs(p1 - p0) < p0 * 0.05
+      ? `테이블당 쓴 돈은 ${eurCheck(p0)}에서 ${eurCheck(p1)}로 거의 같아요.`
+      : `테이블당 쓴 돈은 ${eurCheck(p0)}에서 ${eurCheck(p1)}로 ${p1 < p0 ? '줄었어요' : '늘었어요'}.`
+  return `${tablePart} ${spendPart}`
+}
+
+/**
+ * 매출 = 테이블 수 × 한 테이블 인원 × 1명당 쓴 돈.
+ * 차이를 이 세 가지로 나눈다. 세 값을 더하면 매출 차이와 같다.
+ */
+export function levers(m: MealComparison): { tables: number; party: number; check: number } | null {
+  const b = m.base
+  const a = m.actual
+  if (!b || b.tables <= 0 || b.guests <= 0 || a.tables <= 0 || a.guests <= 0) return null
+  const party0 = b.guests / b.tables
+  const party1 = a.guests / a.tables
+  const check0 = b.revenue / b.guests
+  const check1 = a.revenue / a.guests
+  return {
+    tables: (a.tables - b.tables) * party0 * check0,
+    party: a.tables * (party1 - party0) * check0,
+    check: a.guests * (check1 - check0),
+  }
+}
+
 /* ───────── ‘왜 이렇게 나왔나요?’ ───────── */
 
 export type BackgroundKind = 'weather' | 'event' | 'strike' | 'pattern' | 'memo'
@@ -297,7 +334,12 @@ export function analyze(scope: Scope, date: ISODate, mode: CompareMode, memoText
     }
     const driver = mealDriverSentence(m)
     if (driver) facts.push(driver)
-    if (m.guestEffect !== null && m.checkEffect !== null) {
+    const tableLine = mealTableSentence(m)
+    if (tableLine) facts.push(tableLine)
+    const lv = levers(m)
+    if (lv) {
+      facts.push(`${MEAL_LABEL[dom.meal]} 차이를 나눠 보면, 테이블 수 때문에 ${eurDiff(lv.tables)}, 한 테이블 인원 때문에 ${eurDiff(lv.party)}, 1명당 쓴 돈 때문에 ${eurDiff(lv.check)}예요.`)
+    } else if (m.guestEffect !== null && m.checkEffect !== null) {
       facts.push(`${MEAL_LABEL[dom.meal]} 차이를 나눠 보면, 손님 수 때문에 ${eurDiff(m.guestEffect)}, 1명당 쓴 돈 때문에 ${eurDiff(m.checkEffect)}예요.`)
     }
     const peak = peakHour(c)

@@ -9,12 +9,15 @@ import {
   compare,
   dayData,
   findFlags,
+  partySize,
+  perTable,
   periodRange,
   rangeSummary,
   series,
   weatherSplit,
 } from '../lib/sales-demo/metrics'
-import { eur, eurDiff, pct } from '../lib/sales-demo/format'
+import { eur, eurCheck, eurDiff, pct } from '../lib/sales-demo/format'
+import { levers } from '../lib/sales-demo/analysis'
 import { respond, type AssistantEnv } from '../lib/sales-demo/assistant'
 import type { CompareMode } from '../lib/sales-demo/metrics'
 import { findPatterns } from '../lib/sales-demo/patterns'
@@ -173,9 +176,22 @@ check('가정 계산은 관측 금액과 구분', pats.filter((p) => p.kind === 
 const a8 = respond('고칠 점이 뭐야?', { ...env('recent8'), view: { scope: 'all', date: D, mode: 'recent8' } })
 check('“고칠 점이 뭐야?” → 반복되는 일 답변', a8.intent === 'patterns' && a8.paragraphs.some((x) => x.includes('Opéra점')), true)
 
+console.log('\n── 테이블 기준 (매출 = 테이블 수 × 한 테이블 인원 × 1명당 쓴 돈)')
+const lunch = r8.meals.lunch
+check('Le Marais점 11/21 점심 테이블 수', lunch.actual.tables, 19)
+check('점심 테이블당 쓴 돈', eurCheck(perTable(lunch.actual)), '€37.05')
+check('테이블 수 × 한 테이블 인원 = 손님 수', Math.round(lunch.actual.tables * partySize(lunch.actual)!), lunch.actual.guests)
+const lv = levers(lunch)!
+check('세 가지로 나눈 값의 합 = 점심 매출 차이', Math.round(lv.tables + lv.party + lv.check), lunch.diff)
+check('점심 차이의 대부분은 테이블 수', Math.abs(lv.tables) > Math.abs(lv.party) + Math.abs(lv.check), true)
+const weekT = BRANCH_IDS.reduce((t, b) => t + rangeSummary(b, range).total.tables, 0)
+check('전체 테이블 수 = 지점 합계', sAll.total.tables, weekT)
+const a9 = respond('테이블당 얼마 썼어?', env('recent8'))
+check('“테이블당 얼마 썼어?” → 테이블 기준 답변', a9.intent === 'guestCheck' && a9.paragraphs.some((x) => x.includes('테이블당 €')), true)
+
 console.log('\n── 쉬운 말: 어려운 낱말이 답변에 남아 있지 않은지')
-const HARD = /객단가|방문객|비교 기준|차액|기본값|증감률|관측|표본|집계|실적|수치|안건|강수|누락/
-const sampleQs = ['이날 매출이 왜 이렇게 낮았어?', '손님이 줄어서야, 덜 써서야?', '비 온 토요일끼리만 비교하면?', '그날 다른 지점은 어땠어?', '작년이랑 비교하면?', '이 지점은 토요일마다 이렇게 보여줘', '지난주 매출은 어땠어?', '고칠 점이 뭐야?', '내일 매출 예측해줘', '안녕']
+const HARD = /객단가|단가|방문객|비교 기준|차액|기본값|증감률|관측|표본|집계|실적|수치|안건|강수|누락/
+const sampleQs = ['이날 매출이 왜 이렇게 낮았어?', '손님이 줄어서야, 덜 써서야?', '테이블당 얼마 썼어?', '비 온 토요일끼리만 비교하면?', '그날 다른 지점은 어땠어?', '작년이랑 비교하면?', '이 지점은 토요일마다 이렇게 보여줘', '지난주 매출은 어땠어?', '고칠 점이 뭐야?', '내일 매출 예측해줘', '안녕']
 const hardHits = sampleQs.filter((q) => {
   const a = respond(q, env('weather'))
   return HARD.test([...a.paragraphs, a.conditions, a.preview?.label ?? '', ...a.actions.map((x) => x.label)].join(' '))

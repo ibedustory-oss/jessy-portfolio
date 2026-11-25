@@ -16,7 +16,7 @@ import {
   monthFull,
   people,
 } from '@/lib/sales-demo/format'
-import { PERIODS, baseline, checkOf, findFlags, rangeSummary, rateOf, series, type Flag, type SeriesPoint } from '@/lib/sales-demo/metrics'
+import { PERIODS, baseline, checkOf, partySize, perTable, findFlags, rangeSummary, rateOf, series, type Flag, type SeriesPoint } from '@/lib/sales-demo/metrics'
 import { C, IndexStrip, PeriodChart, type PointMark } from './charts'
 import { useDemo } from './store'
 import { Card, Delta, Icon, RateDelta, Segmented, Tag, btn } from './ui'
@@ -107,9 +107,9 @@ export function FilterBar() {
 
 function KpiTile({ label, value, children, hero = false }: { label: string; value: string; children: React.ReactNode; hero?: boolean }) {
   return (
-    <div className="min-w-0 px-5 py-4">
+    <div className="min-w-0 bg-white px-5 py-4">
       <div className="text-[13px] font-medium text-warmgray">{label}</div>
-      <div className={`mt-1 font-bold tracking-tight text-ink ${hero ? 'text-[34px] leading-10' : 'text-[26px] leading-9'}`}>{value}</div>
+      <div className={`mt-1 font-bold tracking-tight text-ink ${hero ? 'text-[31px] leading-10' : 'text-[25px] leading-10'}`}>{value}</div>
       <div className="mt-1 space-y-0.5 text-[12.5px] leading-5 text-warmgray">{children}</div>
     </div>
   )
@@ -119,6 +119,8 @@ export function Kpis() {
   const d = useDemo()
   const s = useMemo(() => rangeSummary(d.scope, d.range), [d.scope, d.range])
   const check = checkOf(s.total)
+  const table = perTable(s.total)
+  const party = partySize(s.total)
   const py = s.prevYear
   const pp = s.prevPeriod
   const aligned = d.range.granularity === 'day' && d.range.month === null
@@ -131,7 +133,7 @@ export function Kpis() {
         </p>
         {s.missingDays > 0 && <Tag kind="strike">기록 없는 날 {s.missingDays}일은 뺐어요</Tag>}
       </div>
-      <div className="grid divide-y divide-line sm:grid-cols-[1.25fr_1fr_1fr] sm:divide-x sm:divide-y-0">
+      <div className="grid gap-px bg-line sm:grid-cols-2 xl:grid-cols-[1.15fr_1fr_1fr_1fr]">
         <KpiTile label="매출 (세금 포함)" value={eur(s.total.revenue)} hero>
           {py ? (
             <div>
@@ -165,6 +167,14 @@ export function Kpis() {
             </div>
           )}
           <div>매출 ÷ 손님 수</div>
+        </KpiTile>
+        <KpiTile label="테이블당 쓴 돈" value={eurCheck(table)}>
+          {py && table !== null && (
+            <div>
+              작년보다 <RateDelta rate={rateOf(table, perTable(py.total))} /> · 작년 {eurCheck(perTable(py.total))}
+            </div>
+          )}
+          {party !== null && <div>한 테이블에 평균 {party.toFixed(1)}명</div>}
         </KpiTile>
       </div>
       {py && (

@@ -3,8 +3,8 @@
 import { useState, type KeyboardEvent, type ReactNode } from 'react'
 import { WEEKDAY_KO, parts, weekday, type ISODate } from '@/lib/sales-demo/calendar'
 import { mealOfHour } from '@/lib/sales-demo/data'
-import { count, dateFull, dateRangeWithYear, eur, eurAxis, eurCheck, eurDiff, monthFull, pct } from '@/lib/sales-demo/format'
-import { checkOf, rateOf, type HourComparison, type SeriesPoint } from '@/lib/sales-demo/metrics'
+import { count, dateFull, dateRangeWithYear, eur, eurAxis, eurCheck, eurDiff, monthFull, pct, tablesText } from '@/lib/sales-demo/format'
+import { checkOf, perTable, rateOf, type HourComparison, type SeriesPoint } from '@/lib/sales-demo/metrics'
 import { useWidth } from './ui'
 
 /* 차트 색 — 한 계열은 한 색, 비교값은 중립 회색 선 */
@@ -450,6 +450,8 @@ export function HourlyChart({
           <div className="my-1.5 border-t border-line" />
           <TipRow label="손님" value={`${ah.actual.guests}명${ah.base ? ` · ${baseWord} ${Math.round(ah.base.guests)}명` : ''}`} />
           <TipRow label="1명당" value={`${eurCheck(checkOf(ah.actual))}${ah.base ? ` · ${baseWord} ${eurCheck(checkOf(ah.base))}` : ''}`} />
+          <TipRow label="테이블" value={`${tablesText(ah.actual.tables)}${ah.base ? ` · ${baseWord} ${tablesText(ah.base.tables)}` : ''}`} />
+          <TipRow label="테이블당" value={`${eurCheck(perTable(ah.actual))}${ah.base ? ` · ${baseWord} ${eurCheck(perTable(ah.base))}` : ''}`} />
           {rain[active] > 0 && <div className="mt-1 text-[11.5px] text-[#1A4E9B]">비 {rain[active].toFixed(1)}mm</div>}
           {ah.base && <div className="mt-1 text-[11.5px] text-warmgray">{baseName}</div>}
         </Tooltip>

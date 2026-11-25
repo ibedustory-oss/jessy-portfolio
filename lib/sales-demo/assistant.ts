@@ -13,6 +13,7 @@ import {
   baseWith,
   baseWord,
   dominantMeal,
+  levers,
   mealDriverSentence,
   modeLabel,
   peakHour,
@@ -20,7 +21,7 @@ import {
   scopeName,
   type CheckItem,
 } from './analysis'
-import { dateFull, dateMD, dateRange, dateShort, eur, eurCheck, eurDiff, josa, mm, pct, people, weekdayName, weekdayNameOf } from './format'
+import { dateFull, dateMD, dateRange, dateShort, eur, eurCheck, eurDiff, josa, mm, pct, people, tablesText, weekdayName, weekdayNameOf } from './format'
 import {
   baseline,
   branchRanking,
@@ -28,6 +29,7 @@ import {
   compare,
   findFlags,
   inView,
+  perTable,
   rangeSummary,
   rateOf,
   weatherSplit,
@@ -138,7 +140,7 @@ const RE = {
   sameDate: /같은\s?날짜|같은\s?날(?!씨)|날짜\s?(기준|로)/,
   weather: /비\s?(온|오는|왔|올|가\s?(온|오|왔))|비온|우천|날씨|맑은|강수/,
   reset: /원래|최근.*평균|평소(와|랑|대로|\s?토|\s?[일월화수목금]요일)|8일|8주|8번|처음\s?(기준|방식)/,
-  guestCheck: /손님|방문객|객단가|고객\s?수|인원|덜\s?(써|쓰|썼)|1명당|한\s?명당/,
+  guestCheck: /손님|방문객|객단가|고객\s?수|인원|덜\s?(써|쓰|썼)|1명당|한\s?명당|테이블|팀당|한\s?팀|일행|단가/,
   hour: /몇\s?시|시간대|언제/,
   summary: /지난\s?주|이번\s?주|주간|이번\s?달|요약|전체적|기간/,
   overview: /왜|이유|원인|낮|줄|떨어|감소|하락|높|늘|올랐|증가|어땠|어때|어떻|매출|실적/,
@@ -204,7 +206,7 @@ function extractMemo(raw: string): string {
     .trim()
 }
 
-export const FALLBACK_TEXT = '이 데모에서는 매출, 손님 수, 1명당 쓴 돈을 비교할 수 있어요. 무엇을 볼까요?'
+export const FALLBACK_TEXT = '이 데모에서는 매출, 손님 수, 1명당·테이블당 쓴 돈을 비교할 수 있어요. 무엇을 볼까요?'
 
 /* ───────── 추천 질문 ───────── */
 
@@ -222,7 +224,7 @@ export function suggestionsFor(view: ViewState, defaults: Defaults): string[] {
       : c.diff < 0
         ? '이날 매출이 왜 이렇게 낮았어?'
         : '이날 매출이 왜 이렇게 높았어?'
-  const out = [first, '손님이 줄어서야, 덜 써서야?']
+  const out = [first, '손님이 줄어서야, 덜 써서야?', '테이블당 얼마 썼어?']
   if (view.mode !== 'weather') out.push(weatherQ)
   out.push('그날 다른 지점은 어땠어?')
   if (view.mode !== 'lastYearWeekday') out.push('작년이랑 비교하면?')
@@ -321,24 +323,33 @@ function guestCheck(env: AssistantEnv, v: ViewState): Answer {
   const c = compare(v.scope, v.date, v.mode)
   if (!c.comparable) return overview(env, v, '')
   const lines: string[] = []
-  let guestEffect = 0
-  let checkEffect = 0
+  const sum = { tables: 0, party: 0, check: 0 }
   for (const meal of ['lunch', 'dinner'] as const) {
     const m = c.meals[meal]
     if (!m.base) continue
-    guestEffect += m.guestEffect ?? 0
-    checkEffect += m.checkEffect ?? 0
+    const lv = levers(m)
+    if (lv) {
+      sum.tables += lv.tables
+      sum.party += lv.party
+      sum.check += lv.check
+    }
     lines.push(
-      `${MEAL_LABEL[meal]}: 손님 ${people(m.base.guests)} → ${people(m.actual.guests)}, 1명당 ${eurCheck(m.checkBase)} → ${eurCheck(m.checkActual)} (매출 ${eurDiff(m.diff ?? 0)})`,
+      `${MEAL_LABEL[meal]} (매출 ${eurDiff(m.diff ?? 0)}): 테이블 ${tablesText(m.base.tables)} → ${tablesText(m.actual.tables)}, 손님 ${people(m.base.guests)} → ${people(m.actual.guests)}. 테이블당 ${eurCheck(perTable(m.base))} → ${eurCheck(perTable(m.actual))}, 1명당 ${eurCheck(m.checkBase)} → ${eurCheck(m.checkActual)}.`,
     )
   }
-  const total = Math.abs(guestEffect) + Math.abs(checkEffect)
+  const parts: [string, number][] = [
+    ['테이블 수', sum.tables],
+    ['한 테이블 인원', sum.party],
+    ['1명당 쓴 돈', sum.check],
+  ]
+  const total = parts.reduce((t, x) => t + Math.abs(x[1]), 0)
+  const detail = parts.map(([name, val]) => `${name} 때문에 ${eurDiff(val)}`).join(', ')
+  const top = [...parts].sort((x, y) => Math.abs(y[1]) - Math.abs(x[1]))[0]
   let verdict: string
-  if (total < 3000) verdict = '손님 수도, 1명당 쓴 돈도 거의 같아요.'
-  else if (Math.abs(guestEffect) >= total * 0.7) verdict = `손님 수가 달라져서 생긴 차이예요. 손님 수 때문에 ${eurDiff(guestEffect)}, 1명당 쓴 돈 때문에 ${eurDiff(checkEffect)}예요.`
-  else if (Math.abs(checkEffect) >= total * 0.7) verdict = `1명당 쓴 돈이 달라져서 생긴 차이예요. 1명당 쓴 돈 때문에 ${eurDiff(checkEffect)}, 손님 수 때문에 ${eurDiff(guestEffect)}예요.`
-  else verdict = `손님 수와 1명당 쓴 돈이 같이 달라졌어요. 손님 수 때문에 ${eurDiff(guestEffect)}, 1명당 쓴 돈 때문에 ${eurDiff(checkEffect)}예요.`
-  return finish('guestCheck', v, [`${baseLabel(c.base)}과 비교했어요.`, ...lines, verdict], [{ kind: 'evidence', label: '자세히 보기' }])
+  if (total < 3000) verdict = '테이블 수도, 한 테이블 인원도, 1명당 쓴 돈도 거의 같아요.'
+  else if (Math.abs(top[1]) >= total * 0.6) verdict = `주로 ${top[0]}${josa(top[0], '이', '가')} 달라져서 생긴 차이예요. ${detail}예요.`
+  else verdict = `여러 가지가 같이 달라졌어요. ${detail}예요.`
+  return finish('guestCheck', v, [`${baseLabel(c.base)}과 비교했어요.`, ...lines, verdict, '테이블은 계산서 한 장을 한 테이블로 셌어요.'], [{ kind: 'evidence', label: '자세히 보기' }])
 }
 
 function weatherAnswer(v: ViewState): Answer {
@@ -450,7 +461,7 @@ function summaryAnswer(env: AssistantEnv, v: ViewState): Answer {
     const diff = s.total.revenue - s.prevYear.total.revenue
     p += ` 작년 이맘때(${dateRange(s.prevYear.start, s.prevYear.end)})보다 ${eur(Math.abs(diff))} ${diff < 0 ? '적어요' : '많아요'} (${pct(rateOf(s.total.revenue, s.prevYear.total.revenue))}).`
   }
-  p += ` 손님은 ${people(s.total.guests)}, 1명당 쓴 돈은 ${eurCheck(checkOf(s.total))}예요.`
+  p += ` 손님은 ${people(s.total.guests)}, 1명당 쓴 돈은 ${eurCheck(checkOf(s.total))}, 테이블당 쓴 돈은 ${eurCheck(perTable(s.total))}예요.`
   if (s.missingDays > 0) p += ` 기록이 없는 날이 ${s.missingDays}일 있어요.`
   paragraphs.push(p)
   if (v.scope === 'all') {
