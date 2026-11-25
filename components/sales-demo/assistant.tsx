@@ -31,6 +31,7 @@ function Actions({ actions }: { actions: AnswerAction[] }) {
             d.goto(a.scope, a.date)
             d.scrollTo('sd-day')
           } else if (a.kind === 'openAgenda') d.setTab('agenda')
+          else if (a.kind === 'scroll') d.scrollTo(a.target)
         }
         return (
           <button key={a.label} type="button" className={btn.chip} onClick={run}>

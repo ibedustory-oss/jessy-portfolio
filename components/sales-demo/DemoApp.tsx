@@ -4,11 +4,12 @@ import { useEffect } from 'react'
 import { AskFab, Assistant, Guide, Toast } from './assistant'
 import { DayCard, EvidenceCard } from './day'
 import { FilterBar, Flags, Header, Kpis, PeriodCard } from './overview'
+import { PatternsCard } from './patterns'
 import { DemoProvider } from './store'
 
 /**
  * 서울식당 파리 — 5개 지점 매출 브리핑 데모.
- * 한 페이지 안에 기간 실적 → 확인할 날 → 기간별 매출 → 선택일 상세 → 분석 근거가 이어지고,
+ * 한 페이지 안에 기간 실적 → 확인할 날 → 개선 기회 → 기간별 매출 → 선택일 상세 → 분석 근거가 이어지고,
  * PC에서는 오른쪽에, 모바일에서는 상세 바로 아래에 질문 패널이 놓인다.
  */
 export default function DemoApp() {
@@ -38,12 +39,15 @@ export default function DemoApp() {
               <Flags />
             </div>
             <div className="min-w-0 lg:col-start-1">
+              <PatternsCard />
+            </div>
+            <div className="min-w-0 lg:col-start-1">
               <PeriodCard />
             </div>
             <div className="min-w-0 lg:col-start-1">
               <DayCard />
             </div>
-            <div className="min-w-0 lg:col-start-2 lg:row-span-5 lg:row-start-1">
+            <div className="min-w-0 lg:col-start-2 lg:row-span-6 lg:row-start-1">
               <div className="lg:sticky lg:top-[68px] lg:h-[calc(100vh-84px)]">
                 <Assistant />
               </div>

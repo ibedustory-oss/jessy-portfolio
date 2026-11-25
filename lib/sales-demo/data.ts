@@ -479,6 +479,18 @@ export function statusReason(branch: BranchId, d: ISODate): string | null {
   return closedReason(branch, d) ?? MISSING[branch]?.[d] ?? null
 }
 
+/* ───────── 서서히 진행되는 변화 (하루 단위로는 눈에 띄지 않는다) ───────── */
+
+/** Opéra점 평일 저녁: 9월 14일부터 10주에 걸쳐 방문객이 22%까지 줄어든다. */
+const DRIFT_START = dayNum('2026-09-14')
+const DRIFT_END = dayNum('2026-11-22')
+
+function driftFactor(branch: BranchId, n: number, dow: number, meal: Meal): number {
+  if (branch !== 'opera' || meal !== 'dinner' || dow === 0 || dow === 6 || n < DRIFT_START) return 1
+  const t = Math.min(1, (n - DRIFT_START) / (DRIFT_END - DRIFT_START))
+  return 1 - 0.22 * t
+}
+
 /* ───────── 생성 ───────── */
 
 function generateSales(): void {
@@ -505,7 +517,7 @@ function generateSales(): void {
 
       for (const meal of ['lunch', 'dinner'] as Meal[]) {
         const rained = mealRainMm(date, meal) > 0
-        let mealFactor = rained ? model.rain[meal] : 1
+        let mealFactor = (rained ? model.rain[meal] : 1) * driftFactor(id, START_NUM + i, weekday(date), meal)
         for (const c of ctx) mealFactor *= c.effect[id]?.[meal] ?? 1
         const checkNoise = 1 + 0.02 * noise(bi + 1, i, meal === 'lunch' ? 20 : 21)
         // 객단가는 10센트 단위

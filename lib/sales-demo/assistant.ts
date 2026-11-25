@@ -34,6 +34,8 @@ import {
   type Scope,
 } from './metrics'
 import { defaultKey, type Defaults, type Memo, type ViewState } from './types'
+import { PATTERN_WEEKS, findPatterns } from './patterns'
+import { KIND_LABEL, describePattern } from './patterns-text'
 
 export type Intent =
   | 'overview'
@@ -47,6 +49,7 @@ export type Intent =
   | 'memo'
   | 'agenda'
   | 'summary'
+  | 'patterns'
   | 'unsupported'
 
 export type Effect =
@@ -65,6 +68,7 @@ export type AnswerAction =
   | { kind: 'goto'; label: string; scope: Scope; date: ISODate }
   | { kind: 'agenda'; label: string; item: CheckItem; date: ISODate }
   | { kind: 'openAgenda'; label: string }
+  | { kind: 'scroll'; label: string; target: string }
 
 export interface AnswerRow {
   branch: BranchId
@@ -125,6 +129,7 @@ const RE = {
   save: /(앞으로|매번|항상|마다|계속).*(보여|해\s?줘|비교|이렇게|해줘)|기본값|기본으로/,
   memo: /^메모\s*[:：]?|메모.*(남겨|추가|적어|저장|기록)/,
   agenda: /회의|안건/,
+  patterns: /개선|문제점|문제가|문제는|약점|기회|패턴|반복|되풀이|고칠|고쳐|손볼|어디가 약|새는/,
   unsupported: /예측|예상|내일|다음\s?(주|달)|메뉴|원가|이익|마진|리뷰|직원|인건비|배달|재고/,
   others: /다른\s?(지점|매장|곳|가게|점)|지점별|매장별|전\s?지점|모든\s?(지점|매장)|다섯\s?(지점|매장)|5개\s?(지점|매장)|어느\s?(지점|매장)|(지점|매장).*(비교|순위)/,
   lastYear: /작년|전년|지난해|1년\s?전/,
@@ -206,7 +211,7 @@ export function suggestionsFor(view: ViewState, defaults: Defaults): string[] {
   const rainy = isRainyLunch(view.date)
   const weatherQ = rainy ? `비 온 ${w}끼리만 비교하면?` : '날씨가 같았던 날끼리 비교하면?'
   if (view.scope === 'all') {
-    return ['지난주 매출은 어땠어?', '이날 어느 지점이 가장 많이 줄었어?', weatherQ, '작년이랑 비교하면?']
+    return ['지난주 매출은 어땠어?', '개선할 점이 뭐야?', '이날 어느 지점이 가장 많이 줄었어?', weatherQ, '작년이랑 비교하면?']
   }
   const c = compare(view.scope, view.date, view.mode)
   const first =
@@ -219,6 +224,7 @@ export function suggestionsFor(view: ViewState, defaults: Defaults): string[] {
   if (view.mode !== 'weather') out.push(weatherQ)
   out.push('그날 다른 지점은 어땠어?')
   if (view.mode !== 'lastYearWeekday') out.push('작년이랑 비교하면?')
+  out.push('이 지점에서 개선할 점이 뭐야?')
   const saved = defaults[defaultKey(view.scope, weekday(view.date))]
   if (view.mode !== 'recent8' && saved !== view.mode) out.push(`이 지점은 ${w}마다 이렇게 보여줘`)
   return out
@@ -472,6 +478,31 @@ function summaryAnswer(env: AssistantEnv, v: ViewState): Answer {
   return a
 }
 
+function patternsAnswer(v: ViewState): Answer {
+  const list = findPatterns(v.scope)
+  const name = scopeName(v.scope)
+  if (list.length === 0) {
+    const a = finish('patterns', v, [`최근 ${PATTERN_WEEKS}주 동안 ${name}에서 되풀이되는 큰 차이는 찾지 못했어요.`], [])
+    a.conditions = `${name} · 최근 ${PATTERN_WEEKS}주 · 반복 패턴`
+    return a
+  }
+  const top = list.filter((p) => p.kind !== 'strength').slice(0, 3)
+  const good = list.find((p) => p.kind === 'strength')
+  const paragraphs = [`하루가 아니라 최근 ${PATTERN_WEEKS}주 동안 되풀이된 차이를 크기순으로 보면 이래요.`]
+  top.forEach((p, i) => {
+    const t = describePattern(p)
+    paragraphs.push(`${i + 1}. ${v.scope === 'all' ? `${scopeName(p.branch)} — ` : ''}${t.title} · ${t.size}${p.monthly === null ? ' (가정)' : ''} · ${KIND_LABEL[p.kind]}`)
+  })
+  if (good) {
+    const t = describePattern(good)
+    paragraphs.push(`잘되는 쪽도 있어요: ${v.scope === 'all' ? `${scopeName(good.branch)} — ` : ''}${t.title}.`)
+  }
+  paragraphs.push('금액은 관측된 차이이거나 가정을 밝힌 계산이에요. 원인은 확정하지 않았으니, 회의에서 확인한 뒤 4주쯤 시험해 보세요.')
+  const a = finish('patterns', v, paragraphs, [{ kind: 'scroll', label: '개선 기회 자세히 보기', target: 'sd-patterns' }])
+  a.conditions = `${name} · 최근 ${PATTERN_WEEKS}주 · 반복 패턴`
+  return a
+}
+
 function finish(intent: Intent, view: ViewState, paragraphs: string[], actions: AnswerAction[]): Answer {
   return { intent, paragraphs, actions, conditions: conditionsLabel(view), view, effects: [] }
 }
@@ -537,7 +568,7 @@ export function respond(raw: string, env: AssistantEnv): Answer {
   const wrap = (a: Answer): Answer => {
     a.effects = [...effects, ...a.effects]
     const changed = env.lastTarget !== null && env.lastTarget !== targetKey(a.view)
-    if ((moved || changed) && a.intent !== 'overview' && a.intent !== 'summary' && a.intent !== 'memo') {
+    if ((moved || changed) && a.intent !== 'overview' && a.intent !== 'summary' && a.intent !== 'memo' && a.intent !== 'patterns') {
       a.paragraphs = [`${scopeName(a.view.scope)}, ${dateShort(a.view.date)} 기준이에요.`, ...a.paragraphs]
     }
     return a
@@ -598,6 +629,8 @@ export function respond(raw: string, env: AssistantEnv): Answer {
     a.effects.push({ type: 'addAgenda', item: check, date: view.date })
     return wrap(a)
   }
+
+  if (RE.patterns.test(q)) return wrap(patternsAnswer(view))
 
   if (RE.unsupported.test(q)) {
     return wrap(unsupported(env, view, '이 데모에는 그 질문에 답할 자료가 없어요. 없는 수치는 만들지 않아요.'))

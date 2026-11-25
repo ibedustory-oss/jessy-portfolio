@@ -17,6 +17,8 @@ import {
 import { eur, eurDiff, pct } from '../lib/sales-demo/format'
 import { respond, type AssistantEnv } from '../lib/sales-demo/assistant'
 import type { CompareMode } from '../lib/sales-demo/metrics'
+import { findPatterns } from '../lib/sales-demo/patterns'
+import { describePattern } from '../lib/sales-demo/patterns-text'
 
 let failed = 0
 function check(name: string, actual: unknown, expected: unknown) {
@@ -159,6 +161,17 @@ check('미지원 질문에 수치 없음', a7.intent === 'unsupported' && !/€\
 console.log('\n── 저장한 기준이 ‘확인할 날’에 반영되는지')
 const saved = findFlags('all', range.start, range.end, (b, d) => (b === 'marais' && d === D ? 'weather' : 'recent8'))
 check('저장 후 Le Marais 11/21은 확인할 날에서 빠짐', saved.drops.some((f) => f.branch === 'marais' && f.date === D), false)
+
+console.log('\n── 개선 기회 (최근 26주의 반복 패턴)')
+const pats = findPatterns('all')
+for (const p of pats) console.log(`  ${p.kind.padEnd(9)} ${branchById(p.branch).name.padEnd(16)} ${describePattern(p).title} · ${describePattern(p).size}`)
+check('가장 큰 관측 차이 = Opéra점 평일 저녁 감소', `${pats[0].kind} ${pats[0].branch} ${pats[0].group} ${pats[0].meal}`, 'drift opera weekday dinner')
+check('Le Marais점 비 오는 날 점심 패턴', pats.some((p) => p.kind === 'weather' && p.branch === 'marais' && p.meal === 'lunch'), true)
+check('비 때문에 생긴 차이를 감소 추세로 잡지 않음', pats.filter((p) => p.kind === 'drift').length, 1)
+check('Montparnasse점은 비 오는 날 점심이 강점', pats.some((p) => p.kind === 'strength' && p.branch === 'montparnasse'), true)
+check('가정 계산은 관측 금액과 구분', pats.filter((p) => p.kind === 'underused').every((p) => p.monthly === null && p.whatIfMonthly !== null), true)
+const a8 = respond('개선할 점이 뭐야?', { ...env('recent8'), view: { scope: 'all', date: D, mode: 'recent8' } })
+check('“개선할 점이 뭐야?” → 반복 패턴 답변', a8.intent === 'patterns' && a8.paragraphs.some((x) => x.includes('Opéra점')), true)
 
 console.log(failed === 0 ? '\n모든 검산 통과' : `\n실패 ${failed}건`)
 process.exit(failed === 0 ? 0 : 1)
