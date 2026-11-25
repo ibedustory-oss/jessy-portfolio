@@ -17,6 +17,8 @@ import {
 import { eur, eurDiff, pct } from '../lib/sales-demo/format'
 import { respond, type AssistantEnv } from '../lib/sales-demo/assistant'
 import type { CompareMode } from '../lib/sales-demo/metrics'
+import { findPatterns } from '../lib/sales-demo/patterns'
+import { describePattern } from '../lib/sales-demo/patterns-text'
 
 let failed = 0
 function check(name: string, actual: unknown, expected: unknown) {
@@ -139,7 +141,7 @@ const env = (mode: CompareMode, defaults = {}): AssistantEnv => ({
   range,
 })
 const a1 = respond('이날 매출이 왜 이렇게 낮았어?', env('recent8'))
-check('왜 낮았어 → 점심 €384 집중', a1.paragraphs[0].includes('€384가 점심에 집중') && a1.paragraphs[0].includes('68명에서 44명'), true)
+check('왜 낮았어 → 점심 €384 집중', a1.paragraphs[0].includes('€384가 점심에서 빠졌어요') && a1.paragraphs[0].includes('68명에서 44명'), true)
 const a2 = respond('비 온 토요일끼리만 비교하면?', env('recent8'))
 check('비 온 토요일 → weather 기준으로 전환', a2.view.mode, 'weather')
 check('비 온 토요일 → −3.2%', a2.paragraphs[0].includes('€1,984') && a2.paragraphs[0].includes('−3.2%'), true)
@@ -150,7 +152,7 @@ check('작년 같은 날짜를 명시하면 날짜 기준', respond('작년 같�
 const a4 = respond('그날 다른 지점은 어땠어?', env('recent8'))
 check('다른 지점 → 5곳, 보던 지점 강조', a4.rows?.length === 5 && a4.rows.find((r) => r.highlight)?.branch === 'marais', true)
 const a5 = respond('이 지점은 토요일마다 이렇게 보여줘', env('weather'))
-check('저장 미리보기', a5.preview?.label, 'Le Marais점 · 토요일 · 날씨가 같았던 토요일 평균')
+check('저장 미리보기', a5.preview?.label, 'Le Marais점 · 토요일 · 날씨가 비슷했던 토요일과 비교')
 const a6 = respond('메모: 이날은 테라스를 열지 않았음', env('recent8'))
 check('메모 저장 효과만, 금액 추정 없음', a6.effects.some((e) => e.type === 'saveMemo') && !/€/.test(a6.paragraphs.join(' ')), true)
 const a7 = respond('내일 매출 예측해줘', env('recent8'))
@@ -159,6 +161,27 @@ check('미지원 질문에 수치 없음', a7.intent === 'unsupported' && !/€\
 console.log('\n── 저장한 기준이 ‘확인할 날’에 반영되는지')
 const saved = findFlags('all', range.start, range.end, (b, d) => (b === 'marais' && d === D ? 'weather' : 'recent8'))
 check('저장 후 Le Marais 11/21은 확인할 날에서 빠짐', saved.drops.some((f) => f.branch === 'marais' && f.date === D), false)
+
+console.log('\n── 개선 기회 (최근 26주의 반복 패턴)')
+const pats = findPatterns('all')
+for (const p of pats) console.log(`  ${p.kind.padEnd(9)} ${branchById(p.branch).name.padEnd(16)} ${describePattern(p).title} · ${describePattern(p).size}`)
+check('가장 큰 관측 차이 = Opéra점 평일 저녁 감소', `${pats[0].kind} ${pats[0].branch} ${pats[0].group} ${pats[0].meal}`, 'drift opera weekday dinner')
+check('Le Marais점 비 오는 날 점심 패턴', pats.some((p) => p.kind === 'weather' && p.branch === 'marais' && p.meal === 'lunch'), true)
+check('비 때문에 생긴 차이를 감소 추세로 잡지 않음', pats.filter((p) => p.kind === 'drift').length, 1)
+check('Montparnasse점은 비 오는 날 점심이 강점', pats.some((p) => p.kind === 'strength' && p.branch === 'montparnasse'), true)
+check('가정 계산은 관측 금액과 구분', pats.filter((p) => p.kind === 'underused').every((p) => p.monthly === null && p.whatIfMonthly !== null), true)
+const a8 = respond('고칠 점이 뭐야?', { ...env('recent8'), view: { scope: 'all', date: D, mode: 'recent8' } })
+check('“고칠 점이 뭐야?” → 반복되는 일 답변', a8.intent === 'patterns' && a8.paragraphs.some((x) => x.includes('Opéra점')), true)
+
+console.log('\n── 쉬운 말: 어려운 낱말이 답변에 남아 있지 않은지')
+const HARD = /객단가|방문객|비교 기준|차액|기본값|증감률|관측|표본|집계|실적|수치|안건|강수|누락/
+const sampleQs = ['이날 매출이 왜 이렇게 낮았어?', '손님이 줄어서야, 덜 써서야?', '비 온 토요일끼리만 비교하면?', '그날 다른 지점은 어땠어?', '작년이랑 비교하면?', '이 지점은 토요일마다 이렇게 보여줘', '지난주 매출은 어땠어?', '고칠 점이 뭐야?', '내일 매출 예측해줘', '안녕']
+const hardHits = sampleQs.filter((q) => {
+  const a = respond(q, env('weather'))
+  return HARD.test([...a.paragraphs, a.conditions, a.preview?.label ?? '', ...a.actions.map((x) => x.label)].join(' '))
+})
+check('답변에 어려운 낱말 없음', hardHits.join(' | '), '')
+check('“덜 써서야?”도 손님 수·1명당 질문으로 이해', respond('손님이 줄어서야, 덜 써서야?', env('recent8')).intent, 'guestCheck')
 
 console.log(failed === 0 ? '\n모든 검산 통과' : `\n실패 ${failed}건`)
 process.exit(failed === 0 ? 0 : 1)

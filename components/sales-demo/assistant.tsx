@@ -18,7 +18,7 @@ function Actions({ actions }: { actions: AnswerAction[] }) {
           return (
             <button key={a.label} type="button" className={btn.chip} disabled={added} onClick={() => d.addAgenda(a.item, a.date)}>
               <Icon name={added ? 'check' : 'plus'} size={13} />
-              {added ? '안건에 추가됨' : a.label}
+              {added ? '추가했어요' : a.label}
             </button>
           )
         }
@@ -31,6 +31,7 @@ function Actions({ actions }: { actions: AnswerAction[] }) {
             d.goto(a.scope, a.date)
             d.scrollTo('sd-day')
           } else if (a.kind === 'openAgenda') d.setTab('agenda')
+          else if (a.kind === 'scroll') d.scrollTo(a.target)
         }
         return (
           <button key={a.label} type="button" className={btn.chip} onClick={run}>
@@ -81,7 +82,7 @@ function Message({ m }: { m: ChatMessage }) {
                       {r.name}
                       {r.highlight && <span className="ml-1.5 text-[11px] font-semibold text-accent">보던 지점</span>}
                     </th>
-                    <td className="px-2 py-1.5 text-right text-charcoal">{r.revenue === null ? '누락' : eur(r.revenue)}</td>
+                    <td className="px-2 py-1.5 text-right text-charcoal">{r.revenue === null ? '기록 없음' : eur(r.revenue)}</td>
                     <td className="px-3 py-1.5 text-right">{r.diff === null ? <span className="text-warmgray">–</span> : <Delta diff={r.diff} rate={r.rate} />}</td>
                   </tr>
                 ))}
@@ -91,13 +92,13 @@ function Message({ m }: { m: ChatMessage }) {
         )}
         {a?.preview && (
           <div className="mt-2.5 rounded-xl border border-accent/30 bg-tint px-3.5 py-3">
-            <p className="text-[12px] font-medium text-accent">기본값 미리보기</p>
+            <p className="text-[12px] font-medium text-accent">앞으로 이렇게 볼까요?</p>
             <p className="mt-0.5 text-[14px] font-semibold leading-6 text-ink">{a.preview.label}</p>
             {a.preview.resolved && <p className="text-[12.5px] leading-5 text-charcoal">{a.preview.resolved}</p>}
             {m.save === 'pending' ? (
               <div className="mt-2.5 flex gap-2">
                 <button type="button" className={btn.primary} onClick={() => d.confirmSave(m.id)}>
-                  기본값으로 저장
+                  이렇게 저장
                 </button>
                 <button type="button" className={btn.ghost} onClick={() => d.cancelSave(m.id)}>
                   취소
@@ -131,14 +132,14 @@ function Agenda() {
   const groups = BRANCH_IDS.map((b) => ({ b, items: d.agenda.filter((a) => a.branch === b) })).filter((g) => g.items.length > 0)
   const copy = async () => {
     const text = [
-      '서울식당 파리 · 점장 회의 안건',
-      ...groups.flatMap((g) => ['', `■ ${branchById(g.b).name}`, ...g.items.flatMap((i) => [`- ${i.summary}`, `  확인: ${i.question}`])]),
+      '서울식당 파리 · 점장 회의 때 물어볼 것',
+      ...groups.flatMap((g) => ['', `■ ${branchById(g.b).name}`, ...g.items.flatMap((i) => [`- ${i.summary}`, `  물어볼 것: ${i.question}`])]),
     ].join('\n')
     try {
       await navigator.clipboard.writeText(text)
-      d.notify('회의 안건을 복사했어요')
+      d.notify('복사했어요. 메신저에 붙여넣으세요')
     } catch {
-      d.notify('복사하지 못했어요. 브라우저 권한을 확인해 주세요')
+      d.notify('복사가 안 됐어요. 브라우저에서 복사를 허용해 주세요')
     }
   }
   if (groups.length === 0) {
@@ -147,11 +148,11 @@ function Agenda() {
         <div className="flex h-11 w-11 items-center justify-center rounded-full bg-surface text-warmgray">
           <Icon name="list" size={20} />
         </div>
-        <p className="mt-3 text-[14.5px] font-semibold text-ink">아직 안건이 없어요</p>
+        <p className="mt-3 text-[14.5px] font-semibold text-ink">아직 물어볼 게 없어요</p>
         <p className="mt-1 text-[13px] leading-6 text-charcoal">
-          ‘분석 근거’의 추가로 확인할 점에서 <span className="font-semibold">+ 안건</span>을 누르면
+          ‘고쳐볼 만한 점’이나 ‘왜 이렇게 나왔나요?’에서 <span className="font-semibold">추가</span>를 누르면
           <br />
-          다음 점장 회의에서 물어볼 질문이 지점별로 모여요.
+          다음 점장 회의 때 물어볼 질문이 지점별로 모여요.
         </p>
       </div>
     )
@@ -160,7 +161,7 @@ function Agenda() {
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4">
         {groups.map((g) => (
-          <section key={g.b} aria-label={`${branchById(g.b).name} 안건`}>
+          <section key={g.b} aria-label={`${branchById(g.b).name}에 물어볼 것`}>
             <h3 className="text-[13px] font-bold text-ink">{branchById(g.b).name}</h3>
             <ul className="mt-1.5 space-y-1.5">
               {g.items.map((i) => (
@@ -169,7 +170,7 @@ function Agenda() {
                     type="checkbox"
                     checked={i.done}
                     onChange={() => d.toggleAgenda(i.id)}
-                    aria-label={`확인 완료: ${i.question}`}
+                    aria-label={`물어봤어요: ${i.question}`}
                     className="mt-1 h-4 w-4 shrink-0 accent-[#1B64DA]"
                   />
                   <button
@@ -179,12 +180,12 @@ function Agenda() {
                       d.goto(i.branch, i.date)
                       d.scrollTo('sd-day')
                     }}
-                    title="이 지점·날짜 열기"
+                    title="이 지점, 이 날짜 보기"
                   >
                     <span className={`block text-[13.5px] font-medium leading-6 ${i.done ? 'text-warmgray line-through' : 'text-ink'}`}>{i.question}</span>
                     <span className="block text-[12px] leading-5 text-warmgray">{i.summary}</span>
                   </button>
-                  <button type="button" className={`${btn.quiet} !px-1`} onClick={() => d.removeAgenda(i.id)} aria-label={`안건 삭제: ${i.question}`}>
+                  <button type="button" className={`${btn.quiet} !px-1`} onClick={() => d.removeAgenda(i.id)} aria-label={`지우기: ${i.question}`}>
                     <Icon name="x" size={14} />
                   </button>
                 </li>
@@ -196,7 +197,7 @@ function Agenda() {
       <div className="border-t border-line px-4 py-3">
         <button type="button" className={`${btn.ghost} w-full`} onClick={copy}>
           <Icon name="copy" size={15} />
-          안건 전체 복사 (메신저에 붙여넣기)
+          전체 복사해서 메신저로 보내기
         </button>
       </div>
     </div>
@@ -228,11 +229,11 @@ export function Assistant() {
       <Guide placement="panel" />
       <div className="border-b border-line px-4 pt-3.5">
         <h2 className="text-[15px] font-bold text-ink">매출에 대해 물어보세요</h2>
-        <div role="tablist" aria-label="질문과 회의 안건" className="mt-2 flex gap-4">
+        <div role="tablist" aria-label="질문과 회의 때 물어볼 것" className="mt-2 flex gap-4">
           {(
             [
               { id: 'ask', label: '질문' },
-              { id: 'agenda', label: `회의 안건${d.agenda.length ? ` ${d.agenda.length}` : ''}` },
+              { id: 'agenda', label: `회의 때 물어볼 것${d.agenda.length ? ` ${d.agenda.length}` : ''}` },
             ] as const
           ).map((t) => (
             <button
@@ -246,7 +247,7 @@ export function Assistant() {
               }`}
             >
               {t.label}
-              {t.id === 'agenda' && open > 0 && <span className="sr-only"> (확인 전 {open}건)</span>}
+              {t.id === 'agenda' && open > 0 && <span className="sr-only"> (아직 안 물어본 것 {open}개)</span>}
             </button>
           ))}
         </div>
@@ -265,7 +266,7 @@ export function Assistant() {
           </div>
           <div className="border-t border-line px-3.5 pb-3 pt-2.5">
             <p className="mb-2 flex items-center gap-1.5 text-[12px] text-warmgray">
-              <span className="shrink-0">지금 보는 조건</span>
+              <span className="shrink-0">지금 보는 화면</span>
               <span className="truncate rounded-md bg-surface px-1.5 py-0.5 font-medium text-charcoal">{conditions}</span>
             </p>
             <div className="-mx-0.5 mb-2 flex gap-1.5 overflow-x-auto px-0.5 pb-1" role="group" aria-label="추천 질문">
@@ -304,7 +305,7 @@ export function Assistant() {
                 <Icon name="send" size={18} />
               </button>
             </form>
-            <p className="mt-2 text-[11.5px] leading-4 text-warmgray">AI 분석은 예시 응답입니다. 데모 데이터의 집계 결과로만 답해요.</p>
+            <p className="mt-2 text-[11.5px] leading-4 text-warmgray">AI 답변은 예시예요. 이 데모의 가상 매출로 계산한 숫자만 말해요.</p>
           </div>
         </>
       )}
@@ -329,14 +330,14 @@ export function Guide({ placement }: { placement: 'panel' | 'top' }) {
   }
   return (
     <aside
-      aria-label="3분 시연 가이드"
+      aria-label="3분 따라 하기"
       className={placement === 'panel' ? 'border-b border-line bg-tint' : 'mb-4 rounded-2xl border border-[#CFE0FA] bg-tint lg:hidden'}
     >
       <div className="px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 rounded-md bg-accent px-1.5 py-0.5 text-[11.5px] font-bold text-white">
             <Icon name="play" size={12} />
-            3분 시연 <span className="tabular-nums">{d.guideDone.length}/6</span>
+            3분 따라 하기 <span className="tabular-nums">{d.guideDone.length}/6</span>
           </span>
           <button
             type="button"
@@ -344,10 +345,10 @@ export function Guide({ placement }: { placement: 'panel' | 'top' }) {
             aria-expanded={expanded}
             onClick={() => setExpanded(!expanded)}
           >
-            전체 단계
+            전체 순서
             <Icon name="down" size={13} className={expanded ? 'rotate-180' : ''} />
           </button>
-          <button type="button" className="rounded-md p-1 text-warmgray hover:bg-white hover:text-ink" onClick={() => d.setGuideOpen(false)} aria-label="시연 가이드 닫기">
+          <button type="button" className="rounded-md p-1 text-warmgray hover:bg-white hover:text-ink" onClick={() => d.setGuideOpen(false)} aria-label="따라 하기 닫기">
             <Icon name="x" size={14} />
           </button>
         </div>
@@ -362,12 +363,12 @@ export function Guide({ placement }: { placement: 'panel' | 'top' }) {
               </span>
             </p>
             <button type="button" className="shrink-0 rounded-lg border border-accent bg-white px-2.5 py-1.5 text-[12.5px] font-semibold text-accent hover:bg-tint" onClick={act}>
-              {next.id === 1 ? '지점 비교표로 가기' : '질문 넣기'}
+              {next.id === 1 ? '지점별 표로 가기' : '질문 넣기'}
             </button>
           </div>
         ) : (
           <p className="mt-1.5 text-[13px] leading-5 text-charcoal">
-            끝까지 해보셨어요. 저장한 기준으로는 평소 범위라서 ‘확인할 날’에서 Le Marais점 11월 21일이 빠졌어요. 새로고침해도 메모와 기본값은 남아요.
+            다 해보셨어요. 저장한 방식으로 보면 평소와 비슷한 날이라, ‘평소와 달랐던 날’에서 Le Marais점 11월 21일이 빠졌어요. 새로고침해도 메모와 저장한 방식은 남아요.
           </p>
         )}
         {expanded && (

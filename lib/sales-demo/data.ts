@@ -56,7 +56,7 @@ export const BRANCHES: Branch[] = [
     name: 'Saint-Germain점',
     area: '파리 6구',
     concept: '삼겹살과 단체 식사',
-    trait: '저녁 객단가가 높아요',
+    trait: '저녁에 1명당 쓰는 돈이 많아요',
     aliases: ['saint-germain', 'saint germain', 'germain', '생제르맹', '생제르망', '생 제르맹'],
   },
   {
@@ -325,7 +325,7 @@ export const CONTEXT_ITEMS: ContextItem[] = [
     branches: ['montparnasse'],
     start: '2026-11-18',
     end: '2026-11-18',
-    hours: '종일',
+    hours: '하루 종일',
     source: DEMO_SOURCE,
     effect: {},
   },
@@ -338,7 +338,7 @@ export const CONTEXT_ITEMS: ContextItem[] = [
     branches: [],
     start: '2026-03-19',
     end: '2026-03-19',
-    hours: '종일',
+    hours: '하루 종일',
     source: DEMO_SOURCE,
     effect: {
       opera: { lunch: 0.78, dinner: 0.86 },
@@ -425,9 +425,9 @@ export interface MonthlyIndex {
 }
 
 export const TOURISM_INDEX = {
-  name: '파리 관광 수요 지수',
+  name: '파리 관광객 지수',
   region: '파리 전역',
-  unit: '지수 (기준월 = 100)',
+  unit: '기준이 되는 달을 100으로 본 숫자',
   granularity: '월별',
   baseMonth: '2025-11',
   source: DEMO_SOURCE,
@@ -465,18 +465,30 @@ const OPERA_SUMMER_BREAK: [ISODate, ISODate][] = [
 
 function closedReason(branch: BranchId, d: ISODate): string | null {
   const md = d.slice(5)
-  if (md === '12-25') return '성탄절 휴무'
-  if (md === '01-01') return '새해 첫날 휴무'
-  if (branch === 'opera' && OPERA_SUMMER_BREAK.some(([a, b]) => d >= a && d <= b)) return '여름 휴무'
+  if (md === '12-25') return '성탄절이라 쉬었어요'
+  if (md === '01-01') return '새해 첫날이라 쉬었어요'
+  if (branch === 'opera' && OPERA_SUMMER_BREAK.some(([a, b]) => d >= a && d <= b)) return '여름휴가로 쉬었어요'
   return null
 }
 
 const MISSING: Partial<Record<BranchId, Record<ISODate, string>>> = {
-  montparnasse: { '2026-09-08': 'POS 자료가 들어오지 않았어요' },
+  montparnasse: { '2026-09-08': '계산대(POS)에서 매출 기록이 안 들어왔어요' },
 }
 
 export function statusReason(branch: BranchId, d: ISODate): string | null {
   return closedReason(branch, d) ?? MISSING[branch]?.[d] ?? null
+}
+
+/* ───────── 서서히 진행되는 변화 (하루 단위로는 눈에 띄지 않는다) ───────── */
+
+/** Opéra점 평일 저녁: 9월 14일부터 10주에 걸쳐 방문객이 22%까지 줄어든다. */
+const DRIFT_START = dayNum('2026-09-14')
+const DRIFT_END = dayNum('2026-11-22')
+
+function driftFactor(branch: BranchId, n: number, dow: number, meal: Meal): number {
+  if (branch !== 'opera' || meal !== 'dinner' || dow === 0 || dow === 6 || n < DRIFT_START) return 1
+  const t = Math.min(1, (n - DRIFT_START) / (DRIFT_END - DRIFT_START))
+  return 1 - 0.22 * t
 }
 
 /* ───────── 생성 ───────── */
@@ -505,7 +517,7 @@ function generateSales(): void {
 
       for (const meal of ['lunch', 'dinner'] as Meal[]) {
         const rained = mealRainMm(date, meal) > 0
-        let mealFactor = rained ? model.rain[meal] : 1
+        let mealFactor = (rained ? model.rain[meal] : 1) * driftFactor(id, START_NUM + i, weekday(date), meal)
         for (const c of ctx) mealFactor *= c.effect[id]?.[meal] ?? 1
         const checkNoise = 1 + 0.02 * noise(bi + 1, i, meal === 'lunch' ? 20 : 21)
         // 객단가는 10센트 단위
