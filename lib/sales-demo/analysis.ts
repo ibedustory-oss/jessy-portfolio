@@ -43,18 +43,18 @@ export const MEAL_HOURS: Record<Meal, string> = { lunch: '12~15시', dinner: '18
 
 export const scopeName = (scope: Scope): string => (scope === 'all' ? '전체 지점' : branchById(scope).name)
 
-/* ───────── 비교 기준 이름 ───────── */
+/* ───────── 비교 대상 이름 — 누구나 아는 말로 ───────── */
 
-/** 메뉴에 쓰는 이름 (날짜의 요일만 반영) */
+/** 고르는 메뉴에 쓰는 이름 */
 export function modeLabel(mode: CompareMode, date: ISODate): string {
   const w = weekdayName(date)
   switch (mode) {
     case 'recent8':
-      return `최근 ${w} 8일 평균`
+      return `평소 ${w} (최근 8번 평균)`
     case 'weather':
-      return `날씨가 같았던 ${w} 평균`
+      return `날씨가 비슷했던 ${w}`
     case 'lastYearWeekday':
-      return '작년 같은 요일 (364일 전)'
+      return '작년 이맘때 같은 요일'
     case 'lastYearDate':
       return '작년 같은 날짜'
   }
@@ -63,25 +63,35 @@ export function modeLabel(mode: CompareMode, date: ISODate): string {
 export function modeHint(mode: CompareMode): string {
   switch (mode) {
     case 'recent8':
-      return '직전 8주의 같은 요일. 선택일은 평균에서 빼요.'
+      return '지난 8주의 같은 요일과 비교해요. 보고 있는 날은 평균에 넣지 않아요.'
     case 'weather':
-      return '최근 8일 중 점심(12~15시) 강수 여부가 선택일과 같은 날만.'
+      return '지난 8주 중 점심에 비가 왔는지가 같은 날끼리만 비교해요.'
     case 'lastYearWeekday':
-      return '요일이 같은 364일 전 하루.'
+      return '요일이 같도록 364일 전과 비교해요.'
     case 'lastYearDate':
-      return '달력 날짜가 같은 하루. 요일이 다를 수 있어요.'
+      return '달력 날짜가 같은 날이에요. 요일은 다를 수 있어요.'
   }
 }
 
-/** 실제로 적용된 기준의 이름 (표본 수와 날짜 포함) */
+/** 표와 칸에 쓰는 한 단어: 평소 / 작년 */
+export function baseWord(mode: CompareMode): string {
+  return mode === 'lastYearWeekday' || mode === 'lastYearDate' ? '작년' : '평소'
+}
+
+/** ‘평소와’ / ‘작년과’ */
+export function baseWith(mode: CompareMode): string {
+  return baseWord(mode) === '작년' ? '작년과' : '평소와'
+}
+
+/** 실제로 비교한 대상 (몇 번인지, 어느 날짜인지까지) */
 export function baseLabel(base: Baseline): string {
   const w = weekdayName(base.date)
   const n = base.days.length
   switch (base.mode) {
     case 'recent8':
-      return `최근 ${w} ${n}일 평균`
+      return `평소 ${w} · 최근 ${n}번 평균`
     case 'weather':
-      return base.rainyTarget ? `비 온 ${w} ${n}일 평균` : `비가 오지 않은 ${w} ${n}일 평균`
+      return base.rainyTarget ? `비 온 ${w} ${n}번 평균` : `비 안 온 ${w} ${n}번 평균`
     case 'lastYearWeekday':
       return n ? `작년 같은 요일 · ${dateFull(base.days[0].date)}` : '작년 같은 요일'
     case 'lastYearDate':
@@ -95,9 +105,9 @@ export function baseShort(base: Baseline): string {
   const n = base.days.length
   switch (base.mode) {
     case 'recent8':
-      return `최근 ${w} ${n}일 평균`
+      return `평소 ${w}`
     case 'weather':
-      return base.rainyTarget ? `비 온 ${w} ${n}일 평균` : `비가 오지 않은 ${w} ${n}일 평균`
+      return base.rainyTarget ? `비 온 ${w} ${n}번 평균` : `비 안 온 ${w} ${n}번 평균`
     case 'lastYearWeekday':
       return n ? `작년 같은 요일(${dateFull(base.days[0].date)})` : '작년 같은 요일'
     case 'lastYearDate':
@@ -105,23 +115,23 @@ export function baseShort(base: Baseline): string {
   }
 }
 
-/** 저장 미리보기에 쓰는 규칙 이름: ‘Le Marais점 · 토요일 · 날씨가 같았던 토요일 평균’ */
+/** 저장할 때 보여 주는 이름: ‘Le Marais점 · 토요일 · 날씨가 비슷했던 토요일과 비교’ */
 export function ruleLabel(branch: BranchId, dow: number, mode: CompareMode): string {
   const w = `${'일월화수목금토'[dow]}요일`
   const name =
     mode === 'recent8'
-      ? `최근 ${w} 8일 평균`
+      ? `평소 ${w}과 비교`
       : mode === 'weather'
-        ? `날씨가 같았던 ${w} 평균`
+        ? `날씨가 비슷했던 ${w}과 비교`
         : mode === 'lastYearWeekday'
-          ? '작년 같은 요일'
-          : '작년 같은 날짜'
+          ? '작년 같은 요일과 비교'
+          : '작년 같은 날짜와 비교'
   return `${branchById(branch).name} · ${w} · ${name}`
 }
 
 /* ───────── 문장 조각 ───────── */
 
-const direction = (diff: number): string => (diff < 0 ? '적었어요' : '많았어요')
+const direction = (diff: number): string => (diff < 0 ? '적어요' : '많아요')
 
 export function dominantMeal(c: Comparison): { meal: Meal; share: number; opposite: boolean } | null {
   if (!c.comparable || c.diff === null) return null
@@ -144,7 +154,7 @@ export function peakHour(c: Comparison): { hour: number; diff: number } | null {
   return best
 }
 
-/** ‘손님은 68명 → 44명, 객단가는 €16로 같았어요’ */
+/** ‘점심 손님이 68명에서 44명으로 줄었어요. 1명당 쓴 돈은 €16로 같아요.’ */
 export function mealDriverSentence(m: MealComparison): string | null {
   if (!m.base || m.checkActual === null || m.checkBase === null) return null
   const label = MEAL_LABEL[m.meal]
@@ -153,31 +163,31 @@ export function mealDriverSentence(m: MealComparison): string | null {
   const same = Math.round(m.checkActual) === Math.round(m.checkBase)
   const close = Math.abs(m.checkActual - m.checkBase) < m.checkBase * 0.03
   const guestPart =
-    g0 === g1 ? `${label} 손님은 ${people(g1)}으로 같았고` : `${label} 손님은 평균 ${people(g0)}에서 ${people(g1)}으로 ${g1 < g0 ? '줄었고' : '늘었고'}`
+    g0 === g1 ? `${label} 손님은 ${people(g1)}으로 같아요.` : `${label} 손님이 ${people(g0)}에서 ${people(g1)}으로 ${g1 < g0 ? '줄었어요' : '늘었어요'}.`
   const checkPart = same
-    ? `객단가는 ${eurCheck(m.checkActual)}로 같았어요.`
+    ? `1명당 쓴 돈은 ${eurCheck(m.checkActual)}로 같아요.`
     : close
-      ? `객단가는 ${eurCheck(m.checkBase)}에서 ${eurCheck(m.checkActual)}로 거의 같았어요.`
-      : `객단가는 ${eurCheck(m.checkBase)}에서 ${eurCheck(m.checkActual)}로 ${m.checkActual < m.checkBase ? '내렸어요' : '올랐어요'}.`
-  return `${guestPart}, ${checkPart}`
+      ? `1명당 쓴 돈은 ${eurCheck(m.checkBase)}에서 ${eurCheck(m.checkActual)}로 거의 같아요.`
+      : `1명당 쓴 돈은 ${eurCheck(m.checkBase)}에서 ${eurCheck(m.checkActual)}로 ${m.checkActual < m.checkBase ? '줄었어요' : '늘었어요'}.`
+  return `${guestPart} ${checkPart}`
 }
 
-/* ───────── 근거 패널 ───────── */
+/* ───────── ‘왜 이렇게 나왔나요?’ ───────── */
 
 export type BackgroundKind = 'weather' | 'event' | 'strike' | 'pattern' | 'memo'
 
 export interface Background {
   kind: BackgroundKind
   text: string
-  /** 출처 구분 표시 */
+  /** 어디서 온 정보인지 */
   source: string
   context?: ContextItem
 }
 
 export interface CheckItem {
-  /** 확인할 질문 */
+  /** 점장에게 물어볼 질문 */
   question: string
-  /** 회의 안건에 넣을 때 붙일 요약 */
+  /** 회의 목록에 같이 적을 한 줄 요약 */
   summary: string
   branch: BranchId
 }
@@ -195,8 +205,8 @@ function rainBackgrounds(date: ISODate): Background[] {
   const out: Background[] = []
   const l = mealRainMm(date, 'lunch')
   const d = mealRainMm(date, 'dinner')
-  if (l > 0) out.push({ kind: 'weather', text: `점심 시간(12~15시)에 비가 기록됐어요 (합계 ${mm(l)}).`, source: '날씨 기록 · 시간별' })
-  if (d > 0) out.push({ kind: 'weather', text: `저녁 시간(18~22시)에 비가 기록됐어요 (합계 ${mm(d)}).`, source: '날씨 기록 · 시간별' })
+  if (l > 0) out.push({ kind: 'weather', text: `점심(12~15시)에 비가 왔어요. 모두 ${mm(l)}.`, source: '날씨 기록' })
+  if (d > 0) out.push({ kind: 'weather', text: `저녁(18~22시)에 비가 왔어요. 모두 ${mm(d)}.`, source: '날씨 기록' })
   return out
 }
 
@@ -204,7 +214,7 @@ function contextBackground(c: ContextItem): Background {
   return {
     kind: c.kind,
     text: `${c.title} — ${c.scope}, ${dateMD(c.start)}${c.end !== c.start ? `~${dateMD(c.end)}` : ''} ${c.hours}.`,
-    source: c.kind === 'strike' ? '사회적 이슈 기록' : '지역 행사 기록',
+    source: c.kind === 'strike' ? '파업 기록' : '행사 기록',
     context: c,
   }
 }
@@ -240,15 +250,15 @@ function branchChecks(branch: BranchId, date: ISODate, c: Comparison, hasMemo: b
   const rained = mealRainMm(date, dom.meal) > 0
 
   if (c.diff < 0) {
-    if (guestsDown && rained && branch === 'marais') add('비 오는 날 테라스 좌석을 어떻게 운영했는지')
-    if (contexts.some((x) => x.kind === 'strike')) add('파업일 근무 인원과 포장 주문 대응이 어땠는지')
-    if (guestsDown) add(`${label} 예약·노쇼와 대기 상황이 평소와 달랐는지`)
-    if (checkDown) add('할인·세트 구성이 바뀌었거나 품절된 메뉴가 있었는지')
-    if (!hasMemo) add('근무 인원과 영업시간이 평소와 같았는지')
+    if (guestsDown && rained && branch === 'marais') add('비 오는 날 테라스 자리를 어떻게 했는지')
+    if (contexts.some((x) => x.kind === 'strike')) add('파업한 날 일한 사람 수와 포장 주문은 어땠는지')
+    if (guestsDown) add(`${label} 예약이나 노쇼, 대기가 평소와 달랐는지`)
+    if (checkDown) add('할인이나 세트가 바뀌었는지, 품절된 메뉴가 있었는지')
+    if (!hasMemo) add('일한 사람 수와 영업시간이 평소와 같았는지')
   } else {
-    if (contexts.some((x) => x.kind === 'event')) add('행사일 대기 시간과 재료 소진 상황이 어땠는지')
-    if (guestsUp) add(`${label}에 손님이 몰렸을 때 좌석 회전과 인력은 충분했는지`)
-    add('잘된 요인 중 다른 날에도 적용할 수 있는 것이 있는지')
+    if (contexts.some((x) => x.kind === 'event')) add('행사한 날 대기 시간과 재료는 괜찮았는지')
+    if (guestsUp) add(`${label}에 손님이 몰릴 때 자리와 일손은 충분했는지`)
+    add('잘된 이유 중 다른 날에도 쓸 수 있는 게 있는지')
   }
   return out.slice(0, 3)
 }
@@ -261,8 +271,8 @@ export function analyze(scope: Scope, date: ISODate, mode: CompareMode, memoText
     return {
       comparable: false,
       reason: c.reason,
-      headline: hasDay ? `${name} 매출 ${eur(c.day.total.revenue)} · ${c.reason}` : (c.reason ?? '비교할 데이터가 없어요'),
-      facts: hasDay ? [`하루 매출은 ${eur(c.day.total.revenue)}, 방문객은 ${people(c.day.total.guests)}이에요.`] : [],
+      headline: hasDay ? `${name} 매출 ${eur(c.day.total.revenue)} · ${c.reason}` : (c.reason ?? '비교할 날이 없어요'),
+      facts: hasDay ? [`하루 매출은 ${eur(c.day.total.revenue)}, 손님은 ${people(c.day.total.guests)}이에요.`] : [],
       backgrounds: [],
       checks: [],
     }
@@ -270,28 +280,30 @@ export function analyze(scope: Scope, date: ISODate, mode: CompareMode, memoText
 
   const facts: string[] = []
   const base = c.base
-  facts.push(
-    `하루 매출 ${eur(c.actual.revenue)} — ${baseShort(base)} ${eur(base.total.revenue)}보다 ${eur(Math.abs(c.diff))} ${direction(c.diff)} (${pct(c.rate)}).`,
-  )
+  facts.push(`하루 매출은 ${eur(c.actual.revenue)}예요. ${baseShort(base)}(${eur(base.total.revenue)})보다 ${eur(Math.abs(c.diff))} ${direction(c.diff)} (${pct(c.rate)}).`)
   const dom = dominantMeal(c)
   const meaningful = Math.abs(c.diff) >= 3000 && c.rate !== null && Math.abs(c.rate) >= 0.05
-  if (!meaningful) facts.push('차이가 5% 미만이에요. 시간대별로 나눠 볼 만큼 큰 차이는 없어요.')
+  if (!meaningful) facts.push(`차이가 5%도 안 돼요. ${baseWith(mode)} 비슷한 날이에요.`)
   if (dom && meaningful) {
     const m = c.meals[dom.meal]
     if (dom.opposite) {
-      facts.push(`점심은 ${eurDiff(c.meals.lunch.diff ?? 0)}, 저녁은 ${eurDiff(c.meals.dinner.diff ?? 0)}로 방향이 달랐어요.`)
+      facts.push(`점심은 ${eurDiff(c.meals.lunch.diff ?? 0)}, 저녁은 ${eurDiff(c.meals.dinner.diff ?? 0)}로 서로 반대였어요.`)
     } else {
-      facts.push(`차액의 ${pctPlain(dom.share)}(${eurDiff(m.diff ?? 0)})가 ${MEAL_LABEL[dom.meal]}(${MEAL_HOURS[dom.meal]})에서 나왔어요.`)
+      facts.push(
+        c.diff < 0
+          ? `줄어든 돈의 ${pctPlain(dom.share)}(${eur(Math.abs(m.diff ?? 0))})가 ${MEAL_LABEL[dom.meal]}(${MEAL_HOURS[dom.meal]})에서 빠졌어요.`
+          : `늘어난 돈의 ${pctPlain(dom.share)}(${eur(Math.abs(m.diff ?? 0))})가 ${MEAL_LABEL[dom.meal]}(${MEAL_HOURS[dom.meal]})에서 나왔어요.`,
+      )
     }
     const driver = mealDriverSentence(m)
     if (driver) facts.push(driver)
     if (m.guestEffect !== null && m.checkEffect !== null) {
-      facts.push(`${MEAL_LABEL[dom.meal]} 차액을 나누면 손님 수 변화가 ${eurDiff(m.guestEffect)}, 객단가 변화가 ${eurDiff(m.checkEffect)}예요.`)
+      facts.push(`${MEAL_LABEL[dom.meal]} 차이를 나눠 보면, 손님 수 때문에 ${eurDiff(m.guestEffect)}, 1명당 쓴 돈 때문에 ${eurDiff(m.checkEffect)}예요.`)
     }
     const peak = peakHour(c)
-    if (peak && scope !== 'all') facts.push(`차이가 가장 큰 시간은 ${peak.hour}시예요 (${eurDiff(peak.diff)}).`)
+    if (peak && scope !== 'all') facts.push(`가장 차이가 큰 시간은 ${peak.hour}시예요 (${eurDiff(peak.diff)}).`)
   }
-  if (base.referenceOnly) facts.push(`비교한 날이 ${base.days.length}일뿐이라 참고용으로만 봐 주세요.`)
+  if (base.referenceOnly) facts.push(`비교한 날이 ${base.days.length}번뿐이라 참고만 하세요.`)
 
   const backgrounds: Background[] = [...rainBackgrounds(date)]
   for (const ctx of contextFor(scope, date)) backgrounds.push(contextBackground(ctx))
@@ -303,11 +315,11 @@ export function analyze(scope: Scope, date: ISODate, mode: CompareMode, memoText
       const w = weekdayName(date)
       backgrounds.push({
         kind: 'pattern',
-        text: `최근 ${w} 8일을 나눠 보면, 점심에 비가 온 ${split.rainy.n}일은 평균 ${eur(split.rainy.avg)}, 오지 않은 ${split.dry.n}일은 평균 ${eur(split.dry.avg)}였어요.`,
-        source: '매출 자료 × 날씨 기록',
+        text: `최근 ${w} 8번을 나눠 보면, 점심에 비 온 ${split.rainy.n}번은 평균 ${eur(split.rainy.avg)}, 비 안 온 ${split.dry.n}번은 평균 ${eur(split.dry.avg)}예요.`,
+        source: '매출과 날씨를 같이 본 것',
       })
     }
-    if (memoText) backgrounds.push({ kind: 'memo', text: memoText, source: '점주 메모' })
+    if (memoText) backgrounds.push({ kind: 'memo', text: memoText, source: '내 메모' })
     checks = branchChecks(scope, date, c, Boolean(memoText))
   } else {
     const rank = branchRanking(date, mode).filter((r) => r.comparable && r.diff !== null)
@@ -316,7 +328,7 @@ export function analyze(scope: Scope, date: ISODate, mode: CompareMode, memoText
       const worst = rank[0]
       const best = rank[rank.length - 1]
       facts.push(
-        `5개 지점 중 ${down.length}곳이 비교 기준보다 낮았어요. 가장 많이 줄어든 곳은 ${scopeName(worst.day.scope)}(${eurDiff(worst.diff ?? 0)})${
+        `5개 지점 중 ${down.length}곳이 ${baseWord(mode)}보다 적게 벌었어요. 가장 많이 줄어든 곳은 ${scopeName(worst.day.scope)}(${eurDiff(worst.diff ?? 0)})${
           (best.diff ?? 0) > 0 ? `, 가장 많이 늘어난 곳은 ${scopeName(best.day.scope)}(${eurDiff(best.diff ?? 0)})` : ''
         }이에요.`,
       )
@@ -329,11 +341,11 @@ export function analyze(scope: Scope, date: ISODate, mode: CompareMode, memoText
     }
   }
 
-  const headline = `${name} 매출 ${eur(c.actual.revenue)} · ${baseShort(base)} 대비 ${eurDiff(c.diff)} (${pct(c.rate)})`
+  const headline = `${name} 매출 ${eur(c.actual.revenue)} · ${baseShort(base)}보다 ${eurDiff(c.diff)} (${pct(c.rate)})`
   return { comparable: true, reason: null, headline, facts, backgrounds, checks }
 }
 
-export const BACKGROUND_CAVEAT = '같은 날 기록된 자료예요. 매출이 달라진 원인으로 확인된 것은 아니에요.'
+export const BACKGROUND_CAVEAT = '같은 날 있었던 일일 뿐이에요. 이것 때문에 매출이 달라졌다고 확인된 건 아니에요.'
 
 export function weekdayOfDate(d: ISODate): number {
   return weekday(d)

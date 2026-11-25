@@ -57,7 +57,7 @@ export default function DemoApp() {
             </div>
           </div>
           <p className="mt-6 text-center text-[12px] leading-5 text-warmgray">
-            데모 데이터 · 모든 지점과 수치는 가상이에요 · AI 분석은 예시 응답입니다 · 실제 POS·외부 API와 연결돼 있지 않아요
+            데모 데이터 · 지점과 숫자는 모두 지어낸 거예요 · AI 답변은 예시예요 · 실제 계산대(POS)와 연결돼 있지 않아요
           </p>
         </main>
         <AskFab />

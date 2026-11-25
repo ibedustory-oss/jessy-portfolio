@@ -3,9 +3,9 @@
 import { useMemo, useState } from 'react'
 import { branchById } from '@/lib/sales-demo/data'
 import { scopeName } from '@/lib/sales-demo/analysis'
-import { dateRange, dateShort } from '@/lib/sales-demo/format'
-import { PATTERN_END, PATTERN_START, PATTERN_WEEKS, findPatterns, type Pattern, type PatternKind } from '@/lib/sales-demo/patterns'
-import { KIND_LABEL, describePattern } from '@/lib/sales-demo/patterns-text'
+import { dateShort } from '@/lib/sales-demo/format'
+import { findPatterns, type Pattern, type PatternKind } from '@/lib/sales-demo/patterns'
+import { KIND_LABEL, PATTERN_PERIOD, describePattern } from '@/lib/sales-demo/patterns-text'
 import { useDemo } from './store'
 import { Card, Icon, btn } from './ui'
 
@@ -45,8 +45,8 @@ function Row({ p, open, onToggle, showBranch }: { p: Pattern; open: boolean; onT
         <div id={panel} className="grid gap-4 border-t border-line px-3.5 py-3.5 md:grid-cols-2">
           <div>
             <h4 className="flex items-center justify-between gap-2 text-[12.5px] font-bold text-ink">
-              수치로 확인한 내용
-              <span className="rounded bg-surface px-1.5 py-0.5 text-[11.5px] font-medium text-charcoal">매출 자료</span>
+              숫자로 확인한 것
+              <span className="rounded bg-surface px-1.5 py-0.5 text-[11.5px] font-medium text-charcoal">매출 기록</span>
             </h4>
             <ul className="mt-1.5 space-y-1.5 text-[13.5px] leading-6 text-charcoal">
               {t.details.map((x) => (
@@ -61,7 +61,7 @@ function Row({ p, open, onToggle, showBranch }: { p: Pattern; open: boolean; onT
           <div>
             <h4 className="flex items-center justify-between gap-2 text-[12.5px] font-bold text-ink">
               해볼 만한 것
-              <span className="rounded bg-[#F0EDFD] px-1.5 py-0.5 text-[11.5px] font-medium text-[#4A38AE]">제안 · 사실 아님</span>
+              <span className="rounded bg-[#F0EDFD] px-1.5 py-0.5 text-[11.5px] font-medium text-[#4A38AE]">아이디어 · 확인된 사실 아님</span>
             </h4>
             <ul className="mt-1.5 space-y-1.5 text-[13.5px] leading-6 text-charcoal">
               {t.ideas.map((x) => (
@@ -72,7 +72,7 @@ function Row({ p, open, onToggle, showBranch }: { p: Pattern; open: boolean; onT
               ))}
             </ul>
             <div className="mt-3 rounded-lg bg-surface px-3 py-2.5">
-              <p className="text-[12px] font-semibold text-charcoal">먼저 회의에서 확인할 것</p>
+              <p className="text-[12px] font-semibold text-charcoal">먼저 점장님께 물어볼 것</p>
               <p className="mt-0.5 text-[13.5px] leading-6 text-ink">{t.check.question}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 <button
@@ -82,7 +82,7 @@ function Row({ p, open, onToggle, showBranch }: { p: Pattern; open: boolean; onT
                   className={added ? 'inline-flex items-center gap-1 px-1 py-1 text-[12.5px] font-medium text-[#0B6B22]' : `${btn.ghost} !py-1 !text-[12.5px]`}
                 >
                   <Icon name={added ? 'check' : 'plus'} size={13} />
-                  {added ? '안건에 추가됨' : '회의 안건에 추가'}
+                  {added ? '추가했어요' : '회의 때 물어보기'}
                 </button>
                 <button
                   type="button"
@@ -92,7 +92,7 @@ function Row({ p, open, onToggle, showBranch }: { p: Pattern; open: boolean; onT
                     d.scrollTo('sd-day')
                   }}
                 >
-                  예시 날짜 열기 · {dateShort(p.example)}
+                  이런 날 보기 · {dateShort(p.example)}
                 </button>
               </div>
             </div>
@@ -121,15 +121,15 @@ export function PatternsCard() {
   const shown = more ? [...lead, ...rest] : lead
 
   return (
-    <Card id="sd-patterns" label="개선 기회" className="scroll-mt-20 px-5 py-4">
+    <Card id="sd-patterns" label="고쳐볼 만한 점" className="scroll-mt-20 px-5 py-4">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h2 className="text-[15px] font-bold text-ink">개선 기회</h2>
+        <h2 className="text-[15px] font-bold text-ink">고쳐볼 만한 점</h2>
         <p className="text-[12.5px] text-warmgray">
-          {scopeName(d.scope)} · 하루가 아니라 되풀이되는 차이 · 최근 {PATTERN_WEEKS}주({dateRange(PATTERN_START, PATTERN_END)}) · 위 기간 선택과 무관
+          {scopeName(d.scope)} · 하루가 아니라 계속 반복되는 일이에요 · {PATTERN_PERIOD} · 위에서 고른 기간과 상관없어요
         </p>
       </div>
       {all.length === 0 ? (
-        <p className="mt-3 rounded-xl bg-surface px-4 py-3 text-[13.5px] text-charcoal">최근 {PATTERN_WEEKS}주 동안 되풀이되는 큰 차이는 찾지 못했어요.</p>
+        <p className="mt-3 rounded-xl bg-surface px-4 py-3 text-[13.5px] text-charcoal">최근 6개월 동안 계속 반복되는 큰 문제는 못 찾았어요.</p>
       ) : (
         <>
           <ul className="mt-3 space-y-1.5">
@@ -140,10 +140,10 @@ export function PatternsCard() {
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
             {rest.length > 0 && (
               <button type="button" className={btn.quiet} onClick={() => setMore(!more)} aria-expanded={more}>
-                {more ? '접기' : `${rest.length}건 더 보기`}
+                {more ? '접기' : `${rest.length}개 더 보기`}
               </button>
             )}
-            <p className="text-[12px] text-warmgray">금액은 관측된 차이이거나 가정을 밝힌 계산이에요. 원인을 확정한 것은 아니에요.</p>
+            <p className="text-[12px] text-warmgray">금액은 실제로 난 차이이거나, 조건을 정해 계산해 본 값이에요. 이유까지 확인된 건 아니에요.</p>
           </div>
         </>
       )}

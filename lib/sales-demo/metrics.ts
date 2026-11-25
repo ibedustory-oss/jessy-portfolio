@@ -104,7 +104,7 @@ export function dayData(scope: Scope, date: ISODate): DayData {
       scope,
       date,
       status: st,
-      reason: st === 'ok' ? null : st === 'none' ? '조회할 수 있는 기간 밖이에요' : statusReason(scope, date),
+      reason: st === 'ok' ? null : st === 'none' ? '볼 수 있는 기간이 아니에요' : statusReason(scope, date),
       hours,
       ...sumMeals(hours),
       missingBranches: [],
@@ -202,9 +202,9 @@ function baselineBranch(branch: BranchId, date: ISODate, mode: CompareMode): Bas
   for (const d of candidates) {
     if (mode === 'weather' && isRainyLunch(d) !== rainyTarget) continue
     const st = dayStatus(branch, d)
-    if (st === 'none') excluded.push({ date: d, reason: '자료가 없는 기간' })
-    else if (st === 'missing') excluded.push({ date: d, reason: '자료 누락' })
-    else if (st === 'closed') excluded.push({ date: d, reason: statusReason(branch, d) ?? '휴무' })
+    if (st === 'none') excluded.push({ date: d, reason: '기록이 없는 기간' })
+    else if (st === 'missing') excluded.push({ date: d, reason: '기록 없음' })
+    else if (st === 'closed') excluded.push({ date: d, reason: statusReason(branch, d) ?? '쉬는 날' })
     else {
       const dd = dayData(branch, d)
       days.push({
@@ -384,10 +384,10 @@ export function compare(scope: Scope, date: ISODate, mode: CompareMode): Compari
   const base = baseline(scope, date, mode)
 
   let reason: string | null = null
-  if (day.status === 'none') reason = '조회할 수 있는 기간 밖이에요'
-  else if (day.status === 'missing') reason = day.reason ?? '이 날짜의 매출 자료가 없어요'
-  else if (day.status === 'closed') reason = day.reason ?? '휴무일이에요'
-  else if (!base.available) reason = '비교할 데이터가 없어요'
+  if (day.status === 'none') reason = '볼 수 있는 기간이 아니에요'
+  else if (day.status === 'missing') reason = day.reason ?? '이날은 매출 기록이 없어요'
+  else if (day.status === 'closed') reason = day.reason ?? '쉬는 날이에요'
+  else if (!base.available) reason = '비교할 날이 없어요'
   const comparable = reason === null
 
   // 전체 보기에서 기준을 만들 수 없는 지점은 실적에서도 빼고 비교한다.

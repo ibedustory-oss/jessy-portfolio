@@ -113,7 +113,7 @@ export function PeriodChart({
     const d = parts(p.start)
     if (granularity === 'month') {
       if (slot < 30 && i % 2 === 1) return null
-      return { top: `${d.m}월`, bottom: p.partial ? `${p.days}일만` : d.m === 1 ? `${d.y}` : undefined }
+      return { top: `${d.m}월`, bottom: p.partial ? `${p.days}일치` : d.m === 1 ? `${d.y}` : undefined }
     }
     const dow = weekday(p.start)
     if (n <= 10) return { top: `${d.m}/${d.d}`, bottom: WEEKDAY_KO[dow] }
@@ -151,7 +151,7 @@ export function PeriodChart({
       ? `${monthFull(p.key)}${p.partial ? ` · ${dateRangeWithYear(p.start, p.end).replace(/^\d+년 /, '')} (${p.days}일)` : ''}`
       : dateFull(p.start)
   const describe = (p: SeriesPoint) =>
-    `${title(p)}, 매출 ${p.revenue === null ? '자료 없음' : eur(p.revenue)}, ${prevLabel} ${p.prev === null ? '자료 없음' : eur(p.prev)}`
+    `${title(p)}, 매출 ${p.revenue === null ? '기록 없음' : eur(p.revenue)}, ${prevLabel} ${p.prev === null ? '기록 없음' : eur(p.prev)}`
 
   return (
     <div
@@ -159,7 +159,7 @@ export function PeriodChart({
       className="relative outline-none focus-visible:rounded-xl focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
       tabIndex={0}
       role="group"
-      aria-label={`${ariaLabel}. 좌우 화살표로 이동하고 Enter로 선택하세요.`}
+      aria-label={`${ariaLabel}. 좌우 화살표로 옮기고 Enter로 고르세요.`}
       onKeyDown={onKey}
       onBlur={() => setActive(null)}
       onMouseLeave={() => setActive(null)}
@@ -195,7 +195,7 @@ export function PeriodChart({
               {!hasData && <rect x={x} y={y(0) - 22} width={barW} height={22} fill="url(#sd-hatch)" rx={2} />}
               {closed && (
                 <text x={cx(i)} y={y(0) - 5} textAnchor="middle" fontSize={10} fill={C.tick}>
-                  {slot > 22 ? '휴무' : '·'}
+                  {slot > 22 ? '쉼' : '·'}
                 </text>
               )}
               {sel && hasData && <path d={`M${cx(i) - 4},${top - 10}h8l-4,5z`} fill={C.barSelected} />}
@@ -251,24 +251,24 @@ export function PeriodChart({
         <Tooltip x={cx(active)} gap={Math.max(barW, 12) / 2 + 4} width={width}>
           <div className="mb-1 font-semibold text-ink">{title(ap)}</div>
           {ap.revenue === null ? (
-            <div>매출 자료가 없어요 (누락)</div>
+            <div>이날은 매출 기록이 없어요</div>
           ) : (
             <>
-              <TipRow mark="bar" label="매출" value={ap.status === 'closed' ? '휴무 (€0)' : eur(ap.revenue)} />
-              <TipRow mark="line" label={prevLabel} value={ap.prev === null ? '자료 없음' : eur(ap.prev)} />
+              <TipRow mark="bar" label="매출" value={ap.status === 'closed' ? '쉬는 날 (€0)' : eur(ap.revenue)} />
+              <TipRow mark="line" label={prevLabel} value={ap.prev === null ? '기록 없음' : eur(ap.prev)} />
               {ap.prev !== null && ap.status !== 'closed' && (
                 <TipRow label="차이" value={`${eurDiff(ap.revenue - ap.prev)} (${pct(rateOf(ap.revenue, ap.prev))})`} />
               )}
             </>
           )}
-          {granularity === 'day' && <div className="mt-1 text-[11.5px] text-warmgray">작년 대응일 {dateFull(ap.prevStart)}</div>}
-          {ap.status === 'partial' && <div className="mt-1 text-[11.5px] text-[#874700]">일부 지점·날짜의 자료가 빠져 있어요</div>}
+          {granularity === 'day' && <div className="mt-1 text-[11.5px] text-warmgray">작년에 비교한 날 {dateFull(ap.prevStart)}</div>}
+          {ap.status === 'partial' && <div className="mt-1 text-[11.5px] text-[#874700]">일부 지점이나 날짜의 기록이 빠져 있어요</div>}
           {marks[ap.key]?.labels.map((t) => (
             <div key={t} className="mt-1 text-[11.5px] text-charcoal">
               {t}
             </div>
           ))}
-          <div className="mt-1.5 text-[11.5px] text-accent">{granularity === 'month' ? '누르면 일별로 볼 수 있어요' : '누르면 시간대별 상세가 열려요'}</div>
+          <div className="mt-1.5 text-[11.5px] text-accent">{granularity === 'month' ? '누르면 날짜별로 볼 수 있어요' : '누르면 이날을 자세히 볼 수 있어요'}</div>
         </Tooltip>
       )}
       <div className="sr-only" aria-live="polite">
@@ -286,12 +286,15 @@ export function HourlyChart({
   hours,
   metric,
   baseName,
+  baseWord,
   rain,
   ariaLabel,
 }: {
   hours: HourComparison[]
   metric: HourMetric
   baseName: string
+  /** ‘평소’ 또는 ‘작년’ */
+  baseWord: string
   /** 시각별 강수량(mm) — hours와 같은 순서 */
   rain: number[]
   ariaLabel: string
@@ -351,7 +354,7 @@ export function HourlyChart({
 
   const ah = active !== null ? hours[active] : null
   const describe = (h: HourComparison) =>
-    `${h.hour}시, 매출 ${eur(h.actual.revenue)}, 방문객 ${h.actual.guests}명${h.base ? `, 비교값 ${eur(h.base.revenue)}, 차액 ${eurDiff(h.diff ?? 0)}` : ''}`
+    `${h.hour}시, 매출 ${eur(h.actual.revenue)}, 손님 ${h.actual.guests}명${h.base ? `, ${baseWord} ${eur(h.base.revenue)}, 차이 ${eurDiff(h.diff ?? 0)}` : ''}`
 
   return (
     <div
@@ -359,7 +362,7 @@ export function HourlyChart({
       className="relative outline-none focus-visible:rounded-xl focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
       tabIndex={0}
       role="group"
-      aria-label={`${ariaLabel}. 좌우 화살표로 시간대를 이동하세요.`}
+      aria-label={`${ariaLabel}. 좌우 화살표로 시간대를 옮기세요.`}
       onKeyDown={onKey}
       onBlur={() => setActive(null)}
       onMouseLeave={() => setActive(null)}
@@ -422,7 +425,7 @@ export function HourlyChart({
         <line x1={cx(0) - slot / 2 + 6} x2={cx(firstDinner - 1) + slot / 2 - 6} y1={H - m.b + 22} y2={H - m.b + 22} stroke={C.grid} />
         <line x1={cx(firstDinner) - slot / 2 + 6} x2={cx(hours.length - 1) + slot / 2 - 6} y1={H - m.b + 22} y2={H - m.b + 22} stroke={C.grid} />
         <text x={m.l - 8} y={H - 10} textAnchor="end" fontSize={11} fill={C.tick}>
-          강수 mm
+          비 mm
         </text>
         {hours.map((h, i) => (
           <rect
@@ -442,13 +445,13 @@ export function HourlyChart({
             {ah.hour}:00~{ah.hour}:59
           </div>
           <TipRow mark="bar" label="매출" value={eur(ah.actual.revenue)} />
-          {ah.base && <TipRow mark="line" label="비교값" value={eur(ah.base.revenue)} />}
-          {ah.diff !== null && <TipRow label="차액" value={eurDiff(ah.diff)} />}
+          {ah.base && <TipRow mark="line" label={baseWord} value={eur(ah.base.revenue)} />}
+          {ah.diff !== null && <TipRow label="차이" value={eurDiff(ah.diff)} />}
           <div className="my-1.5 border-t border-line" />
-          <TipRow label="방문객" value={`${ah.actual.guests}명${ah.base ? ` · 비교 ${Math.round(ah.base.guests)}명` : ''}`} />
-          <TipRow label="객단가" value={`${eurCheck(checkOf(ah.actual))}${ah.base ? ` · 비교 ${eurCheck(checkOf(ah.base))}` : ''}`} />
-          {rain[active] > 0 && <div className="mt-1 text-[11.5px] text-[#1A4E9B]">강수 {rain[active].toFixed(1)}mm 기록</div>}
-          {ah.base && <div className="mt-1 text-[11.5px] text-warmgray">비교: {baseName}</div>}
+          <TipRow label="손님" value={`${ah.actual.guests}명${ah.base ? ` · ${baseWord} ${Math.round(ah.base.guests)}명` : ''}`} />
+          <TipRow label="1명당" value={`${eurCheck(checkOf(ah.actual))}${ah.base ? ` · ${baseWord} ${eurCheck(checkOf(ah.base))}` : ''}`} />
+          {rain[active] > 0 && <div className="mt-1 text-[11.5px] text-[#1A4E9B]">비 {rain[active].toFixed(1)}mm</div>}
+          {ah.base && <div className="mt-1 text-[11.5px] text-warmgray">{baseName}</div>}
         </Tooltip>
       )}
       <div className="sr-only" aria-live="polite">
@@ -474,7 +477,7 @@ export function IndexStrip({ values, labels }: { values: (number | null)[]; labe
   const pts = values.map((v, i) => (v === null ? null : `${cx(i)},${y(v)}`)).filter(Boolean).join(' ')
   return (
     <div ref={ref}>
-      <svg width={width} height={H} role="img" aria-label={`월별 지수: ${labels.map((l, i) => `${l} ${values[i] ?? '없음'}`).join(', ')}`} className="block">
+      <svg width={width} height={H} role="img" aria-label={`월별 관광객 지수: ${labels.map((l, i) => `${l} ${values[i] ?? '없음'}`).join(', ')}`} className="block">
         <polyline points={pts} fill="none" stroke="#9AA1AD" strokeWidth={1.5} />
         {values.map((v, i) =>
           v === null ? null : (

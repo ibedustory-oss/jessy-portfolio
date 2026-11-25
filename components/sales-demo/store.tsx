@@ -37,12 +37,12 @@ interface Snapshot {
 }
 
 export const GUIDE_STEPS: { id: number; title: string; hint: string; question?: string }[] = [
-  { id: 1, title: '11월 21일에 가장 많이 줄어든 지점 찾기', hint: '지점 비교표에서 차액이 가장 큰 지점을 눌러 보세요.' },
-  { id: 2, title: '왜 낮았는지 물어보기', hint: '평소 쓰는 말로 물어보면 돼요.', question: '이날 매출이 왜 이렇게 낮았어?' },
-  { id: 3, title: '비 온 토요일끼리만 비교하기', hint: '그래프·비교 날짜·차액이 함께 바뀌어요.', question: '비 온 토요일끼리만 비교하면?' },
-  { id: 4, title: '다른 지점과 작년 실적 확인하기', hint: '이어서 “작년이랑 비교하면?”도 물어보세요.', question: '그날 다른 지점은 어땠어?' },
-  { id: 5, title: '매장 메모 남기기', hint: '예) 이날은 테라스를 열지 않았음', question: '메모: 이날은 테라스를 열지 않았음' },
-  { id: 6, title: '이 비교를 토요일 기본값으로 저장하기', hint: '비 온 토요일 비교로 돌아온 뒤 요청하세요.', question: '이 지점은 토요일마다 이렇게 보여줘' },
+  { id: 1, title: '11월 21일에 가장 많이 줄어든 지점 찾기', hint: '지점별 표에서 가장 많이 줄어든 지점을 눌러 보세요.' },
+  { id: 2, title: '왜 적게 벌었는지 물어보기', hint: '평소 말하듯 물어보면 돼요.', question: '이날 매출이 왜 이렇게 낮았어?' },
+  { id: 3, title: '비 온 토요일끼리만 비교하기', hint: '그래프, 비교한 날, 차이가 같이 바뀌어요.', question: '비 온 토요일끼리만 비교하면?' },
+  { id: 4, title: '다른 지점과 작년도 확인하기', hint: '이어서 “작년이랑 비교하면?”도 물어보세요.', question: '그날 다른 지점은 어땠어?' },
+  { id: 5, title: '메모 남기기', hint: '예) 이날은 테라스를 열지 않았음', question: '메모: 이날은 테라스를 열지 않았음' },
+  { id: 6, title: '토요일은 항상 이렇게 보도록 저장하기', hint: '비 온 토요일 비교로 돌아온 뒤 부탁하세요.', question: '이 지점은 토요일마다 이렇게 보여줘' },
 ]
 
 interface DemoCtx {
@@ -120,7 +120,7 @@ export function useDemo(): DemoCtx {
 const GREETING: ChatMessage = {
   id: 0,
   role: 'assistant',
-  text: '지점과 날짜를 고른 뒤 평소 쓰는 말로 물어보세요. 비교 기준을 바꾸면 그래프도 함께 바뀌어요.',
+  text: '지점과 날짜를 고르고, 평소 말하듯 물어보세요. 무엇과 비교할지 바꾸면 그래프도 같이 바뀌어요.',
 }
 
 const clampDate = (d: ISODate): ISODate => (d < VIEW_START ? VIEW_START : d > VIEW_END ? VIEW_END : d)
@@ -316,7 +316,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     (b: BranchId, dow: number, m: CompareMode) => {
       setPersisted((p) => ({ ...p, defaults: { ...p.defaults, [defaultKey(b, dow)]: m } }))
       setOverride(null)
-      notify(`기본값으로 저장했어요 · ${ruleLabel(b, dow, m)}`)
+      notify(`저장했어요 · ${ruleLabel(b, dow, m)}`)
     },
     [notify],
   )
@@ -327,7 +327,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
         delete next[defaultKey(b, dow)]
         return { ...p, defaults: next }
       })
-      notify('저장된 기본값을 해제했어요')
+      notify('저장한 방식을 지웠어요')
     },
     [notify],
   )
@@ -346,7 +346,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
           ? p
           : { ...p, agenda: [...p.agenda, { id, branch: item.branch, date: d, summary: item.summary, question: item.question, done: false }] },
       )
-      notify('회의 안건에 추가했어요')
+      notify('회의 때 물어볼 것에 추가했어요')
     },
     [notify],
   )
@@ -478,7 +478,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       const aid = idRef.current++
       setMessages((ms) => [
         ...ms.map((m) => (m.id === id ? { ...m, save: 'saved' as const } : m)),
-        { id: aid, role: 'assistant', text: `저장했어요. 다음에 들어와도 ${pv.label} 기준으로 먼저 보여드릴게요. 다른 지점과 요일에는 적용되지 않아요.` },
+        { id: aid, role: 'assistant', text: `저장했어요. 다음에 들어와도 이렇게 보여드려요: ${pv.label}. 다른 지점과 다른 요일은 그대로예요.` },
       ])
     },
     [messages, saveDefault],
@@ -503,7 +503,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     setDraft('')
     setTab('ask')
     seen.current = { others: false, lastYear: false }
-    notify('데모를 처음 상태로 되돌렸어요')
+    notify('처음 상태로 되돌렸어요')
     window.scrollTo({ top: 0 })
   }, [notify])
 
