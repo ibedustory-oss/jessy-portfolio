@@ -38,13 +38,21 @@ export const COMPARE_MODES: CompareMode[] = ['recent8', 'weather', 'lastYearWeek
 export interface Totals {
   revenue: number
   guests: number
+  /** 테이블(계산서) 수 */
+  tables: number
 }
 
 export interface HourValue extends Totals {
   hour: number
 }
 
-const zero = (): Totals => ({ revenue: 0, guests: 0 })
+const zero = (): Totals => ({ revenue: 0, guests: 0, tables: 0 })
+
+/** 테이블당 쓴 돈 = 매출 ÷ 테이블 수 */
+export const perTable = (t: Totals | null): number | null => (t && t.tables > 0 ? t.revenue / t.tables : null)
+
+/** 한 테이블에 앉은 인원 = 손님 수 ÷ 테이블 수 */
+export const partySize = (t: Totals | null): number | null => (t && t.tables > 0 ? t.guests / t.tables : null)
 
 /** 객단가 = 총매출 ÷ 총방문객 수. 방문객이 0이면 null */
 export const checkOf = (t: Totals | null): number | null =>
@@ -79,15 +87,16 @@ function sumMeals(hours: HourValue[]): { lunch: Totals; dinner: Totals; total: T
     const t = mealOfHour(h.hour) === 'lunch' ? lunch : dinner
     t.revenue += h.revenue
     t.guests += h.guests
+    t.tables += h.tables
   }
   return {
     lunch,
     dinner,
-    total: { revenue: lunch.revenue + dinner.revenue, guests: lunch.guests + dinner.guests },
+    total: { revenue: lunch.revenue + dinner.revenue, guests: lunch.guests + dinner.guests, tables: lunch.tables + dinner.tables },
   }
 }
 
-const emptyHours = (): HourValue[] => HOURS.map((hour) => ({ hour, revenue: 0, guests: 0 }))
+const emptyHours = (): HourValue[] => HOURS.map((hour) => ({ hour, revenue: 0, guests: 0, tables: 0 }))
 
 const dayCache = new Map<string, DayData>()
 
@@ -123,6 +132,7 @@ export function dayData(scope: Scope, date: ISODate): DayData {
       d.hours.forEach((h, i) => {
         hours[i].revenue += h.revenue
         hours[i].guests += h.guests
+        hours[i].tables += h.tables
       })
     }
     const status: DataStatus =
@@ -226,14 +236,16 @@ function baselineBranch(branch: BranchId, date: ISODate, mode: CompareMode): Bas
       dayData(branch, d.date).hours.forEach((h, i) => {
         hours[i].revenue += h.revenue
         hours[i].guests += h.guests
+        hours[i].tables += h.tables
       })
     }
     const sums = sumMeals(hours)
-    const avg = (t: Totals): Totals => ({ revenue: t.revenue / n, guests: t.guests / n })
+    const avg = (t: Totals): Totals => ({ revenue: t.revenue / n, guests: t.guests / n, tables: t.tables / n })
     meals = { lunch: avg(sums.lunch), dinner: avg(sums.dinner), total: avg(sums.total) }
     for (const h of hours) {
       h.revenue /= n
       h.guests /= n
+      h.tables /= n
     }
   }
   return {
@@ -272,10 +284,12 @@ function baselineAll(date: ISODate, mode: CompareMode): Baseline {
     base.hours.forEach((h, i) => {
       hours[i].revenue += h.revenue
       hours[i].guests += h.guests
+      hours[i].tables += h.tables
     })
     for (const k of ['lunch', 'dinner', 'total'] as const) {
       meals[k].revenue += base[k].revenue
       meals[k].guests += base[k].guests
+      meals[k].tables += base[k].tables
     }
     for (const d of base.days) {
       const cur = perDate.get(d.date)
@@ -290,6 +304,7 @@ function baselineAll(date: ISODate, mode: CompareMode): Baseline {
         for (const k of ['lunch', 'dinner', 'total'] as const) {
           cur[k].revenue += d[k].revenue
           cur[k].guests += d[k].guests
+          cur[k].tables += d[k].tables
         }
       }
     }
@@ -399,6 +414,7 @@ export function compare(scope: Scope, date: ISODate, mode: CompareMode): Compari
       dayData(b, date).hours.forEach((h, i) => {
         actualHours[i].revenue += h.revenue
         actualHours[i].guests += h.guests
+        actualHours[i].tables += h.tables
       })
     }
   }
@@ -418,8 +434,8 @@ export function compare(scope: Scope, date: ISODate, mode: CompareMode): Compari
     },
     hours: actualHours.map((h, i) => ({
       hour: h.hour,
-      actual: { revenue: h.revenue, guests: h.guests },
-      base: comparable ? { revenue: base.hours[i].revenue, guests: base.hours[i].guests } : null,
+      actual: { revenue: h.revenue, guests: h.guests, tables: h.tables },
+      base: comparable ? { revenue: base.hours[i].revenue, guests: base.hours[i].guests, tables: base.hours[i].tables } : null,
       diff: comparable ? h.revenue - base.hours[i].revenue : null,
     })),
   }
@@ -512,9 +528,10 @@ export interface SeriesPoint {
 /** 전년 대응일: 일별은 요일을 맞춘 364일 전, 월별은 같은 날짜 */
 const prevDay = (d: ISODate, aligned: boolean): ISODate => (aligned ? addDays(d, -364) : sameDateLastYear(d))
 
-function sumRange(scope: Scope, dates: ISODate[]): { revenue: number; guests: number; missing: number; counted: number } {
+function sumRange(scope: Scope, dates: ISODate[]): { revenue: number; guests: number; tables: number; missing: number; counted: number } {
   let revenue = 0
   let guests = 0
+  let tables = 0
   let missing = 0
   let counted = 0
   for (const d of dates) {
@@ -527,8 +544,9 @@ function sumRange(scope: Scope, dates: ISODate[]): { revenue: number; guests: nu
     counted += 1
     revenue += dd.total.revenue
     guests += dd.total.guests
+    tables += dd.total.tables
   }
-  return { revenue, guests, missing, counted }
+  return { revenue, guests, tables, missing, counted }
 }
 
 export function series(scope: Scope, range: RangeSpec): SeriesPoint[] {
@@ -609,12 +627,12 @@ export function rangeSummary(scope: Scope, range: RangeSpec): RangeSummary {
     start: range.start,
     end: range.end,
     days: dates.length,
-    total: { revenue: cur.revenue, guests: cur.guests },
+    total: { revenue: cur.revenue, guests: cur.guests, tables: cur.tables },
     missingDays: cur.missing,
     prevYear: py.counted
-      ? { start: pyDates[0], end: pyDates[pyDates.length - 1], total: { revenue: py.revenue, guests: py.guests } }
+      ? { start: pyDates[0], end: pyDates[pyDates.length - 1], total: { revenue: py.revenue, guests: py.guests, tables: py.tables } }
       : null,
-    prevPeriod: pp && pp.counted ? { start: ppStart, end: ppEnd, total: { revenue: pp.revenue, guests: pp.guests } } : null,
+    prevPeriod: pp && pp.counted ? { start: ppStart, end: ppEnd, total: { revenue: pp.revenue, guests: pp.guests, tables: pp.tables } } : null,
   }
 }
 

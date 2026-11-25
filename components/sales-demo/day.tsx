@@ -36,6 +36,7 @@ import {
   mm,
   monthFull,
   people,
+  tablesText,
   weekdayName,
 } from '@/lib/sales-demo/format'
 import {
@@ -43,9 +44,11 @@ import {
   branchRanking,
   checkOf,
   compare,
+  perTable,
   type CompareMode,
   type Comparison,
   type MealComparison,
+  type Totals,
 } from '@/lib/sales-demo/metrics'
 import { C, HourlyChart, type HourMetric } from './charts'
 import { useDemo } from './store'
@@ -146,19 +149,30 @@ function CompareControl({ c }: { c: Comparison }) {
 
 /* ───────── 하루·점심·저녁 요약 ───────── */
 
-function StatTile({ label, sub, revenue, diff, rate, guests, baseGuests, check, baseCheck, word }: {
+function StatTile({ label, sub, actual, base, diff, rate, word }: {
   /** ‘평소’ 또는 ‘작년’ */
   word: string
   label: string
   sub?: string
-  revenue: number
+  actual: Totals
+  base: Totals | null
   diff: number | null
   rate: number | null
-  guests: number
-  baseGuests: number | null
-  check: number | null
-  baseCheck: number | null
 }) {
+  const row = (name: string, now: string, then: string | null) => (
+    <>
+      <dt className="text-warmgray">{name}</dt>
+      <dd className="tabular-nums">
+        {now}
+        {then !== null && (
+          <span className="text-warmgray">
+            {' '}
+            · {word} {then}
+          </span>
+        )}
+      </dd>
+    </>
+  )
   return (
     <div className="min-w-0 rounded-xl border border-line px-4 py-3">
       <div className="flex items-baseline gap-1.5 text-[12.5px]">
@@ -166,40 +180,21 @@ function StatTile({ label, sub, revenue, diff, rate, guests, baseGuests, check, 
         {sub && <span className="text-warmgray">{sub}</span>}
       </div>
       <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
-        <span className="text-[24px] font-bold leading-8 tracking-tight text-ink">{eur(revenue)}</span>
+        <span className="text-[24px] font-bold leading-8 tracking-tight text-ink">{eur(actual.revenue)}</span>
         {diff !== null && <Delta diff={diff} rate={rate} className="text-[13px]" />}
       </div>
       <dl className="mt-1.5 grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5 text-[12.5px] leading-5 text-charcoal">
-        <dt className="text-warmgray">손님</dt>
-        <dd className="tabular-nums">
-          {people(guests)}
-          {baseGuests !== null && <span className="text-warmgray"> · {word} {people(baseGuests)}</span>}
-        </dd>
-        <dt className="text-warmgray">1명당</dt>
-        <dd className="tabular-nums">
-          {eurCheck(check)}
-          {baseCheck !== null && <span className="text-warmgray"> · {word} {eurCheck(baseCheck)}</span>}
-        </dd>
+        {row('손님', people(actual.guests), base ? people(base.guests) : null)}
+        {row('테이블', tablesText(actual.tables), base ? tablesText(base.tables) : null)}
+        {row('1명당', eurCheck(checkOf(actual)), base ? eurCheck(checkOf(base)) : null)}
+        {row('테이블당', eurCheck(perTable(actual)), base ? eurCheck(perTable(base)) : null)}
       </dl>
     </div>
   )
 }
 
 function mealTile(m: MealComparison, word: string) {
-  return (
-    <StatTile
-      word={word}
-      label={MEAL_LABEL[m.meal]}
-      sub={MEAL_HOURS[m.meal]}
-      revenue={m.actual.revenue}
-      diff={m.diff}
-      rate={m.rate}
-      guests={m.actual.guests}
-      baseGuests={m.base ? m.base.guests : null}
-      check={m.checkActual}
-      baseCheck={m.checkBase}
-    />
-  )
+  return <StatTile word={word} label={MEAL_LABEL[m.meal]} sub={MEAL_HOURS[m.meal]} actual={m.actual} base={m.base} diff={m.diff} rate={m.rate} />
 }
 
 /* ───────── 지점 비교표 ───────── */
@@ -229,7 +224,7 @@ function BranchTable({ ranking }: { ranking: Comparison[] }) {
             <th scope="col" className="px-3 py-2 text-right font-semibold" aria-sort="ascending">
               차이 ↑
             </th>
-            <th scope="col" className="hidden w-[120px] px-3 py-2 font-semibold lg:table-cell">
+            <th scope="col" className="hidden w-[90px] px-3 py-2 font-semibold xl:table-cell">
               <span className="sr-only">차이 막대</span>
             </th>
             <th scope="col" className="hidden px-3 py-2 text-right font-semibold md:table-cell">
@@ -237,6 +232,9 @@ function BranchTable({ ranking }: { ranking: Comparison[] }) {
             </th>
             <th scope="col" className="hidden px-3 py-2 text-right font-semibold md:table-cell">
               1명당
+            </th>
+            <th scope="col" className="hidden px-3 py-2 text-right font-semibold md:table-cell">
+              테이블당
             </th>
             <th scope="col" className="hidden px-3 py-2 font-semibold sm:table-cell">
               메모·행사
@@ -273,7 +271,7 @@ function BranchTable({ ranking }: { ranking: Comparison[] }) {
                 <td className="px-3 py-2 text-right">
                   {r.comparable ? <Delta diff={r.diff} rate={r.rate} /> : <span className="text-[12.5px] text-warmgray">비교할 날이 없어요</span>}
                 </td>
-                <td className="hidden px-3 py-2 lg:table-cell">
+                <td className="hidden px-3 py-2 xl:table-cell">
                   {r.comparable && (
                     <div aria-hidden="true" className="relative h-2.5 w-full">
                       <div className="absolute inset-y-[-3px] left-1/2 w-px bg-[#C5CAD1]" />
@@ -286,6 +284,7 @@ function BranchTable({ ranking }: { ranking: Comparison[] }) {
                 </td>
                 <td className="hidden px-3 py-2 text-right text-charcoal md:table-cell">{hasData ? people(r.day.total.guests) : '–'}</td>
                 <td className="hidden px-3 py-2 text-right text-charcoal md:table-cell">{hasData ? eurCheck(checkOf(r.day.total)) : '–'}</td>
+                <td className="hidden px-3 py-2 text-right text-charcoal md:table-cell">{hasData ? eurCheck(perTable(r.day.total)) : '–'}</td>
                 <td className="hidden px-3 py-2 sm:table-cell">
                   <span className="flex flex-wrap gap-1">
                     {ctx.map((c) => (
@@ -308,9 +307,10 @@ function BranchTable({ ranking }: { ranking: Comparison[] }) {
             <td className="px-3 py-2 text-right font-bold text-ink">{eur(total.day.total.revenue)}</td>
             <td className="hidden px-3 py-2 text-right text-charcoal sm:table-cell">{total.comparable ? eur(total.base.total.revenue) : '–'}</td>
             <td className="px-3 py-2 text-right">{total.comparable ? <Delta diff={total.diff} rate={total.rate} /> : '–'}</td>
-            <td className="hidden lg:table-cell" />
+            <td className="hidden xl:table-cell" />
             <td className="hidden px-3 py-2 text-right text-charcoal md:table-cell">{people(total.day.total.guests)}</td>
             <td className="hidden px-3 py-2 text-right text-charcoal md:table-cell">{eurCheck(checkOf(total.day.total))}</td>
+            <td className="hidden px-3 py-2 text-right text-charcoal md:table-cell">{eurCheck(perTable(total.day.total))}</td>
             <td className="hidden sm:table-cell" />
           </tr>
         </tfoot>
@@ -324,11 +324,11 @@ function BranchTable({ ranking }: { ranking: Comparison[] }) {
 function HourlyTable({ c, word }: { c: Comparison; word: string }) {
   return (
     <div className="overflow-x-auto rounded-xl border border-line">
-      <table className="w-full min-w-[560px] border-collapse text-[13px]">
+      <table className="w-full min-w-[640px] border-collapse text-[13px]">
         <caption className="sr-only">시간대별 매출과 비교 대상, 차이</caption>
         <thead className="bg-surface text-left text-[12px] text-warmgray">
           <tr>
-            {['시간', '매출', word, '차이', '손님', `${word} 손님`, '1명당', '비'].map((h, i) => (
+            {['시간', '매출', word, '차이', '손님', '테이블', '1명당', '테이블당', '비'].map((h, i) => (
               <th key={h} scope="col" className={`px-3 py-2 font-semibold ${i === 0 ? '' : 'text-right'}`}>
                 {h}
               </th>
@@ -347,8 +347,9 @@ function HourlyTable({ c, word }: { c: Comparison; word: string }) {
                 <td className="px-3 py-1.5 text-right text-charcoal">{h.base ? eur(h.base.revenue) : '–'}</td>
                 <td className="px-3 py-1.5 text-right">{h.diff !== null ? <Delta diff={h.diff} /> : '–'}</td>
                 <td className="px-3 py-1.5 text-right text-ink">{people(h.actual.guests)}</td>
-                <td className="px-3 py-1.5 text-right text-charcoal">{h.base ? people(h.base.guests) : '–'}</td>
+                <td className="px-3 py-1.5 text-right text-charcoal">{tablesText(h.actual.tables)}</td>
                 <td className="px-3 py-1.5 text-right text-charcoal">{eurCheck(checkOf(h.actual))}</td>
+                <td className="px-3 py-1.5 text-right text-charcoal">{eurCheck(perTable(h.actual))}</td>
                 <td className="px-3 py-1.5 text-right text-charcoal">{r > 0 ? mm(r) : '–'}</td>
               </tr>
             )
@@ -503,17 +504,7 @@ export function DayCard() {
             </p>
           )}
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            <StatTile
-              word={word}
-              label="하루"
-              revenue={c.actual.revenue}
-              diff={c.diff}
-              rate={c.rate}
-              guests={c.actual.guests}
-              baseGuests={c.comparable ? c.base.total.guests : null}
-              check={checkOf(c.actual)}
-              baseCheck={c.comparable ? checkOf(c.base.total) : null}
-            />
+            <StatTile word={word} label="하루" actual={c.actual} base={c.comparable ? c.base.total : null} diff={c.diff} rate={c.rate} />
             {mealTile(c.meals.lunch, word)}
             {mealTile(c.meals.dinner, word)}
           </div>
@@ -925,7 +916,7 @@ export function EvidenceCard() {
             </div>
 
             <div className="rounded-xl bg-surface px-4 py-3 text-[12.5px] leading-6 text-charcoal">
-              <span className="font-semibold text-ink">계산하는 법</span> · 금액은 세금 포함 유로 · 1명당 쓴 돈 = 매출 ÷ 손님 수 · 몇 % 차이 = (이날 − 비교 대상) ÷ 비교 대상 · 보고 있는 날, 쉬는 날, 기록 없는 날은 평균에 넣지 않아요
+              <span className="font-semibold text-ink">계산하는 법</span> · 금액은 세금 포함 유로 · 1명당 쓴 돈 = 매출 ÷ 손님 수 · 테이블당 쓴 돈 = 매출 ÷ 테이블 수 (계산서 한 장을 한 테이블로 세요) · 몇 % 차이 = (이날 − 비교 대상) ÷ 비교 대상 · 보고 있는 날, 쉬는 날, 기록 없는 날은 평균에 넣지 않아요
               {BRANCH_IDS.length > 0 && ' · 날짜와 시간은 파리 기준'}
             </div>
           </div>

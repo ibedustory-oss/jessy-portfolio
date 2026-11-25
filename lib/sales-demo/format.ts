@@ -53,6 +53,12 @@ export function people(n: number): string {
   return `${group(r)}명`
 }
 
+/** 테이블 20개 — 평균이면 소수 한 자리까지 */
+export function tablesText(n: number): string {
+  const r = Math.round(n * 10) / 10
+  return `${Number.isInteger(r) ? group(r) : r.toFixed(1)}개`
+}
+
 export function count(n: number): string {
   return group(Math.round(n))
 }

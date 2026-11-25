@@ -211,6 +211,8 @@ export type DayStatus = 'ok' | 'closed' | 'missing' | 'none'
 
 const revenue: Int32Array[] = BRANCH_IDS.map(() => new Int32Array(DAY_COUNT * H))
 const guests: Int32Array[] = BRANCH_IDS.map(() => new Int32Array(DAY_COUNT * H))
+/** 테이블 수 = 계산서(주문) 수. 계산서 한 장을 한 테이블로 센다. */
+const tables: Int32Array[] = BRANCH_IDS.map(() => new Int32Array(DAY_COUNT * H))
 /** 0 = 정상, 1 = 휴무(매출 0), 2 = 자료 누락 */
 const status: Uint8Array[] = BRANCH_IDS.map(() => new Uint8Array(DAY_COUNT))
 
@@ -669,10 +671,37 @@ function applyRatioPins(): void {
   }
 }
 
+/* ───────── 테이블 수: 손님 수를 지점·식사별 ‘한 테이블 인원’으로 나눈다 ───────── */
+
+/** 한 테이블에 앉는 평균 인원 [평일, 주말] */
+const PARTY: Record<BranchId, Record<Meal, [number, number]>> = {
+  opera: { lunch: [1.7, 2.0], dinner: [2.3, 2.5] },
+  marais: { lunch: [2.2, 2.4], dinner: [2.4, 2.6] },
+  saintgermain: { lunch: [2.6, 2.9], dinner: [4.2, 4.6] },
+  montparnasse: { lunch: [1.5, 1.8], dinner: [1.8, 2.1] },
+  beaugrenelle: { lunch: [2.6, 3.3], dinner: [3.0, 3.6] },
+}
+
+function generateTables(): void {
+  BRANCH_IDS.forEach((id, bi) => {
+    for (let i = 0; i < DAY_COUNT; i++) {
+      const dow = weekday(fromDayNum(START_NUM + i))
+      const weekend = dow === 0 || dow === 6 ? 1 : 0
+      HOURS.forEach((h, hi) => {
+        const g = guests[bi][i * H + hi]
+        if (g === 0) return
+        const party = PARTY[id][mealOfHour(h)][weekend] * (1 + 0.04 * noise(bi + 1, i, 300 + h))
+        tables[bi][i * H + hi] = Math.max(1, Math.round(g / party))
+      })
+    }
+  })
+}
+
 generateWeather()
 generateSales()
 applyMaraisPins()
 applyRatioPins()
+generateTables()
 
 /* ───────── 원자료 접근 ───────── */
 
@@ -681,6 +710,8 @@ export interface HourRecord {
   /** 세금 포함 매출, 유로센트 */
   revenue: number
   guests: number
+  /** 테이블(계산서) 수 */
+  tables: number
 }
 
 export function dayStatus(branch: BranchId, d: ISODate): DayStatus {
@@ -699,6 +730,7 @@ export function hourRecords(branch: BranchId, d: ISODate): HourRecord[] | null {
     hour,
     revenue: revenue[bi][i * H + hi],
     guests: guests[bi][i * H + hi],
+    tables: tables[bi][i * H + hi],
   }))
 }
 
